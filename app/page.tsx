@@ -4,13 +4,13 @@ import { Logo } from './components/Logo'
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col justify-between pb-24 px-4 lg:px-0">
-            <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center ">
+        <main className="flex min-h-screen flex-col justify-between pb-22 px-4 lg:px-0">
+            <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center">
                 <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
                     <Image src="/isotipo.webp" alt="Pylos Isotipo" width={80} height={40} priority className="object-contain" />
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                 </div>
-                <div className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
+                <nav id="header-nav" className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Link className="font-bold" href="#">
                         Home
                     </Link>
@@ -26,7 +26,7 @@ export default function Home() {
                     <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href="#">
                         Login
                     </Link>
-                </div>
+                </nav>
             </div>
 
             <div className="lg:max-w-5xl w-full mx-auto text-left mt-20 lg:mt-0">
