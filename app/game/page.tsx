@@ -151,7 +151,7 @@ const GameScene: React.FC = () => {
                 color: 0xe4505b,
                 transparent: true,
                 opacity: 0.8,
-                shading: THREE.FlatShading,
+                // shading: THREE.FlatShading,
             })
 
             this.mesh = new THREE.Mesh(mergedGeometry, mat)
