@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 import './styles.css'
-import { Logo } from '../components/Logo'
+// import { Logo } from '../components/Logo'
 
 interface Game {
     speed: number
@@ -23,8 +23,8 @@ const GameScene: React.FC = () => {
     let space: Space
     let game: Game
     let deltaTime: number = 0
-    let newTime: number = new Date().getTime()
-    let oldTime: number = new Date().getTime()
+    // let newTime: number = new Date().getTime()
+    // let oldTime: number = new Date().getTime()
 
     const Colors = {
         red: 0xf25346,
@@ -104,7 +104,7 @@ const GameScene: React.FC = () => {
                 color: 0x68c3c0,
                 transparent: true,
                 opacity: 0.6,
-                shading: THREE.FlatShading,
+                // shading: THREE.FlatShading,
             })
 
             this.mesh = new THREE.Mesh(geom, mat)
