@@ -592,7 +592,7 @@ const GameScene: React.FC = () => {
                     </div>
                     <div className="border-l border-r px-4 border-white flex flex-col">
                         <h1 className="text-center">Próximo planeta</h1>
-                        <span id="distValue" className="text-6xl block -tracking-[8px] text-center">
+                        <span id="distValue" className="text-6xl block -tracking-[8px] text-center w-[155px]">
                             0
                         </span>
                         <small className="bg-violet-400 py-1 px-4 rounded-full self-center">años luz</small>

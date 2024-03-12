@@ -17,8 +17,8 @@ export default function Home() {
                     <Link className="font-bold" href="#">
                         Test
                     </Link>
-                    <Link className="font-bold" href="/game">
-                        Download
+                    <Link className="font-bold" href="/game2d">
+                        Demo
                     </Link>
                     <Link className="font-bold" href="#">
                         Support
@@ -50,8 +50,8 @@ export default function Home() {
                     <Link href="#" className="py-4 px-10 font-bold rounded-full border-2 border-sky-400">
                         More Info
                     </Link>
-                    <Link href="/game" className="py-4 px-8 font-bold rounded-full bg-sky-400">
-                        Download Now
+                    <Link href="/game2d" className="py-4 px-8 font-bold rounded-full bg-sky-400">
+                        Try Demo
                     </Link>
                 </div>
             </div>
