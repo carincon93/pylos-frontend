@@ -3,8 +3,10 @@
 import React, { useRef, useEffect } from 'react'
 import * as THREE from 'three'
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js'
-import './styles.css'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+
 // import { Logo } from '../components/Logo'
+import './styles.css'
 
 interface Game {
     speed: number
@@ -151,7 +153,7 @@ const GameScene: React.FC = () => {
                 color: 0xe4505b,
                 transparent: true,
                 opacity: 0.8,
-                // shading: THREE.FlatShading,
+                flatShading: true,
             })
 
             this.mesh = new THREE.Mesh(mergedGeometry, mat)
@@ -179,39 +181,38 @@ const GameScene: React.FC = () => {
     }
 
     class Star {
-        mesh: THREE.Object3D
+        mesh: THREE.Mesh | null
 
         constructor() {
-            this.mesh = new THREE.Object3D()
-            this.mesh.name = 'star'
+            this.mesh = new THREE.Mesh()
+        }
 
-            const geom = new THREE.BoxGeometry(2, 1.5, 0)
-            const mat = new THREE.MeshPhongMaterial({
-                color: Colors.white,
+        loadModel() {
+            return new Promise<void>((resolve) => {
+                const loader = new GLTFLoader()
+
+                loader.load(
+                    '/models/Star.glb',
+                    (gltf) => {
+                        const root = gltf.scene
+
+                        this.mesh = root.children[0] as THREE.Mesh // Set mesh after loading
+
+                        resolve()
+                    },
+                    undefined,
+                    (error) => {
+                        console.error(error)
+                        resolve()
+                    },
+                )
             })
-
-            const nBlocs = 40 + Math.floor(Math.random() * 20)
-            for (let i = 0; i < nBlocs; i++) {
-                const m = new THREE.Mesh(geom.clone(), mat)
-                m.position.x = i * 15
-                m.position.y = Math.random() * 10
-                m.position.z = Math.random() * 10
-                m.rotation.z = Math.random() * Math.PI * 2
-                m.rotation.y = Math.random() * Math.PI * 2
-                const s = 0.1 + Math.random() * 0.9
-                m.scale.set(s, s, s)
-                this.mesh.add(m)
-                m.castShadow = true
-                m.receiveShadow = true
-            }
         }
 
         rotate() {
-            const l = this.mesh.children.length
-            for (let i = 0; i < l; i++) {
-                const m = this.mesh.children[i] as THREE.Mesh
-                m.rotation.z += Math.random() * 0.005 * (i + 1)
-                m.rotation.y += Math.random() * 0.002 * (i + 1)
+            if (this.mesh) {
+                this.mesh.rotation.y += Math.random() * 0.025
+                this.mesh.rotation.z += Math.random() * 0.02
             }
         }
     }
@@ -223,22 +224,33 @@ const GameScene: React.FC = () => {
 
         constructor() {
             this.mesh = new THREE.Object3D()
-            this.nStars = 100
+            this.nStars = 400
             this.stars = []
-            const stepAngle = (Math.PI * 2) / this.nStars
+            const width = window.innerWidth
+            const height = game.planetRadius + Math.random() + 400
 
+            // Loop to create stars
             for (let i = 0; i < this.nStars; i++) {
                 const star = new Star()
+
+                // Load star model and set position when loaded
+                star.loadModel().then(() => {
+                    const x = Math.random() * width - width / 2 // Random x position within viewport width
+                    const y = Math.random() * height - height / 2 // Random y position within viewport height
+                    const z = -300 - Math.random() * 500 // Random z position
+
+                    if (star.mesh) {
+                        if (star.mesh.material instanceof THREE.MeshStandardMaterial) {
+                            star.mesh.material.color.set(0xff0000) // Set red color
+                        }
+                        star.mesh.position.set(x, y, z) // Set position
+                        const s = 10 + Math.random() * 30 // Random scale between 10 and 40
+                        star.mesh.scale.set(s, s, s) // Set scale
+                        this.mesh.add(star.mesh) // Add star mesh to space mesh
+                    }
+                })
+
                 this.stars.push(star)
-                const a = stepAngle * i
-                const h = game.planetRadius + 20 + Math.random() * 200
-                star.mesh.position.y = Math.sin(a) * h
-                star.mesh.position.x = Math.cos(a) * h
-                star.mesh.position.z = -300 - Math.random() * 500
-                star.mesh.rotation.z = a + Math.PI / 2
-                const s = 1 + Math.random() * 2
-                star.mesh.scale.set(s, s, s)
-                this.mesh.add(star.mesh)
             }
         }
 
@@ -290,50 +302,154 @@ const GameScene: React.FC = () => {
     }
 
     class Rocket {
-        mesh: THREE.Group
-        material: THREE.MeshStandardMaterial
+        mesh: THREE.Object3D
+        propeller: THREE.Mesh
+        // pilot: Pilot
 
         constructor() {
-            this.material = new THREE.MeshStandardMaterial({ color: 0xcccccc })
+            this.mesh = new THREE.Object3D()
+            this.mesh.name = 'airPlane'
 
-            this.mesh = new THREE.Group()
+            // Cabin
+            const geomCabin = new THREE.BoxGeometry(80, 50, 50, 1, 1, 1)
+            const matCabin = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true })
 
-            this.createRocket()
+            // geomCabin.vertices[4].y -= 10
+            // geomCabin.vertices[4].z += 20
+            // geomCabin.vertices[5].y -= 10
+            // geomCabin.vertices[5].z -= 20
+            // geomCabin.vertices[6].y += 30
+            // geomCabin.vertices[6].z += 20
+            // geomCabin.vertices[7].y += 30
+            // geomCabin.vertices[7].z -= 20
+
+            const cabin = new THREE.Mesh(geomCabin, matCabin)
+            cabin.castShadow = true
+            cabin.receiveShadow = true
+            this.mesh.add(cabin)
+
+            // Engine
+            const geomEngine = new THREE.BoxGeometry(20, 50, 50, 1, 1, 1)
+            const matEngine = new THREE.MeshPhongMaterial({ color: Colors.white, flatShading: true })
+            const engine = new THREE.Mesh(geomEngine, matEngine)
+            engine.position.x = 50
+            engine.castShadow = true
+            engine.receiveShadow = true
+            this.mesh.add(engine)
+
+            // Tail Plane
+            const geomTailPlane = new THREE.BoxGeometry(15, 20, 5, 1, 1, 1)
+            const matTailPlane = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true })
+            const tailPlane = new THREE.Mesh(geomTailPlane, matTailPlane)
+            tailPlane.position.set(-40, 20, 0)
+            tailPlane.castShadow = true
+            tailPlane.receiveShadow = true
+            this.mesh.add(tailPlane)
+
+            // Wings
+            const geomSideWing = new THREE.BoxGeometry(30, 5, 120, 1, 1, 1)
+            const matSideWing = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true })
+            const sideWing = new THREE.Mesh(geomSideWing, matSideWing)
+            sideWing.position.set(0, 15, 0)
+            sideWing.castShadow = true
+            sideWing.receiveShadow = true
+            this.mesh.add(sideWing)
+
+            const geomWindshield = new THREE.BoxGeometry(3, 15, 20, 1, 1, 1)
+            const matWindshield = new THREE.MeshPhongMaterial({ color: Colors.white, transparent: true, opacity: 0.3, flatShading: true })
+            const windshield = new THREE.Mesh(geomWindshield, matWindshield)
+            windshield.position.set(5, 27, 0)
+            windshield.castShadow = true
+            windshield.receiveShadow = true
+            this.mesh.add(windshield)
+
+            const geomPropeller = new THREE.BoxGeometry(20, 10, 10, 1, 1, 1)
+            // geomPropeller.vertices[4].y -= 5
+            // geomPropeller.vertices[4].z += 5
+            // geomPropeller.vertices[5].y -= 5
+            // geomPropeller.vertices[5].z -= 5
+            // geomPropeller.vertices[6].y += 5
+            // geomPropeller.vertices[6].z += 5
+            // geomPropeller.vertices[7].y += 5
+            // geomPropeller.vertices[7].z -= 5
+
+            const matPropeller = new THREE.MeshPhongMaterial({ color: Colors.brown, flatShading: true })
+            this.propeller = new THREE.Mesh(geomPropeller, matPropeller)
+            this.propeller.castShadow = true
+            this.propeller.receiveShadow = true
+
+            const geomBlade = new THREE.BoxGeometry(1, 80, 10, 1, 1, 1)
+            const matBlade = new THREE.MeshPhongMaterial({ color: Colors.brownDark, flatShading: true })
+            const blade1 = new THREE.Mesh(geomBlade, matBlade)
+            blade1.position.set(8, 0, 0)
+            blade1.castShadow = true
+            blade1.receiveShadow = true
+            const blade2 = blade1.clone()
+            blade2.rotation.x = Math.PI / 2
+            blade2.castShadow = true
+            blade2.receiveShadow = true
+            this.propeller.add(blade1)
+            this.propeller.add(blade2)
+            this.propeller.position.set(60, 0, 0)
+            this.mesh.add(this.propeller)
+
+            const wheelProtecGeom = new THREE.BoxGeometry(30, 15, 10, 1, 1, 1)
+            const wheelProtecMat = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true })
+            const wheelProtecR = new THREE.Mesh(wheelProtecGeom, wheelProtecMat)
+            wheelProtecR.position.set(25, -20, 25)
+            this.mesh.add(wheelProtecR)
+
+            const wheelTireGeom = new THREE.BoxGeometry(24, 24, 4)
+            const wheelTireMat = new THREE.MeshPhongMaterial({ color: Colors.brownDark, flatShading: true })
+            const wheelTireR = new THREE.Mesh(wheelTireGeom, wheelTireMat)
+            wheelTireR.position.set(25, -28, 25)
+
+            const wheelAxisGeom = new THREE.BoxGeometry(10, 10, 6)
+            const wheelAxisMat = new THREE.MeshPhongMaterial({ color: Colors.brown, flatShading: true })
+            const wheelAxis = new THREE.Mesh(wheelAxisGeom, wheelAxisMat)
+            wheelTireR.add(wheelAxis)
+            this.mesh.add(wheelTireR)
+
+            const wheelProtecL = wheelProtecR.clone()
+            wheelProtecL.position.z = -wheelProtecR.position.z
+            this.mesh.add(wheelProtecL)
+
+            const wheelTireL = wheelTireR.clone()
+            wheelTireL.position.z = -wheelTireR.position.z
+            this.mesh.add(wheelTireL)
+
+            const wheelTireB = wheelTireR.clone()
+            wheelTireB.scale.set(0.5, 0.5, 0.5)
+            wheelTireB.position.set(-35, -5, 0)
+            this.mesh.add(wheelTireB)
+
+            const suspensionGeom = new THREE.BoxGeometry(4, 20, 4)
+            suspensionGeom.applyMatrix4(new THREE.Matrix4().makeTranslation(0, 10, 0))
+            const suspensionMat = new THREE.MeshPhongMaterial({ color: Colors.red, flatShading: true })
+            const suspension = new THREE.Mesh(suspensionGeom, suspensionMat)
+            suspension.position.set(-35, -5, 0)
+            suspension.rotation.z = -0.3
+            this.mesh.add(suspension)
+
+            // this.pilot = new Pilot()
+            // this.pilot.mesh.position.set(-10, 27, 0)
+            // this.mesh.add(this.pilot.mesh)
+
+            this.mesh.castShadow = true
+            this.mesh.receiveShadow = true
         }
+    }
 
-        private createRocket() {
-            const bodyGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2, 6)
-            const body = new THREE.Mesh(bodyGeometry, this.material)
-            this.mesh.add(body)
-
-            const coneGeometry = new THREE.CylinderGeometry(0.2, 0, 0.5, 6)
-            const cone = new THREE.Mesh(coneGeometry, this.material)
-            cone.position.y = 1.5
-            this.mesh.add(cone)
-
-            const wingGeometry = new THREE.BoxGeometry(1, 0.1, 0.1)
-            const wing1 = new THREE.Mesh(wingGeometry, this.material)
-            wing1.position.set(0.5, 0.8, 0)
-            this.mesh.add(wing1)
-
-            const wing2 = new THREE.Mesh(wingGeometry, this.material)
-            wing2.position.set(-0.5, 0.8, 0)
-            this.mesh.add(wing2)
-
-            this.mesh.scale.set(4, 4, 4)
-        }
+    function createSpace() {
+        space = new Space()
+        space.mesh.position.y = 0
+        scene.add(space.mesh)
     }
 
     function createPlanet() {
         planet = new Planet()
         planet.mesh.position.y = 20
         scene.add(planet.mesh)
-    }
-
-    function createSpace() {
-        space = new Space()
-        space.mesh.position.y = -game.planetRadius
-        scene.add(space.mesh)
     }
 
     function createAsteroid() {
@@ -345,7 +461,9 @@ const GameScene: React.FC = () => {
 
     function createRocket() {
         rocket = new Rocket()
-        rocket.mesh.position.y = 100
+        rocket.mesh.scale.set(0.25, 0.25, 0.25)
+        rocket.mesh.position.y = 120
+        rocket.mesh.position.x = -30
         scene.add(rocket.mesh)
     }
 
