@@ -128,7 +128,7 @@ function App() {
         reproducirParte(0, 21, audioBienvenida)
 
         setTimeout(() => {
-            reproducirParte(0, 21, audioHistoriEpica)
+            reproducirParte(0, 21.3, audioHistoriEpica)
         }, 2000) // Duración de la eliminación temporal de las clases de hover
     }
 
@@ -196,7 +196,7 @@ const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?:
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'pointer-events-none absolute grid aspect-[3/4] w-[65vw] h-[50vh] sm:w-[60vw] sm:h-[70vh] md:w-[45vw] md:h-[60vh] lg:w-[45vw] lg:h-[80vh] xl:w-[60vh] xl:h-[80vh] 2xl:w-[25vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'pointer-events-none absolute grid aspect-[3/4] w-[70vw] h-[60vh] sm:w-[60vw] sm:h-[70vh] md:w-[45vw] md:h-[60vh] lg:w-[45vw] lg:h-[80vh] xl:w-[60vh] xl:h-[80vh] 2xl:w-[25vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
