@@ -120,7 +120,7 @@ function App() {
             setHoverClass('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
             setDisabledRightButton(false)
             setDisabledLeftButton(false)
-        }, 8000) // Duración de la eliminación temporal de las clases de hover
+        }, 15000) // Duración de la eliminación temporal de las clases de hover
     }
 
     const init = () => {
@@ -142,7 +142,7 @@ function App() {
         <div className="grid">
             {showOverlay && (
                 <div className="overlay flex flex-col items-center justify-center">
-                    <div className="flex gap-2 items-center justify-center">
+                    <div className="flex gap-2 items-center justify-center mx-10">
                         <img src="/isotipo.webp" alt="Pylos Isotipo" className="w-20 md:w-60" />
                         <Logo className="w-80 md:w-full" />
                     </div>
@@ -196,7 +196,7 @@ const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?:
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'pointer-events-none absolute grid aspect-[3/4] w-[70vw] h-[60vh] sm:w-[60vw] sm:h-[70vh] md:w-[45vw] md:h-[60vh] lg:w-[45vw] lg:h-[80vh] xl:w-[60vh] xl:h-[80vh] 2xl:w-[25vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'pointer-events-none absolute grid aspect-[3/4] w-[75vw] h-[60vh] sm:w-[60vw] sm:h-[70vh] md:w-[45vw] md:h-[60vh] lg:w-[45vw] lg:h-[80vh] xl:w-[60vh] xl:h-[80vh] 2xl:w-[25vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
