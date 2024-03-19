@@ -573,27 +573,27 @@ const GameScene: React.FC = () => {
             rocketMesh.rotateZ(-4.8)
             rocketMesh.castShadow = true
 
-            rocketMesh.children[0].material.color.set(0xffffff)
-            rocketMesh.children[1].material.color.set(0xffffff)
-            rocketMesh.children[2].material.color.set(0xffffff)
-            rocketMesh.children[3].material.color.set(0xffffff)
-            rocketMesh.children[4].material.color.set(0xffffff)
-            rocketMesh.children[5].material.color.set(0x545454) //RocketUp
-            rocketMesh.children[6].material.color.set(0xffffff) // Fire
-            rocketMesh.children[7].material.color.set(0xffffff) // Fire
-            rocketMesh.children[8].material.color.set(0xa78bfa) // Window
-            rocketMesh.children[9].material.color.set(0x7b7b7b) // RocketMiddle
-            rocketMesh.children[10].material.color.set(0xc8c8c8) // CabinDown
-            rocketMesh.children[11].material.color.set(0xc8c8c8) // CabinUp
-            rocketMesh.children[12].material.color.set(0x545454) // RocketDown
-            rocketMesh.children[13].material.color.set(0xffb20c)
-            rocketMesh.children[14].material.color.set(0xffb300) // FireCentral
-            rocketMesh.children[15].material.color.set(0xc8c8c8) // FinsLeft
-            rocketMesh.children[16].material.color.set(0xffb300) // FinsRight
-            rocketMesh.children[17].material.color.set(0xffb300)
-            rocketMesh.children[18].material.color.set(0xc8c8c8) // FinsRight
-            rocketMesh.children[19].material.color.set(0xffb300)
-            rocketMesh.children[20].material.color.set(0xffb300)
+            // rocketMesh.children[0].material.color.set(0xffffff)
+            // rocketMesh.children[1].material.color.set(0xffffff)
+            // rocketMesh.children[2].material.color.set(0xffffff)
+            // rocketMesh.children[3].material.color.set(0xffffff)
+            // rocketMesh.children[4].material.color.set(0xffffff)
+            // rocketMesh.children[5].material.color.set(0x545454) //RocketUp
+            // rocketMesh.children[6].material.color.set(0xffffff) // Fire
+            // rocketMesh.children[7].material.color.set(0xffffff) // Fire
+            // rocketMesh.children[8].material.color.set(0xa78bfa) // Window
+            // rocketMesh.children[9].material.color.set(0x7b7b7b) // RocketMiddle
+            // rocketMesh.children[10].material.color.set(0xc8c8c8) // CabinDown
+            // rocketMesh.children[11].material.color.set(0xc8c8c8) // CabinUp
+            // rocketMesh.children[12].material.color.set(0x545454) // RocketDown
+            // rocketMesh.children[13].material.color.set(0xffb20c)
+            // rocketMesh.children[14].material.color.set(0xffb300) // FireCentral
+            // rocketMesh.children[15].material.color.set(0xc8c8c8) // FinsLeft
+            // rocketMesh.children[16].material.color.set(0xffb300) // FinsRight
+            // rocketMesh.children[17].material.color.set(0xffb300)
+            // rocketMesh.children[18].material.color.set(0xc8c8c8) // FinsRight
+            // rocketMesh.children[19].material.color.set(0xffb300)
+            // rocketMesh.children[20].material.color.set(0xffb300)
 
             // rocketMesh.children[0].position.x = -0.5
             // Check and set material color for each child mesh
