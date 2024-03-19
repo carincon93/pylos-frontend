@@ -17,7 +17,7 @@ export default function Home() {
                     <Link className="font-bold" href="#">
                         Test
                     </Link>
-                    <Link className="font-bold" href="/game2d">
+                    <Link className="font-bold" href="/introduccion">
                         Demo
                     </Link>
                     <Link className="font-bold" href="#">
@@ -50,7 +50,7 @@ export default function Home() {
                     <Link href="#" className="py-4 px-10 font-bold rounded-full border-2 border-sky-400">
                         More Info
                     </Link>
-                    <Link href="/game2d" className="py-4 px-8 font-bold rounded-full bg-sky-400">
+                    <Link href="/introduccion" className="py-4 px-8 font-bold rounded-full bg-sky-400">
                         Try Demo
                     </Link>
                 </div>
@@ -59,7 +59,7 @@ export default function Home() {
             <div className="text-center lg:max-w-5xl w-full mx-auto flex lg:justify-end flex-wrap lg:flex-nowrap justify-center mt-20 lg:mt-0">
                 <div>
                     <Image src="/tacto-planet.webp" alt="Planeta tacto" width={100} height={40} className="object-contain" />
-                    <h2>TACTO</h2>
+                    <h2>ÁNFORA</h2>
                 </div>
 
                 <div>

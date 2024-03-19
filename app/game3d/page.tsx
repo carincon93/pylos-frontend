@@ -131,6 +131,44 @@ const GameScene: React.FC = () => {
         scene.add(shadowLight)
     }
 
+    class SpaceObject {
+        protected mesh: THREE.Mesh
+
+        constructor() {
+            this.mesh = new THREE.Mesh()
+        }
+
+        protected loadModel(modelPath: string, color?: number): Promise<void> {
+            return new Promise<void>((resolve) => {
+                const loader = new GLTFLoader()
+
+                loader.load(
+                    modelPath,
+                    (gltf) => {
+                        const root = gltf.scene
+
+                        this.mesh = root.children[0] as THREE.Mesh
+
+                        if (color !== undefined && this.mesh.material instanceof THREE.MeshStandardMaterial) {
+                            this.mesh.material.color.set(color)
+                        }
+
+                        resolve()
+                    },
+                    undefined,
+                    (error) => {
+                        console.error(error)
+                        resolve()
+                    },
+                )
+            })
+        }
+
+        getMesh(): THREE.Mesh {
+            return this.mesh
+        }
+    }
+
     class Space {
         mesh: THREE.Object3D
         nStars: number
@@ -153,14 +191,16 @@ const GameScene: React.FC = () => {
                     const y = Math.random() * height - height / 2 // Random y position within viewport height
                     const z = -300 - Math.random() * 500 // Random z position
 
-                    if (star.mesh) {
-                        if (star.mesh.material instanceof THREE.MeshStandardMaterial) {
-                            star.mesh.material.color.set(0xff0000) // Set red color
+                    const starMesh = star.getMesh() // Access the mesh using getMesh() method
+
+                    if (starMesh) {
+                        if (starMesh.material instanceof THREE.MeshStandardMaterial) {
+                            starMesh.material.color.set(0xff0000) // Set red color
                         }
-                        star.mesh.position.set(x, y, z) // Set position
+                        starMesh.position.set(x, y, z) // Set position
                         const s = 10 + Math.random() * 30 // Random scale between 10 and 40
-                        star.mesh.scale.set(s, s, s) // Set scale
-                        this.mesh.add(star.mesh) // Add star mesh to space mesh
+                        starMesh.scale.set(s, s, s) // Set scale
+                        this.mesh.add(starMesh) // Add star mesh to space mesh
                     }
                 })
 
@@ -206,14 +246,14 @@ const GameScene: React.FC = () => {
                 })
             }
 
-            const mat = new THREE.MeshPhongMaterial({
+            const material = new THREE.MeshPhongMaterial({
                 color: 0xe4505b,
                 transparent: true,
                 opacity: 0.8,
                 flatShading: true,
             })
 
-            this.mesh = new THREE.Mesh(mergedGeometry, mat)
+            this.mesh = new THREE.Mesh(mergedGeometry, material)
             this.mesh.name = 'waves'
             this.mesh.receiveShadow = true
         }
@@ -237,33 +277,13 @@ const GameScene: React.FC = () => {
         }
     }
 
-    class Star {
-        mesh: THREE.Mesh
-
+    class Star extends SpaceObject {
         constructor() {
-            this.mesh = new THREE.Mesh()
+            super()
         }
 
-        loadModel() {
-            return new Promise<void>((resolve) => {
-                const loader = new GLTFLoader()
-
-                loader.load(
-                    '/models/Star.glb',
-                    (gltf) => {
-                        const root = gltf.scene
-
-                        this.mesh = root.children[0] as THREE.Mesh
-                        // this.mesh.castShadow = true
-                        resolve()
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(error)
-                        resolve()
-                    },
-                )
-            })
+        async loadModel(): Promise<void> {
+            await super.loadModel('/models/Star.glb', 0xffffff) // Default color is white
         }
 
         rotate() {
@@ -274,44 +294,104 @@ const GameScene: React.FC = () => {
         }
     }
 
-    class Asteroid {
-        mesh: THREE.Mesh
-
+    class Asteroid extends SpaceObject {
         constructor() {
-            this.mesh = new THREE.Mesh()
+            super()
         }
 
-        loadModel() {
-            return new Promise<void>((resolve) => {
-                const loader = new GLTFLoader()
-
-                loader.load(
-                    '/models/Asteroid.glb',
-                    (gltf) => {
-                        const root = gltf.scene
-
-                        this.mesh = root.children[0] as THREE.Mesh
-                        this.mesh.castShadow = true
-
-                        if (this.mesh.material instanceof THREE.MeshStandardMaterial) {
-                            this.mesh.material.color.set(0xff0000) // Set red color
-                        }
-
-                        resolve()
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(error)
-                        resolve()
-                    },
-                )
-            })
+        async loadModel(): Promise<void> {
+            await super.loadModel('/models/Asteroid.glb', 0xff0000)
         }
 
         rotate() {
             if (this.mesh) {
-                // this.mesh.rotation.y += Math.random() * 0.025
+                this.mesh.rotation.y += 0.025
                 this.mesh.rotation.z += 0.02
+            }
+        }
+    }
+
+    class Rocket extends SpaceObject {
+        amplitude: number
+        frequency: number
+        time: number
+        rotationAngle: number
+        rotateClockwise: boolean
+
+        particleUp: boolean // Flag to indicate if particle is moving up or down
+        particlePosY: number
+        particle2PosY: number
+        particle3PosY: number
+
+        constructor() {
+            super()
+
+            this.amplitude = 1 // Amplitude of the floating motion
+            this.frequency = 0.05 // Frequency of the floating motion
+            this.time = 0
+            this.rotationAngle = 0
+            this.rotateClockwise = true
+            this.particleUp = true // Flag to indicate if particle is moving up or down
+            this.particlePosY = 0
+            this.particle2PosY = 0
+            this.particle3PosY = 0
+        }
+
+        async loadModel(): Promise<void> {
+            await super.loadModel('/models/Rocket.glb')
+        }
+
+        animate() {
+            // Update rocket's position for floating animation
+            const yOffset = Math.sin(this.time) * this.amplitude
+            rocket.mesh.position.y = 100 + yOffset
+
+            // Increment time for the floating animation
+            this.time += this.frequency
+
+            // Move particle up and down
+            const particleSpeed = 0.13 // Adjust the speed as needed
+            const particle2Speed = 0.16 // Adjust the speed as needed
+            const particle3Speed = 0.26 // Adjust the speed as needed
+            if (this.particleUp) {
+                // Move particle up
+                this.particlePosY = 0
+                this.particle2PosY = 0
+                this.particle3PosY = 0
+                if (this.particlePosY >= 0) {
+                    // Reached the upper limit, start moving down
+                    this.particleUp = false
+                }
+            } else {
+                // Move particle down
+                this.particlePosY -= particleSpeed
+                if (this.particlePosY <= -9) {
+                    // Reached the lower limit, start moving up
+                    this.particleUp = true
+                }
+
+                this.particle2PosY -= particle2Speed
+                if (this.particle2PosY <= -12) {
+                    // Reached the lower limit, start moving up
+                    this.particleUp = true
+                }
+
+                this.particle3PosY -= particle2Speed
+                if (this.particle3PosY <= -12) {
+                    // Reached the lower limit, start moving up
+                    this.particleUp = true
+                }
+            }
+
+            // Update the particle's position
+            if (rocket.mesh.children.length > 0) {
+                rocket.mesh.children[0].position.y = this.particlePosY
+                rocket.mesh.children[1].position.y = this.particlePosY
+                rocket.mesh.children[13].position.y = this.particlePosY
+                rocket.mesh.children[4].position.y = this.particle2PosY
+                rocket.mesh.children[3].position.y = this.particle2PosY
+                rocket.mesh.children[2].position.y = this.particle3PosY
+                rocket.mesh.children[6].position.y = this.particle3PosY
             }
         }
     }
@@ -455,74 +535,6 @@ const GameScene: React.FC = () => {
     //     }
     // }
 
-    class Rocket {
-        mesh: THREE.Mesh
-        amplitude: number
-        frequency: number
-        time: number
-        rotationAngle: number
-        rotateClockwise: boolean
-
-        constructor() {
-            this.mesh = new THREE.Mesh()
-            this.amplitude = 0.1 // Amplitude of the floating motion
-            this.frequency = 0.05 // Frequency of the floating motion
-            this.time = 0
-            this.rotationAngle = 0
-            this.rotateClockwise = true
-        }
-
-        loadModel() {
-            return new Promise<void>((resolve) => {
-                const loader = new GLTFLoader()
-
-                loader.load(
-                    '/models/Rocket.glb',
-                    (gltf) => {
-                        const root = gltf.scene
-
-                        this.mesh = root.children[0] as THREE.Mesh
-                        this.mesh.castShadow = true
-
-                        resolve()
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(error)
-                        resolve()
-                    },
-                )
-            })
-        }
-
-        animate() {
-            // Update rocket's position for floating animation
-            const yOffset = Math.sin(this.time) * this.amplitude
-            rocket.mesh.position.y = 120 + yOffset
-
-            // Rotate rocket around Z-axis
-            if (this.rotateClockwise) {
-                if (this.rotationAngle < Math.PI / 9) {
-                    // 20 degrees in radians
-                    rocket.mesh.rotateZ(0.0005) // Adjust rotation speed as needed
-                    this.rotationAngle += 0.0005
-                } else {
-                    this.rotateClockwise = false // Reverse rotation direction
-                }
-            } else {
-                if (this.rotationAngle > 0) {
-                    rocket.mesh.rotateZ(-0.0005) // Reverse rotation
-                    this.rotationAngle -= 0.0005
-                } else {
-                    this.rotateClockwise = true // Switch back to clockwise rotation
-                }
-            }
-
-            // Increment time for the floating animation
-            this.time += this.frequency
-        }
-    }
-
     function createSpace() {
         space = new Space()
         space.mesh.position.y = 0
@@ -539,22 +551,66 @@ const GameScene: React.FC = () => {
         asteroid = new Asteroid()
 
         asteroid.loadModel().then(() => {
-            asteroid.mesh.position.y = 130
-            asteroid.mesh.scale.set(15, 15, 15)
-            scene.add(asteroid.mesh)
+            const asteroidMesh = asteroid.getMesh() // Access the mesh using getMesh() method
+
+            asteroidMesh.position.y = 120
+            asteroidMesh.position.x = 35
+            asteroidMesh.scale.set(15, 15, 15)
+            scene.add(asteroidMesh)
         })
     }
 
     function createRocket() {
+        const colors = [0xff0000, 0x00ff00, 0x0000ff]
+
         rocket = new Rocket()
 
         rocket.loadModel().then(() => {
-            rocket.mesh.scale.set(50, 50, 50)
-            rocket.mesh.position.y = 120
-            rocket.mesh.rotateZ(-1.54)
-            rocket.mesh.rotateX(-0.3)
-            rocket.mesh.position.x = -100
-            scene.add(rocket.mesh)
+            const rocketMesh = rocket.getMesh()
+            rocketMesh.position.y = 130
+            rocketMesh.position.x = -55
+            rocketMesh.scale.set(2.2, 2.2, 2.2)
+            rocketMesh.rotateZ(-4.8)
+            rocketMesh.castShadow = true
+
+            rocketMesh.children[0].material.color.set(0xffffff)
+            rocketMesh.children[1].material.color.set(0xffffff)
+            rocketMesh.children[2].material.color.set(0xffffff)
+            rocketMesh.children[3].material.color.set(0xffffff)
+            rocketMesh.children[4].material.color.set(0xffffff)
+            rocketMesh.children[5].material.color.set(0x545454) //RocketUp
+            rocketMesh.children[6].material.color.set(0xffffff) // Fire
+            rocketMesh.children[7].material.color.set(0xffffff) // Fire
+            rocketMesh.children[8].material.color.set(0xa78bfa) // Window
+            rocketMesh.children[9].material.color.set(0x7b7b7b) // RocketMiddle
+            rocketMesh.children[10].material.color.set(0xc8c8c8) // CabinDown
+            rocketMesh.children[11].material.color.set(0xc8c8c8) // CabinUp
+            rocketMesh.children[12].material.color.set(0x545454) // RocketDown
+            rocketMesh.children[13].material.color.set(0xffb20c)
+            rocketMesh.children[14].material.color.set(0xffb300) // FireCentral
+            rocketMesh.children[15].material.color.set(0xc8c8c8) // FinsLeft
+            rocketMesh.children[16].material.color.set(0xffb300) // FinsRight
+            rocketMesh.children[17].material.color.set(0xffb300)
+            rocketMesh.children[18].material.color.set(0xc8c8c8) // FinsRight
+            rocketMesh.children[19].material.color.set(0xffb300)
+            rocketMesh.children[20].material.color.set(0xffb300)
+
+            // rocketMesh.children[0].position.x = -0.5
+            // Check and set material color for each child mesh
+            // rocketMesh.traverse((child: THREE.Object3D) => {
+            //     if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
+            //         // Access and modify the material color based on the index in the colors array
+            //         console.log(child)
+
+            //         const index = rocketMesh.children.indexOf(child)
+            //         const color = colors[index] || 0x000000
+            //         const material = child.material as THREE.MeshStandardMaterial
+            //         child.castShadow = true
+            //         material.color.set(color)
+            //     }
+            // })
+
+            scene.add(rocketMesh)
         })
     }
 
@@ -595,7 +651,7 @@ const GameScene: React.FC = () => {
                         <span id="distValue" className="text-6xl block -tracking-[8px] text-center w-[155px]">
                             0
                         </span>
-                        <small className="bg-violet-400 py-1 px-4 rounded-full self-center">años luz</small>
+                        <small className="bg-violet-400 py-1 px-4 rounded-full self-center mt-2">años luz</small>
                     </div>
                     <div className="px-4">
                         <h1>Escudo</h1>
