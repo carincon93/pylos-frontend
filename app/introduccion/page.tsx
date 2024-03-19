@@ -4,11 +4,12 @@ import './index.css'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Logo } from '../components/Logo'
-import Image from 'next/image'
+import Link from 'next/link'
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
-    const [disabledButton, setDisabledButton] = useState<boolean>(false) // Índice de la foto activa
+    const [disabledLeftButton, setDisabledLeftButton] = useState<boolean>(false)
+    const [disabledRightButton, setDisabledRightButton] = useState<boolean>(false)
     const [showOverlay, setShowOverlay] = useState(true)
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right') // Estado para almacenar temporalmente las clases de hover
 
@@ -63,13 +64,11 @@ function App() {
         },
     ]
 
-    // Creamos una constante con la ruta al archivo de audio
-    const audioSource = '/historia_epica.mp3'
-
     // Función para reproducir una parte específica del audio
-    function reproducirParte(inicio: number, fin: number) {
+    function reproducirParte(inicio: number, fin: number, audioSource: string) {
         // Creamos un nuevo elemento de audio con la ruta proporcionada
         const audio = new Audio(audioSource)
+        audio.pause()
 
         // Establecer el tiempo de inicio en segundos
         audio.currentTime = inicio
@@ -82,30 +81,35 @@ function App() {
             audio.pause()
         }, (fin - inicio) * 1000) // Convertir la duración de la parte a milisegundos
     }
+    const audioHistoriEpica = '/historia_epica.mp3'
+    const audioBienvenida = '/bienvenida.mp3'
 
     // Función para avanzar/retroceder la foto
     const nextPhoto = () => {
         handleHoverChange('')
-        setDisabledButton(true)
+        setDisabledRightButton(true)
+        setDisabledLeftButton(true)
+
         setActivePhoto((prev) => (prev + 1) % photosData.length)
-        console.log(activePhoto)
 
         if (activePhoto == 0) {
-            reproducirParte(21, 36)
+            reproducirParte(21, 36, audioHistoriEpica)
         } else if (activePhoto == 1) {
-            reproducirParte(35, 51)
+            reproducirParte(35, 51, audioHistoriEpica)
         } else if (activePhoto == 2) {
-            reproducirParte(51, 67)
+            reproducirParte(51, 67.5, audioHistoriEpica)
         } else if (activePhoto == 3) {
-            reproducirParte(67, 82)
+            reproducirParte(67.5, 82, audioHistoriEpica)
         } else if (activePhoto == 4) {
-            reproducirParte(82, 99)
+            reproducirParte(82, 99, audioHistoriEpica)
         }
     }
 
     const previousPhoto = () => {
         handleHoverChange('')
-        setDisabledButton(true)
+        setDisabledRightButton(true)
+        setDisabledLeftButton(true)
+
         setActivePhoto((prev) => (prev - 1 + photosData.length) % photosData.length)
     }
 
@@ -114,35 +118,56 @@ function App() {
         setHoverClass(newClass)
         setTimeout(() => {
             setHoverClass('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
-            setDisabledButton(false)
+            setDisabledRightButton(false)
+            setDisabledLeftButton(false)
+        }, 8000) // Duración de la eliminación temporal de las clases de hover
+    }
+
+    const init = () => {
+        setShowOverlay(false)
+        reproducirParte(0, 21, audioBienvenida)
+
+        setTimeout(() => {
+            reproducirParte(0, 21, audioHistoriEpica)
         }, 2000) // Duración de la eliminación temporal de las clases de hover
     }
 
     useEffect(() => {
-        // Cuando el componente se monta, ocultar el overlay después de 2 segundos
-        const timeout = setTimeout(() => {
-            setShowOverlay(false)
-        }, 5000)
-
-        // Limpiar el timeout cuando el componente se desmonta para evitar fugas de memoria
-        return () => clearTimeout(timeout)
-    }, []) // El efecto solo se ejecuta una vez al montar el componente
+        if (activePhoto == 0) {
+            setDisabledLeftButton(true)
+        }
+    }, [])
 
     return (
         <div className="grid">
             {showOverlay && (
-                <div className="overlay flex items-center justify-center">
-                    <Image src="/isotipo.webp" alt="Pylos Isotipo" width={80} height={40} priority className="object-contain" />
-                    <Logo />
+                <div className="overlay flex flex-col items-center justify-center">
+                    <div className="flex gap-2 items-center justify-center">
+                        <img src="/isotipo.webp" alt="Pylos Isotipo" className="w-20 md:w-60" />
+                        <Logo className="w-80 md:w-full" />
+                    </div>
+                    <button onClick={init} className="py-4 px-16 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
+                        Empezar
+                    </button>
                 </div>
             )}
 
             <div className="lg:grid lg:grid-cols-2 place-items-center flex flex-col items-center justify-center h-screen overflow-hidden bg-blue-500 [grid-area:1/1] [perspective:500px]">
-                <div className="peer/previous blob-left group relative bottom-[-16rem] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-96">
-                    <ActionButton direction="left" text="Foto anterior" onClick={previousPhoto} disabled={disabledButton} />
+                <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-96">
+                    <ActionButton direction="left" text="Foto anterior" onClick={previousPhoto} disabled={disabledLeftButton} />
                 </div>
-                <div className="peer/next blob-right group relative bottom-[-14.53rem] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-96">
-                    <ActionButton direction="right" text="Siguiente foto" onClick={nextPhoto} disabled={disabledButton} />
+                <div className="peer/next blob-right group relative bottom-[43vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-96">
+                    {activePhoto != 4 ? (
+                        <ActionButton direction="right" text="Siguiente foto" onClick={nextPhoto} disabled={disabledRightButton} />
+                    ) : (
+                        <Link
+                            href="/game2d"
+                            className={twMerge(
+                                'button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
+                            )}>
+                            Continuar
+                        </Link>
+                    )}
                 </div>
 
                 {/* Renderizamos las fotos */}
@@ -171,7 +196,7 @@ const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?:
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'pointer-events-none absolute grid aspect-[3/4] w-[65vw] 2xl:w-[22vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d] md:w-[30vw]',
+                'pointer-events-none absolute grid aspect-[3/4] w-[65vw] h-[50vh] sm:w-[60vw] sm:h-[70vh] md:w-[45vw] md:h-[60vh] lg:w-[45vw] lg:h-[80vh] xl:w-[60vh] xl:h-[80vh] 2xl:w-[25vw] 2xl:h-[90vh] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
@@ -181,9 +206,10 @@ const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?:
                 <picture>
                     <img src={img} alt="" className="rounded-md" />
                 </picture>
+
                 {/* {title && <p className="font-medium leading-tight md:text-4xl text-black">{title}</p>} */}
 
-                <p className="text-sm my-6 text-black">{paragraph}</p>
+                <p className="md:text-sm my-4 text-black text-[12px]">{paragraph}</p>
             </div>
             <div className="pointer-events-none rounded-3xl bg-white [grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)]" />
         </div>
@@ -195,9 +221,10 @@ const ActionButton = ({ onClick, direction, text, disabled }: { onClick?: () => 
         disabled={disabled ? true : undefined}
         onClick={onClick}
         className={twMerge(
-            'relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white md:text-4xl',
-            direction === 'right' && 'focus-visible:translate-x-36 lg:group-hover:translate-x-36',
-            direction === 'left' && 'focus-visible:-translate-x-36 lg:group-hover:-translate-x-36',
+            'relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
+            direction === 'right' && 'focus-visible:translate-x-8 lg:group-hover:translate-x-8',
+            direction === 'left' && 'focus-visible:-translate-x-8 lg:group-hover:-translate-x-8',
+            disabled ? 'opacity-20' : 'opacity-100',
         )}>
         <span className={twMerge('button-underline relative block', direction === 'right' && '[--from:-30px] [--to:0px]', direction === 'left' && '[--from:0] [--to:-30px]')}>{text}</span>
     </button>
