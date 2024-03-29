@@ -32,6 +32,19 @@ export default function LoginPage() {
             const token = data.token // Suponiendo que el token está en la propiedad 'token'
 
             if (token) {
+                const cookieOptions = {
+                    domain: process.env.NEXT_PUBLIC_DOMAIN, // Replace with your actual domain
+                    secure: true, // Ensure cookie is only sent over HTTPS
+                    httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                    maxAge: 24 * 60 * 60,
+                }
+
+                // Construct cookie string
+                const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
+
+                // Set the cookie
+                document.cookie = cookieString
+
                 // Redireccionar al panel principal
                 router.push('/introduccion')
             } else {
