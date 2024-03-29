@@ -1,30 +1,31 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Logo } from './components/Logo'
+import { Isotipo } from './components/Isotipo'
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col justify-between pb-22 px-4 lg:px-0">
+        <main className="flex min-h-screen flex-col justify-between pb-22 px-4 lg:px-0 fondo z-[1]">
             <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center">
                 <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
-                    <Image src="/isotipo.webp" alt="Pylos Isotipo" width={80} height={40} priority className="object-contain" />
+                    <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                 </div>
                 <nav id="header-nav" className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Link className="font-bold" href="#">
-                        Home
+                        Inicio
                     </Link>
+
+                    <Link className="font-bold" href="/empezar-aventura">
+                        Empezar la aventura
+                    </Link>
+
                     <Link className="font-bold" href="#">
-                        Test
+                        Soporte
                     </Link>
-                    <Link className="font-bold" href="/introduccion">
-                        Demo
-                    </Link>
-                    <Link className="font-bold" href="#">
-                        Support
-                    </Link>
-                    <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href="#">
-                        Login
+
+                    <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href="/empezar-aventura">
+                        Ingresar
                     </Link>
                 </nav>
             </div>
@@ -42,44 +43,43 @@ export default function Home() {
                     </div>
 
                     <div className="col-span-2 lg:col-auto hidden lg:block">
-                        <Image src="/isotipo.webp" alt="Pylos Isotipo" width={350} height={400} className="object-contain mx-auto" />
+                        <Isotipo className="w-54 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert mx-auto" />
                     </div>
                 </div>
 
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
-                    <Link href="#" className="py-4 px-10 font-bold rounded-full border-2 border-sky-400">
-                        More Info
-                    </Link>
-                    <Link href="/introduccion" className="py-4 px-8 font-bold rounded-full bg-sky-400">
-                        Try Demo
+                    <Link href="/empezar-aventura" className="py-4 px-8 font-bold uppercase rounded-full bg-sky-400">
+                        Empezar la aventura
                     </Link>
                 </div>
             </div>
 
             <div className="text-center lg:max-w-5xl w-full mx-auto flex lg:justify-end flex-wrap lg:flex-nowrap justify-center mt-20 lg:mt-0">
                 <div>
-                    <Image src="/tacto-planet.webp" alt="Planeta tacto" width={100} height={40} className="object-contain" />
+                    <Image src="/anfora.webp" alt="Planeta Ánfora" width={140} height={40} className="object-contain" />
                     <h2>ÁNFORA</h2>
                 </div>
 
                 <div>
-                    <Image src="/visual-planet.webp" alt="Planeta visual" width={100} height={40} className="object-contain" />
+                    <Image src="/planeta2.webp" alt="" width={140} height={40} className="object-contain" />
 
-                    <h2>VISUAL</h2>
+                    {/* <h2>VISUAL</h2> */}
                 </div>
 
                 <div>
-                    <Image src="/escucha-planet.webp" alt="Planeta escucha" width={100} height={40} className="object-contain" />
+                    <Image src="/planeta3.webp" alt="" width={140} height={40} className="object-contain" />
 
-                    <h2>ESCUCHA</h2>
+                    {/* <h2>ESCUCHA</h2> */}
                 </div>
 
                 <div>
-                    <div className="flex">
-                        <Image src="/socioemocional-planet1.webp" alt="Planeta socioemocional" width={100} height={40} className="object-contain" />
-                        <Image src="/socioemocional-planet2.webp" alt="Planeta socioemocional" width={100} height={40} className="object-contain" />
-                    </div>
-                    <h2>SOCIOEMOCIONAL</h2>
+                    <Image src="/planeta4.webp" alt="" width={140} height={40} className="object-contain" />
+                    {/* <h2>SOCIOEMOCIONAL</h2> */}
+                </div>
+
+                <div>
+                    <Image src="/planeta5.webp" alt="" width={140} height={40} className="object-contain" />
+                    {/* <h2>SOCIOEMOCIONAL</h2> */}
                 </div>
             </div>
         </main>

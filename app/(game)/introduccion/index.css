@@ -48,6 +48,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #3b82f6; /* Color del overlay */
+  background-color: #3b82f6;
   z-index: 9999; /* Z-index alto para que esté por encima de todo */
 }

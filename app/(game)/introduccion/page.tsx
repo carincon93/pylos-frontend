@@ -3,8 +3,9 @@
 import './index.css'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Logo } from '../components/Logo'
+import { Logo } from '../../components/Logo'
 import Link from 'next/link'
+import { Isotipo } from '@/app/components/Isotipo'
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
@@ -143,16 +144,16 @@ function App() {
             {showOverlay && (
                 <div className="overlay flex flex-col items-center justify-center">
                     <div className="flex gap-2 items-center justify-center mx-10">
-                        <img src="/isotipo.webp" alt="Pylos Isotipo" className="w-20 md:w-60" />
+                        <Isotipo className="w-56" />
                         <Logo className="w-80 md:w-full" />
                     </div>
-                    <button onClick={init} className="py-4 px-16 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
+                    <button onClick={init} className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
                         Empezar
                     </button>
                 </div>
             )}
 
-            <div className="lg:grid lg:grid-cols-2 place-items-center flex flex-col items-center justify-center h-screen overflow-hidden bg-blue-500 [grid-area:1/1] [perspective:500px]">
+            <div className="lg:grid lg:grid-cols-2 place-items-center flex flex-col items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover [grid-area:1/1] [perspective:500px]">
                 <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-96">
                     <ActionButton direction="left" text="Foto anterior" onClick={previousPhoto} disabled={disabledLeftButton} />
                 </div>
@@ -221,7 +222,7 @@ const ActionButton = ({ onClick, direction, text, disabled }: { onClick?: () => 
         disabled={disabled ? true : undefined}
         onClick={onClick}
         className={twMerge(
-            'relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
+            'relative flex w-full items-center justify-center font-bold text-white transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
             direction === 'right' && 'focus-visible:translate-x-8 lg:group-hover:translate-x-8',
             direction === 'left' && 'focus-visible:-translate-x-8 lg:group-hover:-translate-x-8',
             disabled ? 'opacity-20' : 'opacity-100',

@@ -1,31 +1,32 @@
 {
-  "name": "pylos",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "14.1.3",
-    "next-reveal": "^1.0.6",
-    "react": "^18",
-    "react-dom": "^18",
-    "tailwind-merge": "^2.2.2",
-    "three": "^0.162.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@types/three": "^0.162.0",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.3",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "name": "pylos",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev -p 8080",
+        "build": "next build",
+        "start": "next start -p 8080",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "next": "14.1.3",
+        "next-reveal": "^1.0.6",
+        "react": "^18",
+        "react-dom": "^18",
+        "tailwind-merge": "^2.2.2",
+        "three": "^0.162.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "@types/three": "^0.162.0",
+        "autoprefixer": "^10.0.1",
+        "eslint": "^8",
+        "eslint-config-next": "14.1.3",
+        "postcss": "^8",
+        "postcss-nesting": "^12.1.0",
+        "tailwindcss": "^3.3.0",
+        "typescript": "^5"
+    }
 }
