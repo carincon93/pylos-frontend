@@ -6,14 +6,14 @@ import { isTokenExpired } from './utils/isTokenExpired'
 export function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
 
-    const secretKey = process.env.NEXT_PUBLIC_NESTJS_JWT_SECRET || '' // Replace with your actual secret key
+    // const secretKey = process.env.NEXT_PUBLIC_NESTJS_JWT_SECRET || '' // Replace with your actual secret key
 
-    if (accessToken) {
-        if (isTokenExpired(accessToken, secretKey)) {
-            // Access token has expired, remove the token cookie
-            request.cookies.delete('accessToken')
-        }
-    }
+    // if (accessToken) {
+    //     if (isTokenExpired(accessToken, secretKey)) {
+    //         // Access token has expired, remove the token cookie
+    //         request.cookies.delete('accessToken')
+    //     }
+    // }
 
     if (!accessToken) {
         // Redirect to login page if no access token exists
