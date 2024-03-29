@@ -42,6 +42,8 @@ export default function LoginPage() {
                 // Construct cookie string
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
 
+                console.log(cookieString)
+
                 // Set the cookie
                 document.cookie = cookieString
 
