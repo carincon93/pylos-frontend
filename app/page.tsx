@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Logo } from './components/Logo'
 import { Isotipo } from './components/Isotipo'
+import { HOME_ROUTE, EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
 
 export default function Home() {
     return (
@@ -12,11 +13,11 @@ export default function Home() {
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                 </div>
                 <nav id="header-nav" className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
-                    <Link className="font-bold" href="#">
+                    <Link className="font-bold" href={HOME_ROUTE}>
                         Inicio
                     </Link>
 
-                    <Link className="font-bold" href="/empezar-aventura">
+                    <Link className="font-bold" href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
 
@@ -24,7 +25,7 @@ export default function Home() {
                         Soporte
                     </Link>
 
-                    <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href="/empezar-aventura">
+                    <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href={EMPEZAR_AVENTURA_ROUTE}>
                         Ingresar
                     </Link>
                 </nav>
@@ -48,7 +49,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
-                    <Link href="/empezar-aventura" className="py-4 px-8 font-bold uppercase rounded-full bg-sky-400">
+                    <Link href={EMPEZAR_AVENTURA_ROUTE} className="py-4 px-8 font-bold uppercase rounded-full bg-sky-400">
                         Empezar la aventura
                     </Link>
                 </div>
