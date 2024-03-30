@@ -36,6 +36,6 @@ interface Usuario {
 }
 
 interface Login {
-    nombre: string
-    respuestaSeguridad: string
+    nombreUsuario: string
+    mascotaNombre: string
 }

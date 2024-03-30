@@ -50,23 +50,17 @@ export default function LoginPage() {
                     onSubmit={handleSubmit}>
                     <Input
                         type="text"
-                        placeholder="Nombre"
+                        placeholder="Nombre del pylonauta"
                         className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
-                        onChange={(event) => handleChange('nombre', event.target.value)}
+                        onChange={(event) => handleChange('nombreUsuario', event.target.value)}
                         required
                     />
+
                     <Input
                         type="text"
-                        placeholder="¿Cuál es tu animal favorito?"
+                        placeholder="Nombre del acompañante"
                         className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
-                        disabled
-                        readOnly
-                    />
-                    <Input
-                        type="text"
-                        placeholder="Respuesta"
-                        className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
-                        onChange={(event) => handleChange('respuestaSeguridad', event.target.value)}
+                        onChange={(event) => handleChange('mascotaNombre', event.target.value)}
                         required
                     />
 
