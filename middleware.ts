@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getTokenData } from './utils/getTokenData'
 import { isTokenExpired } from './utils/isTokenExpired'
-import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE } from '@/utils/routes'
+import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE } from '@/utils/routes'
 
 export function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
@@ -43,6 +43,11 @@ export function middleware(request: NextRequest) {
         // Redirect to login page if access token is invalid
         console.error('Token invalid or expired')
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
+    }
+
+    // Redirect to INTRODUCCION_ROUTE if access token exists and user is not already on INTRODUCCION_ROUTE page
+    if (!request.nextUrl.pathname.startsWith(INTRODUCCION_ROUTE)) {
+        return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
     }
 }
 
