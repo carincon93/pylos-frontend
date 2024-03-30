@@ -8,3 +8,21 @@ export async function login(data: Login): Promise<Response> {
         throw new Error('Error al iniciar sesión: ' + error.message)
     }
 }
+
+export async function toAuth(url: string, body: Record<string, any>): Promise<any> {
+    const response = await fetch(url, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+        body: JSON.stringify(body),
+    })
+
+    if (!response.ok) {
+        throw new Error('Error en la solicitud: ' + response.statusText)
+    }
+
+    return await response.json()
+}
