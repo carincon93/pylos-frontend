@@ -7,19 +7,19 @@ export default function EmpezarAventuraPage() {
         <>
             <div className="lg:max-w-5xl w-full mx-auto text-left mt-20 lg:mt-0 grow flex flex-col items-center justify-center gap-y-10 relative mb-20">
                 <div>
-                    <h1 className="text-8xl text-center font-bold uppercase">Empezar la aventura</h1>
+                    <h1 className="text-8xl text-center font-bold uppercase text-white">Empezar la aventura</h1>
                 </div>
 
                 <div className="flex flex-col gap-y-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={REGISTER_ROUTE}
-                        className="py-4 px-16 font-bold uppercase rounded-full bg-primary">
+                        className="py-4 px-16 font-bold uppercase rounded-full bg-primary text-white">
                         Registro
                     </Link>
 
                     <Link
                         href={LOGIN_ROUTE}
-                        className="py-4 px-16 font-bold uppercase rounded-full bg-secondary">
+                        className="py-4 px-16 font-bold uppercase rounded-full bg-secondary text-white">
                         Ingreso
                     </Link>
                 </div>

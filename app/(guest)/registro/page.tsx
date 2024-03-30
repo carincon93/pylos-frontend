@@ -65,7 +65,7 @@ export default function RegistroPage() {
 
                     <Input
                         type="text"
-                        placeholder="Nombre del pylonauta"
+                        placeholder="Nombre del personaje"
                         className="py-4 px-8 text-center"
                         onChange={(event) => handleChange('nombreUsuario', event.target.value)}
                         required
@@ -104,10 +104,10 @@ export default function RegistroPage() {
                         required
                     />
 
-                    <Label className="text-center">Seleccione un acompañante</Label>
+                    <Label className="text-center text-white uppercase">Seleccione un acompañante</Label>
                     <RadioGroup
-                        required
-                        onValueChange={(value) => handleChange('mascotaId', value)}>
+                        onValueChange={(value) => handleChange('mascotaId', value)}
+                        required>
                         <div className="flex items-center justify-center gap-4">
                             {mascotas?.map((mascota: Mascota, index: number) => (
                                 <div
@@ -117,7 +117,9 @@ export default function RegistroPage() {
                                         value={mascota.id}
                                         id={mascota.id}
                                     />
-                                    <Label htmlFor={mascota.id}>
+                                    <Label
+                                        htmlFor={mascota.id}
+                                        className="hover:cursor-pointer">
                                         <Avatar className="size-20">
                                             <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
                                             <AvatarFallback>CN</AvatarFallback>
@@ -136,7 +138,7 @@ export default function RegistroPage() {
                         required
                     />
 
-                    <Button>Registrarse</Button>
+                    <Button className="uppercase">Registrarse</Button>
                 </form>
             </div>
 

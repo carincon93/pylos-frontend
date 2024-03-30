@@ -9,32 +9,32 @@ export default function Home() {
         <main className="flex min-h-screen flex-col justify-between pb-22 px-4 lg:px-0 fondo z-[1]">
             <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center">
                 <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
-                    <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
-                    <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
+                    <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70]" />
+                    <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] text-white" />
                 </div>
                 <nav
                     id="header-nav"
                     className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Link
-                        className="font-bold"
+                        className="text-white font-bold"
                         href={HOME_ROUTE}>
                         Inicio
                     </Link>
 
                     <Link
-                        className="font-bold"
+                        className="text-white font-bold"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
 
                     <Link
-                        className="font-bold"
+                        className="text-white font-bold"
                         href="#">
                         Soporte
                     </Link>
 
                     <Link
-                        className="font-bold border-2 py-1 px-8 rounded-full border-secondary"
+                        className="text-white font-bold border-2 py-1 px-8 rounded-full border-secondary"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Ingresar
                     </Link>
@@ -44,24 +44,24 @@ export default function Home() {
             <div className="lg:max-w-5xl w-full mx-auto text-left mt-20 lg:mt-0">
                 <div className="grid lg:grid-cols-3 items-center">
                     <div className="col-span-2 flex flex-col text-center lg:text-left gap-y-10 lg:gap-y-4">
-                        <h1 className="text-7xl font-bold">Aprender</h1>
+                        <h1 className="text-7xl font-bold text-white">Aprender</h1>
                         <h2 className="text-5xl text-sky-300 font-light">Nunca fue tan divertido</h2>
 
-                        <p className="lg:mr-48">
+                        <p className="lg:mr-48 text-white">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                             exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </p>
                     </div>
 
                     <div className="col-span-2 lg:col-auto hidden lg:block">
-                        <Isotipo className="w-54 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert mx-auto" />
+                        <Isotipo className="w-54 dark:drop-shadow-[255_255_255.3rem_#ffffff70] mx-auto" />
                     </div>
                 </div>
 
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={EMPEZAR_AVENTURA_ROUTE}
-                        className="py-4 px-8 font-bold uppercase rounded-full bg-secondary">
+                        className="py-4 px-8 font-bold text-white uppercase rounded-full bg-secondary">
                         Empezar la aventura
                     </Link>
                 </div>
@@ -76,7 +76,7 @@ export default function Home() {
                         height={40}
                         className="object-contain"
                     />
-                    <h2>ÁNFORA</h2>
+                    <h2 className="text-white">ÁNFORA</h2>
                 </div>
 
                 <div>

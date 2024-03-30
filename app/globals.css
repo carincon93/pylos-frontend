@@ -30,7 +30,7 @@
 
         --border: #e5e5e5;
         --input: #e5e5e5;
-        --ring: #0f0f0f;
+        --ring: theme(colors.pylos.400);
 
         --radius: 0.5rem;
     }
@@ -62,7 +62,7 @@
 
         --border: #262626;
         --input: #262626;
-        --ring: #d4d4d4;
+        --ring: theme(colors.pylos.400);
     }
 }
 

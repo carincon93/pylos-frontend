@@ -145,12 +145,12 @@ function App() {
             {showOverlay && (
                 <div className="overlay flex flex-col items-center justify-center">
                     <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-56" />
-                        <Logo className="w-80 md:w-full" />
+                        <Isotipo className="w-56 " />
+                        <Logo className="w-80 md:w-full text-white" />
                     </div>
                     <button
                         onClick={init}
-                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
+                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors text-white">
                         Empezar
                     </button>
                 </div>
@@ -190,7 +190,7 @@ function App() {
                         key={index}
                         img={photo.img}
                         date={photo.date}
-                        paragraph={photo.paragraph}
+                        // paragraph={photo.paragraph}
                         className={twMerge(
                             '[grid-area:1/1]',
                             activePhoto === index && 'z-10', // La foto activa tiene una elevación z-10 para estar por encima de las demás
@@ -205,7 +205,7 @@ function App() {
     )
 }
 
-const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?: string; title?: string; date: string; img: string; paragraph: string; zIndex?: number }) => {
+const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?: string; title?: string; date: string; img: string; paragraph?: string; zIndex?: number }) => {
     return (
         <div
             style={{ zIndex: zIndex }}
