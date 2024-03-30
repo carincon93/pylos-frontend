@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { Isotipo } from '@/app/components/Isotipo'
 import { MAPA_ROUTE } from '@/utils/routes'
 
-
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
     const [disabledLeftButton, setDisabledLeftButton] = useState<boolean>(false)
@@ -84,7 +83,7 @@ function App() {
             audio.pause()
         }, (fin - inicio) * 1000) // Convertir la duración de la parte a milisegundos
     }
-    const audioHistoriEpica = '/historia_epica.mp3'
+    const audioHistoriaEpica = '/historia_epica.mp3'
     const audioBienvenida = '/bienvenida.mp3'
 
     // Función para avanzar/retroceder la foto
@@ -96,15 +95,15 @@ function App() {
         setActivePhoto((prev) => (prev + 1) % photosData.length)
 
         if (activePhoto == 0) {
-            reproducirParte(21, 36, audioHistoriEpica)
+            reproducirParte(21, 36, audioHistoriaEpica)
         } else if (activePhoto == 1) {
-            reproducirParte(35, 51, audioHistoriEpica)
+            reproducirParte(35, 51, audioHistoriaEpica)
         } else if (activePhoto == 2) {
-            reproducirParte(51, 67.5, audioHistoriEpica)
+            reproducirParte(51, 67.5, audioHistoriaEpica)
         } else if (activePhoto == 3) {
-            reproducirParte(67.5, 82, audioHistoriEpica)
+            reproducirParte(67.5, 82, audioHistoriaEpica)
         } else if (activePhoto == 4) {
-            reproducirParte(82, 99, audioHistoriEpica)
+            reproducirParte(82, 99, audioHistoriaEpica)
         }
     }
 
@@ -131,8 +130,8 @@ function App() {
         reproducirParte(0, 21, audioBienvenida)
 
         setTimeout(() => {
-            reproducirParte(0, 21.3, audioHistoriEpica)
-        }, 2000) // Duración de la eliminación temporal de las clases de hover
+            reproducirParte(0, 21.3, audioHistoriaEpica)
+        }, 5000) // Duración de la eliminación temporal de las clases de hover
     }
 
     useEffect(() => {
@@ -149,7 +148,9 @@ function App() {
                         <Isotipo className="w-56" />
                         <Logo className="w-80 md:w-full" />
                     </div>
-                    <button onClick={init} className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
+                    <button
+                        onClick={init}
+                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors">
                         Empezar
                     </button>
                 </div>
@@ -157,11 +158,21 @@ function App() {
 
             <div className="lg:grid lg:grid-cols-2 place-items-center flex flex-col items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover [grid-area:1/1] [perspective:500px]">
                 <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-96">
-                    <ActionButton direction="left" text="Foto anterior" onClick={previousPhoto} disabled={disabledLeftButton} />
+                    <ActionButton
+                        direction="left"
+                        text="Foto anterior"
+                        onClick={previousPhoto}
+                        disabled={disabledLeftButton}
+                    />
                 </div>
                 <div className="peer/next blob-right group relative bottom-[43vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-96">
                     {activePhoto != 4 ? (
-                        <ActionButton direction="right" text="Siguiente foto" onClick={nextPhoto} disabled={disabledRightButton} />
+                        <ActionButton
+                            direction="right"
+                            text="Siguiente foto"
+                            onClick={nextPhoto}
+                            disabled={disabledRightButton}
+                        />
                     ) : (
                         <Link
                             href={MAPA_ROUTE}
@@ -207,7 +218,11 @@ const Photo = ({ className, title, date, img, paragraph, zIndex }: { className?:
                 <p className="mb-2 rounded-full bg-blue-400 px-5 py-1 text-xs text-white md:text-sm">{date}</p>
 
                 <picture>
-                    <img src={img} alt="" className="rounded-md" />
+                    <img
+                        src={img}
+                        alt=""
+                        className="rounded-md"
+                    />
                 </picture>
 
                 {/* {title && <p className="font-medium leading-tight md:text-4xl text-black">{title}</p>} */}

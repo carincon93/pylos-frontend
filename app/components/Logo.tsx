@@ -5,9 +5,19 @@ interface LogoProps {
 export function Logo({ className }: LogoProps) {
     return (
         <>
-            <svg width="735.81134" height="160.00201" className={className} viewBox="0 0 194.68336 42.333861" version="1.1" id="svg1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+            <svg
+                width="735.81134"
+                height="160.00201"
+                className={className}
+                viewBox="0 0 194.68336 42.333861"
+                version="1.1"
+                id="svg1"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor">
                 <defs id="defs1" />
-                <g id="layer1" transform="translate(-3.1935744,-2.3634747)">
+                <g
+                    id="layer1"
+                    transform="translate(-3.1935744,-2.3634747)">
                     <path
                         opacity="1"
                         stroke="none"

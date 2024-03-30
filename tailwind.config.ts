@@ -1,59 +1,92 @@
 import type { Config } from 'tailwindcss'
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
-const config: Config = {
-    content: ['./pages/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}', './app/**/*.{js,ts,jsx,tsx,mdx}'],
+const config = {
+    darkMode: ['class'],
+    content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
+    prefix: '',
     theme: {
+        container: {
+            center: true,
+            padding: '2rem',
+            screens: {
+                '2xl': '1400px',
+            },
+        },
         extend: {
-            backgroundImage: {
-                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+            fontFamily: {
+                sans: ['var(--font-sans)', ...fontFamily.sans],
+            },
+            colors: {
+                pylos: {
+                    '50': '#fdf2ff',
+                    '100': '#fbe4ff',
+                    '200': '#f7c8ff',
+                    '300': '#f59dff',
+                    '400': '#f262ff',
+                    '500': '#e528ff',
+                    '600': '#cd07f2',
+                    '700': '#ae02c9',
+                    '800': '#9104a4',
+                    '900': '#61086b',
+                    '950': '#52005b',
+                },
+                border: 'var(--border)',
+                input: 'var(--input)',
+                ring: 'var(--ring)',
+                background: 'var(--background)',
+                foreground: 'var(--foreground)',
+                primary: {
+                    DEFAULT: 'var(--primary)',
+                    foreground: 'var(--primary-foreground)',
+                },
+                secondary: {
+                    DEFAULT: 'var(--secondary)',
+                    foreground: 'var(--secondary-foreground)',
+                },
+                destructive: {
+                    DEFAULT: 'var(--destructive)',
+                    foreground: 'var(--destructive-foreground)',
+                },
+                muted: {
+                    DEFAULT: 'var(--muted)',
+                    foreground: 'var(--muted-foreground)',
+                },
+                accent: {
+                    DEFAULT: 'var(--accent)',
+                    foreground: 'var(--accent-foreground)',
+                },
+                popover: {
+                    DEFAULT: 'var(--popover)',
+                    foreground: 'var(--popover-foreground)',
+                },
+                card: {
+                    DEFAULT: 'var(--card)',
+                    foreground: 'var(--card-foreground)',
+                },
+            },
+            borderRadius: {
+                lg: 'var(--radius)',
+                md: 'calc(var(--radius) - 2px)',
+                sm: 'calc(var(--radius) - 4px)',
             },
             keyframes: {
-                // 'card-visible': {
-                //     '0%': {
-                //         transform: 'rotate3d(1, 12, -3, 18deg) translate3d(210px, 0px, 90px)',
-                //     },
-                //     '95%': {
-                //         transform: 'rotate3d(0, 0.2, 0, 180deg) translate3d(0px, calc(150% - 45vh), 0px) scale(3)',
-                //     },
-                //     '100%': {
-                //         transform: 'rotate3d(0, 0.2, 0, 180deg) translate3d(0px, calc(150% - 45vh), 0px) scale(3)',
-                //     },
-                // },
-                // 'card-on-stack': {
-                //     '0%': {
-                //         transform: 'rotate3d(0, 0.2, 0, 180deg) translate3d(0px, calc(150% - 45vh), 0px) scale(3)',
-                //     },
-                //     '5%': {
-                //         transform: 'rotate3d(0, 0.2, 0, 180deg) translate3d(0px, calc(150% - 45vh), 0px) scale(3)',
-                //     },
-                //     '100%': {
-                //         transform: 'rotate3d(0, 0, 0, 0) translate3d(0, 0px, 0px)',
-                //     },
-                // },
-                // 'card-details': {
-                //     '0%': {
-                //         opacity: '0',
-                //         pointerEvents: 'none',
-                //     },
-                //     '80%': {
-                //         opacity: '0',
-                //         pointerEvents: 'none',
-                //     },
-                //     '100%': {
-                //         opacity: '1',
-                //         pointerEvents: 'auto',
-                //     },
-                // },
+                'accordion-down': {
+                    from: { height: '0' },
+                    to: { height: 'var(--radix-accordion-content-height)' },
+                },
+                'accordion-up': {
+                    from: { height: 'var(--radix-accordion-content-height)' },
+                    to: { height: '0' },
+                },
             },
             animation: {
-                // 'card-visible': 'card-visible 0.8s ease-in-out forwards',
-                // 'card-hidden': 'card-on-stack 0.8s ease-in-out forwards',
-                // 'card-details': 'card-details 0.8s ease-in-out forwards',
-                // 'card-details-hidden': 'card-details 0.8s ease-in-out reverse',
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
             },
         },
     },
-    plugins: [],
-}
+    plugins: [require('tailwindcss-animate')],
+} satisfies Config
+
 export default config

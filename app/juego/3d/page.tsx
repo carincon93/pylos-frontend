@@ -635,7 +635,9 @@ const GameScene: React.FC = () => {
     }, [])
 
     return (
-        <div className="game-holder" id="gameHolder">
+        <div
+            className="game-holder"
+            id="gameHolder">
             <div className="absolute top-20 left-0 w-full h-[10vh]">
                 <div className="flex flex-col items-center justify-center">
                     <Logo className="text-white w-72 h-auto" />
@@ -648,20 +650,28 @@ const GameScene: React.FC = () => {
                     </div>
                     <div className="border-l border-r px-4 border-white flex flex-col">
                         <h1 className="text-center">Próximo planeta</h1>
-                        <span id="distValue" className="text-6xl block -tracking-[8px] text-center w-[155px]">
+                        <span
+                            id="distValue"
+                            className="text-6xl block -tracking-[8px] text-center w-[155px]">
                             0
                         </span>
                         <small className="bg-violet-400 py-1 px-4 rounded-full self-center mt-2">años luz</small>
                     </div>
                     <div className="px-4">
                         <h1>Escudo</h1>
-                        <svg className="text-white/30 mt-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                        <svg
+                            className="text-white/30 mt-1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            fill="currentColor">
                             <path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z" />
                         </svg>
                     </div>
                 </div>
             </div>
-            <div className="world" ref={containerRef}></div>
+            <div
+                className="world"
+                ref={containerRef}></div>
         </div>
     )
 }

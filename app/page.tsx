@@ -12,20 +12,30 @@ export default function Home() {
                     <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] dark:invert" />
                 </div>
-                <nav id="header-nav" className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
-                    <Link className="font-bold" href={HOME_ROUTE}>
+                <nav
+                    id="header-nav"
+                    className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
+                    <Link
+                        className="font-bold"
+                        href={HOME_ROUTE}>
                         Inicio
                     </Link>
 
-                    <Link className="font-bold" href={EMPEZAR_AVENTURA_ROUTE}>
+                    <Link
+                        className="font-bold"
+                        href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
 
-                    <Link className="font-bold" href="#">
+                    <Link
+                        className="font-bold"
+                        href="#">
                         Soporte
                     </Link>
 
-                    <Link className="font-bold border-2 py-1 px-8 rounded-full border-sky-400" href={EMPEZAR_AVENTURA_ROUTE}>
+                    <Link
+                        className="font-bold border-2 py-1 px-8 rounded-full border-secondary"
+                        href={EMPEZAR_AVENTURA_ROUTE}>
                         Ingresar
                     </Link>
                 </nav>
@@ -49,7 +59,9 @@ export default function Home() {
                 </div>
 
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
-                    <Link href={EMPEZAR_AVENTURA_ROUTE} className="py-4 px-8 font-bold uppercase rounded-full bg-sky-400">
+                    <Link
+                        href={EMPEZAR_AVENTURA_ROUTE}
+                        className="py-4 px-8 font-bold uppercase rounded-full bg-secondary">
                         Empezar la aventura
                     </Link>
                 </div>
@@ -57,29 +69,59 @@ export default function Home() {
 
             <div className="text-center lg:max-w-5xl w-full mx-auto flex lg:justify-end flex-wrap lg:flex-nowrap justify-center mt-20 lg:mt-0">
                 <div>
-                    <Image src="/anfora.webp" alt="Planeta Ánfora" width={140} height={40} className="object-contain" />
+                    <Image
+                        src="/anfora.webp"
+                        alt="Planeta Ánfora"
+                        width={140}
+                        height={40}
+                        className="object-contain"
+                    />
                     <h2>ÁNFORA</h2>
                 </div>
 
                 <div>
-                    <Image src="/planeta2.webp" alt="" width={140} height={40} className="object-contain" />
+                    <Image
+                        src="/planeta2.webp"
+                        alt=""
+                        width={140}
+                        height={40}
+                        className="object-contain"
+                    />
 
                     {/* <h2>VISUAL</h2> */}
                 </div>
 
                 <div>
-                    <Image src="/planeta3.webp" alt="" width={140} height={40} className="object-contain" />
+                    <Image
+                        src="/planeta3.webp"
+                        alt=""
+                        width={140}
+                        height={40}
+                        className="object-contain"
+                    />
 
                     {/* <h2>ESCUCHA</h2> */}
                 </div>
 
                 <div>
-                    <Image src="/planeta4.webp" alt="" width={140} height={40} className="object-contain" />
+                    <Image
+                        src="/planeta4.webp"
+                        alt=""
+                        width={140}
+                        height={40}
+                        className="object-contain"
+                    />
                     {/* <h2>SOCIOEMOCIONAL</h2> */}
                 </div>
 
                 <div>
-                    <Image src="/planeta5.webp" alt="" width={140} height={40} className="object-contain" />
+                    <Image
+                        src="/planeta5.webp"
+                        alt=""
+                        width={140}
+                        height={40}
+                        className="object-contain"
+                    />
                     {/* <h2>SOCIOEMOCIONAL</h2> */}
                 </div>
             </div>
