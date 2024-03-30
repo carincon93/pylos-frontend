@@ -110,15 +110,15 @@ export default function RegistroPage() {
                         onValueChange={(value) => handleChange('mascotaId', value)}>
                         <div className="flex items-center justify-center gap-4">
                             {mascotas?.map((mascota: Mascota, index: number) => (
-                                <div className="flex flex-col-reverse items-center gap-2">
+                                <div
+                                    key={mascota.id}
+                                    className="flex flex-col-reverse items-center gap-2">
                                     <RadioGroupItem
                                         value={mascota.id}
                                         id={mascota.id}
                                     />
                                     <Label htmlFor={mascota.id}>
-                                        <Avatar
-                                            key={mascota.id}
-                                            className="size-20">
+                                        <Avatar className="size-20">
                                             <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>
