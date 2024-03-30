@@ -11,9 +11,10 @@ interface PreguntaPruebaDiagnostica {
     esPreguntaCerrada: boolean
 }
 
-interface PreguntaSeguridad {
+interface Mascota {
     id: string
-    pregunta: string
+    mascota: string
+    foto: string
 }
 
 interface RespuestaPruebaDiagnostica {
@@ -26,11 +27,12 @@ interface RespuestaPruebaDiagnostica {
 interface Usuario {
     id: string
     nombre: string
+    nombreUsuario: string
     edad: number
     grado: string
     colegio: string
-    preguntaSeguridadId: string
-    respuestaSeguridad: string
+    mascotaId: string
+    mascotaNombre: string
 }
 
 interface Login {

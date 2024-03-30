@@ -2,19 +2,22 @@
 
 import { useForm } from '@/hooks/useForm'
 import { toAuth } from '@/lib/actions'
-import { PreguntaSeguridad, Usuario } from '@/types/MyTypes'
+import { Mascota, Usuario } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import useSWR from 'swr'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Label } from '@/components/ui/label'
 
 export default function RegistroPage() {
     const { formData, handleChange } = useForm<Partial<Usuario>>({})
-    const { data: preguntasSeguridad } = useSWR<PreguntaSeguridad[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-seguridad`, fetcher)
+    const { data: mascotas } = useSWR<Mascota[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/mascota`, fetcher)
 
     const router = useRouter()
 
@@ -54,11 +57,20 @@ export default function RegistroPage() {
                     onSubmit={handleSubmit}>
                     <Input
                         type="text"
-                        placeholder="Nombre"
+                        placeholder="Nombre del alumno"
                         className="py-4 px-8 text-center"
                         onChange={(event) => handleChange('nombre', event.target.value)}
                         required
                     />
+
+                    <Input
+                        type="text"
+                        placeholder="Nombre del pylonauta"
+                        className="py-4 px-8 text-center"
+                        onChange={(event) => handleChange('nombreUsuario', event.target.value)}
+                        required
+                    />
+
                     <Input
                         type="number"
                         placeholder="Edad"
@@ -92,29 +104,35 @@ export default function RegistroPage() {
                         required
                     />
 
-                    <Select
-                        name="preguntaSeguridadId"
-                        onValueChange={(value) => handleChange('preguntaSeguridadId', value)}
-                        required>
-                        <SelectTrigger className="uppercase">
-                            <SelectValue placeholder="Pregunta de seguridad" />
-                        </SelectTrigger>
-                        <SelectContent className="uppercase">
-                            {preguntasSeguridad?.map((preguntaSeguridad: PreguntaSeguridad, index: number) => (
-                                <SelectItem
-                                    key={preguntaSeguridad.id}
-                                    value={preguntaSeguridad.id}>
-                                    {preguntaSeguridad.pregunta}
-                                </SelectItem>
+                    <Label className="text-center">Seleccione un acompañante</Label>
+                    <RadioGroup
+                        required
+                        onValueChange={(value) => handleChange('mascotaId', value)}>
+                        <div className="flex items-center justify-center gap-4">
+                            {mascotas?.map((mascota: Mascota, index: number) => (
+                                <div className="flex flex-col-reverse items-center gap-2">
+                                    <RadioGroupItem
+                                        value={mascota.id}
+                                        id={mascota.id}
+                                    />
+                                    <Label htmlFor={mascota.id}>
+                                        <Avatar
+                                            key={mascota.id}
+                                            className="size-20">
+                                            <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    </Label>
+                                </div>
                             ))}
-                        </SelectContent>
-                    </Select>
+                        </div>
+                    </RadioGroup>
 
                     <Input
                         type="text"
-                        placeholder="Respuesta"
+                        placeholder="Nombre del acompañante"
                         className="py-4 px-8 text-center"
-                        onChange={(event) => handleChange('respuestaSeguridad', event.target.value)}
+                        onChange={(event) => handleChange('mascotaNombre', event.target.value)}
                         required
                     />
 
