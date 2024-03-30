@@ -1,69 +1,44 @@
 'use client'
 
 import { Button } from '@/app/components/Button'
+import { useForm } from '@/hooks/useForm'
+import { toAuth } from '@/lib/actions'
 import { Login } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { INTRODUCCION_ROUTE } from '@/utils/routes'
 
 export default function LoginPage() {
-    const [formData, setFormData] = useState<Partial<Login>>()
+    const { formData, handleChange } = useForm<Partial<Login>>({})
+
     const router = useRouter()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault() // Evita que el formulario se envíe automáticamente
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-
-            if (!response.ok) {
-                throw new Error('Error al iniciar sesión: ' + response.statusText)
-            }
-
-            const data = await response.json()
-            const token = data.token // Suponiendo que el token está en la propiedad 'token'
+            const data = await toAuth(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, formData)
+            const token = data.token
 
             if (token) {
                 const cookieOptions = {
-                    domain: process.env.NEXT_PUBLIC_DOMAIN, // Replace with your actual domain
-                    secure: true, // Ensure cookie is only sent over HTTPS
-                    httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                    domain: process.env.NEXT_PUBLIC_DOMAIN,
+                    secure: true,
+                    httpOnly: true,
                     maxAge: 24 * 60 * 60,
                 }
 
-                // Construct cookie string
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
-
-                console.log(cookieString)
-
-                // Set the cookie
                 document.cookie = cookieString
 
-                // Redireccionar al panel principal
-                router.push('/introduccion')
+                router.push(INTRODUCCION_ROUTE)
             } else {
-                // Si no se recibió un token en la respuesta, manejar el error
                 throw new Error('No se recibió un token en la respuesta')
             }
-        } catch (error: any) {
-            console.error('Error al iniciar sesión:', error?.message)
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error)
             // Manejar errores si es necesario
         }
-    }
-
-    const handleChange = (name: string, value: string) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }))
     }
 
     return (

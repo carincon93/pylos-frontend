@@ -6,6 +6,8 @@ import { twMerge } from 'tailwind-merge'
 import { Logo } from '../../components/Logo'
 import Link from 'next/link'
 import { Isotipo } from '@/app/components/Isotipo'
+import { MAPA_ROUTE } from '@/utils/routes'
+
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
@@ -162,7 +164,7 @@ function App() {
                         <ActionButton direction="right" text="Siguiente foto" onClick={nextPhoto} disabled={disabledRightButton} />
                     ) : (
                         <Link
-                            href="/game2d"
+                            href={MAPA_ROUTE}
                             className={twMerge(
                                 'button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
                             )}>

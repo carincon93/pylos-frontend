@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { LOGIN_ROUTE, REGISTER_ROUTE } from '@/utils/routes'
 
 export default function EmpezarAventuraPage() {
     return (
@@ -10,11 +11,11 @@ export default function EmpezarAventuraPage() {
                 </div>
 
                 <div className="flex flex-col gap-y-4 items-center justify-center lg:justify-start my-10 lg:my-0">
-                    <Link href="/registro" className="py-4 px-16 font-bold uppercase rounded-full bg-purple-600">
+                    <Link href={REGISTER_ROUTE} className="py-4 px-16 font-bold uppercase rounded-full bg-purple-600">
                         Registro
                     </Link>
 
-                    <Link href="/login" className="py-4 px-16 font-bold uppercase rounded-full bg-sky-400">
+                    <Link href={LOGIN_ROUTE} className="py-4 px-16 font-bold uppercase rounded-full bg-sky-400">
                         Ingreso
                     </Link>
                 </div>

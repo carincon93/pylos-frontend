@@ -1,8 +1,9 @@
 // 'use client'
 
 import React from 'react'
-import { Logo } from '../../components/Logo'
 import Link from 'next/link'
+import { Logo } from '@/app/components/Logo'
+import { GAME_3D_ROUTE } from '@/utils/routes'
 
 const Game2d: React.FC = () => {
     return (
@@ -63,7 +64,7 @@ const Game2d: React.FC = () => {
                         <img src="/books.png" alt="" width="100px" className="m-auto" />
                     </button>
 
-                    <Link href="/game3d" className="relative -top-[255px] bg-red-500 hover:bg-red-600 flex items-center rounded-full size-36 self-center">
+                    <Link href={GAME_3D_ROUTE} className="relative -top-[255px] bg-red-500 hover:bg-red-600 flex items-center rounded-full size-36 self-center">
                         <img src="/rocket.png" alt="" width="100px" className="m-auto" />
                         {/* <span className="text-6xl ml-10 -tracking-[3px] mb-2">Despegar</span> */}
                     </Link>
