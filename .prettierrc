@@ -9,5 +9,6 @@
     "importOrderCaseInsensitive": true,
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
-    "bracketSameLine": true
+    "bracketSameLine": true,
+    "singleAttributePerLine": true
 }
