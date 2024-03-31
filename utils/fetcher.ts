@@ -2,8 +2,8 @@
 
 import { cookies } from 'next/headers'
 
-export const fetcher = async (url: string, method: string = 'GET', data?: object | FormData) => {
-    const accessToken = getAccessTokenFromCookie()
+export const fetcher = async (url: string, method: string = 'GET', data?: object | FormData | string) => {
+    const accessToken = await getAccessTokenFromCookie()
 
     const headers = new Headers({
         Accept: 'application/json',
