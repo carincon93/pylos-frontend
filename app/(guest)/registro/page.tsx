@@ -5,7 +5,7 @@ import { toAuth } from '@/lib/actions'
 import { Mascota, Usuario } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { INTRODUCCION_ROUTE } from '@/utils/routes'
+import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { fetcher } from '@/utils/fetcher'
 import { Button } from '@/components/ui/button'
@@ -39,7 +39,7 @@ export default function RegistroPage() {
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
                 document.cookie = cookieString
 
-                router.push(INTRODUCCION_ROUTE)
+                router.push(PRUEBA_DIAGNOSTICA_ROUTE)
             } else {
                 throw new Error('No se recibió un token en la respuesta')
             }
@@ -120,7 +120,7 @@ export default function RegistroPage() {
                                     <Label
                                         htmlFor={mascota.id}
                                         className="hover:cursor-pointer">
-                                        <Avatar className="size-20" >
+                                        <Avatar className="size-20">
                                             <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>

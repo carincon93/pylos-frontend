@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getTokenData } from './utils/getTokenData'
 import { isTokenExpired } from './utils/isTokenExpired'
-import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE } from '@/utils/routes'
+import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 
 export function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
@@ -45,9 +45,9 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    // Redirect to INTRODUCCION_ROUTE if access token exists and user is not already on INTRODUCCION_ROUTE page
+    // Redirect to PRUEBA_DIAGNOSTICA_ROUTE if access token exists and user is not already on PRUEBA_DIAGNOSTICA_ROUTE page
     if (!request.nextUrl.pathname.startsWith(SUBFOLDER_ROUTE)) {
-        return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
+        return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
     }
 }
 

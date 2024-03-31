@@ -5,7 +5,7 @@ import { toAuth } from '@/lib/actions'
 import { Login } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { INTRODUCCION_ROUTE } from '@/utils/routes'
+import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -32,7 +32,7 @@ export default function LoginPage() {
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
                 document.cookie = cookieString
 
-                router.push(INTRODUCCION_ROUTE)
+                router.push(PRUEBA_DIAGNOSTICA_ROUTE)
             } else {
                 throw new Error('No se recibió un token en la respuesta')
             }
