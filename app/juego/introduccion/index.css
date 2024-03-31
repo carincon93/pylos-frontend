@@ -43,11 +43,11 @@
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #3b82f6;
-  z-index: 9999; /* Z-index alto para que esté por encima de todo */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(56, 189, 248);
+    z-index: 9999; /* Z-index alto para que esté por encima de todo */
 }
