@@ -120,7 +120,7 @@ export default function RegistroPage() {
                                     <Label
                                         htmlFor={mascota.id}
                                         className="hover:cursor-pointer">
-                                        <Avatar className="size-20">
+                                        <Avatar className="size-20" >
                                             <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>

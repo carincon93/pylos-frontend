@@ -50,7 +50,7 @@ export default function LoginPage() {
                     onSubmit={handleSubmit}>
                     <Input
                         type="text"
-                        placeholder="Nombre del pylonauta"
+                        placeholder="Nombre del personaje"
                         className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
                         onChange={(event) => handleChange('nombreUsuario', event.target.value)}
                         required
