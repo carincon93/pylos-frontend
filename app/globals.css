@@ -4,65 +4,65 @@
 
 @layer base {
     :root {
-        --background: #ffffff;
-        --foreground: #000000;
+        --background: 255 255 255;
+        --foreground: 0 0 0;
 
-        --card: #ffffff;
-        --card-foreground: #000000;
+        --card: 255 255 255;
+        --card-foreground: 0 0 0;
 
-        --popover: #ffffff;
-        --popover-foreground: #000000;
+        --popover: 255 255 255;
+        --popover-foreground: 0 0 0;
 
-        --primary: theme(colors.pylos.600);
-        --primary-foreground: #f8f8f8;
+        --primary: 205 7 242;
+        --primary-foreground: 248 248 248;
 
-        --secondary: theme(colors.sky.400);
-        --secondary-foreground: #151515;
+        --secondary: 56 189 248;
+        --secondary-foreground: 21 21 21;
 
-        --muted: #f2f2f2;
-        --muted-foreground: #737373;
+        --muted: 242 242 242;
+        --muted-foreground: 115 115 115;
 
-        --accent: #f2f2f2;
-        --accent-foreground: #151515;
+        --accent: 242 242 242;
+        --accent-foreground: 21 21 21;
 
-        --destructive: #aa3c62;
-        --destructive-foreground: #f8f8f8;
+        --destructive: 170 60 98;
+        --destructive-foreground: 248 248 248;
 
-        --border: #e5e5e5;
-        --input: #e5e5e5;
-        --ring: theme(colors.pylos.400);
+        --border: 229 229 229;
+        --input: 229 229 229;
+        --ring: 242 98 255;
 
         --radius: 0.5rem;
     }
 
     .dark {
-        --background: #0f0f0f;
-        --foreground: #f8f8f8;
+        --background: 15 15 15;
+        --foreground: 248 248 248;
 
-        --card: #0f0f0f;
-        --card-foreground: #f8f8f8;
+        --card: 15 15 15;
+        --card-foreground: 248 248 248;
 
-        --popover: #0f0f0f;
-        --popover-foreground: #f8f8f8;
+        --popover: 15 15 15;
+        --popover-foreground: 248 248 248;
 
-        --primary: theme(colors.pylos.600);
-        --primary-foreground: #232323;
+        --primary: 205 7 242;
+        --primary-foreground: 35 35 35;
 
-        --secondary: theme(colors.sky.400);
-        --secondary-foreground: #f8f8f8;
+        --secondary: 56 189 248;
+        --secondary-foreground: 248 248 248;
 
-        --muted: #262626;
-        --muted-foreground: #a3a3a3;
+        --muted: 38 38 38;
+        --muted-foreground: 163 163 163;
 
-        --accent: #262626;
-        --accent-foreground: #f8f8f8;
+        --accent: 38 38 38;
+        --accent-foreground: 248 248 248;
 
-        --destructive: #ae4561;
-        --destructive-foreground: #f8f8f8;
+        --destructive: 174 69 97;
+        --destructive-foreground: 248 248 248;
 
-        --border: #262626;
-        --input: #262626;
-        --ring: theme(colors.pylos.400);
+        --border: 38 38 38;
+        --input: 38 38 38;
+        --ring: 242 98 255;
     }
 }
 
