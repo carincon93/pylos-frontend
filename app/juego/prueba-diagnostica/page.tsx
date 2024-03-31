@@ -1,30 +1,24 @@
 'use client'
 
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { saveRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
-import React from 'react'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
+import debounce from 'lodash/debounce'
+import { Progress } from '@/components/ui/progress'
 
 const PruebaDiagnosticaPage: React.FC = () => {
-    // const [api, setApi] = useState<CarouselApi>()
-    const { data: preguntasPruebaDiagnostica } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica`, fetcher)
+    const { data: preguntasPruebaDiagnostica } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-    // useEffect(() => {
-    //     if (!api) {
-    //         return
-    //     }
+    const handleSubmit = debounce(async (opcionPruebaDiagnosticaId: string) => {
+        if (isSubmitting) return
 
-    //     api.on('select', () => {
-    //         api.console.log('test')
+        setIsSubmitting(true)
 
-    //         // Do something on select.
-    //     })
-    // }, [api])
-
-    const handleSubmit = async (opcionPruebaDiagnosticaId: string) => {
         const data: Partial<RespuestaPruebaDiagnostica> = {
             opcionPruebaDiagnosticaId: opcionPruebaDiagnosticaId,
         }
@@ -32,12 +26,19 @@ const PruebaDiagnosticaPage: React.FC = () => {
         try {
             await saveRespuestaPruebaDiagnostica(data)
         } catch (error) {
-            console.error('Error al guardar el curso complementario:', error)
+            console.error('Error al guardar la respuesta:', error)
+        } finally {
+            setTimeout(() => {
+                setIsSubmitting(false)
+            }, 1000)
+            mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
         }
-    }
+    }, 1000) // Cambia el valor del retardo según tus necesidades
 
     return (
         <div className="h-[100vh]">
+            <Progress value={33} />
+
             <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center">
                 <CarouselContent>
                     {preguntasPruebaDiagnostica?.map((preguntasPruebaDiagnostica, i) => (
@@ -49,7 +50,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                     <Button
                                         key={opcionPruebaDiagnostica.id}
                                         className="p-10 text-[20px]"
-                                        onClick={() => handleSubmit(opcionPruebaDiagnostica.id)}>
+                                        onClick={() => handleSubmit(opcionPruebaDiagnostica.id)}
+                                        disabled={isSubmitting}>
                                         {opcionPruebaDiagnostica.opcion}
                                     </Button>
                                 ))}
@@ -57,8 +59,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                {/* <CarouselPrevious /> */}
-                <CarouselNext disabled />
+                {/* <CarouselPrevious />
+                <CarouselNext /> */}
             </Carousel>
         </div>
     )
