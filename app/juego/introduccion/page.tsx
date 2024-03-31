@@ -150,7 +150,7 @@ function App() {
                     </div>
                     <button
                         onClick={init}
-                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-400 hover:border-sky-200 transition-colors text-white">
+                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-primary hover:border-primary transition-colors text-white hover:opacity-60">
                         Empezar
                     </button>
                 </div>

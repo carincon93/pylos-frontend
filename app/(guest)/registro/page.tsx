@@ -114,12 +114,13 @@ export default function RegistroPage() {
                                     key={mascota.id}
                                     className="flex flex-col-reverse items-center gap-2">
                                     <RadioGroupItem
+                                        className="hover:opacity-80"
                                         value={mascota.id}
                                         id={mascota.id}
                                     />
                                     <Label
                                         htmlFor={mascota.id}
-                                        className="hover:cursor-pointer">
+                                        className="hover:cursor-pointer hover:opacity-60">
                                         <Avatar className="size-20">
                                             <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
                                             <AvatarFallback>CN</AvatarFallback>
