@@ -13,13 +13,13 @@ export default function EmpezarAventuraPage() {
                 <div className="flex flex-col gap-y-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={REGISTER_ROUTE}
-                        className="py-4 px-16 font-bold uppercase rounded-full bg-primary text-white">
+                        className="py-4 px-16 font-bold uppercase rounded-full bg-primary hover:bg-primary/90 text-white">
                         Registro
                     </Link>
 
                     <Link
                         href={LOGIN_ROUTE}
-                        className="py-4 px-16 font-bold uppercase rounded-full bg-secondary text-white">
+                        className="py-4 px-16 font-bold uppercase rounded-full bg-secondary hover:bg-secondary/90 text-white">
                         Ingreso
                     </Link>
                 </div>

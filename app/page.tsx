@@ -16,25 +16,25 @@ export default function Home() {
                     id="header-nav"
                     className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Link
-                        className="text-white font-bold"
+                        className="text-white hover:text-white/90 font-bold"
                         href={HOME_ROUTE}>
                         Inicio
                     </Link>
 
                     <Link
-                        className="text-white font-bold"
+                        className="text-white hover:text-white/90 font-bold"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
 
                     <Link
-                        className="text-white font-bold"
+                        className="text-white hover:text-white/90 font-bold"
                         href="#">
                         Soporte
                     </Link>
 
                     <Link
-                        className="text-white font-bold border-2 py-1 px-8 rounded-full border-secondary"
+                        className="text-white hover:text-white/90 font-bold border-2 py-1 px-8 rounded-full border-secondary hover:border-secondary/90"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Ingresar
                     </Link>
@@ -61,7 +61,7 @@ export default function Home() {
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={EMPEZAR_AVENTURA_ROUTE}
-                        className="py-4 px-8 font-bold text-white uppercase rounded-full bg-secondary">
+                        className="py-4 px-8 font-bold text-white uppercase rounded-full bg-secondary hover:bg-secondary/90">
                         Empezar la aventura
                     </Link>
                 </div>
