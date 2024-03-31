@@ -1,11 +1,11 @@
-import { Login } from '@/types/MyTypes'
+import { RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 
-export async function login(data: Login): Promise<Response> {
+export async function saveRespuestaPruebaDiagnostica(data: Partial<RespuestaPruebaDiagnostica>): Promise<Response> {
     try {
-        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, 'POST', data)
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica`, 'POST', data)
     } catch (error: any) {
-        throw new Error('Error al iniciar sesión: ' + error.message)
+        throw new Error('Error al guardar la respuesta: ' + error.message)
     }
 }
 
