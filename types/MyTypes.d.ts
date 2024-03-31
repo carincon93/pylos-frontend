@@ -22,7 +22,8 @@ interface RespuestaPruebaDiagnostica {
     id: string
     respuesta: string
     usuarioId: string
-    opcionPruebaDiagnosticaId: string
+    opcionPruebaDiagnosticaId: string | null
+    preguntaPruebaDiagnosticaId: string | null
 }
 
 interface Usuario {
