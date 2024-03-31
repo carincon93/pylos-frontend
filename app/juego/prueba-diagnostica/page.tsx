@@ -5,24 +5,24 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, Car
 import { saveRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useSWR from 'swr'
 
 const PruebaDiagnosticaPage: React.FC = () => {
-    const [api, setApi] = useState<CarouselApi>()
+    // const [api, setApi] = useState<CarouselApi>()
     const { data: preguntasPruebaDiagnostica } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica`, fetcher)
 
-    useEffect(() => {
-        if (!api) {
-            return
-        }
+    // useEffect(() => {
+    //     if (!api) {
+    //         return
+    //     }
 
-        api.on('select', () => {
-            api.console.log('test')
+    //     api.on('select', () => {
+    //         api.console.log('test')
 
-            // Do something on select.
-        })
-    }, [api])
+    //         // Do something on select.
+    //     })
+    // }, [api])
 
     const handleSubmit = async (opcionPruebaDiagnosticaId: string) => {
         const data: Partial<RespuestaPruebaDiagnostica> = {
@@ -38,9 +38,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
     return (
         <div className="h-[100vh]">
-            <Carousel
-                className="w-[90%] mx-auto h-full flex items-center justify-center"
-                setApi={setApi}>
+            <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center">
                 <CarouselContent>
                     {preguntasPruebaDiagnostica?.map((preguntasPruebaDiagnostica, i) => (
                         <CarouselItem key={preguntasPruebaDiagnostica.id}>
