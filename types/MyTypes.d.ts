@@ -9,6 +9,7 @@ interface PreguntaPruebaDiagnostica {
     id: string
     pregunta: string
     esPreguntaCerrada: boolean
+    opcionPruebaDiagnostica: OpcionPruebaDiagnostica[]
 }
 
 interface Mascota {
