@@ -46,7 +46,7 @@ export function middleware(request: NextRequest) {
     }
 
     // Redirect to INTRODUCCION_ROUTE if access token exists and user is not already on INTRODUCCION_ROUTE page
-    if (!request.nextUrl.pathname.startsWith(INTRODUCCION_ROUTE)) {
+    if (!request.nextUrl.pathname.startsWith(SUBFOLDER_ROUTE)) {
         return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
     }
 }
