@@ -6,7 +6,7 @@ import { HOME_ROUTE, EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
 
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col justify-between pb-22 px-4 lg:px-0 fondo z-[1]">
+        <main className="flex min-h-screen flex-col justify-between pb-22 px-0 fondo z-[1]">
             <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center">
                 <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
                     <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70]" />
