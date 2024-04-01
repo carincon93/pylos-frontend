@@ -73,7 +73,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
             {progress > 0 && progress < 100 && (
                 <Progress
                     className="absolute w-9/12 lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
-                    value={40}
+                    value={progress}
                 />
             )}
 
