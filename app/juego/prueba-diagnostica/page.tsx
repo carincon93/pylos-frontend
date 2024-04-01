@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import { saveRespuestaPruebaDiagnostica } from '@/lib/actions'
+import { reproducirParte, saveRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
@@ -23,6 +23,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
     const router = useRouter()
 
+    const buttonPressed = '/button-pressed.mp3'
+
     useEffect(() => {
         if (preguntasPruebaDiagnostica && preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((preguntasPruebaDiagnostica?.length - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / preguntasPruebaDiagnostica?.length)
@@ -37,6 +39,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null) => {
         if (isSubmitting) return
+
+        reproducirParte(0, 2, buttonPressed)
 
         setIsSubmitting(true)
 

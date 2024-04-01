@@ -1,12 +1,13 @@
 'use client'
 
 import './index.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Logo } from '../../components/Logo'
 import Link from 'next/link'
 import { Isotipo } from '@/app/components/Isotipo'
 import { MAPA_ROUTE } from '@/utils/routes'
+import { reproducirParte } from '@/lib/actions'
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
@@ -60,23 +61,6 @@ function App() {
         },
     ]
 
-    // Función para reproducir una parte específica del audio
-    function reproducirParte(inicio: number, fin: number, audioSource: string) {
-        // Creamos un nuevo elemento de audio con la ruta proporcionada
-        const audio = new Audio(audioSource)
-        audio.pause()
-
-        // Establecer el tiempo de inicio en segundos
-        audio.currentTime = inicio
-
-        // Reproducir el audio
-        audio.play()
-
-        // Detener el audio después de la duración especificada
-        setTimeout(() => {
-            audio.pause()
-        }, (fin - inicio) * 1000) // Convertir la duración de la parte a milisegundos
-    }
     const audioHistoriaEpica = '/historia_epica.mp3'
     const audioBienvenida = '/bienvenida.mp3'
 
