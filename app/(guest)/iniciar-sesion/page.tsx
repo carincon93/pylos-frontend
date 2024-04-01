@@ -1,24 +1,45 @@
 'use client'
 
 import { useForm } from '@/hooks/useForm'
-import { toAuth } from '@/lib/actions'
+import { getErrorMessage, getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
 import { Login } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useState } from 'react'
 
 export default function LoginPage() {
     const { formData, handleChange } = useForm<Partial<Login>>({})
+    const [errors, setErrors] = useState<any[]>([])
+    const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
+    const fieldErrors = getErrorsForFields(fields, errors)
 
     const router = useRouter()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault() // Evita que el formulario se envíe automáticamente
+        event.preventDefault()
 
         try {
-            const data = await toAuth(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, formData)
+            const response = await fetch(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json()
+
+                if (errorData.errors) {
+                    setErrors(transformErrors(errorData.errors))
+                } else {
+                    throw new Error(errorData.message)
+                }
+                return
+            }
+
+            const data = await response.json()
             const token = data.token
 
             if (token) {
@@ -32,6 +53,7 @@ export default function LoginPage() {
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
                 document.cookie = cookieString
 
+                // Redirigir al usuario a la página deseada después del inicio de sesión
                 router.push(PRUEBA_DIAGNOSTICA_ROUTE)
             } else {
                 throw new Error('No se recibió un token en la respuesta')
@@ -48,21 +70,27 @@ export default function LoginPage() {
                 <form
                     className="flex flex-col gap-y-6 w-5/12"
                     onSubmit={handleSubmit}>
-                    <Input
-                        type="text"
-                        placeholder="Nombre del personaje"
-                        className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
-                        onChange={(event) => handleChange('nombreUsuario', event.target.value)}
-                        required
-                    />
+                    <div>
+                        <Input
+                            type="text"
+                            placeholder="Nombre del personaje"
+                            className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
+                            onChange={(event) => handleChange('nombreUsuario', event.target.value)}
+                            required
+                        />
+                        {fieldErrors['nombreUsuario'] && <small className="text-red-500">{fieldErrors['nombreUsuario']}</small>}
+                    </div>
 
-                    <Input
-                        type="text"
-                        placeholder="Nombre del acompañante"
-                        className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
-                        onChange={(event) => handleChange('mascotaNombre', event.target.value)}
-                        required
-                    />
+                    <div>
+                        <Input
+                            type="text"
+                            placeholder="Nombre del acompañante"
+                            className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
+                            onChange={(event) => handleChange('mascotaNombre', event.target.value)}
+                            required
+                        />
+                        {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
+                    </div>
 
                     <Button className="uppercase">Ingresar</Button>
                 </form>

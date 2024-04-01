@@ -20,9 +20,37 @@ export async function toAuth(url: string, body: Record<string, any>): Promise<an
         body: JSON.stringify(body),
     })
 
-    if (!response.ok) {
-        throw new Error('Error en la solicitud: ' + response.statusText)
-    }
+    return await response
+}
 
-    return await response.json()
+export const getErrorMessage = (fieldName: string, errors: any[]) => {
+    try {
+        const error = errors.find((error) => error.property === fieldName)
+        return error ? error.errors.map((err: any) => Object.values(err)[0])[0] : null
+    } catch (error) {
+        console.error('Error parsing JSON:', error)
+        return null
+    }
+}
+
+export const transformErrors = (errors: any[]) => {
+    return errors.map((error) => {
+        const property = error.property
+        const constraints = error.constraints
+        const formattedErrors = Object.entries(constraints).map(([key, value]) => ({ [key]: value }))
+        return { property, errors: formattedErrors }
+    })
+}
+
+export const getErrorsForFields = (fields: string[], errors: any[]) => {
+    const fieldErrors: { [key: string]: string[] } = {}
+
+    fields.forEach((field) => {
+        const fieldError = getErrorMessage(field, errors)
+        if (fieldError) {
+            fieldErrors[field] = fieldError
+        }
+    })
+
+    return fieldErrors
 }

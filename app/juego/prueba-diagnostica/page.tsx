@@ -68,7 +68,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
             {progress > 0 && progress < 100 && (
                 <Progress
-                    className="absolute max-w-7xl left-0 right-0 mx-auto top-8 h-6"
+                    className="absolute max-w-2xl lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
                     value={progress}
                 />
             )}
@@ -79,7 +79,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                         <CarouselItem
                             key={preguntaPruebaDiagnostica.id}
                             className="px-10">
-                            <p className="text-center text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
+                            <p className="text-center text-black text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
 
                             <div className="grid grid-cols-3 gap-4 mt-20">
                                 {preguntaPruebaDiagnostica.esPreguntaCerrada ? (
