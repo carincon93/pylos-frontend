@@ -31,21 +31,21 @@ export default function EmpezarAventuraPage() {
                     alt="Planeta Ánfora"
                     width={240}
                     height={40}
-                    className="object-contain absolute md:bottom-40 md:left-[20%] 2xl:bottom-40 2xl:left-[30%] -z-[1]"
+                    className="object-contain absolute md:bottom-52 md:left-[14%] 2xl:bottom-40 2xl:left-[30%] -z-[1]"
                 />
                 <Image
                     src="/planeta2.webp"
                     alt=""
                     width={240}
                     height={40}
-                    className="object-contain absolute md:top-16 md:right-[25%] 2xl:top-32 2xl:right-[38%] -z-[1]"
+                    className="object-contain absolute md:top-16 md:right-[15%] 2xl:top-32 2xl:right-[38%] -z-[1]"
                 />
                 <Image
                     src="/planeta3.webp"
                     alt=""
                     width={240}
                     height={40}
-                    className="object-contain absolute md:bottom-60 md:right-[18%] 2xl:bottom-60 2xl:right-[30%] -z-[1]"
+                    className="object-contain absolute md:bottom-60 md:right-[14%] 2xl:bottom-60 2xl:right-[30%] -z-[1]"
                 />
                 <Image
                     src="/planeta4.webp"
@@ -59,7 +59,7 @@ export default function EmpezarAventuraPage() {
                     alt=""
                     width={240}
                     height={40}
-                    className="object-contain absolute md:top-12 md:left-[22%] 2xl:top-40 2xl:left-[30%] -z-[1]"
+                    className="object-contain absolute md:top-14 md:left-[22%] 2xl:top-40 2xl:left-[30%] -z-[1]"
                 />
             </div>
         </>
