@@ -72,8 +72,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
             {progress > 0 && progress < 100 && (
                 <Progress
-                    className="absolute max-w-md lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
-                    value={progress}
+                    className="absolute w-9/12 lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
+                    value={40}
                 />
             )}
 
@@ -101,7 +101,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                 ) : (
                                     <div className="col-span-3 flex flex-col gap-y-8 items-center justify-center">
                                         <Input
-                                            className=" h-16 border-primary border-2 uppercase text-2xl text-center"
+                                            className="w-9/12 h-14 border-primary border-2 uppercase text-[18px] text-center mx-auto"
                                             placeholder="Escriba la respuesta"
                                             onChange={(event) => setRespuesta(event.target.value)}
                                         />
