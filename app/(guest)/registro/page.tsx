@@ -137,7 +137,7 @@ export default function RegistroPage() {
                     </div>
 
                     <div>
-                        <Label className="text-center text-white uppercase">Seleccione un acompañante</Label>
+                        <Label className="my-4 text-center block text-white uppercase">Seleccione un acompañante</Label>
                         <RadioGroup
                             onValueChange={(value) => handleChange('mascotaId', value)}
                             required>

@@ -91,7 +91,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                         {preguntaPruebaDiagnostica?.opcionPruebaDiagnostica?.map((opcionPruebaDiagnostica, j) => (
                                             <Button
                                                 key={opcionPruebaDiagnostica.id}
-                                                className="p-10 text-[20px]"
+                                                className="p-10 text-[20px] text-pretty leading-5"
                                                 onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id)}
                                                 disabled={isSubmitting}>
                                                 {opcionPruebaDiagnostica.opcion}
