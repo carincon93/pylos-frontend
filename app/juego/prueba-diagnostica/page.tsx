@@ -12,6 +12,7 @@ import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
+import { Loading } from '@/components/ui/loading'
 
 const PruebaDiagnosticaPage: React.FC = () => {
     const { data: preguntasPruebaDiagnostica } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica`, fetcher)
@@ -21,8 +22,6 @@ const PruebaDiagnosticaPage: React.FC = () => {
     const [progress, setProgress] = useState(0)
 
     const router = useRouter()
-
-    // if (progress == 100) return <>Cargando...</>
 
     useEffect(() => {
         if (preguntasPruebaDiagnostica && preguntasPruebaDiagnosticaPorUsuario) {
@@ -61,7 +60,11 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
     return (
         <div className="h-[100vh] relative overflow-x-hidden">
-            {progress == 100 && <div className="absolute bg-sky-400 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">Cargando</div>}
+            {progress == 100 && (
+                <div className="absolute bg-sky-400 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
+                    <Loading />
+                </div>
+            )}
 
             {progress > 0 && progress < 100 && (
                 <Progress
