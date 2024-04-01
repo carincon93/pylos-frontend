@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from '@/hooks/useForm'
-import { getErrorMessage, getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
+import { getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
 import { Mascota, Usuario } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
+import { toast } from '@/components/ui/use-toast'
 
 export default function RegistroPage() {
     const { data: mascotas } = useSWR<Mascota[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/mascota`, fetcher)
@@ -37,6 +38,7 @@ export default function RegistroPage() {
                 if (errorData.errors) {
                     setErrors(transformErrors(errorData.errors))
                 } else {
+                    toast({ title: '❌ Error', description: errorData.message })
                     throw new Error(errorData.message)
                 }
                 return

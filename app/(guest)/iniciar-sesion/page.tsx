@@ -1,7 +1,7 @@
 'use client'
 
 import { useForm } from '@/hooks/useForm'
-import { getErrorMessage, getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
+import { getErrorsForFields, transformErrors } from '@/lib/actions'
 import { Login } from '@/types/MyTypes'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -9,6 +9,7 @@ import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
+import { toast } from '@/components/ui/use-toast'
 
 export default function LoginPage() {
     const { formData, handleChange } = useForm<Partial<Login>>({})
@@ -34,6 +35,7 @@ export default function LoginPage() {
                 if (errorData.errors) {
                     setErrors(transformErrors(errorData.errors))
                 } else {
+                    toast({ title: '❌ Error', description: errorData.message })
                     throw new Error(errorData.message)
                 }
                 return
