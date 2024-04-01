@@ -146,7 +146,7 @@ function App() {
             )}
 
             <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
-                <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-96">
+                <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
                     <ActionButton
                         direction="left"
                         text="Foto anterior"
@@ -154,7 +154,7 @@ function App() {
                         disabled={disabledLeftButton}
                     />
                 </div>
-                <div className="peer/next blob-right group relative bottom-[40vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-96">
+                <div className="peer/next blob-right group relative bottom-[40vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
                     {activePhoto != 4 ? (
                         <ActionButton
                             direction="right"
