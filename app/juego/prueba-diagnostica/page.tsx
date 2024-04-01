@@ -59,7 +59,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
     }, 1000) // Cambia el valor del retardo según tus necesidades
 
     return (
-        <div className="h-[100vh] relative overflow-x-hidden">
+        <div className="h-[100vh] relative overflow-hidden bg-[url('/fondo-prueba.webp')] bg-cover bg-center fondo-prueba">
             {progress == 100 && (
                 <div className="absolute bg-sky-400 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
                     <Loading />
@@ -68,7 +68,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
 
             {progress > 0 && progress < 100 && (
                 <Progress
-                    className="absolute max-w-2xl lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
+                    className="absolute max-w-md lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
                     value={progress}
                 />
             )}
@@ -79,7 +79,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                         <CarouselItem
                             key={preguntaPruebaDiagnostica.id}
                             className="px-10">
-                            <p className="text-center text-black text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
+                            <p className="text-center text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
 
                             <div className="grid grid-cols-3 gap-4 mt-20">
                                 {preguntaPruebaDiagnostica.esPreguntaCerrada ? (
@@ -103,7 +103,8 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                         />
                                         <Button
                                             className="uppercase text-[18px] h-12 w-52"
-                                            onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, null)}>
+                                            onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, null)}
+                                            disabled={respuesta == ''}>
                                             Siguiente
                                         </Button>
                                     </div>
