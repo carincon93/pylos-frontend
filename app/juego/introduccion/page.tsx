@@ -134,8 +134,8 @@ function App() {
             {showOverlay && (
                 <div className="overlay flex flex-col items-center justify-center">
                     <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-56" />
-                        <Logo className="w-80 md:w-full text-white" />
+                        <Isotipo className="w-20 sm:w-56" />
+                        <Logo className="w-60 sm:w-80 md:w-full text-white" />
                     </div>
                     <button
                         onClick={init}
@@ -146,7 +146,7 @@ function App() {
             )}
 
             <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
-                <div className="peer/previous blob-left group relative bottom-[40vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
+                <div className="peer/previous blob-left group relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
                     <ActionButton
                         direction="left"
                         text="Foto anterior"
@@ -154,7 +154,7 @@ function App() {
                         disabled={disabledLeftButton}
                     />
                 </div>
-                <div className="peer/next blob-right group relative bottom-[40vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
+                <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
                     {activePhoto != 4 ? (
                         <ActionButton
                             direction="right"
@@ -184,7 +184,7 @@ function App() {
                     title={photosData[activePhoto].title}
                 />
 
-                <p className="absolute text-2xl z-[9999] bottom-20 px-10">
+                <p className="absolute text-2xl z-[9999] bottom-20 sm:bottom-32 px-10">
                     <mark
                         className="bg-pylos-200"
                         dangerouslySetInnerHTML={{ __html: photosData[activePhoto].text }}></mark>
@@ -199,7 +199,7 @@ const Photo = ({ className, title, date, img, text, zIndex }: { className?: stri
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'top-20 md:top-52 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
