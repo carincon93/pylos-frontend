@@ -22,7 +22,7 @@ export default function Home() {
                     </Link>
 
                     <Link
-                        className="text-white hover:text-white/90 font-bold"
+                        className="text-white hidden hover:text-white/90 font-bold sm:inline-block"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
@@ -67,7 +67,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="text-center lg:max-w-5xl w-full mx-auto flex lg:justify-end flex-wrap lg:flex-nowrap justify-center mt-20 lg:mt-0">
+            <div className="text-center lg:max-w-5xl w-full mx-auto flex lg:justify-end flex-wrap lg:flex-nowrap justify-center mt-6 mb-10 sm:mt-16 lg:mt-0">
                 <div>
                     <Image
                         src="/anfora.webp"

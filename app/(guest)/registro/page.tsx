@@ -70,9 +70,9 @@ export default function RegistroPage() {
 
     return (
         <>
-            <div className="lg:max-w-5xl w-full mx-auto text-left mt-20 lg:mt-0 grow flex flex-col items-center justify-center gap-y-10 relative mb-20">
+            <div className="lg:max-w-5xl w-full mx-auto text-left lg:mt-0 grow flex flex-col items-center justify-center gap-y-10 relative">
                 <form
-                    className="flex flex-col gap-y-6 w-5/12"
+                    className="flex flex-col gap-y-6 w-9/12 sm:w-5/12"
                     onSubmit={handleSubmit}>
                     <div>
                         <Input
@@ -156,7 +156,7 @@ export default function RegistroPage() {
                                             className="hover:cursor-pointer hover:opacity-60">
                                             <Avatar className="size-20">
                                                 <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${mascota.foto}`} />
-                                                <AvatarFallback>CN</AvatarFallback>
+                                                <AvatarFallback>MASCOTA</AvatarFallback>
                                             </Avatar>
                                         </Label>
                                     </div>
@@ -179,44 +179,6 @@ export default function RegistroPage() {
 
                     <Button className="uppercase">Registrarse</Button>
                 </form>
-            </div>
-
-            <div>
-                <Image
-                    src="/anfora.webp"
-                    alt="Planeta Ánfora"
-                    width={240}
-                    height={40}
-                    className="object-contain absolute md:bottom-40 md:left-[8%] xl:bottom-32 xl:left-[18%] 2xl:bottom-40 2xl:left-[30%] -z-[1]"
-                />
-                <Image
-                    src="/planeta2.webp"
-                    alt=""
-                    width={240}
-                    height={40}
-                    className="object-contain absolute md:top-16 md:right-[5%] xl:top-16 xl:right-[20%] 2xl:top-32 2xl:right-[30%] -z-[1]"
-                />
-                <Image
-                    src="/planeta3.webp"
-                    alt=""
-                    width={240}
-                    height={40}
-                    className="object-contain absolute md:bottom-60 md:right-[8%] xl:bottom-40 xl:right-[18%] 2xl:bottom-60 2xl:right-[30%] -z-[1]"
-                />
-                <Image
-                    src="/planeta4.webp"
-                    alt=""
-                    width={240}
-                    height={40}
-                    className="object-contain absolute md:bottom-10 md:left-[35%] xl:bottom-0 xl:left-[40%] 2xl:bottom-10 2xl:left-[45%] -z-[1]"
-                />
-                <Image
-                    src="/planeta5.webp"
-                    alt=""
-                    width={240}
-                    height={40}
-                    className="object-contain absolute md:top-12 md:left-[10%] xl:top-12 xl:left-[20%]  2xl:top-40 2xl:left-[30%] -z-[1]"
-                />
             </div>
         </>
     )
