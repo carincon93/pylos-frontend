@@ -143,7 +143,7 @@ textarea {
 .loader {
     width: 45px;
     aspect-ratio: 0.75;
-    --c: no-repeat linear-gradient(#f79eff 0 0);
+    --c: no-repeat linear-gradient(#ffffff 0 0);
     background: var(--c) 0% 50%, var(--c) 50% 50%, var(--c) 100% 50%;
     background-size: 20% 50%;
     animation: l6 1s infinite linear;

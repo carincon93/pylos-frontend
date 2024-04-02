@@ -48,6 +48,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(56, 189, 248);
+    background-color: #cd07f2;
     z-index: 9999; /* Z-index alto para que esté por encima de todo */
 }
