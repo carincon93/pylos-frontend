@@ -134,12 +134,12 @@ function App() {
             {showOverlay && (
                 <div className="overlay flex flex-col items-center justify-center">
                     <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-20 sm:w-56" />
+                        <Isotipo className="w-20 sm:w-56 text-white" />
                         <Logo className="w-60 sm:w-80 md:w-full text-white" />
                     </div>
                     <button
                         onClick={init}
-                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-8 border-sky-200 transition-colors text-sky-200 hover:border-sky-200/50 hover:text-sky-200/50">
+                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-4 sm:border-8 border-white transition-colors text-white hover:border-sky-200/50 hover:text-sky-200/50">
                         Empezar
                     </button>
                 </div>

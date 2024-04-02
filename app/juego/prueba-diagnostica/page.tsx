@@ -65,7 +65,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
     return (
         <div className="h-[100vh] relative overflow-hidden bg-[url('/fondo-prueba.webp')] bg-cover bg-center fondo-prueba">
             {progress == 100 && (
-                <div className="absolute bg-sky-400 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
+                <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
                     <Loading />
                 </div>
             )}
@@ -83,15 +83,15 @@ const PruebaDiagnosticaPage: React.FC = () => {
                         <CarouselItem
                             key={preguntaPruebaDiagnostica.id}
                             className="px-10">
-                            <p className="text-center text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
+                            <p className="text-center text-2xl sm:text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
 
-                            <div className="grid grid-cols-3 gap-4 mt-20">
+                            <div className="grid sm:grid-cols-3 gap-4 mt-20">
                                 {preguntaPruebaDiagnostica.esPreguntaCerrada ? (
                                     <>
                                         {preguntaPruebaDiagnostica?.opcionPruebaDiagnostica?.map((opcionPruebaDiagnostica, j) => (
                                             <Button
                                                 key={opcionPruebaDiagnostica.id}
-                                                className="p-10 text-[20px] text-wrap leading-5"
+                                                className="p-8 sm:p-10 text-[20px] text-wrap leading-5"
                                                 onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id)}
                                                 disabled={isSubmitting}>
                                                 {opcionPruebaDiagnostica.opcion}
@@ -101,7 +101,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                 ) : (
                                     <div className="col-span-3 flex flex-col gap-y-8 items-center justify-center">
                                         <Input
-                                            className="w-9/12 h-14 border-primary border-2 uppercase text-[18px] text-center mx-auto"
+                                            className="sm:w-9/12 h-14 border-primary border-2 uppercase text-[18px] text-center mx-auto"
                                             placeholder="Escriba la respuesta"
                                             onChange={(event) => setRespuesta(event.target.value)}
                                         />
