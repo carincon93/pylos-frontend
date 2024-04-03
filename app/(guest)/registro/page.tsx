@@ -3,7 +3,6 @@
 import { useForm } from '@/hooks/useForm'
 import { getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
 import { Mascota, Usuario } from '@/types/MyTypes'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -16,11 +15,13 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 import { toast } from '@/components/ui/use-toast'
+import { Loading } from '@/components/ui/loading'
 
 export default function RegistroPage() {
     const { data: mascotas } = useSWR<Mascota[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/mascota`, fetcher)
     const { formData, handleChange } = useForm<Partial<Usuario>>({})
     const [errors, setErrors] = useState<any[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
 
@@ -28,6 +29,7 @@ export default function RegistroPage() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault() // Evita que el formulario se envíe automáticamente
+        setLoading(true)
 
         try {
             const response = await toAuth(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/register`, formData)
@@ -66,6 +68,8 @@ export default function RegistroPage() {
             console.error('Error al iniciar sesión:', error)
             // Manejar errores si es necesario
         }
+
+        setLoading(false)
     }
 
     return (
@@ -177,7 +181,10 @@ export default function RegistroPage() {
                         {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
                     </div>
 
-                    <Button className="uppercase">Registrarse</Button>
+                    <Button className="uppercase">
+                        {loading && <Loading className="!w-4 mr-2" />}
+                        Registrarse
+                    </Button>
                 </form>
             </div>
         </>
