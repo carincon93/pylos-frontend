@@ -76,11 +76,11 @@ const PruebaDiagnosticaPage: React.FC = () => {
         <>
             <Canvas
                 camera={{ position: [0, 0, 1] }}
-                className="!h-[100vh] relative z-20">
+                className="!h-[100vh] relative z-10 bg-pylos-800/50">
                 <Stars />
             </Canvas>
 
-            <div className="h-[100vh] absolute top-0 left-0 w-full overflow-hidden bg-cover bg-center fondo-prueba z-10">
+            <div className="h-[100vh] absolute top-0 left-0 w-full overflow-hidden bg-cover bg-center z-20">
                 {progress > 0 && progress < 100 && (
                     <Progress
                         className="absolute w-9/12 lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
