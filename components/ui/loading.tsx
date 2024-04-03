@@ -1,11 +1,14 @@
 import React from 'react'
 
-const Loading = React.forwardRef<HTMLInputElement>(function LoadingComponent(props, ref) {
+interface Props {
+    className?: string
+}
+
+const Loading = React.forwardRef<HTMLInputElement, Props>(function LoadingComponent({ className }, ref) {
     return (
         <span
-            className="loader"
+            className={`loader ${className}`}
             ref={ref}
-            {...props}
         />
     )
 })
