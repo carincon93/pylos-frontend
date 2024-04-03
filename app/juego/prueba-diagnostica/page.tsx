@@ -39,12 +39,13 @@ const PruebaDiagnosticaPage: React.FC = () => {
         }, 1000)
     }, [progress])
 
-    if (preguntasPruebaDiagnostica == undefined || progress == 100)
+    if (preguntasPruebaDiagnostica == undefined || progress == 100) {
         return (
             <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
                 <Loading />
             </div>
         )
+    }
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null) => {
         if (isSubmitting) return
@@ -78,7 +79,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                 className="!h-[100vh] relative z-20">
                 <Stars />
             </Canvas>
-            
+
             <div className="h-[100vh] absolute top-0 left-0 w-full overflow-hidden bg-cover bg-center fondo-prueba z-10">
                 {progress > 0 && progress < 100 && (
                     <Progress
