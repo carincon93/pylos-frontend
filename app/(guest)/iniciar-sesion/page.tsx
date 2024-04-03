@@ -10,10 +10,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { toast } from '@/components/ui/use-toast'
+import { Loading } from '@/components/ui/loading'
 
 export default function LoginPage() {
     const { formData, handleChange } = useForm<Partial<Login>>({})
     const [errors, setErrors] = useState<any[]>([])
+    const [loading, setLoading] = useState<boolean>(false)
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
 
@@ -21,6 +23,8 @@ export default function LoginPage() {
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
+        setLoading(true)
 
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/auth/login`, {
@@ -64,6 +68,8 @@ export default function LoginPage() {
             console.error('Error al iniciar sesión:', error)
             // Manejar errores si es necesario
         }
+
+        setLoading(false)
     }
 
     return (
@@ -94,7 +100,10 @@ export default function LoginPage() {
                         {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
                     </div>
 
-                    <Button className="uppercase">Ingresar</Button>
+                    <Button className="uppercase">
+                        {loading && <Loading className="!w-4 mr-2" />}
+                        Ingresar
+                    </Button>
                 </form>
             </div>
         </>
