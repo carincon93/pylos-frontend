@@ -75,6 +75,7 @@ export default function LoginPage() {
     return (
         <>
             <div className="lg:max-w-5xl w-full mx-auto text-left lg:mt-0 grow flex flex-col items-center justify-center gap-y-10 relative">
+                <h1 className="text-6xl text-center font-medium uppercase">Ingresar</h1>
                 <form
                     className="flex flex-col gap-y-6 w-9/12 sm:w-5/12"
                     onSubmit={handleSubmit}>
