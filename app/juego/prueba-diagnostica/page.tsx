@@ -17,8 +17,8 @@ import { Stars } from '@/app/components/Stars'
 import { Canvas } from '@react-three/fiber'
 
 const PruebaDiagnosticaPage: React.FC = () => {
-    const { data: preguntasPruebaDiagnostica } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica`, fetcher)
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
+
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
@@ -28,18 +28,15 @@ const PruebaDiagnosticaPage: React.FC = () => {
     const buttonPressed = '/button-pressed.mp3'
 
     useEffect(() => {
-        if (preguntasPruebaDiagnostica && preguntasPruebaDiagnosticaPorUsuario) {
-            setProgress(((preguntasPruebaDiagnostica?.length - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / preguntasPruebaDiagnostica?.length)
+        if (preguntasPruebaDiagnosticaPorUsuario) {
+            setProgress(((10 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 10)
+            setTimeout(() => {
+                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) router.push(INTRODUCCION_ROUTE)
+            }, 1000)
         }
-    }, [preguntasPruebaDiagnostica && preguntasPruebaDiagnosticaPorUsuario])
+    }, [preguntasPruebaDiagnosticaPorUsuario])
 
-    useEffect(() => {
-        setTimeout(() => {
-            if (progress == 100) router.push(INTRODUCCION_ROUTE)
-        }, 1000)
-    }, [progress])
-
-    if (preguntasPruebaDiagnostica == undefined || progress == 100) {
+    if (progress == 100) {
         return (
             <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
                 <Loading />
