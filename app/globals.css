@@ -44,8 +44,8 @@
         --card-rgb: 15 15 15;
         --card-foreground-rgb: 255 255 255;
 
-        --popover-rgb: 15 15 15;
-        --popover-foreground-rgb: 255 255 255;
+        --popover-rgb: 255 255 255;
+        --popover-foreground-rgb: 15 15 15;
 
         --primary-rgb: 205 7 242;
         --primary-foreground-rgb: 255 255 255;
@@ -188,4 +188,45 @@ button[role='combobox'] {
         padding: 0 1.5rem;
         inset-inline: 40px;
     }
+}
+
+.menu,
+.scores {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.42);
+    background-image: url('/menu_bg.svg');
+    background-size: 200px;
+    background-repeat: repeat;
+    backdrop-filter: blur(4px);
+    transition: all 1s ease-in-out;
+}
+
+/* FADE IN ANIMATION */
+.menu:not(.menu--hidden),
+.scores:not(.scores--hidden) {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.menu--hidden,
+.scores--hidden {
+    opacity: 0;
+    pointer-events: none;
 }
