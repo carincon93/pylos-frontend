@@ -4,9 +4,9 @@ import { CapsuleCollider, RigidBody, vec3 } from '@react-three/rapier'
 import { useEffect, useRef } from 'react'
 import { gameStates, useGameStore } from '@/lib/store'
 import Character from './Character'
-import { Controls } from '../juego/anfora/page'
 
 import * as THREE from 'three'
+import { Controls } from '@/lib/utils'
 
 const JUMP_FORCE = 0.5
 const MOVEMENT_SPEED = 0.1

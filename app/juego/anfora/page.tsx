@@ -6,14 +6,7 @@ import { Physics } from '@react-three/rapier'
 import { Leva } from 'leva'
 import { Suspense, useMemo } from 'react'
 import { Experience } from '../../components/Experience.jsx'
-
-export const Controls = {
-    forward: 'forward',
-    back: 'back',
-    left: 'left',
-    right: 'right',
-    jump: 'jump',
-}
+import { Controls } from '@/lib/utils'
 
 function App() {
     const map = useMemo(
