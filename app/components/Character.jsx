@@ -4,13 +4,13 @@ import React, { useEffect, useRef } from 'react'
 
 export default function Character(props) {
     const group = useRef()
-    const { nodes, materials, animations } = useGLTF('/models/model.gltf')
+    const { nodes, materials, animations } = useGLTF('/models/AstronautModel.glb')
     const { actions } = useAnimations(animations, group)
 
     const characterState = useGameStore((state) => state.characterState)
 
     useEffect(() => {
-        actions[characterState].reset().fadeIn(0.2).play()
+        actions[characterState].reset().play()
         return () => {
             actions[characterState].fadeOut(0.2)
         }
@@ -21,18 +21,18 @@ export default function Character(props) {
             ref={group}
             {...props}
             dispose={null}>
-            <group name="Scene">
+            <group name="Group">
                 <group
-                    name="Root003"
+                    name="Armature001"
                     scale={0.64}>
-                    <primitive object={nodes.LeftFootCtrl} />
-                    <primitive object={nodes.RightFootCtrl} />
-                    <primitive object={nodes.HipsCtrl} />
+                    <primitive object={nodes.RightLeg} />
+                    <primitive object={nodes.LeftLeg} />
+                    <primitive object={nodes.Spine} />
                     <skinnedMesh
-                        name="characterMedium"
-                        geometry={nodes.characterMedium.geometry}
-                        material={materials['skin.001']}
-                        skeleton={nodes.characterMedium.skeleton}
+                        name="Body"
+                        geometry={nodes.Body.geometry}
+                        material={materials['Material_0']}
+                        skeleton={nodes.Body.skeleton}
                     />
                 </group>
             </group>
@@ -40,4 +40,4 @@ export default function Character(props) {
     )
 }
 
-useGLTF.preload('/models/model.gltf')
+useGLTF.preload('/models/AstronautModel.glb')
