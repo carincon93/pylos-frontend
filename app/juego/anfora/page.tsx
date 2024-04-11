@@ -16,7 +16,6 @@ export const Controls = {
 }
 
 function App() {
-    useFont.preload('./fonts/Noto Sans JP ExtraBold_Regular.json')
     const map = useMemo(
         () => [
             { name: Controls.forward, keys: ['ArrowUp', 'KeyW'] },
@@ -30,14 +29,14 @@ function App() {
 
     return (
         <KeyboardControls map={map}>
-            <Leva hidden />
+            <Leva collapsed />
             <Canvas
                 shadows
                 camera={{ position: [0, 20, 14], fov: 42 }}
                 style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
                 <color
                     attach="background"
-                    args={['#e3daf7']}
+                    args={['#eec481']}
                 />
                 <Suspense>
                     <Physics>
