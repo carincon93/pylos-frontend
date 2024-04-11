@@ -57,19 +57,56 @@ export const CharacterController = () => {
 
             rigidbody.current.applyImpulse(impulse, true)
 
+            let targetAngle
+
+            // Norte (Arriba)
+            if (forwardPressed && !rightPressed && !leftPressed) {
+                targetAngle = Math.PI // 180 grados en radianes
+            }
+            // Este (Derecha)
+            if (rightPressed && !forwardPressed && !backPressed) {
+                targetAngle = Math.PI / 2 // 90 grados en radianes
+            }
+            // Sur (Abajo)
+            if (backPressed && !rightPressed && !leftPressed) {
+                targetAngle = 0 // 0 radianes
+            }
+            // Oeste (Izquierda)
+            if (leftPressed && !forwardPressed && !backPressed) {
+                targetAngle = -Math.PI / 2 // -90 grados en radianes
+            }
+
+            // Diagonales
+            // Noreste (Arriba + Derecha)
+            if (forwardPressed && rightPressed) {
+                targetAngle = (3 * Math.PI) / 4 // 135 grados en radianes
+            }
+            // Sureste (Abajo + Derecha)
+            if (backPressed && rightPressed) {
+                targetAngle = Math.PI / 4 // 45 grados en radianes
+            }
+            // Suroeste (Abajo + Izquierda)
+            if (backPressed && leftPressed) {
+                targetAngle = -Math.PI / 4 // -45 grados en radianes
+            }
+            // Noroeste (Arriba + Izquierda)
+            if (forwardPressed && leftPressed) {
+                targetAngle = (-3 * Math.PI) / 4 // -135 grados en radianes
+            }
+
+            // Aplicar rotación si targetAngle está definido
+            if (targetAngle !== undefined) {
+                character.current.rotation.y = targetAngle
+            }
+
             if (Math.abs(linvel.x) > RUN_VEL || Math.abs(linvel.z) > RUN_VEL) {
-                if (characterState !== 'Run') {
-                    setCharacterState('Run')
+                if (characterState !== 'Fly1') {
+                    setCharacterState('Fly1')
                 }
             } else {
                 if (characterState !== 'Idle') {
                     setCharacterState('Idle')
                 }
-            }
-
-            if (changeRotation) {
-                const angle = Math.atan2(linvel.x, linvel.z)
-                character.current.rotation.y = angle
             }
         }
 
@@ -82,7 +119,7 @@ export const CharacterController = () => {
             targetCameraPosition.y = 6
         }
         if (gameState !== gameStates.GAME) {
-            targetCameraPosition.y = 0
+            targetCameraPosition.y = 10
         }
 
         state.camera.position.lerp(targetCameraPosition, delta * 2)
