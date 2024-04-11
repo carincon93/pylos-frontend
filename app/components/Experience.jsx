@@ -36,7 +36,7 @@ export const Experience = () => {
                         sensor
                     />
                 </RigidBody>
-                <ContactShadows
+                {/* <ContactShadows
                     frames={1}
                     position={[0, -0.88, 0]}
                     scale={80}
@@ -44,7 +44,7 @@ export const Experience = () => {
                     far={50}
                     blur={0.8}
                     color={'#aa9acd'}
-                />
+                /> */}
                 {/* STAGE */}
                 {/* <Stage position-y={-0.92} /> */}
                 <RigidBody
@@ -52,7 +52,7 @@ export const Experience = () => {
                     type="fixed"
                     position-y={-0.5}
                     friction={2}>
-                    <CylinderCollider args={[1 / 2, 5]} />
+                    <CuboidCollider args={[50, 0.1, 50]} />
                 </RigidBody>
 
                 {/* CHARACTER */}
