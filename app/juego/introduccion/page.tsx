@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import { Logo } from '../../components/Logo'
 import Link from 'next/link'
 import { Isotipo } from '@/app/components/Isotipo'
-import { GAME_3D_ROUTE } from '@/utils/routes'
+import { ANFORA_ROUTE } from '@/utils/routes'
 import { reproducirParte } from '@/lib/actions'
 
 function App() {
@@ -164,7 +164,7 @@ function App() {
                         />
                     ) : (
                         <Link
-                            href={GAME_3D_ROUTE}
+                            href={ANFORA_ROUTE}
                             className={twMerge(
                                 'button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
                             )}>
