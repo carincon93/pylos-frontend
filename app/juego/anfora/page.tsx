@@ -1,9 +1,8 @@
 'use client'
 
-import { KeyboardControls, Loader, useFont, useProgress } from '@react-three/drei'
+import { KeyboardControls, Loader, Stats, useProgress } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
-import { Leva } from 'leva'
 import { Suspense, useMemo } from 'react'
 import { Experience } from '../../components/Experience.jsx'
 import { Controls } from '@/lib/utils'
@@ -16,13 +15,14 @@ function App() {
             { name: Controls.left, keys: ['ArrowLeft', 'KeyA'] },
             { name: Controls.right, keys: ['ArrowRight', 'KeyD'] },
             { name: Controls.jump, keys: ['Space'] },
+            { name: Controls.reset, keys: ['KeyR'] },
         ],
         [],
     )
 
     return (
         <KeyboardControls map={map}>
-            <Leva collapsed />
+            <Stats showPanel={1} />
             <Canvas
                 shadows
                 camera={{ position: [0, 20, 14], fov: 42 }}
@@ -32,12 +32,12 @@ function App() {
                     args={['#eec481']}
                 />
                 <Suspense>
-                    <Physics>
+                    <Physics debug>
                         <Experience />
                     </Physics>
                 </Suspense>
             </Canvas>
-            <Loader />
+            {/* <Loader /> */}
         </KeyboardControls>
     )
 }
