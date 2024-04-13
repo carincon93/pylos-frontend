@@ -8,8 +8,7 @@ import Character from './Character'
 import * as THREE from 'three'
 import { Controls } from '@/lib/utils'
 
-const JUMP_FORCE = 0.5
-const MOVEMENT_SPEED = 0.1
+let MOVEMENT_SPEED = 0.1
 const MAX_VEL = 3
 const RUN_VEL = 1.5
 
@@ -19,19 +18,34 @@ export const CharacterController = () => {
         setCharacterState: state.setCharacterState,
         gameState: state.gameState,
     }))
+    const setCharacterPosition = useGameStore((state) => state.setCharacterPosition)
+    const cameraText = useGameStore((state) => state.cameraText)
+
     const jumpPressed = useKeyboardControls((state) => state[Controls.jump])
     const leftPressed = useKeyboardControls((state) => state[Controls.left])
     const rightPressed = useKeyboardControls((state) => state[Controls.right])
     const backPressed = useKeyboardControls((state) => state[Controls.back])
     const forwardPressed = useKeyboardControls((state) => state[Controls.forward])
+    const resetPressed = useKeyboardControls((state) => state[Controls.reset])
     const rigidbody = useRef()
     const isOnFloor = useRef(true)
+    const character = useRef()
+
+    const resetPosition = () => {
+        rigidbody.current.setTranslation(vec3({ x: 0, y: 0, z: 0 }))
+        rigidbody.current.setLinvel(vec3({ x: 0, y: 0, z: 0 }))
+    }
 
     useFrame((state, delta) => {
         const impulse = { x: 0, y: 0, z: 0 }
         if (jumpPressed && isOnFloor.current) {
-            impulse.y += JUMP_FORCE
-            isOnFloor.current = false
+            MOVEMENT_SPEED = 2
+        } else {
+            MOVEMENT_SPEED = 0.1
+        }
+
+        if (resetPressed) {
+            resetPosition()
         }
 
         if (rigidbody.current) {
@@ -113,13 +127,15 @@ export const CharacterController = () => {
         // CAMERA FOLLOW
         const characterWorldPosition = character.current.getWorldPosition(new THREE.Vector3())
 
+        setCharacterPosition([characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z])
+
         const targetCameraPosition = new THREE.Vector3(characterWorldPosition.x, 0, characterWorldPosition.z + 14)
 
         if (gameState === gameStates.GAME) {
             targetCameraPosition.y = 6
         }
         if (gameState !== gameStates.GAME) {
-            targetCameraPosition.y = 10
+            targetCameraPosition.y = cameraText ? 18 : 10
         }
 
         state.camera.position.lerp(targetCameraPosition, delta * 2)
@@ -140,13 +156,6 @@ export const CharacterController = () => {
         state.camera.lookAt(lerpedLookAt)
     })
 
-    const character = useRef()
-
-    const resetPosition = () => {
-        rigidbody.current.setTranslation(vec3({ x: 0, y: 0, z: 0 }))
-        rigidbody.current.setLinvel(vec3({ x: 0, y: 0, z: 0 }))
-    }
-
     useEffect(() => useGameStore.subscribe((state) => state.currentStage, resetPosition), [])
 
     useEffect(() => useGameStore.subscribe((state) => state.wrongAnswers, resetPosition), [])
@@ -162,8 +171,8 @@ export const CharacterController = () => {
                     isOnFloor.current = true
                 }}>
                 <CapsuleCollider
-                    args={[0.8, 0.4]}
-                    position={[0, 1.2, 0]}
+                    args={[1, 0.4]}
+                    position={[0, 0.5, 0]}
                 />
                 <group ref={character}>
                     <Character />
