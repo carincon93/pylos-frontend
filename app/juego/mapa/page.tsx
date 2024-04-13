@@ -3,7 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Logo } from '@/app/components/Logo'
-import { GAME_3D_ROUTE } from '@/utils/routes'
+import { ANFORA_ROUTE } from '@/utils/routes'
 
 const Game2d: React.FC = () => {
     return (
@@ -106,7 +106,7 @@ const Game2d: React.FC = () => {
                     </button>
 
                     <Link
-                        href={GAME_3D_ROUTE}
+                        href={ANFORA_ROUTE}
                         className="relative -top-[255px] bg-red-500 hover:bg-red-600 flex items-center rounded-full size-36 self-center">
                         <img
                             src="/rocket.png"
