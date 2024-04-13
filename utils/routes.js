@@ -5,5 +5,5 @@ export const REGISTER_ROUTE = '/registro'
 export const EMPEZAR_AVENTURA_ROUTE = '/empezar-la-aventura'
 export const INTRODUCCION_ROUTE = `${SUBFOLDER_ROUTE}/introduccion`
 export const MAPA_ROUTE = `${SUBFOLDER_ROUTE}/mapa`
-export const GAME_3D_ROUTE = `${SUBFOLDER_ROUTE}/3d`
+export const ANFORA_ROUTE = `${SUBFOLDER_ROUTE}/anfora`
 export const PRUEBA_DIAGNOSTICA_ROUTE = `${SUBFOLDER_ROUTE}/prueba-diagnostica`
