@@ -11,4 +11,5 @@ export const Controls = {
     left: 'left',
     right: 'right',
     jump: 'jump',
+    reset: 'r',
 }
