@@ -8,7 +8,8 @@ import Character from './Character'
 import * as THREE from 'three'
 import { Controls } from '@/lib/utils'
 
-let MOVEMENT_SPEED = 0.1
+const JUMP_FORCE = 0.6
+const MOVEMENT_SPEED = 0.5
 const MAX_VEL = 3
 const RUN_VEL = 1.5
 
@@ -20,6 +21,7 @@ export const CharacterController = () => {
     }))
     const setCharacterPosition = useGameStore((state) => state.setCharacterPosition)
     const cameraText = useGameStore((state) => state.cameraText)
+    const characterPosition = useGameStore((state) => state.characterPosition)
 
     const jumpPressed = useKeyboardControls((state) => state[Controls.jump])
     const leftPressed = useKeyboardControls((state) => state[Controls.left])
@@ -32,16 +34,16 @@ export const CharacterController = () => {
     const character = useRef()
 
     const resetPosition = () => {
-        rigidbody.current.setTranslation(vec3({ x: 0, y: 0, z: 0 }))
+        rigidbody.current.setTranslation(vec3({ x: -4, y: 2, z: 38 }))
         rigidbody.current.setLinvel(vec3({ x: 0, y: 0, z: 0 }))
     }
 
     useFrame((state, delta) => {
         const impulse = { x: 0, y: 0, z: 0 }
+
         if (jumpPressed && isOnFloor.current) {
-            MOVEMENT_SPEED = 2
-        } else {
-            MOVEMENT_SPEED = 0.1
+            impulse.y += JUMP_FORCE
+            isOnFloor.current = false
         }
 
         if (resetPressed) {
@@ -114,8 +116,8 @@ export const CharacterController = () => {
             }
 
             if (Math.abs(linvel.x) > RUN_VEL || Math.abs(linvel.z) > RUN_VEL) {
-                if (characterState !== 'Fly1') {
-                    setCharacterState('Fly1')
+                if (characterState !== 'Fly') {
+                    setCharacterState('Fly')
                 }
             } else {
                 if (characterState !== 'Idle') {
@@ -127,15 +129,19 @@ export const CharacterController = () => {
         // CAMERA FOLLOW
         const characterWorldPosition = character.current.getWorldPosition(new THREE.Vector3())
 
-        setCharacterPosition([characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z])
+        // setCharacterPosition([characterWorldPosition.x, characterWorldPosition.y, characterWorldPosition.z])
 
-        const targetCameraPosition = new THREE.Vector3(characterWorldPosition.x, 0, characterWorldPosition.z + 14)
+        const targetCameraPosition = new THREE.Vector3(characterWorldPosition.x, 0, characterWorldPosition.z + 20)
 
         if (gameState === gameStates.GAME) {
             targetCameraPosition.y = 6
         }
         if (gameState !== gameStates.GAME) {
-            targetCameraPosition.y = cameraText ? 18 : 10
+            targetCameraPosition.y = 3
+        }
+
+        if (cameraText) {
+            targetCameraPosition.y = 20
         }
 
         state.camera.position.lerp(targetCameraPosition, delta * 2)
@@ -161,7 +167,7 @@ export const CharacterController = () => {
     useEffect(() => useGameStore.subscribe((state) => state.wrongAnswers, resetPosition), [])
 
     return (
-        <group>
+        <group position={characterPosition}>
             <RigidBody
                 ref={rigidbody}
                 colliders={false}

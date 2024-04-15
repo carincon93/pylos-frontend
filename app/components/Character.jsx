@@ -5,6 +5,7 @@ import React, { useEffect, useRef } from 'react'
 export default function Character(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/AstronautModel.glb')
+
     const { actions } = useAnimations(animations, group)
 
     const characterState = useGameStore((state) => state.characterState)
@@ -23,7 +24,7 @@ export default function Character(props) {
             dispose={null}>
             <group name="Group">
                 <group
-                    name="Armature001"
+                    name="Body"
                     scale={0.64}>
                     <primitive object={nodes.RightLeg} />
                     <primitive object={nodes.LeftLeg} />
@@ -31,7 +32,7 @@ export default function Character(props) {
                     <skinnedMesh
                         name="Body"
                         geometry={nodes.Body.geometry}
-                        material={materials['Material_0']}
+                        material={materials['Material_0.001']}
                         skeleton={nodes.Body.skeleton}
                     />
                 </group>
