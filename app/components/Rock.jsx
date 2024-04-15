@@ -3,6 +3,8 @@ import { BallCollider, RigidBody } from '@react-three/rapier'
 import Asteroid from './Asteroid'
 
 const Rock = (props) => {
+    const setReadingTextVisible = useGameStore((state) => state.setReadingTextVisible)
+
     // Define un array de posiciones correspondientes a cada índice
     const positions = [
         [20, 1.4, 20],
@@ -23,7 +25,7 @@ const Rock = (props) => {
             enabledRotations={[false, false, false]}
             position={position}
             onCollisionEnter={() => {
-                // setCurrentReadingIndex(currentReadingIndex + 1)
+                setReadingTextVisible(true)
             }}>
             <BallCollider args={[0.8, 0]} />
             <group>
