@@ -6,6 +6,7 @@ import Reading from './Reading'
 import Question from './Question'
 import Stage from './Stage'
 import Arch from './Arch'
+import Desert from './Desert'
 import { useGameStore } from '@/lib/store'
 
 export const Experience = () => {
@@ -13,7 +14,7 @@ export const Experience = () => {
     const showFirstStage = useGameStore((state) => state.showFirstStage)
     const setCurrentReadingIndex = useGameStore((state) => state.setCurrentReadingIndex)
 
-    const plane = showFirstStage ? [100, 80] : [40, 80]
+    const plane = showFirstStage ? [100, 80] : [50, 80]
 
     return (
         <>
@@ -24,7 +25,7 @@ export const Experience = () => {
                 position={[5, 5, 5]}
                 intensity={0.3}
                 castShadow
-                color={'#9e69da'}
+                color={'#c3c29e'}
             />
 
             <group position-y={-1}>
@@ -35,7 +36,7 @@ export const Experience = () => {
                     <mesh rotation={[-Math.PI / 2, 0, 0]}>
                         <planeGeometry args={plane} />
                         <meshBasicMaterial
-                            color="#c85b79"
+                            color={showFirstStage ? '#c85b79' : '#c3c29e'}
                             toneMapped={false}
                         />
                     </mesh>
@@ -62,13 +63,6 @@ export const Experience = () => {
                         </RigidBody>
 
                         <RigidBody
-                            position={[-4, 1.2, 28]}
-                            colliders={false}
-                            type="fixed">
-                            <CuboidCollider args={[10, 0.1, 2]} />
-                        </RigidBody>
-
-                        <RigidBody
                             position={[0, 1.2, 0]}
                             colliders={false}
                             type="fixed">
@@ -86,6 +80,8 @@ export const Experience = () => {
                 <Question />
 
                 <Arch />
+
+                <Desert />
 
                 {/* CHARACTER */}
                 <CharacterController />
