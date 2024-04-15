@@ -16,7 +16,6 @@ export default function Stage(props) {
                 name="Plane_1"
                 geometry={nodes.Plane_1.geometry}
                 material={materials['Grass']}
-                // material={materials['Mountain']}
             />
         </group>
     )
