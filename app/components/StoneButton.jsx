@@ -15,7 +15,7 @@ export default function StoneButton(props) {
                 name="StonePlatform_Cylinder"
                 geometry={nodes.StonePlatform_Cylinder.geometry}
                 material={materials['Material.001']}>
-                {props.selected && <meshStandardMaterial color="black" />}
+                {props.selected ? <meshStandardMaterial color="#9a9a6a" /> : <meshStandardMaterial color="#e9ddb6" />}
             </mesh>
         </group>
     )
