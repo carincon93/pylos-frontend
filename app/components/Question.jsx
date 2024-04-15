@@ -1,6 +1,6 @@
 import { useGameStore } from '@/lib/store'
 import { Sphere, Text } from '@react-three/drei'
-import { BallCollider, CylinderCollider, RigidBody } from '@react-three/rapier'
+import { BallCollider, CuboidCollider, CylinderCollider, RigidBody } from '@react-three/rapier'
 import StoneButton from './StoneButton'
 import Column from './Column'
 
@@ -14,6 +14,8 @@ export default function Question() {
     const currentReadingIndex = useGameStore((state) => state.currentReadingIndex)
     const reading = useGameStore((state) => state.readings[currentReadingIndex])
     const readingTextVisible = useGameStore((state) => state.readingTextVisible)
+    const setCameraText = useGameStore((state) => state.setCameraText)
+    const cameraText = useGameStore((state) => state.cameraText)
 
     const handleAnswer = useGameStore((state) => state.handleAnswer)
 
@@ -33,7 +35,31 @@ export default function Question() {
     if (!question || !readingTextVisible) return null
 
     return (
-        <group position={[0, 0.2, 14]}>
+        <group position={[0, 0.4, 12]}>
+            {/* <group position={[0, -0.2, 0]}> */}
+            <RigidBody
+                type="fixed"
+                colliders={false}
+                position={[0, -0.58, 3]}
+                enabledRotations={[false, false, false]}
+                onCollisionEnter={() => {
+                    setCameraText(false)
+                }}>
+                <CuboidCollider args={[6, 0.4, 6]} />
+            </RigidBody>
+
+            <RigidBody
+                type="fixed"
+                colliders={false}
+                position={[0, -0.6, 18]}
+                enabledRotations={[false, false, false]}
+                onCollisionEnter={() => {
+                    setCameraText(true)
+                }}>
+                <CuboidCollider args={[10, 0.4, 8]} />
+            </RigidBody>
+            {/* </group> */}
+
             <Text
                 color="black"
                 anchorX="center"
@@ -43,7 +69,7 @@ export default function Question() {
                 font={'/fonts/Enwallowify-Regular.ttf'}
                 rotation={[-Math.PI / 2, 0, 0]}
                 maxWidth={22}
-                fontSize={0.7}>
+                fontSize={0.6}>
                 {question.text}
             </Text>
 
@@ -67,9 +93,10 @@ export default function Question() {
                     <Text
                         color="black"
                         textAlign="left"
-                        position={[0, 0.2, index * 2.5]}
+                        position={[0, 0.4, index * 2.5]}
                         font={'/fonts/Enwallowify-Regular.ttf'}
                         rotation={[-Math.PI / 2, 0, 0]}
+                        maxWidth={5}
                         fontSize={0.4}>
                         {answer.text}
                     </Text>
@@ -81,7 +108,7 @@ export default function Question() {
                 type="fixed"
                 colliders={false}
                 enabledRotations={[false, false, false]}
-                position={[6, 0, (question.answers.length / 2) * 2]}
+                position={[0, 0, -4]}
                 onCollisionEnter={() => {
                     setCurrentQuestionIndex(currentQuestionIndex + 1)
                     if (reading.questions.length == currentQuestionIndex + 1) {
