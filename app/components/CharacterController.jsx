@@ -29,6 +29,7 @@ export const CharacterController = () => {
     const backPressed = useKeyboardControls((state) => state[Controls.back])
     const forwardPressed = useKeyboardControls((state) => state[Controls.forward])
     const resetPressed = useKeyboardControls((state) => state[Controls.reset])
+    const showFirstStage = useGameStore((state) => state.showFirstStage)
     const rigidbody = useRef()
     const isOnFloor = useRef(true)
     const character = useRef()
@@ -140,8 +141,14 @@ export const CharacterController = () => {
             targetCameraPosition.y = 3
         }
 
-        if (cameraText) {
-            targetCameraPosition.y = 20
+        if (!showFirstStage) {
+            if (cameraText) {
+                targetCameraPosition.y = 0
+                targetCameraPosition.z = characterWorldPosition.z + 8
+            } else {
+                targetCameraPosition.y = 26
+                targetCameraPosition.z = characterWorldPosition.z + 15
+            }
         }
 
         state.camera.position.lerp(targetCameraPosition, delta * 2)
