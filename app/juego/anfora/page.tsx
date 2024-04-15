@@ -29,7 +29,7 @@ function App() {
                 style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
                 <color
                     attach="background"
-                    args={['#eec481']}
+                    args={['#ffe18a']}
                 />
                 <Suspense>
                     <Physics debug>
