@@ -1,6 +1,6 @@
 import { useGameStore } from '@/lib/store'
 import { Text } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function Reading() {
     const currentReadingIndex = useGameStore((state) => state.currentReadingIndex)
@@ -9,24 +9,11 @@ export default function Reading() {
 
     const firstTextRef = useRef()
     const secondTextRef = useRef()
-    const [firstTextHeight, setFirstTextHeight] = useState(0)
-
-    useEffect(() => {
-        if (firstTextRef.current) {
-            if (firstTextRef.current) {
-                // Obtenemos el número de caracteres en el texto
-                const textLength = reading.text.length
-                // Calculamos la altura aproximada del texto basada en el número de caracteres y el tamaño de la fuente
-                const textHeight = textLength * 0.02 // Ajusta este valor según sea necesario
-                setFirstTextHeight(textHeight)
-            }
-        }
-    }, [readingTextVisible])
 
     if (!reading || !readingTextVisible) return null
 
     return (
-        <group position={[0, 0.2, 0]}>
+        <group position={[0, 7, 5]}>
             <Text
                 ref={firstTextRef}
                 color="black"
@@ -34,9 +21,9 @@ export default function Reading() {
                 anchorY="middle"
                 textAlign="center"
                 font={'/fonts/Enwallowify-Regular.ttf'}
-                rotation={[-Math.PI / 2, 0, 0]}
-                maxWidth={12}
-                fontSize={0.7}>
+                rotation={[-Math.PI / 30, 0, 0]}
+                maxWidth={10}
+                fontSize={0.5}>
                 {reading.text}
             </Text>
 
@@ -46,11 +33,12 @@ export default function Reading() {
                 anchorX="center"
                 anchorY="middle"
                 textAlign="right"
-                position-z={firstTextHeight}
+                position-x={-7.5}
+                position-y={-4}
                 font={'/fonts/Enwallowify-Regular.ttf'}
-                rotation={[-Math.PI / 2, 0, 0]}
-                maxWidth={8}
-                fontSize={0.4}>
+                rotation={[-Math.PI / 30, 0, 0]}
+                maxWidth={4}
+                fontSize={0.2}>
                 {reading.author}
             </Text>
         </group>
