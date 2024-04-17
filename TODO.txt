@@ -1,0 +1,1 @@
+1. Después de una respuesta abierta se sigue guardando la misma respuesta en la siguientes preguntas que se responden
