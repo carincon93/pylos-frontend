@@ -1,30 +1,31 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getTokenData } from './utils/getTokenData'
-import { isTokenExpired } from './utils/isTokenExpired'
+import { verifyAuth } from './utils/isTokenExpired'
 import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
 
-    const secretKey = process.env.NEXT_PUBLIC_NESTJS_JWT_SECRET || '' // Replace with your actual secret key
+    const verifiedToken =
+        accessToken &&
+        (await verifyAuth(accessToken).catch((err) => {
+            console.log(err)
+        }))
 
-    if (accessToken) {
-        if (isTokenExpired(accessToken, secretKey)) {
-            // Access token has expired, remove the token cookie
-            request.cookies.delete('accessToken')
-        }
+    if (!verifiedToken) {
+        request.cookies.delete('accessToken')
     }
 
     // Check if the path starts with /juego
     const isJuegoPath = request.nextUrl.pathname.startsWith(SUBFOLDER_ROUTE)
 
-    if (!accessToken && isJuegoPath) {
+    if (!verifiedToken && isJuegoPath) {
         // Redirect to login page if no access token exists for paths under /juego
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    if (!accessToken) {
+    if (!verifiedToken) {
         // Redirect to login page if no access token exists for other paths
         if (
             !request.nextUrl.pathname.startsWith(HOME_ROUTE) &&
