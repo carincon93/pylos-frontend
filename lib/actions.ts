@@ -9,6 +9,14 @@ export async function saveRespuestaPruebaDiagnostica(data: Partial<RespuestaPrue
     }
 }
 
+export async function updateRespuestaPruebaDiagnostica(data: Partial<RespuestaPruebaDiagnostica>): Promise<Response> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/${data.id}`, 'PATCH', data)
+    } catch (error: any) {
+        throw new Error('Error al guardar la respuesta: ' + error.message)
+    }
+}
+
 export async function toAuth(url: string, body: Record<string, any>): Promise<any> {
     const response = await fetch(url, {
         method: 'POST',
