@@ -13,14 +13,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Stars } from '@/app/components/Stars'
 import { Canvas } from '@react-three/fiber'
 import { updateRespuestaPruebaDiagnostica } from '@/lib/actions'
-import { useSearchParams } from 'next/navigation'
 import { Isotipo } from '@/app/components/Isotipo'
 import { Logo } from '@/app/components/Logo'
 
-const ResultadosPruebaDiagnosticaPage = () => {
-    const searchParams = useSearchParams()
+interface Props {
+    searchParams: {
+        admin?: string | undefined
+    }
+}
 
-    const isAdmin = searchParams.get('admin')
+const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
+    const isAdmin = searchParams.admin
 
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
     const { data: respuestasPruebaDiagnostica } = useSWR<RespuestaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica`, fetcher)
