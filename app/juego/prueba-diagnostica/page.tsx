@@ -10,7 +10,7 @@ import useSWR, { mutate } from 'swr'
 import debounce from 'lodash/debounce'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
-import { INTRODUCCION_ROUTE } from '@/utils/routes'
+import { RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
 import { Loading } from '@/components/ui/loading'
 import { Stars } from '@/app/components/Stars'
@@ -22,6 +22,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
+    const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
 
     const router = useRouter()
 
@@ -31,7 +32,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((10 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 10)
             setTimeout(() => {
-                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) router.push(INTRODUCCION_ROUTE)
+                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) router.push(RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE)
             }, 1000)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
@@ -44,8 +45,10 @@ const PruebaDiagnosticaPage: React.FC = () => {
         )
     }
 
-    const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null) => {
+    const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {
         if (isSubmitting) return
+
+        setOpcionCorrecta(esOpcionCorrecta)
 
         reproducirParte(0, 2, buttonPressed)
 
@@ -54,7 +57,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
         const data: Partial<RespuestaPruebaDiagnostica> = {
             preguntaPruebaDiagnosticaId: preguntaPruebaDiagnosticaId,
             opcionPruebaDiagnosticaId: opcionPruebaDiagnosticaId,
-            respuesta: respuesta,
+            respuesta: opcionPruebaDiagnosticaId ? undefined : respuesta,
         }
 
         try {
@@ -66,23 +69,35 @@ const PruebaDiagnosticaPage: React.FC = () => {
                 setIsSubmitting(false)
             }, 1000)
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
+
+            setOpcionCorrecta(undefined)
         }
-    }, 1000) // Cambia el valor del retardo según tus necesidades
+    }, 1000)
 
     return (
         <>
             <Canvas
                 camera={{ position: [0, 0, 1] }}
-                className="!h-[100vh] relative z-10 bg-pylos-800/50">
+                className="!h-[100vh] !fixed z-10 bg-pylos-800/50">
                 <Stars />
             </Canvas>
 
-            <div className="h-[100vh] absolute top-0 left-0 w-full overflow-hidden bg-cover bg-center z-20">
+            <div className="h-[100vh] relative w-full overflow-hidden bg-cover bg-center z-20">
                 {progress > 0 && progress < 100 && (
-                    <Progress
-                        className="absolute w-9/12 lg:max-w-7xl left-0 right-0 mx-auto top-8 h-6"
-                        value={progress}
-                    />
+                    <div className="flex items-center justify-center mt-10">
+                        <Progress
+                            className=" w-9/12 lg:max-w-7xl h-6 mr-4"
+                            value={progress}
+                        />
+                        <span className="text-2xl font-bold font-cursive">{progress}%</span>
+                    </div>
+                )}
+
+                {opcionCorrecta != undefined && (
+                    <span
+                        className={`bg-[url('/estados.png')] size-24 ${
+                            opcionCorrecta ? 'bg-[-205px_-9px]' : 'bg-[1px_-21px]'
+                        }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-40`}></span>
                 )}
 
                 <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center">
@@ -100,7 +115,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                                                 <Button
                                                     key={opcionPruebaDiagnostica.id}
                                                     className="p-8 sm:p-10 text-[20px] text-wrap leading-5"
-                                                    onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id)}
+                                                    onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id, opcionPruebaDiagnostica.esOpcionCorrecta)}
                                                     disabled={isSubmitting}>
                                                     {opcionPruebaDiagnostica.opcion}
                                                 </Button>
