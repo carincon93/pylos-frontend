@@ -21,9 +21,13 @@ interface Mascota {
 interface RespuestaPruebaDiagnostica {
     id: string
     respuesta: string
+    esRespuestaCorrecta: boolean | null
     usuarioId: string
     opcionPruebaDiagnosticaId: string | null
     preguntaPruebaDiagnosticaId: string | null
+    usuario: Usuario
+    preguntaPruebaDiagnostica: PreguntaPruebaDiagnostica
+    opcionPruebaDiagnostica: OpcionPruebaDiagnostica
 }
 
 interface Usuario {
