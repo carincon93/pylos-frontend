@@ -1,5 +1,25 @@
-import { RespuestaPruebaDiagnostica } from '@/types/MyTypes'
-import { fetcher } from '@/utils/fetcher'
+import { RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
+import { fetcher, getUserDataFromToken } from '@/utils/fetcher'
+
+export async function getProfile(): Promise<Usuario> {
+    try {
+        const userData = await getUserDataFromToken()
+
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData?.id}`, 'GET')
+    } catch (error: any) {
+        throw new Error('Error al obtener el usuario: ' + error.message)
+    }
+}
+
+export async function updateUsuario(data: Partial<Usuario>): Promise<Response> {
+    try {
+        const userData = await getUserDataFromToken()
+
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData?.id}`, 'PATCH', data)
+    } catch (error: any) {
+        throw new Error('Error al actualizar el usuario: ' + error.message)
+    }
+}
 
 export async function saveRespuestaPruebaDiagnostica(data: Partial<RespuestaPruebaDiagnostica>): Promise<Response> {
     try {
