@@ -4,17 +4,46 @@ import './index.css'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Logo } from '../../components/Logo'
-import Link from 'next/link'
 import { Isotipo } from '@/app/components/Isotipo'
 import { ANFORA_ROUTE } from '@/utils/routes'
-import { reproducirParte } from '@/lib/actions'
+import { getProfile, reproducirParte, updateUsuario } from '@/lib/actions'
+import { Usuario } from '@/types/MyTypes'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
+import { Loading } from '@/components/ui/loading'
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
     const [disabledLeftButton, setDisabledLeftButton] = useState<boolean>(false)
     const [disabledRightButton, setDisabledRightButton] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(true)
     const [showOverlay, setShowOverlay] = useState(true)
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right') // Estado para almacenar temporalmente las clases de hover
+
+    const router = useRouter()
+
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const profile = await getProfile()
+
+                if (profile.introduccionCompleta) {
+                    router.push(ANFORA_ROUTE)
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error)
+            } finally {
+                setTimeout(() => {
+                    setLoading(false)
+                    setTimeout(() => {
+                        setShowOverlay(true)
+                    }, 1000)
+                }, 2000)
+            }
+        }
+
+        fetchUserProfile()
+    }, [])
 
     const photosData = [
         {
@@ -120,6 +149,20 @@ function App() {
         }, 15000) // Duración de la eliminación temporal de las clases de hover
     }
 
+    const handleButton = async () => {
+        const data: Partial<Usuario> = {
+            introduccionCompleta: true,
+        }
+
+        try {
+            await updateUsuario(data)
+        } catch (error) {
+            console.error('Error al guardar la respuesta:', error)
+        } finally {
+            router.push(ANFORA_ROUTE)
+        }
+    }
+
     const init = () => {
         reproducirParte(0, 2, audioBienvenida)
 
@@ -137,18 +180,24 @@ function App() {
 
     return (
         <div className="grid">
-            {showOverlay && (
-                <div className="overlay flex flex-col items-center justify-center">
-                    <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-20 sm:w-56 text-white" />
-                        <Logo className="w-60 sm:w-80 md:w-full text-white" />
-                    </div>
-                    <button
-                        onClick={init}
-                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-4 sm:border-8 border-white transition-colors text-white hover:border-sky-200/50 hover:text-sky-200/50">
-                        Empezar
-                    </button>
+            {loading ? (
+                <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
+                    <Loading />
                 </div>
+            ) : (
+                showOverlay && (
+                    <div className="overlay flex flex-col items-center justify-center">
+                        <div className="flex gap-2 items-center justify-center mx-10">
+                            <Isotipo className="w-20 sm:w-56 text-white" />
+                            <Logo className="w-60 sm:w-80 md:w-full text-white" />
+                        </div>
+                        <button
+                            onClick={init}
+                            className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-4 sm:border-8 border-white transition-colors text-white hover:border-sky-200/50 hover:text-sky-200/50">
+                            Empezar
+                        </button>
+                    </div>
+                )
             )}
 
             <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
@@ -169,13 +218,11 @@ function App() {
                             disabled={disabledRightButton}
                         />
                     ) : (
-                        <Link
-                            href={ANFORA_ROUTE}
-                            className={twMerge(
-                                'button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl',
-                            )}>
+                        <Button
+                            onClick={handleButton}
+                            className="button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] bg-transparent hover:bg-transparent duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl">
                             Continuar
-                        </Link>
+                        </Button>
                     )}
                 </div>
 
@@ -185,14 +232,9 @@ function App() {
                     text={photosData[activePhoto].text}
                     gif={photosData[activePhoto].gif}
                     showOverlay={showOverlay}
-                    className={twMerge(
-                        'z-10', // La foto activa tiene una elevación z-10 para estar por encima de las demás
-                        hoverClass,
-                    )}
+                    className={twMerge('z-10', hoverClass)}
                     title={photosData[activePhoto].title}
                 />
-
-                {/* <p dangerouslySetInnerHTML={{ __html: photosData[activePhoto].text }}></p> */}
             </div>
         </div>
     )
