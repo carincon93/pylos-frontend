@@ -22,13 +22,15 @@ function App() {
             title: 'First Photo',
             img: '/_e351e41b-efe7-4e59-8ce8-91fbbbd0db45.jpeg',
             date: '4 de abril de 2250',
-            text: 'En la actualidad, los viajes espaciales permiten a las personas explorar planetas lejanos.  Imagina a un valiente astronauta al que llamaremos Pylonauta, quien está muy emocionado por descubrir un nuevo mundo llamado Ánfora. <br /> Él parte en su nave espacial, <strong>"NEBULÓN"</strong>, listo para la aventura.',
+            gif: '/parte1.gif',
+            text: 'En la actualidad, los viajes espaciales permiten a las personas explorar planetas lejanos. Imagina a un valiente astronauta al que llamaremos Pylonauta, quien está muy emocionado por descubrir un nuevo mundo llamado Ánfora. <br /> Él parte en su nave espacial, <strong>"NEBULÓN"</strong>, listo para la aventura.',
         },
         {
             id: 'second',
             title: 'Second Photo',
             img: '/_08026eb5-f13f-44f9-8a54-96e796383a0e.jpeg',
             date: '5 de abril de 2250',
+            gif: '/parte2.gif',
             text: 'El viaje de Pylonauta está lleno de emoción, pero justo cuando se acerca a Ánfora, una tormenta espacial inesperada aparece. La nave es sacudida violentamente y Pylonauta pierde el control.',
         },
         {
@@ -36,6 +38,7 @@ function App() {
             title: 'Third Photo',
             img: '/_56f5d894-b46b-4294-81d6-17e64e549f11.jpeg',
             date: '5 de abril de 2250',
+            gif: '/parte3.gif',
             text: 'Con un estruendo ensordecedor, "NEBULÓN" se estrella contra la superficie del planeta desconocido. Afortunadamente, Pylonauta sale ileso, pero su nave está seriamente dañada y él se encuentra varado en un mundo extraño.',
         },
         {
@@ -43,6 +46,7 @@ function App() {
             title: 'Fourth Photo',
             img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b48.jpeg',
             date: '5 de abril de 2250',
+            gif: '/parte4.gif',
             text: 'Decidido a encontrar una solución, Pylonauta comienza a explorar Ánfora y pronto descubre que no está solo. Encuentra unas misteriosas pistas que indican que puede reparar su nave, pero primero debe superar una prueba en el antiguo Templo Alameda del Conocimiento.',
         },
         {
@@ -50,6 +54,7 @@ function App() {
             title: 'Fifth Photo',
             img: '/_7ff3ae87-8440-4e2e-9599-8262eb0edf5b.jpeg',
             date: '5 de abril de 2250',
+            gif: '/parte5.gif',
             text: 'Este templo legendario guarda las herramientas necesarias para reparar la nave, pero solo los más valientes y astutos podrán obtenerlas. El Templo Alameda del Conocimiento está lleno de desafíos y enigmas que desafían la mente de Pylonauta.',
         },
         {
@@ -57,6 +62,7 @@ function App() {
             title: 'Sixth Photo',
             img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.jpeg',
             date: '5 de abril de 2250',
+            gif: '/parte6.gif',
             text: 'Sin embargo, con determinación y coraje, él se enfrenta a cada obstáculo con valentía. Está decidido a reparar su nave y regresar a casa, sin importar cuán difíciles sean las pruebas que enfrenta.',
         },
     ]
@@ -79,9 +85,9 @@ function App() {
         })
 
         if (activePhoto == 0) {
-            reproducirParte(21, 36, audioHistoriaEpica)
+            reproducirParte(22, 36, audioHistoriaEpica)
         } else if (activePhoto == 1) {
-            reproducirParte(35, 51, audioHistoriaEpica)
+            reproducirParte(36, 51, audioHistoriaEpica)
         } else if (activePhoto == 2) {
             reproducirParte(51, 67.5, audioHistoriaEpica)
         } else if (activePhoto == 3) {
@@ -177,6 +183,8 @@ function App() {
                     img={photosData[activePhoto].img}
                     date={photosData[activePhoto].date}
                     text={photosData[activePhoto].text}
+                    gif={photosData[activePhoto].gif}
+                    showOverlay={showOverlay}
                     className={twMerge(
                         'z-10', // La foto activa tiene una elevación z-10 para estar por encima de las demás
                         hoverClass,
@@ -184,26 +192,40 @@ function App() {
                     title={photosData[activePhoto].title}
                 />
 
-                <p className="absolute text-2xl z-[9999] bottom-20 sm:bottom-32 px-10">
-                    <mark
-                        className="bg-pylos-200"
-                        dangerouslySetInnerHTML={{ __html: photosData[activePhoto].text }}></mark>
-                </p>
+                {/* <p dangerouslySetInnerHTML={{ __html: photosData[activePhoto].text }}></p> */}
             </div>
         </div>
     )
 }
 
-const Photo = ({ className, title, date, img, text, zIndex }: { className?: string; title?: string; date: string; img: string; text?: string; zIndex?: number }) => {
+const Photo = ({
+    className,
+    title,
+    date,
+    img,
+    text,
+    gif,
+    zIndex,
+    showOverlay,
+}: {
+    className?: string
+    title?: string
+    date: string
+    img: string
+    text?: string
+    gif?: string
+    zIndex?: number
+    showOverlay?: boolean
+}) => {
     return (
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'top-20 md:top-52 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'top-20 md:top-52 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
-            <div className="pointer-events-none absolute flex h-full w-full flex-col items-start rounded-3xl bg-gray-100 p-8 shadow-2xl [grid-area:1/1]">
+            <div className="pointer-events-none absolute flex h-full w-full flex-col items-start rounded-3xl bg-white p-8 shadow-2xl [grid-area:1/1]">
                 <p className="mb-2 rounded-full bg-blue-400 px-5 py-1 text-xs text-white md:text-sm">{date}</p>
 
                 <picture>
@@ -213,6 +235,16 @@ const Photo = ({ className, title, date, img, text, zIndex }: { className?: stri
                         className="rounded-md"
                     />
                 </picture>
+
+                <div className="overflow-hidden">
+                    {!showOverlay && (
+                        <img
+                            className="relative top-[-40px] md:top-[-60px] xl:top-[-74px] 2xl:top-[-80px] scale-[1.4]"
+                            src={gif}
+                            alt=""
+                        />
+                    )}
+                </div>
             </div>
             <div className="pointer-events-none rounded-3xl bg-white [grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)]" />
         </div>
