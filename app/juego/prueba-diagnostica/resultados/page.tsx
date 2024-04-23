@@ -9,12 +9,14 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { INTRODUCCION_ROUTE } from '@/utils/routes'
 
 import { Stars } from '@/app/components/Stars'
 import { Canvas } from '@react-three/fiber'
 import { updateRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { Isotipo } from '@/app/components/Isotipo'
 import { Logo } from '@/app/components/Logo'
+import Link from 'next/link'
 
 interface Props {
     searchParams: {
@@ -54,6 +56,25 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
                 <Stars />
             </Canvas>
 
+            <Link
+                href={INTRODUCCION_ROUTE}
+                className="fixed bottom-10 right-10 z-30 bg-pylos-600 hover:bg-pylos-700 rounded-full shadow-lg p-8 flex items-center justify-center">
+                Continuar
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="ml-2 w-6 h-6">
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                </svg>
+            </Link>
+
             <div className="top-0 left-0 w-full bg-cover bg-center z-20 flex flex-col items-center justify-center">
                 <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
                     <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70]" />
@@ -64,7 +85,7 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
 
                 <Tabs
                     defaultValue="posiciones"
-                    className="mt-10 z-30">
+                    className="mt-10 z-20">
                     {isAdmin == '1' && (
                         <TabsList>
                             <TabsTrigger value="posiciones">Tabla de posiciones</TabsTrigger>
