@@ -67,10 +67,9 @@ const PruebaDiagnosticaPage: React.FC = () => {
         } finally {
             setTimeout(() => {
                 setIsSubmitting(false)
+                setOpcionCorrecta(undefined)
             }, 1000)
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
-
-            setOpcionCorrecta(undefined)
         }
     }, 1000)
 
@@ -97,15 +96,15 @@ const PruebaDiagnosticaPage: React.FC = () => {
                     <span
                         className={`bg-[url('/estados.png')] size-24 ${
                             opcionCorrecta ? 'bg-[-205px_-9px]' : 'bg-[1px_-21px]'
-                        }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-40`}></span>
+                        }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-32`}></span>
                 )}
 
-                <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center">
+                <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center -mt-20">
                     <CarouselContent>
                         {preguntasPruebaDiagnosticaPorUsuario?.map((preguntaPruebaDiagnostica, i) => (
                             <CarouselItem
                                 key={preguntaPruebaDiagnostica.id}
-                                className="px-10">
+                                className="px-10 ">
                                 <p className="text-center text-2xl sm:text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
 
                                 <div className="grid sm:grid-cols-3 gap-4 mt-20">
