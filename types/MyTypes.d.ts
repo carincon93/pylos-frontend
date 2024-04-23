@@ -39,6 +39,7 @@ interface Usuario {
     colegio: string
     mascotaId: string
     mascotaNombre: string
+    introduccionCompleta: boolean
 }
 
 interface Login {
