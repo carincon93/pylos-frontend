@@ -1,6 +1,7 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { getTokenData } from './getTokenData'
 
 export const fetcher = async (url: string, method: string = 'GET', data?: object | FormData | string) => {
     const accessToken = await getAccessTokenFromCookie()
@@ -36,15 +37,20 @@ export const fetcher = async (url: string, method: string = 'GET', data?: object
 }
 
 // Función para obtener el token de acceso de la cookie
-export const getAccessTokenFromCookie = () => {
+export const getAccessTokenFromCookie = (): string => {
     const cookieStore = cookies()
 
     const token = cookieStore.get('accessToken')
 
     if (!token) {
-        return null
-        // throw new Error('No se encontró el token de acceso en la cookie')
+        throw new Error('No se encontró el token de acceso en la cookie')
     }
 
     return token.value
+}
+
+export const getUserDataFromToken = async () => {
+    const accessToken = await getAccessTokenFromCookie()
+
+    return getTokenData(accessToken)
 }
