@@ -25,8 +25,8 @@ const Loading = React.forwardRef<HTMLInputElement, Props>(function LoadingCompon
                     gradientUnits="userSpaceOnUse">
                     <stop
                         offset="0%"
-                        stop-color="violet"
-                        stop-opacity="0">
+                        stopColor="violet"
+                        stopOpacity="0">
                         <animate
                             attributeName="stop-opacity"
                             values="0;1;0"
@@ -36,8 +36,8 @@ const Loading = React.forwardRef<HTMLInputElement, Props>(function LoadingCompon
                     </stop>
                     <stop
                         offset="100%"
-                        stop-color="violet"
-                        stop-opacity="0">
+                        stopColor="violet"
+                        stopOpacity="0">
                         <animate
                             attributeName="stop-opacity"
                             values="0;1;0"
