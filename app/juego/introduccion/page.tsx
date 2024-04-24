@@ -210,7 +210,7 @@ function App() {
                     />
                 </div>
                 <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
-                    {activePhoto != 4 ? (
+                    {activePhoto != 5 ? (
                         <ActionButton
                             direction="right"
                             text="Siguiente foto"
@@ -281,7 +281,7 @@ const Photo = ({
                 <div className="overflow-hidden">
                     {!showOverlay && (
                         <img
-                            className="relative top-[-40px] md:top-[-60px] xl:top-[-74px] 2xl:top-[-80px] scale-[1.4]"
+                            className="relative top-[-40px] md:top-[-60px] xl:top-[-74px] 2xl:top-[-80px] scale-[1.8]"
                             src={gif}
                             alt=""
                         />
