@@ -68,8 +68,6 @@ export default function LoginPage() {
             console.error('Error al iniciar sesión:', error)
             // Manejar errores si es necesario
         }
-
-        setLoading(false)
     }
 
     return (
