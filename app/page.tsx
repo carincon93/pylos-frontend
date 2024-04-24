@@ -11,9 +11,9 @@ import { Button } from '@/components/ui/button'
 import { useReloadButton } from '@/hooks/useReloadButton'
 
 export default function Home() {
-    const [showReloadButton, mascotas] = useReloadButton(10000) // Show button after 10 seconds
+    const [showReloadButton, response] = useReloadButton(10000) // Show button after 10 seconds
 
-    if (mascotas == undefined) {
+    if (!response?.ok) {
         return (
             <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex flex-col gap-y-10 items-center justify-center text-4xl font-medium">
                 <Loading />
