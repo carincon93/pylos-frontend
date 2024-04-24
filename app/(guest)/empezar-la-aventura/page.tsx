@@ -1,5 +1,10 @@
 import Link from 'next/link'
 import { LOGIN_ROUTE, REGISTER_ROUTE } from '@/utils/routes'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Empezar la aventura',
+}
 
 export default function EmpezarAventuraPage() {
     return (
