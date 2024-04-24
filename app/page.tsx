@@ -1,27 +1,10 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { Logo } from './components/Logo'
 import { Isotipo } from './components/Isotipo'
 import { HOME_ROUTE, EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
 
-import { Loading } from '@/components/ui/loading'
-import { Button } from '@/components/ui/button'
-import { useReloadButton } from '@/hooks/useReloadButton'
-
 export default function Home() {
-    const [showReloadButton, response] = useReloadButton(10000) // Show button after 10 seconds
-
-    if (!response?.ok) {
-        return (
-            <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex flex-col gap-y-10 items-center justify-center text-4xl font-medium">
-                <Loading />
-                {showReloadButton && <Button onClick={() => window.location.reload()}>Recargar la página</Button>}
-            </div>
-        )
-    }
-
     return (
         <main className="flex min-h-screen flex-col justify-between pb-22 px-0 fondo z-[1]">
             <div className="lg:max-w-5xl w-full mx-auto lg:flex items-center">
