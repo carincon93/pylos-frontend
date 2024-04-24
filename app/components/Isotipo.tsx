@@ -23,12 +23,12 @@ export function Isotipo({ className }: IsotipoProps) {
                         r="413.68"
                         gradientUnits="userSpaceOnUse">
                         <stop
-                            offset=".39"
+                            offset=".09"
                             stopColor="#ea93bb"
                         />
                         <stop
                             offset="1"
-                            stopColor="#9358a4"
+                            stopColor="violet"
                         />
                     </radialGradient>
                     <radialGradient
