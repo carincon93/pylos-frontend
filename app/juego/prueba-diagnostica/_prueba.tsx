@@ -1,21 +1,23 @@
 'use client'
 
 import { RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
-import { Loading } from '@/components/ui/loading'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import LoadingOverlay from '@/app/loading'
-import { reproducirParte, saveRespuestaPruebaDiagnostica } from '@/lib/actions'
+import { saveRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export default function Prueba() {
+    const { playAudio } = useAudioPlayer()
+
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
 
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -45,7 +47,7 @@ export default function Prueba() {
 
         setOpcionCorrecta(esOpcionCorrecta)
 
-        reproducirParte(0, 2, buttonPressed)
+        playAudio(0, 2, buttonPressed)
 
         setIsSubmitting(true)
 

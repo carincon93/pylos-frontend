@@ -1,18 +1,22 @@
 'use client'
 
 import './index.css'
+
+import { Logo } from '@/app/components/Logo'
+import { Isotipo } from '@/app/components/Isotipo'
+import { Button } from '@/components/ui/button'
+import LoadingOverlay from '@/app/loading'
+import { getProfile, updateUsuario } from '@/lib/actions'
+import { ANFORA_ROUTE } from '@/utils/routes'
+import { Usuario } from '@/types/MyTypes'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Logo } from '../../components/Logo'
-import { Isotipo } from '@/app/components/Isotipo'
-import { ANFORA_ROUTE } from '@/utils/routes'
-import { getProfile, reproducirParte, updateUsuario } from '@/lib/actions'
-import { Usuario } from '@/types/MyTypes'
-import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
-import LoadingOverlay from '@/app/loading'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 function App() {
+    const { playAudio, isPlaying } = useAudioPlayer()
+
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
     const [disabledLeftButton, setDisabledLeftButton] = useState<boolean>(false)
     const [disabledRightButton, setDisabledRightButton] = useState<boolean>(false)
@@ -114,15 +118,15 @@ function App() {
         })
 
         if (activePhoto == 0) {
-            reproducirParte(22, 36, audioHistoriaEpica)
+            playAudio(22, 36, audioHistoriaEpica)
         } else if (activePhoto == 1) {
-            reproducirParte(36, 51, audioHistoriaEpica)
+            playAudio(36, 51, audioHistoriaEpica)
         } else if (activePhoto == 2) {
-            reproducirParte(51, 67.5, audioHistoriaEpica)
+            playAudio(51, 67.5, audioHistoriaEpica)
         } else if (activePhoto == 3) {
-            reproducirParte(67.5, 82, audioHistoriaEpica)
+            playAudio(67.5, 82, audioHistoriaEpica)
         } else if (activePhoto == 4) {
-            reproducirParte(82, 99, audioHistoriaEpica)
+            playAudio(82, 99, audioHistoriaEpica)
         }
     }
 
@@ -164,11 +168,11 @@ function App() {
     }
 
     const init = () => {
-        reproducirParte(0, 2, audioBienvenida)
+        playAudio(0, 2, audioBienvenida)
 
         setTimeout(() => {
             setShowOverlay(false)
-            reproducirParte(0, 21.3, audioHistoriaEpica)
+            playAudio(0, 21.3, audioHistoriaEpica)
         }, 3000)
     }
 
@@ -229,9 +233,9 @@ function App() {
                     date={photosData[activePhoto].date}
                     text={photosData[activePhoto].text}
                     gif={photosData[activePhoto].gif}
-                    showOverlay={showOverlay}
                     className={twMerge('z-10', hoverClass)}
                     title={photosData[activePhoto].title}
+                    isPlaying={isPlaying}
                 />
             </div>
         </div>
@@ -246,7 +250,7 @@ const Photo = ({
     text,
     gif,
     zIndex,
-    showOverlay,
+    isPlaying,
 }: {
     className?: string
     title?: string
@@ -255,7 +259,7 @@ const Photo = ({
     text?: string
     gif?: string
     zIndex?: number
-    showOverlay?: boolean
+    isPlaying: boolean
 }) => {
     return (
         <div
@@ -277,7 +281,7 @@ const Photo = ({
                 </picture>
 
                 <div className="overflow-hidden">
-                    {!showOverlay && (
+                    {isPlaying && (
                         <img
                             className="relative top-[-40px] md:top-[-60px] xl:top-[-74px] 2xl:top-[-80px] scale-[1.8]"
                             src={gif}
