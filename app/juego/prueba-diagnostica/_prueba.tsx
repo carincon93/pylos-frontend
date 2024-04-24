@@ -25,6 +25,10 @@ export default function Prueba() {
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
 
+    if (progress == 100) {
+        return <LoadingOverlay className="bg-pylos-800" />
+    }
+
     const router = useRouter()
 
     const buttonPressed = '/button-pressed.mp3'
@@ -38,16 +42,12 @@ export default function Prueba() {
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
 
-    if (progress == 100) {
-        return <LoadingOverlay />
-    }
-
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {
+        playAudio(0, 2, buttonPressed)
+
         if (isSubmitting) return
 
         setOpcionCorrecta(esOpcionCorrecta)
-
-        playAudio(0, 2, buttonPressed)
 
         setIsSubmitting(true)
 
@@ -63,12 +63,12 @@ export default function Prueba() {
             console.error('Error al guardar la respuesta:', error)
         } finally {
             setTimeout(() => {
-                setIsSubmitting(false)
                 setOpcionCorrecta(undefined)
+                setIsSubmitting(false)
             }, 1000)
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
         }
-    }, 1000)
+    }, 500)
 
     return (
         <div className="h-[100vh] relative w-full overflow-hidden bg-cover bg-center z-20">

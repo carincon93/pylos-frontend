@@ -185,7 +185,7 @@ function App() {
     return (
         <div className="grid">
             {loading ? (
-                <LoadingOverlay />
+                <LoadingOverlay className='bg-pylos-800' />
             ) : (
                 showOverlay && (
                     <div className="overlay flex flex-col items-center justify-center">
