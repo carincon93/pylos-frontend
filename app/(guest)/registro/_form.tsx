@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import { toast } from '@/components/ui/use-toast'
-import { Loading } from '@/components/ui/loading'
+import LoadingOverlay from '@/app/loading'
 import { useForm } from '@/hooks/useForm'
 import { Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
@@ -25,6 +25,10 @@ export default function RegisterForm() {
     const [loading, setLoading] = useState<boolean>(false)
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
+
+    if (!mascotas) {
+        return <LoadingOverlay />
+    }
 
     const router = useRouter()
 
@@ -70,7 +74,9 @@ export default function RegisterForm() {
             // Manejar errores si es necesario
         }
 
-        setLoading(false)
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
     }
 
     return (
@@ -182,9 +188,10 @@ export default function RegisterForm() {
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button className="uppercase">
-                {loading && <Loading className="!w-4 mr-2" />}
-                Registrarse
+            <Button
+                className="uppercase"
+                disabled={loading}>
+                {loading ? 'Guardando...' : 'Registrarse'}
             </Button>
         </form>
     )

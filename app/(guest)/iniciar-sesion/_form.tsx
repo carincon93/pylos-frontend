@@ -67,6 +67,10 @@ export default function LoginForm() {
             console.error('Error al iniciar sesión:', error)
             // Manejar errores si es necesario
         }
+
+        setTimeout(() => {
+            setLoading(false)
+        }, 3500)
     }
 
     return (
@@ -95,9 +99,10 @@ export default function LoginForm() {
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button className="uppercase">
-                {loading && <Loading className="!w-4 mr-2" />}
-                Ingresar
+            <Button
+                className="uppercase"
+                disabled={loading}>
+                {loading ? 'Ingresando...' : 'Ingresar'}
             </Button>
         </form>
     )
