@@ -25,10 +25,6 @@ export default function Prueba() {
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
 
-    if (progress == 100) {
-        return <LoadingOverlay className="bg-pylos-800" />
-    }
-
     const router = useRouter()
 
     const buttonPressed = '/button-pressed.mp3'
@@ -41,6 +37,10 @@ export default function Prueba() {
             }, 1000)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
+
+    if (progress == 100) {
+        return <LoadingOverlay className="bg-pylos-800" />
+    }
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {
         playAudio(0, 2, buttonPressed)
