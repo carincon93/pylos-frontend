@@ -96,7 +96,7 @@ const PruebaDiagnosticaPage: React.FC = () => {
                     <span
                         className={`bg-[url('/estados.png')] size-24 ${
                             opcionCorrecta ? 'bg-[-205px_-9px]' : 'bg-[1px_-21px]'
-                        }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-32`}></span>
+                        }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-32 z-30`}></span>
                 )}
 
                 <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center -mt-20">
