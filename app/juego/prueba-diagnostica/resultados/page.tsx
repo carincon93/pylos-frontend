@@ -58,7 +58,7 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
 
             <Link
                 href={INTRODUCCION_ROUTE}
-                className="fixed bottom-10 right-10 z-30 bg-pylos-600 hover:bg-pylos-700 rounded-full shadow-lg p-8 flex items-center justify-center">
+                className="fixed bottom-4 right-4 z-30 bg-sky-600 hover:bg-sky-700 rounded-full shadow-lg py-4 pl-8 pr-6 flex items-center justify-center">
                 Continuar
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
