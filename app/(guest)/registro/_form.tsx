@@ -26,11 +26,11 @@ export default function RegisterForm() {
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
 
+    const router = useRouter()
+
     if (!mascotas) {
         return <LoadingOverlay />
     }
-
-    const router = useRouter()
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault() // Evita que el formulario se envíe automáticamente
