@@ -37,13 +37,14 @@ export const fetcher = async (url: string, method: string = 'GET', data?: object
 }
 
 // Función para obtener el token de acceso de la cookie
-export const getAccessTokenFromCookie = (): string => {
+export const getAccessTokenFromCookie = () => {
     const cookieStore = cookies()
 
     const token = cookieStore.get('accessToken')
 
     if (!token) {
-        throw new Error('No se encontró el token de acceso en la cookie')
+        return null
+        // throw new Error('No se encontró el token de acceso en la cookie')
     }
 
     return token.value
@@ -52,5 +53,5 @@ export const getAccessTokenFromCookie = (): string => {
 export const getUserDataFromToken = async () => {
     const accessToken = await getAccessTokenFromCookie()
 
-    return getTokenData(accessToken)
+    return getTokenData(accessToken as string)
 }
