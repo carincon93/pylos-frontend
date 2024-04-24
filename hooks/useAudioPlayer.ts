@@ -5,7 +5,7 @@ export function useAudioPlayer() {
     const [isPlaying, setIsPlaying] = useState(false) // Para rastrear el estado de reproducción
 
     // Función para reproducir una parte específica del audio
-    const reproducirParte = useCallback(
+    const playAudio = useCallback(
         (inicio: number, fin: number, audioSource: string) => {
             // Pausar y resetear el audio anterior si está en reproducción
             if (audio) {
@@ -23,7 +23,6 @@ export function useAudioPlayer() {
             // Configurar el evento 'ended'
             newAudio.onended = () => {
                 setIsPlaying(false)
-                console.log('Audio has ended') // Aquí puedes realizar otras acciones o manejar el estado
             }
 
             // Detener el audio después de la duración especificada si el audio no ha terminado naturalmente
@@ -48,5 +47,5 @@ export function useAudioPlayer() {
         }
     }, [audio])
 
-    return { reproducirParte, isPlaying }
+    return { playAudio, isPlaying }
 }
