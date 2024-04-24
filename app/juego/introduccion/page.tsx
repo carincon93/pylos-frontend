@@ -220,7 +220,7 @@ function App() {
                     ) : (
                         <Button
                             onClick={handleButton}
-                            className="button-underline relative flex w-full items-center justify-center font-bold text-[rgba(0,0,0,.6)] transition-[transform,color] bg-transparent hover:bg-transparent duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl">
+                            className="button-underline relative flex w-full items-center justify-center font-bold transition-[transform,color] bg-transparent hover:bg-transparent duration-500 focus-visible:text-white group-hover:text-white lg:text-2xl xl:text-4xl">
                             Continuar
                         </Button>
                     )}
@@ -263,7 +263,7 @@ const Photo = ({
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'top-20 md:top-52 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'top-40 md:top-36 lg:top-20 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
             <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
