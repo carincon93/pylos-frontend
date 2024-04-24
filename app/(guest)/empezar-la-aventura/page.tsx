@@ -4,7 +4,9 @@ import { LOGIN_ROUTE, REGISTER_ROUTE } from '@/utils/routes'
 export default function EmpezarAventuraPage() {
     return (
         <>
-            <h1 className="text-6xl xl:text-6xl 2xl:text-8xl text-center font-bold uppercase text-white">Empezar la aventura</h1>
+            <h1 className="text-6xl xl:text-6xl 2xl:text-8xl text-center font-bold uppercase text-white">
+                Empezar <br /> la aventura
+            </h1>
 
             <div className="flex flex-col gap-y-4 items-center justify-center lg:justify-start">
                 <Link
