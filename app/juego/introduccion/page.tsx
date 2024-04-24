@@ -10,7 +10,7 @@ import { getProfile, reproducirParte, updateUsuario } from '@/lib/actions'
 import { Usuario } from '@/types/MyTypes'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
-import { Loading } from '@/components/ui/loading'
+import LoadingOverlay from '@/app/loading'
 
 function App() {
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
@@ -181,9 +181,7 @@ function App() {
     return (
         <div className="grid">
             {loading ? (
-                <div className="absolute bg-pylos-800 w-full h-[100vh] z-[99] text-white flex items-center justify-center text-4xl font-medium">
-                    <Loading />
-                </div>
+                <LoadingOverlay />
             ) : (
                 showOverlay && (
                     <div className="overlay flex flex-col items-center justify-center">
