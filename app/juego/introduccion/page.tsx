@@ -6,13 +6,13 @@ import { Logo } from '@/app/components/Logo'
 import { Isotipo } from '@/app/components/Isotipo'
 import { Button } from '@/components/ui/button'
 import LoadingOverlay from '@/app/loading'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { getProfile, updateUsuario } from '@/lib/actions'
 import { ANFORA_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 function App() {
     const { playAudio, isPlaying } = useAudioPlayer()
