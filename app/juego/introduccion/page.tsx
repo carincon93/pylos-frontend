@@ -235,6 +235,7 @@ function App() {
                     gif={photosData[activePhoto].gif}
                     className={twMerge('z-10', hoverClass)}
                     title={photosData[activePhoto].title}
+                    showOverlay={showOverlay}
                     isPlaying={isPlaying}
                 />
             </div>
@@ -250,6 +251,7 @@ const Photo = ({
     text,
     gif,
     zIndex,
+    showOverlay,
     isPlaying,
 }: {
     className?: string
@@ -259,6 +261,7 @@ const Photo = ({
     text?: string
     gif?: string
     zIndex?: number
+    showOverlay: boolean
     isPlaying: boolean
 }) => {
     return (
@@ -281,7 +284,7 @@ const Photo = ({
                 </picture>
 
                 <div className="overflow-hidden">
-                    {isPlaying && (
+                    {isPlaying && !showOverlay && (
                         <img
                             className="relative top-[-40px] md:top-[-60px] xl:top-[-74px] 2xl:top-[-80px] scale-[1.8]"
                             src={gif}
