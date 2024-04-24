@@ -4,8 +4,8 @@ import { KeyboardControls, Loader, Stats, useProgress } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Physics } from '@react-three/rapier'
 import { Suspense, useMemo } from 'react'
-import { Experience } from '../../components/Experience.jsx'
 import { Controls } from '@/lib/utils'
+import { Experience } from '@/app/components/Experience'
 
 function App() {
     const map = useMemo(
