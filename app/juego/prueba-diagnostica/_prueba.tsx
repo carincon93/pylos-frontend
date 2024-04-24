@@ -43,8 +43,6 @@ export default function Prueba() {
     }
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {
-        playAudio(0, 2, buttonPressed)
-
         if (isSubmitting) return
 
         setOpcionCorrecta(esOpcionCorrecta)
@@ -104,7 +102,9 @@ export default function Prueba() {
                                             <Button
                                                 key={opcionPruebaDiagnostica.id}
                                                 className="p-8 sm:p-10 text-[20px] text-wrap leading-5"
-                                                onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id, opcionPruebaDiagnostica.esOpcionCorrecta)}
+                                                onClick={() => {
+                                                    playAudio(0, 2, buttonPressed), handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id, opcionPruebaDiagnostica.esOpcionCorrecta)
+                                                }}
                                                 disabled={isSubmitting}>
                                                 {opcionPruebaDiagnostica.opcion}
                                             </Button>
@@ -119,7 +119,9 @@ export default function Prueba() {
                                         />
                                         <Button
                                             className="uppercase text-[18px] h-12 w-52"
-                                            onClick={() => handleSubmit(preguntaPruebaDiagnostica.id, null)}
+                                            onClick={() => {
+                                                playAudio(0, 2, buttonPressed), handleSubmit(preguntaPruebaDiagnostica.id, null)
+                                            }}
                                             disabled={respuesta == ''}>
                                             Siguiente
                                         </Button>
