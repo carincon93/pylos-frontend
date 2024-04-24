@@ -18,8 +18,6 @@ function App() {
     const { playAudio, isPlaying } = useAudioPlayer()
 
     const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
-    const [disabledLeftButton, setDisabledLeftButton] = useState<boolean>(false)
-    const [disabledRightButton, setDisabledRightButton] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(true)
     const [showOverlay, setShowOverlay] = useState(true)
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right') // Estado para almacenar temporalmente las clases de hover
@@ -106,8 +104,6 @@ function App() {
     // Función para avanzar/retroceder la foto
     const nextPhoto = () => {
         handleHoverChange('')
-        setDisabledRightButton(true)
-        setDisabledLeftButton(true)
 
         setActivePhoto((prev) => {
             // Obtener los párrafos de la foto activa
@@ -132,8 +128,6 @@ function App() {
 
     const previousPhoto = () => {
         handleHoverChange('')
-        setDisabledRightButton(true)
-        setDisabledLeftButton(true)
 
         setActivePhoto((prev) => {
             const nuevoIndice = (prev - 1 + photosData.length) % photosData.length
@@ -148,8 +142,6 @@ function App() {
         setHoverClass(newClass)
         setTimeout(() => {
             setHoverClass('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
-            setDisabledRightButton(false)
-            setDisabledLeftButton(false)
         }, 15000) // Duración de la eliminación temporal de las clases de hover
     }
 
@@ -178,14 +170,13 @@ function App() {
 
     useEffect(() => {
         if (activePhoto == 0) {
-            setDisabledLeftButton(true)
         }
     }, [])
 
     return (
         <div className="grid">
             {loading ? (
-                <LoadingOverlay className='bg-pylos-800' />
+                <LoadingOverlay className="bg-pylos-800" />
             ) : (
                 showOverlay && (
                     <div className="overlay flex flex-col items-center justify-center">
@@ -195,7 +186,7 @@ function App() {
                         </div>
                         <button
                             onClick={init}
-                            className="py-4 px-16 mt-20 font-bold rounded-full text-3xl border-4 sm:border-8 border-white transition-colors text-white hover:border-sky-200/50 hover:text-sky-200/50">
+                            className="py-4 px-16 mt-20 font-bold rounded-full text-3xl bg-primary hover:bg-primary/90 transition-colors text-white hover:text-white/50">
                             Empezar
                         </button>
                     </div>
@@ -208,7 +199,7 @@ function App() {
                         direction="left"
                         text="Foto anterior"
                         onClick={previousPhoto}
-                        disabled={disabledLeftButton}
+                        disabled={activePhoto == 0 || (isPlaying && !showOverlay)}
                     />
                 </div>
                 <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
@@ -217,7 +208,7 @@ function App() {
                             direction="right"
                             text="Siguiente foto"
                             onClick={nextPhoto}
-                            disabled={disabledRightButton}
+                            disabled={isPlaying && !showOverlay}
                         />
                     ) : (
                         <Button
