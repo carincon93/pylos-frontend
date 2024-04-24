@@ -4,10 +4,14 @@ import { fetcher } from '@/utils/fetcher'
 import useSWR from 'swr'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import LoadingOverlay from '@/app/loading'
 
 export default function TablaPosiciones() {
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
-    
+
+    if (!resultadosPruebaDiagnostica) {
+        return <LoadingOverlay />
+    }
 
     return (
         <Table className="bg-white max-w-screen-xl mx-auto rounded shadow-lg text-black my-10 table-fixed">

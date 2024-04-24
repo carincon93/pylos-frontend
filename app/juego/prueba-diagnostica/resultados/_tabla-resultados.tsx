@@ -6,9 +6,14 @@ import { updateRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { RespuestaPruebaDiagnostica } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
+import LoadingOverlay from '@/app/loading'
 
 export default function TablaResultados() {
     const { data: respuestasPruebaDiagnostica } = useSWR<RespuestaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica`, fetcher)
+
+    if (!respuestasPruebaDiagnostica) {
+        return <LoadingOverlay />
+    }
 
     const handleChange = async (value: string, respuestaId: string) => {
         // Convertir el valor de cadena a booleano
