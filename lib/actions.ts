@@ -82,21 +82,3 @@ export const getErrorsForFields = (fields: string[], errors: any[]) => {
 
     return fieldErrors
 }
-
-// Función para reproducir una parte específica del audio
-export const reproducirParte = (inicio: number, fin: number, audioSource: string) => {
-    // Creamos un nuevo elemento de audio con la ruta proporcionada
-    const audio = new Audio(audioSource)
-    audio.pause()
-
-    // Establecer el tiempo de inicio en segundos
-    audio.currentTime = inicio
-
-    // Reproducir el audio
-    audio.play()
-
-    // Detener el audio después de la duración especificada
-    setTimeout(() => {
-        audio.pause()
-    }, (fin - inicio) * 1000) // Convertir la duración de la parte a milisegundos
-}
