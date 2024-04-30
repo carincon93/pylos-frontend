@@ -46,7 +46,7 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
             </Link>
 
             <div className="top-0 left-0 w-full bg-cover bg-center z-20 flex flex-col items-center justify-center">
-                <div className="flex justify-center gap-x-4 relative top-12 lg:top-0">
+                <div className="flex justify-center gap-x-4 relative top-0">
                     <Isotipo className="w-14 dark:drop-shadow-[255_255_255.3rem_#ffffff70]" />
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] text-white" />
                 </div>
@@ -55,7 +55,7 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
 
                 <Tabs
                     defaultValue="posiciones"
-                    className="mt-10 z-20">
+                    className="mt-10 z-20 w-full md:max-w-screen-xl">
                     {isAdmin == '1' && (
                         <TabsList>
                             <TabsTrigger value="posiciones">Tabla de posiciones</TabsTrigger>

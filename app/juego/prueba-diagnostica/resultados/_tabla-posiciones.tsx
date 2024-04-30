@@ -14,7 +14,7 @@ export default function TablaPosiciones() {
     }
 
     return (
-        <Table className="bg-white max-w-screen-xl mx-auto rounded shadow-lg text-black my-10 table-fixed">
+        <Table className="bg-white rounded shadow-lg text-black my-10 table-fixed">
             <TableCaption className="text-white">Tabla de posiciones.</TableCaption>
             <TableHeader>
                 <TableRow>
@@ -28,7 +28,7 @@ export default function TablaPosiciones() {
                     <TableRow key={index}>
                         <TableCell className="font-medium text-center">{index + 1}</TableCell>
                         <TableCell className="font-medium">
-                            <div className="flex items-center">
+                            <div className="flex items-center text-xs md:text-md lg:text-lg">
                                 <Avatar className="size-10 mr-4">
                                     <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${resultado.mascotaFoto}`} />
                                     <AvatarFallback>MASCOTA</AvatarFallback>
