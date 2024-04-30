@@ -7,7 +7,7 @@ import { Isotipo } from '@/app/components/Isotipo'
 import { Button } from '@/components/ui/button'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { getProfile, updateUsuario } from '@/lib/actions'
-import { ANFORA_ROUTE } from '@/utils/routes'
+import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -28,7 +28,7 @@ export default function HistoriaEpica() {
                 const profile = await getProfile()
 
                 if (profile.introduccionCompleta) {
-                    router.push(ANFORA_ROUTE)
+                    router.push(MUNDOS_ROUTE)
                 }
             } catch (error) {
                 console.error('Error fetching data:', error)
@@ -152,7 +152,7 @@ export default function HistoriaEpica() {
         } catch (error) {
             console.error('Error al guardar la respuesta:', error)
         } finally {
-            router.push(ANFORA_ROUTE)
+            router.push(MUNDOS_ROUTE)
         }
     }
 
