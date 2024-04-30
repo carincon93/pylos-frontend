@@ -25,14 +25,16 @@ function App() {
             <Stats showPanel={1} />
             <Canvas
                 shadows
-                camera={{ position: [0, 20, 14], fov: 42 }}
+                camera={{ position: [0, 20, 24], fov: 25 }}
                 style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
                 <color
                     attach="background"
-                    args={['#ffe18a']}
+                    args={['#9104a4']}
                 />
                 <Suspense>
-                    <Physics debug>
+                    <Physics
+                        debug
+                        interpolate>
                         <Experience />
                     </Physics>
                 </Suspense>
