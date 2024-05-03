@@ -6,8 +6,8 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import LoadingOverlay from '@/app/loading'
-import { saveRespuestaPruebaDiagnostica } from '@/lib/actions'
-import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica } from '@/types/MyTypes'
+import { saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib/actions'
+import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
 import debounce from 'lodash/debounce'
@@ -24,6 +24,10 @@ export default function Prueba() {
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
+    const [startTime, setStartTime] = useState<number | null>(null)
+    const [cronometro, setCronometro] = useState(0)
+    const [tiempoEnMinutos, setTiempoEnMinutos] = useState('')
+    const [isPageVisible, setIsPageVisible] = useState(true)
 
     const router = useRouter()
 
@@ -33,10 +37,72 @@ export default function Prueba() {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((10 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 10)
             setTimeout(() => {
-                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) router.push(RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE)
+                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) handleButton()
             }, 1000)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
+
+    useEffect(() => {
+        const start = Date.now()
+
+        const handleVisibilityChange = () => {
+            if (document.visibilityState === 'visible') {
+                setStartTime(start)
+
+                setIsPageVisible(true)
+            } else {
+                // Si la página está oculta, pausa el cronómetro
+                setStartTime(null)
+                setIsPageVisible(false)
+            }
+        }
+
+        // Actualiza el tiempo del cronómetro cada segundo
+        const intervalo = setInterval(() => {
+            const tiempoTranscurrido = Date.now() - start
+            const segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000)
+            const minutos = Math.floor(segundosTranscurridos / 60)
+            const segundos = segundosTranscurridos % 60
+            const tiempoFormateado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`
+            setTiempoEnMinutos(tiempoFormateado)
+            setCronometro(segundosTranscurridos)
+        }, 1000)
+
+        document.addEventListener('visibilitychange', handleVisibilityChange)
+
+        return () => {
+            clearInterval(intervalo)
+            document.removeEventListener('visibilitychange', handleVisibilityChange)
+        }
+    }, [])
+
+    // useEffect(() => {
+    //     // Inicia o reanuda el cronómetro cuando la página es visible
+    //     if (isPageVisible) {
+    //         const intervalo = setInterval(() => {
+    //             if (startTime !== null) {
+    //                 const tiempoTranscurrido = Date.now() - startTime
+    //                 const segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000)
+    //                 setCronometro(segundosTranscurridos)
+    //             }
+    //         }, 1000)
+    //         return () => clearInterval(intervalo)
+    //     }
+    // }, [isPageVisible, startTime])
+
+    const handleButton = async () => {
+        const data: Partial<Usuario> = {
+            tiempoPruebaDiagnostica: cronometro - 2,
+        }
+
+        try {
+            await updateUsuario(data)
+        } catch (error) {
+            console.error('Error al guardar la información:', error)
+        } finally {
+            router.push(RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE)
+        }
+    }
 
     if (progress == 100) {
         return <LoadingOverlay className="bg-pylos-800" />
@@ -71,13 +137,31 @@ export default function Prueba() {
     return (
         <div className="h-[100vh] relative w-full overflow-hidden bg-cover bg-center z-20">
             {progress > 0 && progress < 100 && (
-                <div className="flex items-center justify-center mt-10">
-                    <Progress
-                        className=" w-9/12 lg:max-w-7xl h-6 mr-4"
-                        value={progress}
-                    />
-                    <span className="text-2xl font-bold font-cursive">{progress}%</span>
-                </div>
+                <>
+                    <div className="flex items-center justify-center mt-10">
+                        <Progress
+                            className=" w-9/12 lg:max-w-7xl h-6 mr-4"
+                            value={progress}
+                        />
+                        <span className="text-2xl font-bold font-cursive">{progress}%</span>
+                    </div>
+                    <div className="flex items-center justify-center flex-col">
+                        <div className="flex items-center justify-center">
+                            <svg
+                                className="mr-2"
+                                height="16"
+                                strokeLinejoin="round"
+                                viewBox="0 0 16 16"
+                                width="16">
+                                <path
+                                    d="M7.25 1.25V2.03971C5.87928 2.18571 4.62678 2.72736 3.6089 3.54824L3.03033 2.96967L2.5 2.43934L1.43934 3.5L1.96967 4.03033L2.54824 4.6089C1.57979 5.80976 1 7.33717 1 9C1 12.866 4.13401 16 8 16C11.866 16 15 12.866 15 9C15 7.33717 14.4202 5.80976 13.4518 4.6089L14.0303 4.03033L14.5607 3.5L13.5 2.43934L12.9697 2.96967L12.3911 3.54824C11.3732 2.72736 10.1207 2.18571 8.75 2.03971V1.25H9.25H10V-0.25H9.25H8.75H7.25H6.75H6V1.25H6.75H7.25ZM2.5 9C2.5 5.96243 4.96243 3.5 8 3.5C11.0376 3.5 13.5 5.96243 13.5 9C13.5 12.0376 11.0376 14.5 8 14.5C4.96243 14.5 2.5 12.0376 2.5 9ZM8.75 6.75V6H7.25V6.75V9V9.75H8.75V9V6.75Z"
+                                    fill="currentColor"></path>
+                            </svg>
+
+                            {tiempoEnMinutos}
+                        </div>
+                    </div>
+                </>
             )}
 
             {opcionCorrecta != undefined && (
