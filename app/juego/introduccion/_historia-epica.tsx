@@ -150,7 +150,7 @@ export default function HistoriaEpica() {
         try {
             await updateUsuario(data)
         } catch (error) {
-            console.error('Error al guardar la respuesta:', error)
+            console.error('Error al guardar la información:', error)
         } finally {
             router.push(MUNDOS_ROUTE)
         }
