@@ -14,6 +14,7 @@ import debounce from 'lodash/debounce'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
+import { useContextData } from '@/app/context/AppContext'
 
 export default function Prueba() {
     const { playAudio } = useAudioPlayer()
@@ -24,10 +25,11 @@ export default function Prueba() {
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
-    const [startTime, setStartTime] = useState<number | null>(null)
     const [cronometro, setCronometro] = useState(0)
     const [tiempoEnMinutos, setTiempoEnMinutos] = useState('')
     const [isPageVisible, setIsPageVisible] = useState(true)
+
+    const { profileUserData } = useContextData()
 
     const router = useRouter()
 
@@ -37,7 +39,12 @@ export default function Prueba() {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((10 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 10)
             setTimeout(() => {
-                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) handleButton()
+                if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
+                    if (profileUserData && profileUserData.tiempoPruebaDiagnostica == null) {
+                        sendTiempoPruebaDiagnostica()
+                    }
+                    router.push(RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE)
+                }
             }, 1000)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
@@ -47,12 +54,8 @@ export default function Prueba() {
 
         const handleVisibilityChange = () => {
             if (document.visibilityState === 'visible') {
-                setStartTime(start)
-
                 setIsPageVisible(true)
             } else {
-                // Si la página está oculta, pausa el cronómetro
-                setStartTime(null)
                 setIsPageVisible(false)
             }
         }
@@ -76,23 +79,9 @@ export default function Prueba() {
         }
     }, [])
 
-    // useEffect(() => {
-    //     // Inicia o reanuda el cronómetro cuando la página es visible
-    //     if (isPageVisible) {
-    //         const intervalo = setInterval(() => {
-    //             if (startTime !== null) {
-    //                 const tiempoTranscurrido = Date.now() - startTime
-    //                 const segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000)
-    //                 setCronometro(segundosTranscurridos)
-    //             }
-    //         }, 1000)
-    //         return () => clearInterval(intervalo)
-    //     }
-    // }, [isPageVisible, startTime])
-
-    const handleButton = async () => {
+    const sendTiempoPruebaDiagnostica = async () => {
         const data: Partial<Usuario> = {
-            tiempoPruebaDiagnostica: cronometro - 2,
+            tiempoPruebaDiagnostica: cronometro - 1,
         }
 
         try {
@@ -136,7 +125,7 @@ export default function Prueba() {
 
     return (
         <div className="h-[100vh] relative w-full overflow-hidden bg-cover bg-center z-20">
-            {progress > 0 && progress < 100 && (
+            {progress < 100 && (
                 <>
                     <div className="flex items-center justify-center mt-10">
                         <Progress

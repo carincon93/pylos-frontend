@@ -6,12 +6,13 @@ import { Logo } from '@/app/components/Logo'
 import { Isotipo } from '@/app/components/Isotipo'
 import { Button } from '@/components/ui/button'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
-import { getProfile, updateUsuario } from '@/lib/actions'
+import { updateUsuario } from '@/lib/actions'
 import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { useContextData } from '@/app/context/AppContext'
 
 export default function HistoriaEpica() {
     const { playAudio, isPlaying } = useAudioPlayer()
@@ -21,27 +22,12 @@ export default function HistoriaEpica() {
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right') // Estado para almacenar temporalmente las clases de hover
 
     const router = useRouter()
+    const { profileUserData } = useContextData()
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            try {
-                const profile = await getProfile()
-
-                if (profile.introduccionCompleta) {
-                    router.push(MUNDOS_ROUTE)
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error)
-            } finally {
-                setTimeout(() => {
-                    setTimeout(() => {
-                        setShowOverlay(true)
-                    }, 1000)
-                }, 2000)
-            }
+        if (profileUserData && profileUserData.introduccionCompleta) {
+            router.push(MUNDOS_ROUTE)
         }
-
-        fetchUserProfile()
     }, [])
 
     const photosData = [
