@@ -11,7 +11,7 @@ import BackgroundStars from '@/app/components/BackgroundStars'
 
 interface Props {
     searchParams: {
-        admin?: string | undefined
+        admin?: boolean | undefined
     }
 }
 
@@ -56,14 +56,14 @@ const ResultadosPruebaDiagnosticaPage = ({ searchParams }: Props) => {
                 <Tabs
                     defaultValue="posiciones"
                     className="mt-10 z-20 w-full md:max-w-screen-xl">
-                    {isAdmin == '1' && (
+                    {isAdmin && (
                         <TabsList>
                             <TabsTrigger value="posiciones">Tabla de posiciones</TabsTrigger>
                             <TabsTrigger value="respuestas">Respuestas</TabsTrigger>
                         </TabsList>
                     )}
                     <TabsContent value="posiciones">
-                        <TablaPosiciones />
+                        <TablaPosiciones isAdmin={isAdmin} />
                     </TabsContent>
                     <TabsContent value="respuestas">
                         <TablaResultados />
