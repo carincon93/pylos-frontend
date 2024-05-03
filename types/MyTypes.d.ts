@@ -40,6 +40,7 @@ interface Usuario {
     mascotaId: string
     mascotaNombre: string
     introduccionCompleta: boolean
+    tiempoPruebaDiagnostica: number
 }
 
 interface Login {
