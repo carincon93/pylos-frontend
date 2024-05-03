@@ -17,10 +17,16 @@ export function NavigationEvents() {
         const url = `${pathname}?${searchParams}`
 
         checkHealth()
+
+        if (pathname.startsWith('/juego/introduccion')) {
+            fetchUserProfile()
+        }
     }, [pathname, searchParams])
 
     useEffect(() => {
-        fetchUserProfile()
+        if (pathname.startsWith('/juego')) {
+            fetchUserProfile()
+        }
     }, [])
 
     const fetchUserProfile = async () => {
