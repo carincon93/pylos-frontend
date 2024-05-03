@@ -151,22 +151,24 @@ export default function HistoriaEpica() {
         }, 3000)
     }
 
+    if (showOverlay) {
+        return (
+            <div className="overlay flex flex-col items-center justify-center">
+                <div className="flex gap-2 items-center justify-center mx-10">
+                    <Isotipo className="w-20 sm:w-56 text-white" />
+                    <Logo className="w-60 sm:w-80 md:w-full text-white" />
+                </div>
+                <Button
+                    onClick={init}
+                    className="mt-20 font-bold rounded-full text-3xl bg-primary hover:bg-primary/90 transition-colors text-white hover:text-white/50 p-6">
+                    Empezar
+                </Button>
+            </div>
+        )
+    }
+
     return (
         <div className="grid">
-            {showOverlay && (
-                <div className="overlay flex flex-col items-center justify-center">
-                    <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-20 sm:w-56 text-white" />
-                        <Logo className="w-60 sm:w-80 md:w-full text-white" />
-                    </div>
-                    <button
-                        onClick={init}
-                        className="py-4 px-16 mt-20 font-bold rounded-full text-3xl bg-primary hover:bg-primary/90 transition-colors text-white hover:text-white/50">
-                        Empezar
-                    </button>
-                </div>
-            )}
-
             <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
                 <div className="peer/previous blob-left group relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
                     <ActionButton
