@@ -7,9 +7,9 @@ import { Inter as FontSans } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
-import HealthChecker from '@/components/HealthChecker'
 import { Suspense } from 'react'
 import LoadingOverlay from './loading'
+import { NavigationEvents } from './components/navigation-events'
 
 const fontSans = FontSans({
     subsets: ['latin'],
@@ -37,9 +37,11 @@ export default function RootLayout({
                         defaultTheme="system"
                         enableSystem
                         disableTransitionOnChange>
-                        <Suspense fallback={<LoadingOverlay className="bg-pylos-800" />}>{children}</Suspense>
+                        <Suspense fallback={<LoadingOverlay className="bg-pylos-800" />}>
+                            {children}
+                            <NavigationEvents />
+                        </Suspense>
                         <Toaster />
-                        <HealthChecker />
                     </ThemeProvider>
                 </AppProvider>
             </body>
