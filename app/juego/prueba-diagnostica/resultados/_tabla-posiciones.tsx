@@ -72,7 +72,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                                     }  bg-[length:123px] ml-6`}></span>
                             </div>
                         </TableCell>
-                        <TableCell className="font-medium">{resultado.tiempoPruebaDiagnostica} segundos</TableCell>
+                        <TableCell className="font-medium">{resultado.tiempoPruebaDiagnostica ? `${resultado.tiempoPruebaDiagnostica} segundos` : 'No ha iniciado la prueba'} </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
