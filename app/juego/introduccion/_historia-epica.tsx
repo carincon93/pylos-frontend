@@ -28,7 +28,7 @@ export default function HistoriaEpica() {
         if (profileUserData && profileUserData.introduccionCompleta) {
             router.push(MUNDOS_ROUTE)
         }
-    }, [])
+    }, [profileUserData])
 
     const photosData = [
         {
