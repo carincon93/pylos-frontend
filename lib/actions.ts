@@ -37,6 +37,14 @@ export async function updateRespuestaPruebaDiagnostica(data: Partial<RespuestaPr
     }
 }
 
+export async function restartRespuestaPruebaDiagnostica(data: Partial<Usuario>): Promise<Response> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/${data.id}/restablecer-prueba`, 'DELETE')
+    } catch (error: any) {
+        throw new Error('Error al restablecer la prueba: ' + error.message)
+    }
+}
+
 export async function toAuth(url: string, body: Record<string, any>): Promise<any> {
     const response = await fetch(url, {
         method: 'POST',
