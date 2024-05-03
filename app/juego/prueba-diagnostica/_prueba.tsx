@@ -163,7 +163,7 @@ export default function Prueba() {
             <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center -mt-20">
                 <CarouselContent>
                     {isSubmitting ? (
-                        <LoadingOverlay />
+                        <></>
                     ) : (
                         preguntasPruebaDiagnosticaPorUsuario?.map((preguntaPruebaDiagnostica, i) => (
                             <CarouselItem
