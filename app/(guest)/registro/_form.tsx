@@ -111,10 +111,10 @@ export default function RegisterForm() {
                     name="grado"
                     onValueChange={(value) => handleChange('grado', value)}
                     required>
-                    <SelectTrigger className="uppercase">
+                    <SelectTrigger>
                         <SelectValue placeholder="Grado" />
                     </SelectTrigger>
-                    <SelectContent className="uppercase">
+                    <SelectContent>
                         <SelectItem value="1">1</SelectItem>
                         <SelectItem value="2">2</SelectItem>
                         <SelectItem value="3">3</SelectItem>
@@ -148,7 +148,7 @@ export default function RegisterForm() {
             </div>
 
             <div>
-                <Label className="my-4 text-center block text-white uppercase">Seleccione un acompañante</Label>
+                <Label className="my-4 text-center block text-white">Seleccione un acompañante</Label>
                 <RadioGroup
                     onValueChange={(value) => handleChange('mascotaId', value)}
                     required>
@@ -188,11 +188,7 @@ export default function RegisterForm() {
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button
-                className="uppercase"
-                disabled={loading}>
-                {loading ? 'Guardando...' : 'Registrarse'}
-            </Button>
+            <Button disabled={loading}>{loading ? 'Guardando...' : 'Registrarse'}</Button>
         </form>
     )
 }

@@ -61,7 +61,7 @@ export default function Home() {
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={EMPEZAR_AVENTURA_ROUTE}
-                        className="py-4 px-8 font-bold text-white uppercase rounded-full bg-secondary hover:bg-secondary/90">
+                        className="py-4 px-8 font-bold text-white rounded-full bg-secondary hover:bg-secondary/90">
                         Empezar la aventura
                     </Link>
                 </div>

@@ -38,7 +38,7 @@ export default function TablaResultados() {
             <TableCaption className="text-white">Lista de respuestas.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[200px]">Estudiante</TableHead>
+                    <TableHead className="w-[200px] hidden md:table-cell">Estudiante</TableHead>
                     <TableHead className="hidden md:table-cell">Pregunta</TableHead>
                     <TableHead className="hidden md:table-cell">Respuesta</TableHead>
                     <TableHead className="text-center hidden md:table-cell">Calificación</TableHead>
@@ -48,18 +48,18 @@ export default function TablaResultados() {
                 {respuestasPruebaDiagnostica?.map((respuesta, index) => (
                     <TableRow
                         key={respuesta.id}
-                        className="flex flex-col mb-4 md:table-row">
+                        className="flex flex-col md:table-row">
                         <TableCell>
                             <span className="text-gray-400 block mb-4 md:hidden">Estudiante:</span>
 
-                            <span className="text-xs font-medium">{respuesta.usuario.nombre}</span>
+                            <span className="text-md font-medium capitalize">{respuesta.usuario.nombre}</span>
                         </TableCell>
                         <TableCell>
-                            <small className="mb-2 inline-block text-xs">
+                            <small className="mb-6 inline-block text-xs">
                                 {respuesta.preguntaPruebaDiagnostica.esPreguntaCerrada ? (
-                                    <span className="bg-violet-200 text-violet-500 py-1 px-2 rounded-full mb-1 inline-block text-[10px] md:text-xs">Pregunta cerrada</span>
+                                    <span className="bg-violet-200 text-violet-500 py-1 px-2 rounded-full md:mb-2 inline-block text-[10px] md:text-xs">Pregunta cerrada</span>
                                 ) : (
-                                    <span className="bg-sky-200 text-sky-500 py-1 px-2 rounded-full mb-1 inline-block text-[10px] md:text-xs">Pregunta abierta</span>
+                                    <span className="bg-sky-200 text-sky-500 py-1 px-2 rounded-full md:mb-2 inline-block text-[10px] md:text-xs">Pregunta abierta</span>
                                 )}
 
                                 <br />
@@ -76,31 +76,40 @@ export default function TablaResultados() {
                                     <small>Warn: Se ha guardado una respuesta abierta en una pregunta cerrada.</small>
                                     <br />
                                     <br />
-                                    {respuesta.respuesta}
+                                    <p className="first-letter:uppercase">{respuesta.respuesta}</p>
                                 </span>
                             ) : (
-                                <>{respuesta.respuesta}</>
+                                <p className="first-letter:uppercase">{respuesta.respuesta}</p>
                             )}
-                            <br />
 
                             {respuesta.opcionPruebaDiagnostica?.opcion}
                         </TableCell>
-                        <TableCell className="text-left md:text-center">
+                        <TableCell className="text-left md:text-center pb-14 md:pb-0">
                             <span className="text-gray-400 block mb-4 md:hidden">Calificación:</span>
                             {respuesta.preguntaPruebaDiagnostica.esPreguntaCerrada ? (
-                                <small className={`${respuesta.opcionPruebaDiagnostica.esOpcionCorrecta ? 'bg-green-200 text-green-500' : 'bg-red-200 text-red-500'} py-1 px-2 rounded-full`}>
+                                <span
+                                    className={`${
+                                        respuesta.opcionPruebaDiagnostica.esOpcionCorrecta ? 'bg-green-200 text-green-500 border-green-400 px-7' : 'bg-red-200 text-red-400 border-red-400 px-6'
+                                    } py-2 rounded-full border w-full block text-center`}>
                                     {respuesta.opcionPruebaDiagnostica.esOpcionCorrecta ? 'Correcto' : 'Incorrecto'}
-                                </small>
+                                </span>
                             ) : (
                                 <Select
                                     name="grado"
                                     onValueChange={(value) => handleChange(value, respuesta.id)}
                                     value={respuesta.esRespuestaCorrecta === null ? '' : respuesta.esRespuestaCorrecta ? '1' : '0'}
                                     required>
-                                    <SelectTrigger className="uppercase">
+                                    <SelectTrigger
+                                        className={`${
+                                            respuesta.esRespuestaCorrecta === null
+                                                ? ''
+                                                : respuesta.esRespuestaCorrecta
+                                                ? 'bg-green-200 border-green-400 text-green-500'
+                                                : 'bg-red-200 border-red-400 text-red-400'
+                                        }`}>
                                         <SelectValue placeholder="Calificar" />
                                     </SelectTrigger>
-                                    <SelectContent className="uppercase rounded">
+                                    <SelectContent className="rounded">
                                         <SelectItem value="1">Correcto</SelectItem>
                                         <SelectItem value="0">Incorrecto</SelectItem>
                                     </SelectContent>

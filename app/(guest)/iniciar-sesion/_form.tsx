@@ -81,7 +81,7 @@ export default function LoginForm() {
                 <Input
                     type="text"
                     placeholder="Nombre del personaje"
-                    className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
+                    className="py-4 px-8 rounded-full text-center font-semibold text-black"
                     onChange={(event) => handleChange('nombreUsuario', event.target.value)}
                     required
                 />
@@ -92,18 +92,14 @@ export default function LoginForm() {
                 <Input
                     type="text"
                     placeholder="Nombre del acompañante"
-                    className="uppercase py-4 px-8 rounded-full text-center font-semibold text-black"
+                    className="py-4 px-8 rounded-full text-center font-semibold text-black"
                     onChange={(event) => handleChange('mascotaNombre', event.target.value)}
                     required
                 />
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button
-                className="uppercase"
-                disabled={loading}>
-                {loading ? 'Ingresando...' : 'Ingresar'}
-            </Button>
+            <Button disabled={loading}>{loading ? 'Ingresando...' : 'Ingresar'}</Button>
         </form>
     )
 }
