@@ -124,10 +124,10 @@ export default function Prueba() {
     }, 500)
 
     return (
-        <div className="h-[100vh] relative w-full overflow-hidden bg-cover bg-center z-20">
+        <div className="relative w-full min-h-[100vh] bg-cover bg-center z-20">
             {progress < 100 && (
                 <>
-                    <div className="flex items-center justify-center mt-10">
+                    <div className="flex items-center justify-center pt-10">
                         <Progress
                             className=" w-9/12 lg:max-w-7xl h-6 mr-4"
                             value={progress}
@@ -159,8 +159,7 @@ export default function Prueba() {
                         opcionCorrecta ? 'bg-[-205px_-9px]' : 'bg-[1px_-21px]'
                     }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-30`}></span>
             )}
-
-            <Carousel className="w-[90%] mx-auto h-full flex items-center justify-center -mt-20">
+            <Carousel className="w-[90%] mt-20 mx-auto h-full flex items-center justify-center">
                 <CarouselContent>
                     {isSubmitting ? (
                         <></>
