@@ -134,7 +134,7 @@ export default function Prueba() {
                         />
                         <span className="text-2xl font-bold font-cursive">{progress}%</span>
                     </div>
-                    <div className="flex items-center justify-center flex-col">
+                    <div className="flex items-center justify-center flex-col mt-1">
                         <div className="flex items-center justify-center">
                             <svg
                                 className="mr-2"
@@ -171,7 +171,7 @@ export default function Prueba() {
                                 className="px-10 ">
                                 <p className="text-center text-2xl sm:text-4xl">{preguntaPruebaDiagnostica.pregunta}</p>
 
-                                <div className="grid sm:grid-cols-3 gap-4 mt-20">
+                                <div className={`grid sm:grid-cols-${preguntaPruebaDiagnostica?.opcionPruebaDiagnostica.length} gap-4 mt-20`}>
                                     {preguntaPruebaDiagnostica.esPreguntaCerrada ? (
                                         <>
                                             {preguntaPruebaDiagnostica?.opcionPruebaDiagnostica?.map((opcionPruebaDiagnostica, j) => (
@@ -189,12 +189,12 @@ export default function Prueba() {
                                     ) : (
                                         <div className="col-span-3 flex flex-col gap-y-8 items-center justify-center">
                                             <Input
-                                                className="sm:w-9/12 h-14 border-primary border-2 uppercase text-[18px] text-center mx-auto"
+                                                className="sm:w-9/12 h-14 border-primary border-2 text-[18px] text-center mx-auto"
                                                 placeholder="Escriba la respuesta"
                                                 onChange={(event) => setRespuesta(event.target.value)}
                                             />
                                             <Button
-                                                className="uppercase text-[18px] h-12 w-52"
+                                                className="text-[18px] h-12 w-52"
                                                 onClick={() => {
                                                     playAudio(0, 2, buttonPressed), handleSubmit(preguntaPruebaDiagnostica.id, null)
                                                 }}
