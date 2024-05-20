@@ -12,7 +12,6 @@ import { Usuario } from '@/types/MyTypes'
 import { useState } from 'react'
 import Link from 'next/link'
 import { INTRODUCCION_ROUTE } from '@/utils/routes'
-import Image from 'next/image'
 
 export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefined }) {
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
