@@ -37,6 +37,33 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
 
     return (
         <>
+            <AlertDialog open={open}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Empieza la aventura de nuestro pequeño Pylonauta:</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            1. A continuación, verás fotos que cuentan la historia de Pylonauta.
+                            <br />
+                            <br />
+                            <img src="/introduccion-dialog.png" />
+                            <br />
+                            2. En cada foto, una voz explicará el viaje de nuestro Pylonauta.
+                            <br />
+                            <br />
+                            3. Cuando la voz termine de hablar, haz clic en <strong>Siguiente foto</strong> para continuar con la historia.
+                            <br />
+                            <br />
+                            <strong>¡Estás muy cerca de comenzar esta gran aventura!</strong>
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogAction>
+                            <Link href={INTRODUCCION_ROUTE}>Continuar</Link>
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
             <Button
                 className="fixed bottom-4 right-4 z-30 bg-secondary hover:bg-secondary/90 rounded-full shadow-lg py-4 pl-8 pr-6 flex items-center justify-center"
                 onClick={() => setOpen(true)}>
@@ -55,32 +82,6 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                     />
                 </svg>
             </Button>
-            <AlertDialog open={open}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>Empieza la aventura de nuestro pequeño Pylonauta:</AlertDialogTitle>
-                        <AlertDialogDescription>
-                            1. A continuación, verás fotos que cuentan la historia de Pylonauta.
-                            <br />
-                            <br />
-                            <img src="/introduccion-dialog.png" />
-                            <br />
-                            2. En cada foto, una voz explicará el viaje de nuestro Pylonauta.
-                            <br />
-                            <br />
-                            3. Cuando la voz termine de hablar, haz clic en "Siguiente foto" para continuar con la historia.
-                            <br />
-                            <br />
-                            <strong>¡Estás muy cerca de comenzar esta gran aventura!</strong>
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction>
-                            <Link href={INTRODUCCION_ROUTE}>Continuar</Link>
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
 
             <Table className="bg-white rounded shadow-lg text-black my-10 table-fixed">
                 <TableCaption className="text-white">Tabla de posiciones.</TableCaption>
