@@ -82,25 +82,9 @@ export default function HistoriaEpica() {
             // Calcular el nuevo índice de la foto activa
             return nuevoIndice
         })
-    }
 
-    useEffect(() => {
-        if (!showOverlay) {
-            if (activePhoto == 1) {
-                playSegment(0, 19.6)
-            } else if (activePhoto == 2) {
-                playSegment(20, 33)
-            } else if (activePhoto == 3) {
-                playSegment(33.5, 49)
-            } else if (activePhoto == 4) {
-                playSegment(49, 66)
-            } else if (activePhoto == 5) {
-                playSegment(66.5, 82)
-            } else if (activePhoto == 6) {
-                playSegment(82.5, 96)
-            }
-        }
-    }, [activePhoto])
+        handleChangePhoto()
+    }
 
     const previousPhoto = () => {
         handleHoverChange('')
@@ -111,7 +95,29 @@ export default function HistoriaEpica() {
             // Calcular el nuevo índice de la foto activa
             return nuevoIndice
         })
+
+        handleChangePhoto()
     }
+
+    const handleChangePhoto = () => {
+        if (activePhoto == 0) {
+            playSegment(0, 19.6)
+        } else if (activePhoto == 1) {
+            playSegment(20, 33)
+        } else if (activePhoto == 2) {
+            playSegment(33.5, 49)
+        } else if (activePhoto == 3) {
+            playSegment(49, 66)
+        } else if (activePhoto == 4) {
+            playSegment(66.5, 82)
+        } else if (activePhoto == 5) {
+            playSegment(82.5, 96)
+        }
+    }
+
+    useEffect(() => {
+        handleChangePhoto()
+    }, [activePhoto])
 
     const videoRef = useRef<HTMLVideoElement>(null)
     const [currentTime, setCurrentTime] = useState(0)
@@ -157,38 +163,24 @@ export default function HistoriaEpica() {
 
         setTimeout(() => {
             setShowOverlay(false)
-            setActivePhoto(1)
+            handleChangePhoto()
         }, 3000)
     }
 
     return (
         <>
-            {showOverlay && (
-                <div className="overlay flex flex-col items-center justify-center">
-                    <div className="flex gap-2 items-center justify-center mx-10">
-                        <Isotipo className="w-20 sm:w-56 text-white" />
-                        <Logo className="w-60 sm:w-80 md:w-full text-white" />
-                    </div>
-                    <Button
-                        onClick={init}
-                        className="mt-20 font-bold rounded-full text-2xl !px-10 bg-primary hover:bg-primary/90 transition-colors text-white hover:text-white/50 p-6">
-                        Empezar
-                    </Button>
-                </div>
-            )}
-
             <div className="grid">
                 <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
                     <div className="peer/previous blob-left group relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
-                        <ActionButton
+                        {/* <ActionButton
                             direction="left"
                             text="Foto anterior"
                             onClick={previousPhoto}
-                            disabled={activePhoto == 1 || (isPlaying && !showOverlay)}
-                        />
+                            disabled={activePhoto == 0 || (isPlaying && !showOverlay)}
+                        /> */}
                     </div>
                     <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
-                        {activePhoto != 6 ? (
+                        {activePhoto != 5 ? (
                             <ActionButton
                                 direction="right"
                                 text="Siguiente foto"
@@ -209,7 +201,6 @@ export default function HistoriaEpica() {
                         date={photosData[activePhoto].date}
                         className={twMerge('z-10', hoverClass)}
                         title={photosData[activePhoto].title}
-                        showOverlay={showOverlay}
                         videoRef={videoRef}
                     />
                 </div>
@@ -218,22 +209,7 @@ export default function HistoriaEpica() {
     )
 }
 
-const Photo = ({
-    className,
-    title,
-    date,
-    img,
-    zIndex,
-    videoRef,
-}: {
-    className?: string
-    title?: string
-    date: string
-    img: string
-    zIndex?: number
-    showOverlay: boolean
-    videoRef: React.RefObject<HTMLVideoElement>
-}) => {
+const Photo = ({ className, title, date, img, zIndex, videoRef }: { className?: string; title?: string; date: string; img: string; zIndex?: number; videoRef: React.RefObject<HTMLVideoElement> }) => {
     return (
         <div
             style={{ zIndex: zIndex }}
