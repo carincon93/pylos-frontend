@@ -45,7 +45,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                             1. A continuación, verás fotos que cuentan la historia de Pylonauta.
                             <br />
                             <br />
-                            <img src="/introduccion-dialog.png" />
+                            <img src="/introduccion-dialog.webp" />
                             <br />
                             2. En cada foto, una voz explicará el viaje de nuestro Pylonauta.
                             <br />
