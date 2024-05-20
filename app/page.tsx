@@ -34,7 +34,7 @@ export default function Home() {
                     </Link>
 
                     <Link
-                        className="text-white hover:text-white/90 font-bold border-2 py-1 px-8 rounded-full border-secondary hover:border-secondary/90"
+                        className="text-white hover:text-white/90 font-bold border-2 py-1 px-8 rounded-full border-primary hover:border-primary/90"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Ingresar
                     </Link>
@@ -62,7 +62,7 @@ export default function Home() {
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={EMPEZAR_AVENTURA_ROUTE}
-                        className="py-4 px-8 font-bold text-white rounded-full bg-secondary hover:bg-secondary/90">
+                        className="py-4 px-8 font-bold text-white rounded-full bg-primary hover:bg-primary/90">
                         Empezar la aventura
                     </Link>
                 </div>
