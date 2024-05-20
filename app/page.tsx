@@ -47,9 +47,10 @@ export default function Home() {
                         <h1 className="text-7xl font-bold text-white">Aprender</h1>
                         <h2 className="text-5xl text-sky-300 font-light">Nunca fue tan divertido</h2>
 
-                        <p className="lg:mr-48 text-white">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <p className="lg:mr-36 text-white mb-4 font-medium">
+                            Únete a Pylonauta en su increíble aventura espacial por los misteriosos planetas de nuestro universo. Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu
+                            ayuda para resolver enigmas y superar desafíos emocionantes. ¡Descubre las herramientas secretas, repara la nave NEBULÓN y ayúdalo a regresar a casa! ¡Prepárate para una
+                            aventura llena de diversión y aprendizaje!
                         </p>
                     </div>
 
