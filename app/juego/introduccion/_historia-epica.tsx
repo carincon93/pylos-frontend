@@ -230,7 +230,9 @@ const Photo = ({ className, title, date, img, zIndex, videoRef }: { className?: 
                 </picture>
 
                 <div className="overflow-hidden">
-                    <video ref={videoRef}>
+                    <video
+                        ref={videoRef}
+                        preload="auto">
                         <source
                             src="/grabacion.mp4"
                             type="video/mp4"
