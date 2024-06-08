@@ -2,7 +2,7 @@
 
 import { useForm } from '@/hooks/useForm'
 import { getErrorsForFields, transformErrors } from '@/lib/actions'
-import { Login } from '@/types/MyTypes'
+import { Login, Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
 import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
@@ -10,8 +10,13 @@ import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import { toast } from '@/components/ui/use-toast'
 import { Loading } from '@/components/ui/loading'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import useSWR from 'swr'
+import { fetcher } from '@/utils/fetcher'
 
 export default function LoginForm() {
+    const { data: usuarios } = useSWR<Usuario[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario`, fetcher)
+
     const { formData, handleChange } = useForm<Partial<Login>>({})
     const [errors, setErrors] = useState<any[]>([])
     const [loading, setLoading] = useState<boolean>(false)
@@ -78,24 +83,36 @@ export default function LoginForm() {
             className="flex flex-col gap-y-6 w-9/12 sm:w-5/12"
             onSubmit={handleSubmit}>
             <div>
-                <Input
-                    type="text"
-                    placeholder="Nombre del personaje"
-                    className="py-4 px-8 rounded-full text-center font-semibold text-black"
-                    onChange={(event) => handleChange('nombreUsuario', event.target.value)}
-                    required
-                />
+                <Select
+                    name="nombreUsuario"
+                    onValueChange={(value) => handleChange('nombreUsuario', value)}
+                    required>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Nombre del usuario" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded">
+                        {usuarios?.map((usuario) => (
+                            <SelectItem value={usuario.nombreUsuario}>{usuario.nombreUsuario}</SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
                 {fieldErrors['nombreUsuario'] && <small className="text-red-500">{fieldErrors['nombreUsuario']}</small>}
             </div>
 
             <div>
-                <Input
-                    type="text"
-                    placeholder="Nombre del acompañante"
-                    className="py-4 px-8 rounded-full text-center font-semibold text-black"
-                    onChange={(event) => handleChange('mascotaNombre', event.target.value)}
-                    required
-                />
+                <Select
+                    name="mascotaNombre"
+                    onValueChange={(value) => handleChange('mascotaNombre', value)}
+                    required>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Nombre de la mascota" />
+                    </SelectTrigger>
+                    <SelectContent className="rounded">
+                        {usuarios?.map((usuario) => (
+                            <SelectItem value={usuario.mascotaNombre}>{usuario.mascotaNombre}</SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
