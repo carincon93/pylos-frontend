@@ -39,7 +39,7 @@ export default function Prueba() {
 
     useEffect(() => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
-            setProgress(((10 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 10)
+            setProgress(((20 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 20)
             sendTiempoPruebaDiagnostica()
 
             if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
