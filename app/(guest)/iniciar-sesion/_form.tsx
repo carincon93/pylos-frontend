@@ -91,7 +91,11 @@ export default function LoginForm() {
                     </SelectTrigger>
                     <SelectContent className="rounded">
                         {usuarios?.map((usuario) => (
-                            <SelectItem value={usuario.nombreUsuario}>{usuario.nombreUsuario}</SelectItem>
+                            <SelectItem
+                                key={usuario.id}
+                                value={usuario.nombreUsuario}>
+                                {usuario.nombreUsuario}
+                            </SelectItem>
                         ))}
                     </SelectContent>
                 </Select>
@@ -108,7 +112,11 @@ export default function LoginForm() {
                     </SelectTrigger>
                     <SelectContent className="rounded">
                         {usuarios?.map((usuario) => (
-                            <SelectItem value={usuario.mascotaNombre}>{usuario.mascotaNombre}</SelectItem>
+                            <SelectItem
+                                key={usuario.id}
+                                value={usuario.mascotaNombre}>
+                                {usuario.mascotaNombre}
+                            </SelectItem>
                         ))}
                     </SelectContent>
                 </Select>
