@@ -90,9 +90,10 @@ export default function LoginForm() {
                         <SelectValue placeholder="Nombre del usuario" />
                     </SelectTrigger>
                     <SelectContent className="rounded">
-                        {usuarios?.map((usuario) => (
+                        {usuarios?.map((usuario, i) => (
                             <SelectItem
-                                key={usuario.id}
+                                key={i}
+                                className="capitalize"
                                 value={usuario.nombreUsuario}>
                                 {usuario.nombreUsuario}
                             </SelectItem>
@@ -111,9 +112,10 @@ export default function LoginForm() {
                         <SelectValue placeholder="Nombre de la mascota" />
                     </SelectTrigger>
                     <SelectContent className="rounded">
-                        {usuarios?.map((usuario) => (
+                        {usuarios?.map((usuario, i) => (
                             <SelectItem
-                                key={usuario.id}
+                                key={i + 40}
+                                className="capitalize"
                                 value={usuario.mascotaNombre}>
                                 {usuario.mascotaNombre}
                             </SelectItem>
