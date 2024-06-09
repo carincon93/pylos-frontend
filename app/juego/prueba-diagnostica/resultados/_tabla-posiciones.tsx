@@ -115,8 +115,8 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
 
                                     <span
                                         className={`bg-[url('/estados.png')] size-10 inline-block bg-no-repeat ${
-                                            resultado.puntaje >= 8 ? 'bg-[-77px_-2px]' : resultado.puntaje < 8 && resultado.puntaje >= 6 ? 'bg-[1px_-45px]' : 'bg-[-38px_-45px]'
-                                        }  bg-[length:123px] md:ml-6`}></span>
+                                            resultado.puntaje >= 8 ? 'bg-[-22px_-1px]' : resultado.puntaje < 8 && resultado.puntaje >= 6 ? 'bg-[-43px_-42px]' : 'bg-[-4px_-42px]'
+                                        }  bg-[length:86px] md:ml-6`}></span>
                                 </div>
                             </TableCell>
                             <TableCell className="font-medium text-center md:text-left">

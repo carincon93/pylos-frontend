@@ -142,7 +142,7 @@ export default function Prueba() {
                             1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
                             <br />
                             <br />
-                            2. ¡Inicia el Desafío! La prueba consta de 10 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde con calma y
+                            2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde con calma y
                             sin prisa.
                             <br />
                             <br />
@@ -187,12 +187,14 @@ export default function Prueba() {
                                 </div>
                             </>
                         )}
+
                         {opcionCorrecta != undefined && (
                             <span
-                                className={`bg-[url('/estados.png')] size-24 ${
-                                    opcionCorrecta ? 'bg-[-205px_-9px]' : 'bg-[1px_-21px]'
-                                }  bg-[length:314px] absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-30`}></span>
+                                className={`bg-[url('/estados.png')] size-32 ${
+                                    opcionCorrecta ? 'bg-[-55px_3px]' : 'bg-[-2px_-125px]'
+                                } absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-30`}></span>
                         )}
+
                         <Carousel className="w-[90%] mt-20 mx-auto h-full flex items-center justify-center">
                             <CarouselContent>
                                 {isSubmitting ? (
