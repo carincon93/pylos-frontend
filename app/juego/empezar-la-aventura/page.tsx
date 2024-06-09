@@ -23,7 +23,7 @@ export default function EmpezarAventuraPage() {
             <Carousel
                 orientation="vertical"
                 className="mt-32 md:mt-0">
-                <CarouselContent className="h-[286px] md:h-[260px]">
+                <CarouselContent className="h-[286px] md:h-[240px]">
                     <CarouselItem>
                         <Link
                             href={ANFORA_ROUTE}
@@ -35,7 +35,7 @@ export default function EmpezarAventuraPage() {
                                 height={40}
                                 className="object-contain"
                             />
-                            <h1 className="text-2xl">ÁNFORA</h1>
+                            <h1 className="text-2xl mt-8">ÁNFORA</h1>
                         </Link>
                     </CarouselItem>
                     <CarouselItem>
@@ -49,7 +49,7 @@ export default function EmpezarAventuraPage() {
                                 height={40}
                                 className="object-contain"
                             />
-                            <h1 className="text-2xl">POR DEFINIR</h1>
+                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
                         </Link>
                     </CarouselItem>
                     <CarouselItem>
@@ -63,7 +63,7 @@ export default function EmpezarAventuraPage() {
                                 height={40}
                                 className="object-contain"
                             />
-                            <h1 className="text-2xl">POR DEFINIR</h1>
+                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
                         </Link>
                     </CarouselItem>
                     <CarouselItem>
@@ -77,7 +77,7 @@ export default function EmpezarAventuraPage() {
                                 height={40}
                                 className="object-contain"
                             />
-                            <h1 className="text-2xl">POR DEFINIR</h1>
+                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
                         </Link>
                     </CarouselItem>
                     <CarouselItem>
@@ -91,7 +91,7 @@ export default function EmpezarAventuraPage() {
                                 height={40}
                                 className="object-contain"
                             />
-                            <h1 className="text-2xl">POR DEFINIR</h1>
+                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
                         </Link>
                     </CarouselItem>
                 </CarouselContent>
