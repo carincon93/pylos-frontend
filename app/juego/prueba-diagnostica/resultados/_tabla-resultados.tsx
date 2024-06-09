@@ -86,7 +86,7 @@ export default function TablaResultados() {
                         </TableCell>
                         <TableCell className="text-left md:text-center pb-14 md:pb-0">
                             <span className="text-gray-400 block mb-4 md:hidden">Calificación:</span>
-                            {respuesta.preguntaPruebaDiagnostica.esPreguntaCerrada ? (
+                            {respuesta.preguntaPruebaDiagnostica.esPreguntaCerrada && respuesta.opcionPruebaDiagnostica?.esOpcionCorrecta != null ? (
                                 <span
                                     className={`${
                                         respuesta.opcionPruebaDiagnostica.esOpcionCorrecta ? 'bg-green-200 text-green-500 border-green-400 px-7' : 'bg-red-200 text-red-400 border-red-400 px-6'
