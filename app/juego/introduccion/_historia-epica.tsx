@@ -1,25 +1,23 @@
 'use client'
 
 import './index.css'
-
-import { Logo } from '@/app/components/Logo'
-import { Isotipo } from '@/app/components/Isotipo'
 import { Button } from '@/components/ui/button'
-import { useAudioPlayer } from '@/hooks/useAudioPlayer'
+// import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { updateUsuario } from '@/lib/actions'
 import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { useContextData } from '@/app/context/AppContext'
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function HistoriaEpica() {
-    const { playAudio, isPlaying } = useAudioPlayer()
+    // const { playAudio, isPlaying } = useAudioPlayer()
 
-    const [activePhoto, setActivePhoto] = useState<number>(0) // Índice de la foto activa
-    const [showOverlay, setShowOverlay] = useState(true)
-    const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right') // Estado para almacenar temporalmente las clases de hover
+    const [activePhoto, setActivePhoto] = useState<number>(0)
+    // const [showOverlay, setShowOverlay] = useState(true)
+    const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
+    const [videoStatus, setVideoStatus] = useState(false)
 
     const router = useRouter()
     const { profileUserData } = useContextData()
@@ -31,124 +29,94 @@ export default function HistoriaEpica() {
     }, [profileUserData])
 
     const photosData = [
-        {
-            id: 'first',
-            title: 'First Photo',
-            img: '/_e351e41b-efe7-4e59-8ce8-91fbbbd0db45.jpeg',
-            date: '4 de abril de 2250',
-        },
-        {
-            id: 'second',
-            title: 'Second Photo',
-            img: '/_08026eb5-f13f-44f9-8a54-96e796383a0e.jpeg',
-            date: '4 de abril de 2250',
-        },
-        {
-            id: 'third',
-            title: 'Third Photo',
-            img: '/_56f5d894-b46b-4294-81d6-17e64e549f11.jpeg',
-            date: '4 de abril de 2250',
-        },
-        {
-            id: 'fourth',
-            title: 'Fourth Photo',
-            img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b48.jpeg',
-            date: '4 de abril de 2250',
-        },
-        {
-            id: 'fifth',
-            title: 'Fifth Photo',
-            img: '/_7ff3ae87-8440-4e2e-9599-8262eb0edf5b.jpeg',
-            date: '4 de abril de 2250',
-        },
-        {
-            id: 'sixth',
-            title: 'Sixth Photo',
-            img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.jpeg',
-            date: '4 de abril de 2250',
-        },
+        { id: 'first', title: 'First Photo', img: '/_e351e41b-efe7-4e59-8ce8-91fbbbd0db45.jpeg', date: '4 de abril de 2250' },
+        { id: 'second', title: 'Second Photo', img: '/_08026eb5-f13f-44f9-8a54-96e796383a0e.jpeg', date: '4 de abril de 2250' },
+        { id: 'third', title: 'Third Photo', img: '/_56f5d894-b46b-4294-81d6-17e64e549f11.jpeg', date: '4 de abril de 2250' },
+        { id: 'fourth', title: 'Fourth Photo', img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b48.jpeg', date: '4 de abril de 2250' },
+        { id: 'fifth', title: 'Fifth Photo', img: '/_7ff3ae87-8440-4e2e-9599-8262eb0edf5b.jpeg', date: '4 de abril de 2250' },
+        { id: 'sixth', title: 'Sixth Photo', img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.jpeg', date: '4 de abril de 2250' },
     ]
 
-    const audioBienvenida = '/bienvenida.mp3'
+    // const audioBienvenida = '/bienvenida.mp3'
 
-    // Función para avanzar/retroceder la foto
     const nextPhoto = () => {
         handleHoverChange('')
-
-        setActivePhoto((prev) => {
-            // Obtener los párrafos de la foto activa
-            const nuevoIndice = (prev + 1 + photosData.length) % photosData.length
-
-            // Calcular el nuevo índice de la foto activa
-            return nuevoIndice
-        })
-
-        handleChangePhoto()
+        setActivePhoto((prev) => (prev + 1) % photosData.length)
+        handleChangePhoto((activePhoto + 1) % photosData.length)
     }
 
-    const previousPhoto = () => {
-        handleHoverChange('')
+    // const previousPhoto = () => {
+    //     handleHoverChange('')
+    //     setActivePhoto((prev) => (prev - 1 + photosData.length) % photosData.length)
+    //     handleChangePhoto((activePhoto - 1 + photosData.length) % photosData.length)
+    // }
 
-        setActivePhoto((prev) => {
-            const nuevoIndice = (prev - 1 + photosData.length) % photosData.length
+    const videoSegments = [
+        [0, 19.6],
+        [20, 33],
+        [33.5, 49],
+        [49, 66],
+        [66.5, 82],
+        [82.5, 96],
+    ]
 
-            // Calcular el nuevo índice de la foto activa
-            return nuevoIndice
-        })
-
-        handleChangePhoto()
-    }
-
-    const handleChangePhoto = () => {
-        if (activePhoto == 0) {
-            playSegment(0, 19.6)
-        } else if (activePhoto == 1) {
-            playSegment(20, 33)
-        } else if (activePhoto == 2) {
-            playSegment(33.5, 49)
-        } else if (activePhoto == 3) {
-            playSegment(49, 66)
-        } else if (activePhoto == 4) {
-            playSegment(66.5, 82)
-        } else if (activePhoto == 5) {
-            playSegment(82.5, 96)
-        }
+    const handleChangePhoto = (index: number) => {
+        const [startTime, endTime] = videoSegments[index]
+        playSegment(startTime, endTime)
     }
 
     useEffect(() => {
-        handleChangePhoto()
+        handleChangePhoto(activePhoto)
     }, [activePhoto])
 
     const videoRef = useRef<HTMLVideoElement>(null)
-    const [currentTime, setCurrentTime] = useState(0)
 
     const playSegment = (startTime: number, endTime: number) => {
         if (videoRef.current) {
             videoRef.current.currentTime = startTime
             videoRef.current.play()
+            setVideoStatus(false)
 
-            const timeout = setTimeout(() => {
-                videoRef.current?.pause()
-                setCurrentTime(endTime)
-            }, (endTime - startTime) * 1000)
+            const interval = setInterval(() => {
+                if (videoRef.current) {
+                    if (videoRef.current.currentTime >= endTime) {
+                        videoRef.current.pause()
+                        setVideoStatus(true)
+                        clearInterval(interval)
+                    }
+                }
+            }, 100)
 
-            return () => clearTimeout(timeout)
+            return () => clearInterval(interval)
         }
     }
 
-    // Función para manejar el cambio de clases de hover
+    useEffect(() => {
+        const handlePause = () => {
+            setVideoStatus(true)
+        }
+
+        const videoElement = videoRef.current
+        if (videoElement) {
+            videoElement.addEventListener('pause', handlePause)
+        }
+
+        return () => {
+            if (videoElement) {
+                videoElement.removeEventListener('pause', handlePause)
+            }
+        }
+    }, [])
+
     const handleHoverChange = (newClass: string) => {
         setHoverClass(newClass)
         setTimeout(() => {
             setHoverClass('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
-        }, 15000) // Duración de la eliminación temporal de las clases de hover
+        }, 15000)
     }
 
     const handleButton = async () => {
-        const data: Partial<Usuario> = {
-            introduccionCompleta: true,
-        }
-
+        const data: Partial<Usuario> = { introduccionCompleta: true }
         try {
             await updateUsuario(data)
         } catch (error) {
@@ -158,34 +126,18 @@ export default function HistoriaEpica() {
         }
     }
 
-    const init = () => {
-        playAudio(0, 2, audioBienvenida)
-
-        setTimeout(() => {
-            setShowOverlay(false)
-            handleChangePhoto()
-        }, 3000)
-    }
-
     return (
         <>
             <div className="grid">
                 <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
-                    <div className="peer/previous blob-left group relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]">
-                        {/* <ActionButton
-                            direction="left"
-                            text="Foto anterior"
-                            onClick={previousPhoto}
-                            disabled={activePhoto == 0 || (isPlaying && !showOverlay)}
-                        /> */}
-                    </div>
+                    <div className="relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]"></div>
                     <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
-                        {activePhoto != 5 ? (
+                        {activePhoto !== 5 ? (
                             <ActionButton
                                 direction="right"
                                 text="Siguiente foto"
                                 onClick={nextPhoto}
-                                disabled={isPlaying && !showOverlay}
+                                // disabled={isPlaying}
                             />
                         ) : (
                             <Button
@@ -195,13 +147,15 @@ export default function HistoriaEpica() {
                             </Button>
                         )}
                     </div>
-
                     <Photo
+                        activeVideoSegment={videoSegments[activePhoto]}
                         img={photosData[activePhoto].img}
                         date={photosData[activePhoto].date}
                         className={twMerge('z-10', hoverClass)}
                         title={photosData[activePhoto].title}
                         videoRef={videoRef}
+                        videoStatus={videoStatus}
+                        setVideoStatus={setVideoStatus}
                     />
                 </div>
             </div>
@@ -209,18 +163,93 @@ export default function HistoriaEpica() {
     )
 }
 
-const Photo = ({ className, title, date, img, zIndex, videoRef }: { className?: string; title?: string; date: string; img: string; zIndex?: number; videoRef: React.RefObject<HTMLVideoElement> }) => {
+const Photo = ({
+    activeVideoSegment,
+    className,
+    title,
+    date,
+    img,
+    zIndex,
+    videoRef,
+    videoStatus,
+    setVideoStatus,
+}: {
+    activeVideoSegment?: number[]
+    className?: string
+    title?: string
+    date: string
+    img: string
+    zIndex?: number
+    videoRef: React.RefObject<HTMLVideoElement>
+    videoStatus: boolean
+    setVideoStatus: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
+    const [currentTime, setCurrentTime] = useState(0)
+    const [duration, setDuration] = useState(0)
+
+    const [, endTime] = activeVideoSegment || [0, 0]
+
+    useEffect(() => {
+        const videoElement = videoRef.current
+
+        const updateCurrentTime = () => {
+            if (videoElement) {
+                setCurrentTime(videoElement.currentTime)
+            }
+        }
+
+        const setVideoDuration = () => {
+            if (videoElement) {
+                setDuration(videoElement.duration)
+            }
+        }
+
+        if (videoElement) {
+            videoElement.addEventListener('timeupdate', updateCurrentTime)
+            videoElement.addEventListener('loadedmetadata', setVideoDuration)
+        }
+
+        return () => {
+            if (videoElement) {
+                videoElement.removeEventListener('timeupdate', updateCurrentTime)
+                videoElement.removeEventListener('loadedmetadata', setVideoDuration)
+            }
+        }
+    }, [videoRef])
+
+    useEffect(() => {
+        console.log(videoStatus)
+    }, [videoStatus])
+
+    const handlePlay = () => {
+        if (videoRef.current) {
+            setVideoStatus(false)
+            videoRef.current.play()
+        }
+    }
+
+    const handlePause = () => {
+        if (videoRef.current) {
+            videoRef.current.pause()
+        }
+    }
+
+    const formatTime = (time: number) => {
+        const minutes = Math.floor(time / 60)
+        const seconds = Math.floor(time % 60)
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    }
+
     return (
         <div
             style={{ zIndex: zIndex }}
             className={twMerge(
-                'top-40 md:top-36 lg:top-20 xl:top-10 pointer-events-none absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
+                'top-40 md:top-36 lg:top-20 xl:top-10 absolute grid aspect-[3/4] w-[75vw] sm:w-[60vw] md:w-[45vw] lg:w-[45vw] xl:w-[35vw] 2xl:w-[25vw] transition-transform duration-1000 [transform-style:preserve-3d]',
                 className,
             )}>
-            <div className="pointer-events-none rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
-            <div className="pointer-events-none absolute flex h-full w-full flex-col items-start rounded-3xl bg-white p-8 shadow-2xl [grid-area:1/1]">
+            <div className="rounded-3xl bg-gray-300 [grid-area:1/1] [transform-style:preserve-3d] [backface-visibility:hidden] [transform:translateZ(-5px)] md:-mb-[5px] md:-mt-[5px] md:[transform:translateZ(-10px)]" />
+            <div className="absolute flex h-full w-full flex-col items-start rounded-3xl bg-white p-8 shadow-2xl [grid-area:1/1]">
                 <p className="mb-2 rounded-full bg-blue-400 px-5 py-1 text-xs text-white md:text-sm">{date}</p>
-
                 <picture>
                     <img
                         src={img}
@@ -228,7 +257,6 @@ const Photo = ({ className, title, date, img, zIndex, videoRef }: { className?: 
                         className="rounded-md"
                     />
                 </picture>
-
                 <div className="overflow-hidden">
                     <video
                         ref={videoRef}
@@ -238,14 +266,48 @@ const Photo = ({ className, title, date, img, zIndex, videoRef }: { className?: 
                             type="video/mp4"
                         />
                     </video>
+                    <div>
+                        {currentTime < endTime && videoStatus && (
+                            <button
+                                onClick={handlePlay}
+                                className="absolute left-[40%] top-[40%] hover:opacity-65">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-24">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                                    />
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+                                    />
+                                </svg>
+                            </button>
+                        )}
+                        <button
+                            onClick={handlePause}
+                            className="custom-play-pause">
+                            Pause
+                        </button>
+                        {/* <div className="custom-timer">
+                            {formatTime(currentTime)} / {formatTime(duration)}
+                        </div> */}
+                    </div>
                 </div>
             </div>
-            <div className="pointer-events-none rounded-3xl bg-white [grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)]" />
+            <div className="rounded-3xl bg-white [grid-area:1/1] [backface-visibility:hidden] [transform:rotateY(180deg)]" />
         </div>
     )
 }
 
-const ActionButton = ({ onClick, direction, text, disabled }: { onClick?: () => void; direction: 'left' | 'right'; text: string; disabled: boolean }) => (
+const ActionButton = ({ onClick, direction, text, disabled }: { onClick?: () => void; direction: 'left' | 'right'; text: string; disabled?: boolean }) => (
     <button
         disabled={disabled ? true : undefined}
         onClick={onClick}
