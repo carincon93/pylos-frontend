@@ -129,7 +129,7 @@ export default function HistoriaEpica() {
     return (
         <>
             <div className="grid">
-                <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.webp')] bg-cover bg-center [perspective:500px]">
+                <div className="lg:grid lg:grid-cols-2 place-items-center flex items-center justify-center h-screen overflow-hidden bg-[url('/fondo-introduccion.jpg')] bg-cover bg-center [perspective:500px]">
                     <div className="relative bottom-[45vh] right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:mr-[22rem]"></div>
                     <div className="peer/next blob-right group relative bottom-[45vh] -right-[6rem] lg:bottom-0 lg:right-0 lg:flex lg:h-full lg:w-full md:items-center md:pb-0 lg:ml-[22rem]">
                         {activePhoto !== 5 ? (
@@ -216,10 +216,6 @@ const Photo = ({
             }
         }
     }, [videoRef])
-
-    useEffect(() => {
-        console.log(videoStatus)
-    }, [videoStatus])
 
     const handlePlay = () => {
         if (videoRef.current) {
