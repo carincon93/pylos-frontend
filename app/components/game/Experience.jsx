@@ -3,16 +3,9 @@ import { Map } from './Map'
 import { CharacterController } from './CharacterController'
 import { useRef } from 'react'
 import { Physics } from '@react-three/rapier'
-import { useControls } from 'leva'
 
 export const Experience = () => {
     const shadowCameraRef = useRef()
-
-    const { map } = useControls('Map', {
-        map: {
-            value: 'map_test',
-        },
-    })
 
     return (
         <>
@@ -34,7 +27,7 @@ export const Experience = () => {
                     attach={'shadow-camera'}
                 />
             </directionalLight>
-            <Physics debug>
+            <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
                 <Map position={[-6, -7, 0]} />
                 <CharacterController />
             </Physics>

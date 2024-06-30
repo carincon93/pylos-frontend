@@ -30,8 +30,8 @@ const lerpAngle = (start, end, t) => {
 
 export const CharacterController = () => {
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
-        WALK_SPEED: { value: 0.8, min: 0.1, max: 4, step: 0.1 },
-        RUN_SPEED: { value: 1.6, min: 0.2, max: 12, step: 0.1 },
+        WALK_SPEED: { value: 1.8, min: 0.1, max: 4, step: 0.1 },
+        RUN_SPEED: { value: 4.6, min: 0.2, max: 12, step: 0.1 },
         ROTATION_SPEED: {
             value: degToRad(0.5),
             min: degToRad(0.1),

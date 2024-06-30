@@ -10,6 +10,7 @@ export function CharacterAstronaut({ animation, ...props }) {
         actions[animation].reset().fadeIn(0.2).play()
         return () => actions[animation]?.fadeOut(0.2)
     }, [animation])
+
     return (
         <group
             ref={group}
