@@ -9,7 +9,7 @@ export const Experience = () => {
 
     return (
         <>
-            <OrbitControls />
+            {/* <OrbitControls /> */}
             <Environment preset="sunset" />
             <directionalLight
                 intensity={0.65}
