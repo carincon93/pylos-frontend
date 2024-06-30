@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 
-export function CharacterAstronaut({ animation = 'Idle' }) {
+export function CharacterAstronaut({ animation, ...props }) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/CharacterAstronaut.gltf')
     const { actions } = useAnimations(animations, group)
@@ -13,12 +13,12 @@ export function CharacterAstronaut({ animation = 'Idle' }) {
     return (
         <group
             ref={group}
-            dispose={null}>
+            {...props}>
             <group name="Scene">
                 <group
                     name="Armature"
-                    rotation={[Math.PI / 2, 0, -1.58]}
-                    scale={0.01}>
+                    rotation={[Math.PI / 2, 0, 0]}
+                    scale={0.02}>
                     <skinnedMesh
                         name="Body"
                         geometry={nodes.Body.geometry}

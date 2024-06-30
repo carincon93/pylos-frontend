@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import { useEffect } from 'react'
 
-export const Map = () => {
+export const Map = ({ ...props }) => {
     const map = useGLTF('/models/MapTest.gltf')
 
     useEffect(() => {
@@ -18,7 +18,10 @@ export const Map = () => {
         <RigidBody
             colliders="trimesh"
             type="fixed">
-            <primitive object={map.scene} />
+            <primitive
+                object={map.scene}
+                {...props}
+            />
         </RigidBody>
     )
 }
