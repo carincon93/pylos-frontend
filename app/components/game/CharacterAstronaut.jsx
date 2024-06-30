@@ -25,6 +25,8 @@ export function CharacterAstronaut({ animation, ...props }) {
                         geometry={nodes.Body.geometry}
                         material={materials['Material.001']}
                         skeleton={nodes.Body.skeleton}
+                        castShadow
+                        receiveShadow
                     />
                     <primitive object={nodes.mixamorigHips} />
                 </group>
