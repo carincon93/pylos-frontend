@@ -57,18 +57,18 @@ export function NavigationEvents() {
         }
     }
 
-    // if (loading && checkingServer) {
-    //     return (
-    //         <>
-    //             <LoadingOverlay className="bg-pylos-800" />
-    //             <div className="fixed top-0 left-0 z-[10000] p-4">El servidor no está respondiendo. Reintentando...</div>
-    //         </>
-    //     )
-    // }
+    if (loading && checkingServer) {
+        return (
+            <>
+                <LoadingOverlay className="bg-pylos-800" />
+                <div className="fixed top-0 left-0 z-[10000] p-4">El servidor no está respondiendo. Reintentando...</div>
+            </>
+        )
+    }
 
-    // if (loading && !checkingServer) {
-    //     return <LoadingOverlay className="bg-pylos-800" />
-    // }
+    if (loading && !checkingServer) {
+        return <LoadingOverlay className="bg-pylos-800" />
+    }
 
     return
 }
