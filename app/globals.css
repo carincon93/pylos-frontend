@@ -89,6 +89,10 @@ body {
     scrollbar-width: none;
 }
 
+*:hover {
+    cursor: url('/cursor.png'), auto;
+}
+
 textarea {
     resize: none;
     field-sizing: content;
