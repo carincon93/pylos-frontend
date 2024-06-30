@@ -2,8 +2,8 @@
 
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useMemo } from 'react'
-import { Experience } from '@/app/components/game/Experience'
+import { Suspense } from 'react'
+import { Experience } from '@/app/components/game/AnforaExperience'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -13,7 +13,7 @@ const keyboardMap = [
     { name: 'run', keys: ['Shift'] },
 ]
 
-function App() {
+function Anfora() {
     return (
         <KeyboardControls map={keyboardMap}>
             <Canvas
@@ -29,8 +29,32 @@ function App() {
                     <Experience />
                 </Suspense>
             </Canvas>
+
+            <div className="fixed left-10 top-10">
+                <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
+            </div>
+
+            <div className="fixed left-10 bottom-6 space-y-2">
+                <div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
+                </div>
+                <div className="flex gap-2">
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
+                </div>
+                <small className="block text-center">Caminar</small>
+            </div>
+
+            <div className="fixed left-16 bottom-48 space-y-2">
+                <div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-32">Shift</div>
+                </div>
+
+                <small className="block text-center">Correr</small>
+            </div>
         </KeyboardControls>
     )
 }
 
-export default App
+export default Anfora
