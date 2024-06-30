@@ -164,7 +164,7 @@ export const CharacterController = () => {
                 <group ref={character}>
                     <CharacterAstronaut
                         scale={0.18}
-                        position-y={-0.25}
+                        position-y={-0.4}
                         animation={animation}
                     />
                 </group>
