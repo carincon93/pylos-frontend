@@ -1,13 +1,13 @@
 'use client'
 
+import { AnforaExperience } from '@/app/components/game/anfora/AnforaExperience'
+import AnforaForm from '@/app/components/game/anfora/Form'
+import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect } from 'react'
-import { AnforaExperience } from '@/app/components/game/AnforaExperience'
-import ResponseWindow from '@/app/components/game/anfora/ResponsiveWindow'
-import { useGameStore } from '@/lib/store'
-import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
+import useSWR from 'swr'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -73,7 +73,7 @@ function Anfora() {
                     <small className="block text-center">Correr</small>
                 </div>
             </KeyboardControls>
-            {activeForm && <ResponseWindow handleSubmit={handleSubmit} />}
+            {activeForm && <AnforaForm handleSubmit={handleSubmit} />}
         </>
     )
 }
