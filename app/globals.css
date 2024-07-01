@@ -170,14 +170,27 @@ button[role='combobox'] {
     }
 }
 
-.response-window {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+.btn {
+    color: #9104a4;
+    text-decoration: none;
+    padding: 0.5rem;
+    border: 2px solid #9104a4;
+    border-radius: 10rem;
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 0.6em #bd15d3, 0 0.9em rgba(199, 65, 252, 0.4);
+}
+
+.btn:hover {
+    background: #9104a4;
+    color: #ffffff;
+}
+
+.btn.b-1:hover {
+    top: 0.2em;
+    box-shadow: 0 0.4em #bd15d3, 0 0.7em rgba(199, 65, 252, 0.4);
+}
+
+.btn.b-1:active {
+    top: 0.4em;
+    box-shadow: 0 0.2em #bd15d3, 0 0.5em rgba(199, 65, 252, 0.4);
 }
