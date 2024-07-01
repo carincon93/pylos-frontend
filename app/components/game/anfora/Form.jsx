@@ -12,6 +12,7 @@ const Form = ({ handleSubmit }) => {
         <div className="fixed inset-0 bg-white m-auto p-10 w-[60vw] shadow-lg z-[1000] text-black rounded-xl h-[450px]">
             <h1 className="text-center font-[cursive] mb-6 font-semibold text-lg">{readingSelected.title}</h1>
             <p className="font-[cursive]">{readingSelected.text}</p>
+            <p className="text-sm text-right mt-4 text-gray-400">{readingSelected.author}</p>
             <Carousel orientation="vertical">
                 <CarouselContent className="h-[240px]">
                     {readingSelected.questions.map((question, i) => (

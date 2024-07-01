@@ -48,31 +48,40 @@ function Anfora() {
                         <AnforaExperience />
                     </Suspense>
                 </Canvas>
-
-                <div className="fixed left-10 top-10">
-                    <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
-                </div>
-
-                <div className="fixed left-10 bottom-6 space-y-2">
-                    <div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
-                    </div>
-                    <div className="flex gap-2">
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
-                    </div>
-                    <small className="block text-center">Caminar</small>
-                </div>
-
-                <div className="fixed left-[4.2rem] bottom-48 space-y-2">
-                    <div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-32">Shift</div>
-                    </div>
-
-                    <small className="block text-center">Correr</small>
-                </div>
             </KeyboardControls>
+            <div className="fixed left-10 top-10">
+                <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
+            </div>
+
+            <div className="fixed left-10 bottom-6 space-y-2">
+                <div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
+                </div>
+                <div className="flex gap-2">
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
+                </div>
+                <small className="block text-center">Caminar</small>
+            </div>
+
+            <div className="fixed left-[4.2rem] bottom-48 space-y-2">
+                <div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-32">Shift</div>
+                </div>
+
+                <small className="block text-center">Correr</small>
+            </div>
+
+            <div className="fixed right-10 bottom-6 space-y-2">
+                <div className="flex gap-2">
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                </div>
+            </div>
             {activeForm && <AnforaForm handleSubmit={handleSubmit} />}
         </>
     )
