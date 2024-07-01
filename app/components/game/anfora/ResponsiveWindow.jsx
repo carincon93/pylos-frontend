@@ -2,7 +2,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useGameStore } from '@/lib/store'
 import React from 'react'
 
-const ResponseWindow = ({ response, handleSubmit }) => {
+const ResponseWindow = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
     const readings = useGameStore((state) => state.readings)
 

@@ -33,6 +33,13 @@ export const Map = ({ ...props }) => {
                     setSelectedAnforaForm(1), setActiveForm(true)
                 }}
             />
+
+            <MeshComponent
+                position={[10, -6, 0]}
+                onClick={() => {
+                    setSelectedAnforaForm(2), setActiveForm(true)
+                }}
+            />
         </RigidBody>
     )
 }

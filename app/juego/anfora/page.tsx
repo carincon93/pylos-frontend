@@ -6,6 +6,8 @@ import { Suspense, useEffect } from 'react'
 import { AnforaExperience } from '@/app/components/game/AnforaExperience'
 import ResponseWindow from '@/app/components/game/anfora/ResponsiveWindow'
 import { useGameStore } from '@/lib/store'
+import useSWR from 'swr'
+import { fetcher } from '@/utils/fetcher'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -16,8 +18,15 @@ const keyboardMap = [
 ]
 
 function Anfora() {
+    const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
+
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
+    const setReadings = useGameStore((state) => state.setReadings)
+
+    useEffect(() => {
+        setReadings(readings)
+    }, [readings, setReadings])
 
     const handleSubmit = () => {
         setActiveForm(null)
@@ -64,13 +73,7 @@ function Anfora() {
                     <small className="block text-center">Correr</small>
                 </div>
             </KeyboardControls>
-            {activeForm && (
-                <ResponseWindow
-                    response={10}
-                    // setResponse={setResponse}
-                    handleSubmit={handleSubmit}
-                />
-            )}
+            {activeForm && <ResponseWindow handleSubmit={handleSubmit} />}
         </>
     )
 }
