@@ -118,7 +118,7 @@ export const CharacterController = () => {
                 rotationTarget.current += ROTATION_SPEED * movement.x
             }
 
-            if ((movement.x !== 0 && activeForm == null) || (movement.z !== 0 && activeForm == null)) {
+            if ((movement.x !== 0 && activeForm == false) || (movement.z !== 0 && activeForm == false)) {
                 characterRotationTarget.current = Math.atan2(movement.x, movement.z)
                 vel.x = Math.sin(rotationTarget.current + characterRotationTarget.current) * speed
                 vel.z = Math.cos(rotationTarget.current + characterRotationTarget.current) * speed
