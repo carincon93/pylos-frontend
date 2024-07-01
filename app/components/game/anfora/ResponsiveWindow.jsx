@@ -31,8 +31,8 @@ const ResponseWindow = ({ response, handleSubmit }) => {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="bg-transparent relative -top-20 -left-5" />
-                <CarouselNext className="bg-transparent relative bottom-10 -left-[3.2rem]" />
+                <CarouselPrevious className="bg-transparent relative top-4 border-0" />
+                <CarouselNext className="bg-transparent relative -bottom-4 border-0" />
             </Carousel>
         </div>
     )
