@@ -4,7 +4,7 @@ import { CharacterController } from './CharacterController'
 import { useRef } from 'react'
 import { Physics } from '@react-three/rapier'
 
-export const Experience = () => {
+export const AnforaExperience = () => {
     const shadowCameraRef = useRef()
 
     return (

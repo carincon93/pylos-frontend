@@ -1,9 +1,14 @@
 import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import { useEffect } from 'react'
+import MeshComponent from './anfora/MeshComponent'
+import { useGameStore } from '@/lib/store'
 
 export const Map = ({ ...props }) => {
     const map = useGLTF('/models/MapTest.gltf')
+
+    const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
+    const setActiveForm = useGameStore((state) => state.setActiveForm)
 
     useEffect(() => {
         map.scene.traverse((child) => {
@@ -21,6 +26,12 @@ export const Map = ({ ...props }) => {
             <primitive
                 object={map.scene}
                 {...props}
+            />
+            <MeshComponent
+                position={[2, -6, 0]}
+                onClick={() => {
+                    setSelectedAnforaForm(2), setActiveForm(true)
+                }}
             />
         </RigidBody>
     )

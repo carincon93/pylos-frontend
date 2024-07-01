@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { MathUtils, Vector3 } from 'three'
 import { degToRad } from 'three/src/math/MathUtils.js'
 import { CharacterAstronaut } from './CharacterAstronaut'
+import { useGameStore } from '@/lib/store'
 
 const normalizeAngle = (angle) => {
     while (angle > Math.PI) angle -= 2 * Math.PI
@@ -29,6 +30,8 @@ const lerpAngle = (start, end, t) => {
 }
 
 export const CharacterController = () => {
+    const activeForm = useGameStore((state) => state.activeForm)
+
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
         WALK_SPEED: { value: 1.8, min: 0.1, max: 4, step: 0.1 },
         RUN_SPEED: { value: 2.7, min: 0.2, max: 12, step: 0.1 },
@@ -94,7 +97,7 @@ export const CharacterController = () => {
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
             if (isClicking.current) {
-                console.log('clicking', mouse.x, mouse.y)
+                // console.log('clicking', mouse.x, mouse.y)
                 if (Math.abs(mouse.x) > 0.1) {
                     movement.x = -mouse.x
                 }
@@ -115,7 +118,7 @@ export const CharacterController = () => {
                 rotationTarget.current += ROTATION_SPEED * movement.x
             }
 
-            if (movement.x !== 0 || movement.z !== 0) {
+            if ((movement.x !== 0 && activeForm == null) || (movement.z !== 0 && activeForm == null)) {
                 characterRotationTarget.current = Math.atan2(movement.x, movement.z)
                 vel.x = Math.sin(rotationTarget.current + characterRotationTarget.current) * speed
                 vel.z = Math.cos(rotationTarget.current + characterRotationTarget.current) * speed

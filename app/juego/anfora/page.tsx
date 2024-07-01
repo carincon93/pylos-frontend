@@ -2,8 +2,10 @@
 
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
-import { Experience } from '@/app/components/game/AnforaExperience'
+import { Suspense, useEffect } from 'react'
+import { AnforaExperience } from '@/app/components/game/AnforaExperience'
+import ResponseWindow from '@/app/components/game/anfora/ResponsiveWindow'
+import { useGameStore } from '@/lib/store'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -14,6 +16,13 @@ const keyboardMap = [
 ]
 
 function Anfora() {
+    const activeForm = useGameStore((state) => state.activeForm)
+    const setActiveForm = useGameStore((state) => state.setActiveForm)
+
+    const handleSubmit = () => {
+        setActiveForm(null)
+    }
+
     return (
         <KeyboardControls map={keyboardMap}>
             <Canvas
@@ -26,9 +35,17 @@ function Anfora() {
                 />
                 <Suspense>
                     <SoftShadows size={42} />
-                    <Experience />
+                    <AnforaExperience />
                 </Suspense>
             </Canvas>
+
+            {activeForm && (
+                <ResponseWindow
+                    response={10}
+                    // setResponse={setResponse}
+                    handleSubmit={handleSubmit}
+                />
+            )}
 
             <div className="fixed left-10 top-10">
                 <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
