@@ -56,7 +56,7 @@ function Anfora() {
                     <small className="block text-center">Caminar</small>
                 </div>
 
-                <div className="fixed left-16 bottom-48 space-y-2 ml-1">
+                <div className="fixed left-[4.2rem] bottom-48 space-y-2">
                     <div>
                         <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-32">Shift</div>
                     </div>
