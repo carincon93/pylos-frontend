@@ -14,7 +14,7 @@ const keyboardMap = [
     { name: 'backward', keys: ['ArrowDown', 'KeyS'] },
     { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
     { name: 'right', keys: ['ArrowRight', 'KeyD'] },
-    { name: 'run', keys: ['Shift'] },
+    { name: 'run', keys: ['Space'] },
 ]
 
 function Anfora() {
@@ -65,9 +65,9 @@ function Anfora() {
                 <small className="block text-center">Caminar</small>
             </div>
 
-            <div className="fixed left-[4.2rem] bottom-48 space-y-2">
+            <div className="fixed left-60 bottom-6 space-y-2">
                 <div>
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-32">Shift</div>
+                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
                 </div>
 
                 <small className="block text-center">Correr</small>
@@ -75,11 +75,11 @@ function Anfora() {
 
             <div className="fixed right-10 bottom-6 space-y-2">
                 <div className="flex gap-2">
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 1 pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 2 pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 3 pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 4 pérdido</div>
+                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 5 pérdido</div>
                 </div>
             </div>
             {activeForm && <AnforaForm handleSubmit={handleSubmit} />}
