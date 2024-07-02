@@ -74,7 +74,7 @@ const Form = ({ handleSubmit }) => {
                                     {question.answers.map((answer) => (
                                         <button
                                             key={answer.id}
-                                            onClick={() => handleSubmit(readingSelected.questions.length, answer)}
+                                            onClick={() => handleSubmit(readingSelected.questions.length, answer, readingSelected.object)}
                                             className="btn b-1 bg-purple-100 leading-4 text-xs">
                                             {answer.text}
                                         </button>

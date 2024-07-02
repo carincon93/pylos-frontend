@@ -7,6 +7,7 @@ import { useGameStore } from '@/lib/store'
 export const Map = ({ ...props }) => {
     const map = useGLTF('/models/MapTest.gltf')
 
+    const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
 
@@ -30,35 +31,35 @@ export const Map = ({ ...props }) => {
             <MeshComponent
                 position={[2, -6, 0]}
                 onClick={() => {
-                    setSelectedAnforaForm(1), setActiveForm(true)
+                    setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <MeshComponent
                 position={[10, -6, 0]}
                 onClick={() => {
-                    setSelectedAnforaForm(2), setActiveForm(true)
+                    setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <MeshComponent
                 position={[20, -6, 0]}
                 onClick={() => {
-                    setSelectedAnforaForm(3), setActiveForm(true)
+                    setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <MeshComponent
                 position={[30, -6, 0]}
                 onClick={() => {
-                    setSelectedAnforaForm(4), setActiveForm(true)
+                    setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <MeshComponent
                 position={[40, -6, 0]}
                 onClick={() => {
-                    setSelectedAnforaForm(5), setActiveForm(true)
+                    setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
         </RigidBody>

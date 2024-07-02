@@ -3,13 +3,13 @@
 import { AnforaExperience } from '@/app/components/game/anfora/AnforaExperience'
 import AnforaForm from '@/app/components/game/anfora/Form'
 import { saveObjetoNaveReparado } from '@/lib/actions'
+import { ObjetoNaveReparado } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
-import { ObjetoNaveReparado } from '@/types/MyTypes'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -22,19 +22,24 @@ const keyboardMap = [
 function Anfora() {
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
     const { data: objetosNaveReparados } = useSWR<ObjetoNaveReparado[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`, fetcher)
-    const [qtyCorrectOptions, setQtyCorrectOptions] = useState<number>(0)
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
     const setSelectedFormOption = useGameStore((state) => state.setSelectedFormOption)
+    const qtyCorrectOptions = useGameStore((state) => state.qtyCorrectOptions)
+    const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
+    const alaItem = objetosNaveReparados?.find((item) => item.objeto === 'ala')
+    const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'sistema de navegación')
+    const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel solar')
+    const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'combustible')
 
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
 
-    const handleSubmit = async (qtyQuestions: number, answer: any) => {
+    const handleSubmit = async (qtyQuestions: number, answer: any, object: string) => {
         setSelectedFormOption(true)
 
         setTimeout(() => {
@@ -42,13 +47,13 @@ function Anfora() {
         }, 5000)
 
         if (answer.esOpcionCorrecta) {
-            setQtyCorrectOptions((prev) => prev + 1)
+            setQtyCorrectOptions(qtyCorrectOptions + 1)
         }
 
-        if (answer.esOpcionCorrecta && qtyQuestions - 1 == qtyCorrectOptions) {
+        if (qtyCorrectOptions >= qtyQuestions - 1 && answer.esOpcionCorrecta) {
             const data: Partial<ObjetoNaveReparado> = {
                 planeta: 'anfora',
-                objeto: 'motor',
+                objeto: object,
             }
 
             try {
@@ -109,12 +114,36 @@ function Anfora() {
                         className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
                             motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
                         }`}>
-                        Motor {motorItem ? '' : 'pérdido'}
+                        Motor
                     </div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 2 pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 3 pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 4 pérdido</div>
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 5 pérdido</div>
+
+                    <div
+                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                            alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                        }`}>
+                        Ala
+                    </div>
+
+                    <div
+                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                            sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                        }`}>
+                        Sistema de navegación
+                    </div>
+
+                    <div
+                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                            panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                        }`}>
+                        Panel solar
+                    </div>
+
+                    <div
+                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                            combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                        }`}>
+                        Combustible
+                    </div>
                 </div>
             </div>
             {activeForm && <AnforaForm handleSubmit={handleSubmit} />}
