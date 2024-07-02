@@ -43,6 +43,13 @@ interface Usuario {
     tiempoPruebaDiagnostica: number
 }
 
+interface ObjetoNaveReparado {
+    id: string
+    objeto: string
+    planeta: string
+    usuarioId: string
+}
+
 interface Login {
     nombreUsuario: string
     mascotaNombre: string
