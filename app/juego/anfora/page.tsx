@@ -5,7 +5,7 @@ import AnforaForm from '@/app/components/game/anfora/Form'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
 import useSWR from 'swr'
 
@@ -19,17 +19,30 @@ const keyboardMap = [
 
 function Anfora() {
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
-
+    const [qtyCorrectOptions, setQtyCorrectOptions] = useState<number>(0)
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
+    const setSelectedFormOption = useGameStore((state) => state.setSelectedFormOption)
 
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
 
-    const handleSubmit = () => {
-        setActiveForm(null)
+    const handleSubmit = (qtyQuestions: number, answer: any) => {
+        setSelectedFormOption(true)
+
+        setTimeout(() => {
+            setSelectedFormOption(false)
+        }, 5000)
+
+        if (answer.esOpcionCorrecta) {
+            setQtyCorrectOptions((prev) => prev + 1)
+        }
+
+        if (answer.esOpcionCorrecta && qtyQuestions - 1 == qtyCorrectOptions) {
+            setActiveForm(false)
+        }
     }
 
     return (

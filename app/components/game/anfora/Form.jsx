@@ -6,6 +6,7 @@ import React from 'react'
 const Form = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
     const readings = useGameStore((state) => state.readings)
+    const selectedFormOption = useGameStore((state) => state.selectedFormOption)
     const { profileUserData } = useContextData()
 
     const readingSelected = selectedAnforaForm ? readings[selectedAnforaForm - 1] : []
@@ -19,7 +20,7 @@ const Form = ({ handleSubmit }) => {
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="currentColor"
                         className="size-5 mr-2">
                         <path
@@ -28,7 +29,7 @@ const Form = ({ handleSubmit }) => {
                             d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z"
                         />
                     </svg>
-                    97%
+                    98%
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -49,7 +50,9 @@ const Form = ({ handleSubmit }) => {
                     <span className="bg-[url('/estados.png')] size-10 inline-block bg-no-repeat bg-[-43px_-42px] bg-[length:86px] mr-2"></span>
                     <span className="capitalize">¡Hola {profileUserData?.nombre}!</span>
                 </div>
-                <p className="text-sm mt-2 text-gray-200 ml-12">Para recuperar el siguiente elemento de la nave debe leer muy bien la lectura y responder bien las preguntas correspondientes.</p>
+                <p className="text-sm mt-2 text-gray-200 ml-12">
+                    Para reparar el siguiente elemento de la nave debes leer muy bien la lectura y responder de manera acertada las preguntas correspondientes.
+                </p>
             </div>
             <div>
                 <div className="px-10 h-60 overflow-y-auto">
@@ -70,7 +73,7 @@ const Form = ({ handleSubmit }) => {
                                     {question.answers.map((answer) => (
                                         <button
                                             key={answer.id}
-                                            onClick={handleSubmit}
+                                            onClick={() => handleSubmit(readingSelected.questions.length, answer)}
                                             className="btn b-1 bg-purple-100 leading-4 text-xs">
                                             {answer.text}
                                         </button>
@@ -80,7 +83,7 @@ const Form = ({ handleSubmit }) => {
                         ))}
                     </CarouselContent>
                     <CarouselPrevious className="bg-transparent relative top-4 border-0" />
-                    <CarouselNext className="bg-transparent relative -bottom-4 border-0" />
+                    <CarouselNext className={`${selectedFormOption ? 'bg-pylos-600' : 'bg-transparent'} relative -bottom-4 border-0`} />
                 </Carousel>
             </div>
             <div className="p-2">
