@@ -6,16 +6,16 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
-import LoadingOverlay from '@/app/loading'
 import { saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
-import useSWR, { mutate } from 'swr'
-import debounce from 'lodash/debounce'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { useContextData } from '@/app/context/AppContext'
+import LoadingOverlay from '@/app/loading'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import debounce from 'lodash/debounce'
+import useSWR, { mutate } from 'swr'
 
 export default function Prueba() {
     const { playAudio } = useAudioPlayer()

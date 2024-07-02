@@ -2,12 +2,14 @@
 
 import { AnforaExperience } from '@/app/components/game/anfora/AnforaExperience'
 import AnforaForm from '@/app/components/game/anfora/Form'
+import { saveObjetoNaveReparado } from '@/lib/actions'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
+import { ObjetoNaveReparado } from '@/types/MyTypes'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -19,17 +21,20 @@ const keyboardMap = [
 
 function Anfora() {
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
+    const { data: objetosNaveReparados } = useSWR<ObjetoNaveReparado[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`, fetcher)
     const [qtyCorrectOptions, setQtyCorrectOptions] = useState<number>(0)
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
     const setSelectedFormOption = useGameStore((state) => state.setSelectedFormOption)
 
+    const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
+
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
 
-    const handleSubmit = (qtyQuestions: number, answer: any) => {
+    const handleSubmit = async (qtyQuestions: number, answer: any) => {
         setSelectedFormOption(true)
 
         setTimeout(() => {
@@ -41,7 +46,19 @@ function Anfora() {
         }
 
         if (answer.esOpcionCorrecta && qtyQuestions - 1 == qtyCorrectOptions) {
-            setActiveForm(false)
+            const data: Partial<ObjetoNaveReparado> = {
+                planeta: 'anfora',
+                objeto: 'motor',
+            }
+
+            try {
+                await saveObjetoNaveReparado(data)
+            } catch (error) {
+                console.error('Error al guardar el objeto:', error)
+            } finally {
+                mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`)
+                setActiveForm(false)
+            }
         }
     }
 
@@ -88,7 +105,12 @@ function Anfora() {
 
             <div className="fixed right-10 bottom-6 space-y-2">
                 <div className="flex gap-2">
-                    <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 1 pérdido</div>
+                    <div
+                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                            motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                        }`}>
+                        Motor {motorItem ? '' : 'pérdido'}
+                    </div>
                     <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 2 pérdido</div>
                     <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 3 pérdido</div>
                     <div className="text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-20 h-20 flex items-center justify-center">Ítem 4 pérdido</div>
