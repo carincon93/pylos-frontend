@@ -5,6 +5,7 @@ import React from 'react'
 
 const Form = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
+    const setActiveForm = useGameStore((state) => state.setActiveForm)
     const readings = useGameStore((state) => state.readings)
     const selectedFormOption = useGameStore((state) => state.selectedFormOption)
     const { profileUserData } = useContextData()
@@ -12,7 +13,7 @@ const Form = ({ handleSubmit }) => {
     const readingSelected = selectedAnforaForm ? readings[selectedAnforaForm - 1] : []
 
     return (
-        <div className="bg-gray-800 rounded-xl text-white shadow-inner border-[22px] my-2 fixed inset-0 m-auto w-[55vw] z-[1000] flex flex-col justify-between">
+        <div className="bg-gray-800 rounded-xl text-white shadow-inner border-[22px] my-2 fixed inset-0 m-auto w-[50vw] z-[1000] flex flex-col justify-between">
             <div className=" p-2 text-xs flex items-center justify-between">
                 <span>04:12</span>
                 <span className="flex items-center justify-center">
@@ -87,7 +88,9 @@ const Form = ({ handleSubmit }) => {
                 </Carousel>
             </div>
             <div className="p-2">
-                <span className="bg-gray-200 w-40 block rounded-full mx-auto p-1"></span>
+                <span
+                    className="bg-gray-200 w-40 block rounded-full mx-auto p-1"
+                    onClick={() => setActiveForm(false)}></span>
             </div>
         </div>
     )
