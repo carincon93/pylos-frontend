@@ -35,6 +35,15 @@
         --ring: 242 98 255;
 
         --radius: 0.5rem; */;
+
+        --ipad-scale: 1.29;
+        --ipad-text-scale: 1;
+        --ipad-width: 484px;
+        --ipad-height: 762px;
+        --ipad-border: 19.35px;
+        --ipad-x: 40%;
+        --ipad-y: 89px;
+        --ipad-ratio: 0.635;
     }
 
     .dark {
@@ -193,4 +202,121 @@ button[role='combobox'] {
 .btn.b-1:active {
     top: 0.4em;
     box-shadow: 0 0.2em #bd15d3, 0 0.5em rgba(199, 65, 252, 0.4);
+}
+
+.ipad {
+    position: fixed;
+    top: var(--ipad-y);
+    left: var(--ipad-x);
+    z-index: 15;
+    width: var(--ipad-width);
+    height: var(--ipad-height);
+    visibility: visible;
+    transform-origin: bottom center;
+    transform: translate3d(0, 110%, 0) rotate(75deg);
+}
+
+.ipad.visible {
+    transition: transform 0.92s cubic-bezier(0.245, 1.315, 0.25, 0.97);
+    transform: translateZ(0);
+}
+
+.ipad.invisible {
+    transition: transform 0.7s cubic-bezier(1, -0.235, 0.525, 0.905);
+    transform: translate3d(0, 110%, 0) rotate(75deg);
+}
+
+.ipad-case {
+    --case-top-color: #f9e4dc;
+    --case-bottom-color: #da8884;
+
+    --case-border: calc(var(--ipad-border) * -1);
+    position: absolute;
+    top: var(--case-border);
+    right: var(--case-border);
+    bottom: var(--case-border);
+    left: var(--case-border);
+    z-index: 1;
+}
+
+.ipad-case::before,
+.ipad-case::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    border-radius: calc(45px * var(--ipad-scale));
+}
+
+.ipad-case::before {
+    z-index: 0;
+    background: var(--case-bottom-color);
+    box-shadow: 0 0 20px 20px #0000000d;
+    transform: translate(calc(-8px * var(--ipad-scale)), calc(6px * var(--ipad-scale)));
+}
+
+.ipad-case::after {
+    z-index: 1;
+    background: var(--case-top-color);
+}
+
+.finger-1 svg,
+.finger-2 svg,
+.thumb-1 svg,
+.thumb-2 svg {
+    position: absolute;
+    color: #e7ac93;
+}
+
+.finger-1 svg {
+    top: 5%;
+    right: -19.2%;
+    z-index: 0;
+    width: calc(105px * var(--ipad-scale));
+    height: calc(154px * var(--ipad-scale));
+}
+
+.finger-2 svg {
+    top: 30%;
+    right: -19.3%;
+    z-index: 3;
+    width: calc(99px * var(--ipad-scale));
+    height: calc(331px * var(--ipad-scale));
+    filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.1));
+}
+
+.thumb-1 svg {
+    top: 30%;
+    left: -35.2%;
+    z-index: 3;
+    width: calc(157px * var(--ipad-scale));
+    height: calc(170px * var(--ipad-scale));
+    filter: drop-shadow(10px -10px 5px rgba(0, 0, 0, 0.1));
+    transform-origin: bottom center;
+}
+
+.thumb-2 svg {
+    top: 44%;
+    left: -33.2%;
+    z-index: 0;
+    width: calc(253px * var(--ipad-scale));
+    height: calc(307px * var(--ipad-scale));
+    transform-origin: bottom center;
+}
+
+.wrist {
+    color: #e7ac93;
+    background-color: #e7ac93;
+    position: absolute;
+    top: 70%;
+    left: -15.2%;
+    z-index: 0;
+    /* display: none; */
+    width: calc(250px * var(--ipad-scale));
+    height: calc(600px * var(--ipad-scale));
+    background-color: #e7ac93;
+    background-image: radial-gradient(45.02% 39.83% at 86.78% 32.14%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+    transform: rotate(25deg);
 }

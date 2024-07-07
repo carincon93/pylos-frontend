@@ -85,7 +85,7 @@ export const CharacterController = () => {
         } else {
             setTimeout(() => {
                 setCameraPositionValues([0, 3, -6])
-            }, 1500)
+            }, 600)
         }
     }, [activeForm])
 
