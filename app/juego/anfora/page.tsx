@@ -34,10 +34,17 @@ function Anfora() {
     const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'sistema de navegación')
     const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel solar')
     const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'combustible')
+    const [showTablet, setShowTablet] = useState(false)
 
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowTablet(activeForm)
+        }, 500)
+    }, [activeForm])
 
     const handleSubmit = async (qtyQuestions: number, answer: any, object: string) => {
         setSelectedFormOption(true)
@@ -72,7 +79,7 @@ function Anfora() {
             <KeyboardControls map={keyboardMap}>
                 <Canvas
                     shadows
-                    camera={{ fov: 70 }}
+                    camera={{ fov: 40 }}
                     style={{ height: '100vh' }}>
                     <color
                         attach="background"
@@ -84,69 +91,73 @@ function Anfora() {
                     </Suspense>
                 </Canvas>
             </KeyboardControls>
-            <div className="fixed left-10 top-10">
-                <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
-            </div>
 
-            <div className="fixed left-10 bottom-6 space-y-2">
-                <div>
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
-                </div>
-                <div className="flex gap-2">
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
-                </div>
-                <small className="block text-center">Caminar</small>
-            </div>
-
-            <div className="fixed left-60 bottom-6 space-y-2">
-                <div>
-                    <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
+            <div className="select-none">
+                <div className="fixed left-10 top-10">
+                    <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
                 </div>
 
-                <small className="block text-center">Correr</small>
-            </div>
+                <div className="fixed left-10 bottom-6 space-y-2">
+                    <div>
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
+                    </div>
+                    <div className="flex gap-2">
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
+                    </div>
+                    <small className="block text-center">Caminar</small>
+                </div>
 
-            <div className="fixed right-10 bottom-6 space-y-2">
-                <div className="flex gap-2">
-                    <div
-                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                            motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
-                        }`}>
-                        Motor
+                <div className="fixed left-60 bottom-6 space-y-2">
+                    <div>
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
                     </div>
 
-                    <div
-                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                            alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
-                        }`}>
-                        Ala
-                    </div>
+                    <small className="block text-center">Correr</small>
+                </div>
 
-                    <div
-                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                            sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
-                        }`}>
-                        Sistema de navegación
-                    </div>
+                <div className="fixed right-10 bottom-6 space-y-2">
+                    <div className="flex gap-2">
+                        <div
+                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                                motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            }`}>
+                            Motor
+                        </div>
 
-                    <div
-                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                            panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
-                        }`}>
-                        Panel solar
-                    </div>
+                        <div
+                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                                alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            }`}>
+                            Ala
+                        </div>
 
-                    <div
-                        className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                            combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
-                        }`}>
-                        Combustible
+                        <div
+                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                                sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            }`}>
+                            Sistema de navegación
+                        </div>
+
+                        <div
+                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                                panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            }`}>
+                            Panel solar
+                        </div>
+
+                        <div
+                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
+                                combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            }`}>
+                            Combustible
+                        </div>
                     </div>
                 </div>
             </div>
-            {activeForm && <AnforaForm handleSubmit={handleSubmit} />}
+
+            {showTablet && <AnforaForm handleSubmit={handleSubmit} />}
         </>
     )
 }
