@@ -34,12 +34,12 @@ export const CharacterController = () => {
 
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
         WALK_SPEED: { value: 0.8, min: 0.1, max: 4, step: 0.1 },
-        RUN_SPEED: { value: 2.7, min: 0.2, max: 12, step: 0.1 },
+        RUN_SPEED: { value: 1, min: 0.2, max: 4, step: 0.06 },
         ROTATION_SPEED: {
-            value: degToRad(0.5),
+            value: degToRad(0.1),
             min: degToRad(0.1),
             max: degToRad(5),
-            step: degToRad(0.1),
+            step: degToRad(0.01),
         },
     })
     const rb = useRef()
@@ -78,6 +78,17 @@ export const CharacterController = () => {
         }
     }, [])
 
+    const [cameraPositionValues, setCameraPositionValues] = useState([0, 3, -6])
+    useEffect(() => {
+        if (activeForm) {
+            setCameraPositionValues([0, 0, 0])
+        } else {
+            setTimeout(() => {
+                setCameraPositionValues([0, 3, -6])
+            }, 1500)
+        }
+    }, [activeForm])
+
     useFrame(({ camera, mouse }) => {
         if (rb.current) {
             const vel = rb.current.linvel()
@@ -96,16 +107,16 @@ export const CharacterController = () => {
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
-            if (isClicking.current) {
-                // console.log('clicking', mouse.x, mouse.y)
-                if (Math.abs(mouse.x) > 0.1) {
-                    movement.x = -mouse.x
-                }
-                movement.z = mouse.y + 0.4
-                if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
-                    speed = RUN_SPEED
-                }
-            }
+            // if (isClicking.current) {
+            //     // console.log('clicking', mouse.x, mouse.y)
+            //     if (Math.abs(mouse.x) > 0.1) {
+            //         movement.x = -mouse.x
+            //     }
+            //     movement.z = mouse.y + 0.4
+            //     if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
+            //         speed = RUN_SPEED
+            //     }
+            // }
 
             if (get().left) {
                 movement.x = 1
@@ -161,12 +172,11 @@ export const CharacterController = () => {
                 />
                 <group
                     ref={cameraPosition}
-                    position-y={4}
-                    position-z={-4}
+                    position={cameraPositionValues}
                 />
                 <group ref={character}>
                     <CharacterAstronaut
-                        scale={0.18}
+                        scale={0.1}
                         position-y={-0.4}
                         animation={animation}
                     />
