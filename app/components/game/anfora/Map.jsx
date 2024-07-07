@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { useGameStore } from '@/lib/store'
 
 export const Map = ({ ...props }) => {
-    const map = useGLTF('/models/MapTest.gltf')
+    const map = useGLTF('/models/Map.glb')
 
     const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
@@ -26,6 +26,7 @@ export const Map = ({ ...props }) => {
             type="fixed">
             <primitive
                 object={map.scene}
+                scale={[20, 20, 20]}
                 {...props}
             />
             <MeshComponent
@@ -66,4 +67,4 @@ export const Map = ({ ...props }) => {
     )
 }
 
-useGLTF.preload('/models/MapTest.gltf')
+useGLTF.preload('/models/Map.glb')
