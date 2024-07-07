@@ -157,7 +157,7 @@ function Anfora() {
                 </div>
             </div>
 
-            {showTablet && <AnforaForm handleSubmit={handleSubmit} />}
+            <AnforaForm handleSubmit={handleSubmit} />
         </>
     )
 }
