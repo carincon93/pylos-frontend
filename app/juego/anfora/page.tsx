@@ -28,6 +28,7 @@ function Anfora() {
     const setSelectedFormOption = useGameStore((state) => state.setSelectedFormOption)
     const qtyCorrectOptions = useGameStore((state) => state.qtyCorrectOptions)
     const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
+    const setInGame = useGameStore((state) => state.setInGame)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const alaItem = objetosNaveReparados?.find((item) => item.objeto === 'ala')
@@ -46,6 +47,11 @@ function Anfora() {
         }, 500)
     }, [activeForm])
 
+    useEffect(() => {
+        document.body.classList.add('overflow-hidden')
+        setInGame(true)
+    }, [])
+
     const handleSubmit = async (qtyQuestions: number, answer: any, object: string) => {
         setSelectedFormOption(true)
 
@@ -57,7 +63,7 @@ function Anfora() {
             setQtyCorrectOptions(qtyCorrectOptions + 1)
         }
 
-        if (qtyCorrectOptions >= qtyQuestions - 1 && answer.esOpcionCorrecta) {
+        if (qtyCorrectOptions == qtyQuestions - 1 && answer.esOpcionCorrecta) {
             const data: Partial<ObjetoNaveReparado> = {
                 planeta: 'anfora',
                 objeto: object,
