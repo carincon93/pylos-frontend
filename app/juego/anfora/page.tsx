@@ -46,6 +46,8 @@ function Anfora() {
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
+        document.body.classList.add('touch-none')
+        document.body.classList.add('select-none')
         setInGame(true)
     }, [])
 

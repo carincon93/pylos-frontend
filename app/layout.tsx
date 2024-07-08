@@ -10,11 +10,20 @@ import { Toaster } from '@/components/ui/toaster'
 import { Suspense } from 'react'
 import LoadingOverlay from './loading'
 import { NavigationEvents } from './components/navigation-events'
+import type { Viewport } from 'next'
 
 const fontSans = FontSans({
     subsets: ['latin'],
     variable: '--font-sans',
 })
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
     title: 'Pylos - Aprender nunca fue tan divertido',
