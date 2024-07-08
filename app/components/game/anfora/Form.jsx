@@ -9,6 +9,8 @@ const Form = ({ handleSubmit }) => {
     const readings = useGameStore((state) => state.readings)
     const { profileUserData } = useContextData()
     const [answers, setAnswers] = useState([])
+    const [object, setObject] = useState('')
+    const [errorMessage, setShowErrorMessage] = useState(false)
     const readingSelected = selectedAnforaForm && readings ? readings[selectedAnforaForm - 1] : []
 
     const contentRef = useRef(null)
@@ -62,18 +64,31 @@ const Form = ({ handleSubmit }) => {
         setStartY(e.clientY)
     }
 
-    const handleSelectAnswer = (questionId, optionId) => {
+    const handleSelectAnswer = (readingId, questionId, optionId, isCorrectAnswer, object) => {
+        setObject(object)
         setAnswers((prev) => {
-            const existingAnswer = prev.find((answer) => answer.question_id === questionId)
+            const existingAnswer = prev.find((answer) => answer.questionId === questionId)
 
             if (existingAnswer) {
                 // Si ya existe una respuesta para esta pregunta, actualiza la opción seleccionada
-                return prev.map((answer) => (answer.question_id === questionId ? { ...answer, optionsSelected: optionId } : answer))
+                return prev.map((answer) => (answer.questionId === questionId ? { ...answer, readingId: readingId, optionsSelected: optionId, correctAnswer: isCorrectAnswer } : answer))
             } else {
                 // Si no existe, agrega una nueva entrada
-                return [...prev, { question_id: questionId, optionsSelected: optionId }]
+                return [...prev, { readingId: readingId, questionId: questionId, optionsSelected: optionId, correctAnswer: isCorrectAnswer }]
             }
         })
+    }
+
+    const checkAnswers = () => {
+        if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
+            handleSubmit(object)
+        } else {
+            setShowErrorMessage(true)
+
+            setTimeout(() => {
+                setShowErrorMessage(false)
+            }, 2000)
+        }
     }
 
     return (
@@ -309,10 +324,10 @@ const Form = ({ handleSubmit }) => {
                                             <button
                                                 key={answer.id}
                                                 onClick={() => {
-                                                    handleSubmit(readingSelected.questions.length, answer, readingSelected.object), handleSelectAnswer(question.id, answer.id)
+                                                    handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
                                                 }}
                                                 className={`btn b-1 ${
-                                                    answers.find((item) => item.question_id == question.id)?.optionsSelected == answer.id ? 'bg-pylos-800 !text-white' : 'bg-purple-100'
+                                                    answers.find((item) => item.questionId == question.id)?.optionsSelected == answer.id ? 'bg-pylos-800 !text-white' : 'bg-purple-100'
                                                 }  leading-4 text-xs block !w-full my-4`}>
                                                 {answer.text}
                                             </button>
@@ -320,6 +335,12 @@ const Form = ({ handleSubmit }) => {
                                     </div>
                                 </div>
                             ))}
+
+                            <button
+                                className="rounded-full border border-white p-2 mx-auto w-32 block hover:bg-white/30"
+                                onClick={() => checkAnswers()}>
+                                Enviar
+                            </button>
                         </div>
                     </div>
                     <div
@@ -327,6 +348,13 @@ const Form = ({ handleSubmit }) => {
                             translateY == 0 ? '' : 'translate-y-60'
                         }`}>
                         Desliza hacia abajo
+                    </div>
+
+                    <div
+                        className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow text-sm z-10 p-2 transition-transform ${
+                            errorMessage ? '' : 'translate-y-60'
+                        }`}>
+                        Tiene respuestas erróneas
                     </div>
                 </div>
             </div>
