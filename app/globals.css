@@ -227,8 +227,8 @@ button[role='combobox'] {
 }
 
 .ipad-case {
-    --case-top-color: #f9e4dc;
-    --case-bottom-color: #da8884;
+    --case-top-color: #585858;
+    --case-bottom-color: #353535;
 
     --case-border: calc(var(--ipad-border) * -1);
     position: absolute;
@@ -313,10 +313,20 @@ button[role='combobox'] {
     top: 70%;
     left: -15.2%;
     z-index: 0;
-    /* display: none; */
     width: calc(250px * var(--ipad-scale));
     height: calc(600px * var(--ipad-scale));
     background-color: #e7ac93;
     background-image: radial-gradient(45.02% 39.83% at 86.78% 32.14%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
     transform: rotate(25deg);
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: calc(30px * var(--ipad-scale));
 }
