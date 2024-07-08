@@ -25,9 +25,6 @@ function Anfora() {
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
-    const setSelectedFormOption = useGameStore((state) => state.setSelectedFormOption)
-    const qtyCorrectOptions = useGameStore((state) => state.qtyCorrectOptions)
-    const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setInGame = useGameStore((state) => state.setInGame)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
@@ -52,31 +49,19 @@ function Anfora() {
         setInGame(true)
     }, [])
 
-    const handleSubmit = async (qtyQuestions: number, answer: any, object: string) => {
-        setSelectedFormOption(true)
-
-        setTimeout(() => {
-            setSelectedFormOption(false)
-        }, 5000)
-
-        if (answer.esOpcionCorrecta) {
-            setQtyCorrectOptions(qtyCorrectOptions + 1)
+    const handleSubmit = async (object: string) => {
+        const data: Partial<ObjetoNaveReparado> = {
+            planeta: 'anfora',
+            objeto: object,
         }
 
-        if (qtyCorrectOptions == qtyQuestions - 1 && answer.esOpcionCorrecta) {
-            const data: Partial<ObjetoNaveReparado> = {
-                planeta: 'anfora',
-                objeto: object,
-            }
-
-            try {
-                await saveObjetoNaveReparado(data)
-            } catch (error) {
-                console.error('Error al guardar el objeto:', error)
-            } finally {
-                mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`)
-                setActiveForm(false)
-            }
+        try {
+            await saveObjetoNaveReparado(data)
+        } catch (error) {
+            console.error('Error al guardar el objeto:', error)
+        } finally {
+            mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`)
+            setActiveForm(false)
         }
     }
 
