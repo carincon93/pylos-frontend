@@ -1,22 +1,83 @@
 import { useContextData } from '@/app/context/AppContext'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { useGameStore } from '@/lib/store'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const Form = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
-    const setActiveForm = useGameStore((state) => state.setActiveForm)
     const activeForm = useGameStore((state) => state.activeForm)
+    const setActiveForm = useGameStore((state) => state.setActiveForm)
     const readings = useGameStore((state) => state.readings)
-    const selectedFormOption = useGameStore((state) => state.selectedFormOption)
     const { profileUserData } = useContextData()
+    const [answers, setAnswers] = useState([])
+    const readingSelected = selectedAnforaForm && readings ? readings[selectedAnforaForm - 1] : []
 
-    const readingSelected = selectedAnforaForm ? readings[selectedAnforaForm - 1] : []
+    const contentRef = useRef(null)
+    const [startY, setStartY] = useState(0)
+    const [translateY, setTranslateY] = useState(0)
+    const [isDragging, setIsDragging] = useState(false)
+
+    useEffect(() => {
+        if (activeForm) {
+            setTranslateY(0)
+        }
+    }, [activeForm])
+
+    const handleTouchStart = (e) => {
+        const touch = e.touches[0]
+        setStartY(touch.clientY)
+    }
+
+    const handleTouchMove = (e) => {
+        const touch = e.touches[0]
+        const deltaY = touch.clientY - startY
+        setTranslateY((prev) => prev + deltaY)
+        setStartY(touch.clientY)
+    }
+
+    const handleDragStart = (e) => {
+        setIsDragging(true)
+        setStartY(e.clientY)
+    }
+
+    const handleDragEnd = (e) => {
+        setIsDragging(false)
+        setStartY(e.clientY)
+    }
+
+    const handleDrag = (e) => {
+        if (!isDragging) return
+
+        const deltaY = e.clientY - startY
+
+        setTranslateY((prev) => {
+            const newTranslateY = prev + deltaY
+            if (newTranslateY > 0) {
+                setTimeout(() => {
+                    setTranslateY(0)
+                }, 400)
+            }
+            return newTranslateY
+        })
+
+        setStartY(e.clientY)
+    }
+
+    const handleSelectAnswer = (questionId, optionId) => {
+        setAnswers((prev) => {
+            const existingAnswer = prev.find((answer) => answer.question_id === questionId)
+
+            if (existingAnswer) {
+                // Si ya existe una respuesta para esta pregunta, actualiza la opción seleccionada
+                return prev.map((answer) => (answer.question_id === questionId ? { ...answer, optionsSelected: optionId } : answer))
+            } else {
+                // Si no existe, agrega una nueva entrada
+                return [...prev, { question_id: questionId, optionsSelected: optionId }]
+            }
+        })
+    }
 
     return (
-        <section
-            className={`ipad ${activeForm ? 'visible' : 'invisible'}`}
-            onClick={() => setActiveForm(false)}>
+        <section className={`ipad select-none ${activeForm ? 'visible' : 'invisible'}`}>
             <figure className="ipad-case"></figure>
             <figure className="ipad-hand">
                 <div className="finger-1">
@@ -157,8 +218,8 @@ const Form = ({ handleSubmit }) => {
                     style={{ transform: 'rotate(25deg)' }}></div>
             </figure>
 
-            {/* <div className="screen">
-                <div className=" p-2 text-xs flex items-center justify-between">
+            <div className="screen bg-secondary overflow-y-auto">
+                <div className="px-8 py-2 text-xs flex items-center justify-between z-10 relative">
                     <span>04:12</span>
                     <span className="flex items-center justify-center">
                         <svg
@@ -190,53 +251,85 @@ const Form = ({ handleSubmit }) => {
                         </svg>
                     </span>
                 </div>
-                <div className="p-6 bg-pylos-700 text-white rounded-2xl mx-8">
+                <div className={`p-6 bg-pylos-700 text-white rounded-2xl mx-8 transition-transform ${translateY > -5 ? '' : '-translate-y-60'}`}>
                     <div className="flex items-center">
                         <span className="bg-[url('/estados.png')] size-10 inline-block bg-no-repeat bg-[-43px_-42px] bg-[length:86px] mr-2"></span>
-                        <span className="capitalize">¡Hola {profileUserData?.nombre}!</span>
+                        <span className="capitalize font-medium">¡Hola {profileUserData?.nombre}!</span>
                     </div>
-                    <p className="text-sm mt-2 text-gray-200 ml-12">
-                        Para reparar el siguiente elemento de la nave debes leer muy bien la lectura y responder de manera acertada las preguntas correspondientes.
+
+                    <p className="text-sm mt-2 text-gray-200 leading-5">
+                        ¡Genial 😊! Haz encontrado un elemento de Nebulón. Lastimosamente está dañado 😒. Para poder repararlo debes leer atentamente la siguiente lectura y responder correctamente las{' '}
+                        {readingSelected?.questions?.length} preguntas. ¡Tu puedes!.
                     </p>
                 </div>
-                <div>
-                    <div className="px-10 h-60 overflow-y-auto">
-                        <h1 className="text-center font-[cursive] mb-6 font-semibold text-lg">{readingSelected.title}</h1>
-                        <p className="font-[cursive]">{readingSelected.text}</p>
-                        <p className="text-sm text-right mt-4 text-gray-400">{readingSelected.author}</p>
-                    </div>
-                    <Carousel
-                        className="p-8"
-                        orientation="vertical">
-                        <CarouselContent className="h-[240px]">
-                            {readingSelected.questions.map((question, i) => (
-                                <CarouselItem
+
+                <div
+                    className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-800 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
+                    onClick={() => setActiveForm(false)}>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        className="size-6">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6 18 18 6M6 6l12 12"
+                        />
+                    </svg>
+                </div>
+
+                <div
+                    className="ipad-content"
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onMouseDown={handleDragStart}
+                    onMouseMove={handleDrag}
+                    onMouseUp={handleDragEnd}
+                    ref={contentRef}>
+                    <div
+                        className="mt-10"
+                        style={{ transform: `translateY(${translateY}px)` }}>
+                        <div className="px-10">
+                            <h1 className="text-center font-[cursive] mb-6 font-semibold text-lg">{readingSelected.title}</h1>
+                            <p className="font-[cursive]">{readingSelected.text}</p>
+                            <p className="text-sm text-right mt-4 text-white/70">{readingSelected.author}</p>
+                        </div>
+
+                        <div className="p-8">
+                            {readingSelected?.questions?.map((question, i) => (
+                                <div
                                     key={i}
-                                    className="flex flex-col items-center justify-center">
+                                    className="my-10">
                                     <p className="font-[cursive] mb-6 font-semibold">{question.text}</p>
-                                    <div className="flex gap-4">
+                                    <div className="w-full">
                                         {question.answers.map((answer) => (
                                             <button
                                                 key={answer.id}
-                                                onClick={() => handleSubmit(readingSelected.questions.length, answer, readingSelected.object)}
-                                                className="btn b-1 bg-purple-100 leading-4 text-xs">
+                                                onClick={() => {
+                                                    handleSubmit(readingSelected.questions.length, answer, readingSelected.object), handleSelectAnswer(question.id, answer.id)
+                                                }}
+                                                className={`btn b-1 ${
+                                                    answers.find((item) => item.question_id == question.id)?.optionsSelected == answer.id ? 'bg-pylos-800 !text-white' : 'bg-purple-100'
+                                                }  leading-4 text-xs block !w-full my-4`}>
                                                 {answer.text}
                                             </button>
                                         ))}
                                     </div>
-                                </CarouselItem>
+                                </div>
                             ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="bg-transparent relative top-4 border-0" />
-                        <CarouselNext className={`${selectedFormOption ? 'bg-pylos-600' : 'bg-transparent'} relative -bottom-4 border-0`} />
-                    </Carousel>
+                        </div>
+                    </div>
+                    <div
+                        className={`absolute w-52 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow z-10 p-2 transition-transform ${
+                            translateY == 0 ? '' : 'translate-y-60'
+                        }`}>
+                        Desliza hacia abajo
+                    </div>
                 </div>
-                <div className="p-2">
-                    <span
-                        className="bg-gray-200 w-40 block rounded-full mx-auto p-1"
-                        onClick={() => setActiveForm(false)}></span>
-                </div>
-            </div> */}
+            </div>
         </section>
     )
 }
