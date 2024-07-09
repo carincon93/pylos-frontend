@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function AuthLayout({
+export default function GuestLayout({
     children, // will be a page or nested layout
 }: {
     children: React.ReactNode
