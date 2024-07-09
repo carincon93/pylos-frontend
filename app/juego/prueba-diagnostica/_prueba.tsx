@@ -1,6 +1,6 @@
 'use client'
 
-import { RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
+import { RESULTADOS_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
@@ -43,7 +43,7 @@ export default function Prueba() {
             sendTiempoPruebaDiagnostica()
 
             if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
-                router.push(RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE)
+                router.push(RESULTADOS_ROUTE)
             }
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
