@@ -3,6 +3,11 @@ import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import { useEffect } from 'react'
 import { useGameStore } from '@/lib/store'
+import { MotorModel } from './Motor'
+import { AlaModel } from './Ala'
+import { PanelModel } from './Panel'
+import { BidonModel } from './Bidon'
+import { NavegacionModel } from './Navegacion'
 
 export const Map = ({ ...props }) => {
     const map = useGLTF('/models/Map.glb')
@@ -29,36 +34,35 @@ export const Map = ({ ...props }) => {
                 scale={[20, 20, 20]}
                 {...props}
             />
-            <MeshComponent
-                position={[2, -6, 0]}
+            <AlaModel
                 onClick={() => {
                     setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
-            <MeshComponent
-                position={[10, -6, 0]}
+            <MotorModel
+                scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
-            <MeshComponent
-                position={[20, -6, 0]}
+            <PanelModel
+                scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
-            <MeshComponent
-                position={[30, -6, 0]}
+            <BidonModel
+                scale={0.2}
                 onClick={() => {
                     setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
-            <MeshComponent
-                position={[40, -6, 0]}
+            <NavegacionModel
+                scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
