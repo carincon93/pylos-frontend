@@ -32,6 +32,7 @@ interface RespuestaPruebaDiagnostica {
 
 interface Usuario {
     id: string
+    usuarioId: string
     nombre: string
     nombreUsuario: string
     edad: number
@@ -40,6 +41,7 @@ interface Usuario {
     mascotaId: string
     mascotaNombre: string
     introduccionCompleta: boolean
+    esAdmin: boolean
     tiempoPruebaDiagnostica: number
 }
 
