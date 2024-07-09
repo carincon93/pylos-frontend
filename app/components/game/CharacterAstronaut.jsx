@@ -22,6 +22,7 @@ export function CharacterAstronaut({ animation, ...props }) {
                     scale={0.02}>
                     <skinnedMesh
                         name="Body"
+                        // position={[2, -0.4, -3]}
                         geometry={nodes.Body.geometry}
                         material={materials['Material.001']}
                         skeleton={nodes.Body.skeleton}

@@ -107,21 +107,21 @@ export const CharacterController = () => {
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
-            // if (isClicking.current) {
-            //     // console.log('clicking', mouse.x, mouse.y)
-            //     if (Math.abs(mouse.x) > 0.1) {
-            //         movement.x = -mouse.x
-            //     }
-            //     movement.z = mouse.y + 0.4
-            //     if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
-            //         speed = RUN_SPEED
-            //     }
-            // }
+            if (isClicking.current && activeForm == false) {
+                // console.log('clicking', mouse.x, mouse.y)
+                if (Math.abs(mouse.x) > 0.1) {
+                    movement.x = -mouse.x
+                }
+                movement.z = mouse.y + 0.4
+                if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
+                    speed = RUN_SPEED
+                }
+            }
 
-            if (get().left) {
+            if (get().left && activeForm == false) {
                 movement.x = 1
             }
-            if (get().right) {
+            if (get().right && activeForm == false) {
                 movement.x = -1
             }
 
@@ -141,6 +141,7 @@ export const CharacterController = () => {
             } else {
                 setAnimation('Idle')
             }
+            console.log(character.current)
             character.current.rotation.y = lerpAngle(character.current.rotation.y, characterRotationTarget.current, 0.1)
 
             rb.current.setLinvel(vel, true)
