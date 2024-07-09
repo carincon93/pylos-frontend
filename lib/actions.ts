@@ -21,9 +21,17 @@ export async function updateUsuario(data: Partial<Usuario>): Promise<Response> {
     try {
         const userData = await getUserDataFromToken()
 
-        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData?.id}`, 'PATCH', data)
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${data.id ?? userData?.id}`, 'PATCH', data)
     } catch (error: any) {
         throw new Error('Error al actualizar el usuario: ' + error.message)
+    }
+}
+
+export async function deleteUsuario(id: string | undefined): Promise<Response> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${id}`, 'DELETE')
+    } catch (error: any) {
+        throw new Error('Error al eliminar el usuario: ' + error.message)
     }
 }
 
