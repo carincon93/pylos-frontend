@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getTokenData } from './utils/getTokenData'
 import { verifyAuth } from './utils/isTokenExpired'
-import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE, MUNDOS_ROUTE } from '@/utils/routes'
+import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE, MUNDOS_ROUTE, RESULTADOS_ROUTE } from '@/utils/routes'
 import { getProfile } from './lib/actions'
 
 export async function middleware(request: NextRequest) {
