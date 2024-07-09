@@ -6,18 +6,31 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import LoadingOverlay from '@/app/loading'
 import { Button } from '@/components/ui/button'
-import { deleteUsuario, restartRespuestaPruebaDiagnostica } from '@/lib/actions'
+import { deleteUsuario, getProfile, restartRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Usuario } from '@/types/MyTypes'
 import { useContextData } from '@/app/context/AppContext'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UsuarioForm from './_form'
 
 export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefined }) {
     const [open, setOpen] = useState(false)
     const [usuario, setUsuario] = useState<Partial<Usuario>>()
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
-    const { profileUserData } = useContextData()
+    const [profile, setProfile] = useState<Usuario>()
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile()
+                setProfile(profile)
+            } catch (error: any) {
+                console.error('Error al obtener el perfil del usuario:', error.message)
+            }
+        }
+
+        fetchProfile()
+    }, [])
 
     if (!resultadosPruebaDiagnostica) {
         return <LoadingOverlay />
@@ -88,7 +101,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                         <TableHead>Estudiante</TableHead>
                         <TableHead>Puntaje</TableHead>
                         <TableHead>Tiempo</TableHead>
-                        {profileUserData?.esAdmin && <TableHead>Acciones</TableHead>}
+                        {profile?.esAdmin && <TableHead>Acciones</TableHead>}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -118,7 +131,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                                 {resultado.tiempoPruebaDiagnostica ? `${resultado.tiempoPruebaDiagnostica} segundos` : 'No ha iniciado la prueba'}{' '}
                             </TableCell>
 
-                            {profileUserData?.esAdmin && (
+                            {profile?.esAdmin && (
                                 <TableCell>
                                     <Button
                                         className="text-xs mt-1 bg-red-400 hover:bg-red-500 ml-2 md:ml-0"
