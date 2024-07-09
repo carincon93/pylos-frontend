@@ -141,7 +141,6 @@ export const CharacterController = () => {
             } else {
                 setAnimation('Idle')
             }
-            console.log(character.current)
             character.current.rotation.y = lerpAngle(character.current.rotation.y, characterRotationTarget.current, 0.1)
 
             rb.current.setLinvel(vel, true)
