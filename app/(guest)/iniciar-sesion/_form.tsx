@@ -4,7 +4,7 @@ import { useForm } from '@/hooks/useForm'
 import { getErrorsForFields, transformErrors } from '@/lib/actions'
 import { Login, Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
-import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
+import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { toast } from '@/components/ui/use-toast'
@@ -63,7 +63,7 @@ export default function LoginForm() {
                 document.cookie = cookieString
 
                 // Redirigir al usuario a la página deseada después del inicio de sesión
-                router.push(PRUEBA_DIAGNOSTICA_ROUTE)
+                router.push(MUNDOS_ROUTE)
             } else {
                 throw new Error('No se recibió un token en la respuesta')
             }
@@ -112,14 +112,16 @@ export default function LoginForm() {
                         <SelectValue placeholder="Nombre de la mascota" />
                     </SelectTrigger>
                     <SelectContent className="rounded">
-                        {usuarios?.map((usuario, i) => (
-                            <SelectItem
-                                key={i + 40}
-                                className="capitalize"
-                                value={usuario.mascotaNombre}>
-                                {usuario.mascotaNombre}
-                            </SelectItem>
-                        ))}
+                        {usuarios
+                            ?.sort((a, b) => a.mascotaNombre.localeCompare(b.mascotaNombre))
+                            .map((usuario, i) => (
+                                <SelectItem
+                                    key={i + 40}
+                                    className="capitalize"
+                                    value={usuario.mascotaNombre}>
+                                    {usuario.mascotaNombre}
+                                </SelectItem>
+                            ))}
                     </SelectContent>
                 </Select>
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
