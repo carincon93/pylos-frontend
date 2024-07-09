@@ -113,38 +113,47 @@ function Anfora() {
                 <div className="fixed right-10 bottom-6 space-y-2">
                     <div className="flex gap-2">
                         <div
-                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                                motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                             }`}>
-                            Motor
+                            <img src="/anfora/motor.png" />
                         </div>
 
                         <div
-                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                                alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                             }`}>
-                            Ala
+                            <img
+                                src="/anfora/ala.png"
+                                className="relative bottom-0 right-[-22px] block w-8"
+                            />
                         </div>
 
                         <div
-                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                                sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                             }`}>
-                            Sistema de navegación
+                            <img src="/anfora/navegacion.png" />
                         </div>
 
                         <div
-                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                                panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                             }`}>
-                            Panel solar
+                            <img
+                                src="/anfora/panel.png"
+                                className="relative -bottom-4 -right-2 block"
+                            />
                         </div>
 
                         <div
-                            className={`font-black text-center border-2 rounded-xl p-2 mx-auto w-20 h-20 flex items-center justify-center ${
-                                combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100'
+                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                             }`}>
-                            Combustible
+                            <img
+                                src="/anfora/bidon.png"
+                                className="w-10"
+                            />
                         </div>
                     </div>
                 </div>

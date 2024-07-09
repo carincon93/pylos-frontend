@@ -273,7 +273,7 @@ const Form = ({ handleSubmit }) => {
                     </div>
 
                     <p className="text-sm mt-2 text-gray-200 leading-5">
-                        ¡Genial 😊! Haz encontrado un elemento de Nebulón. Lastimosamente está dañado 😒. Para poder repararlo debes leer atentamente la siguiente lectura y responder correctamente las{' '}
+                        ¡Genial 😊! Haz encontrado una parte de Nebulón. Lastimosamente está dañada 😒. Para poder repararla debes leer atentamente la siguiente lectura y responder correctamente las{' '}
                         {readingSelected?.questions?.length} preguntas. ¡Tu puedes!.
                     </p>
                 </div>
@@ -317,7 +317,7 @@ const Form = ({ handleSubmit }) => {
                             {readingSelected?.questions?.map((question, i) => (
                                 <div
                                     key={i}
-                                    className="my-10">
+                                    className="my-20">
                                     <p className="font-[cursive] mb-6 font-semibold">{question.text}</p>
                                     <div className="w-full">
                                         {question.answers.map((answer) => (
