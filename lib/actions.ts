@@ -1,13 +1,19 @@
 import { ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher, getUserDataFromToken } from '@/utils/fetcher'
 
-export async function getProfile(): Promise<Usuario> {
+export async function getProfile(): Promise<Usuario | null> {
     try {
         const userData = await getUserDataFromToken()
 
-        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData?.id}`, 'GET')
+        if (!userData) {
+            throw new Error('No se pudo obtener los datos del usuario del token')
+        }
+
+        const user = await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData.id}`, 'GET')
+        return user
     } catch (error: any) {
-        throw new Error('Error al obtener el usuario: ' + error.message)
+        console.error('Error al obtener el usuario: ' + error.message)
+        return null
     }
 }
 
