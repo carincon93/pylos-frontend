@@ -3,7 +3,7 @@
 import { Mascota } from '@/types/MyTypes'
 import { getErrorsForFields, toAuth, transformErrors } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
-import { PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
+import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -65,7 +65,7 @@ export default function RegisterForm() {
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
                 document.cookie = cookieString
 
-                router.push(PRUEBA_DIAGNOSTICA_ROUTE)
+                router.push(MUNDOS_ROUTE)
             } else {
                 throw new Error('No se recibió un token en la respuesta')
             }

@@ -48,10 +48,6 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    if (profile?.introduccionCompleta && request.nextUrl.pathname != MUNDOS_ROUTE) {
-        return NextResponse.redirect(new URL(MUNDOS_ROUTE, request.url))
-    }
-
     if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
         return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
     }
