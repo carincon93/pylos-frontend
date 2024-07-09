@@ -1,7 +1,7 @@
 import { ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher, getUserDataFromToken } from '@/utils/fetcher'
 
-export async function getProfile(): Promise<Usuario | null> {
+export async function getProfile(): Promise<Usuario> {
     try {
         const userData = await getUserDataFromToken()
 
@@ -13,7 +13,7 @@ export async function getProfile(): Promise<Usuario | null> {
         return user
     } catch (error: any) {
         console.error('Error al obtener el usuario: ' + error.message)
-        return null
+        throw new Error('Error al obtener el perfil del usuario')
     }
 }
 

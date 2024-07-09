@@ -7,7 +7,6 @@ import { getProfile } from './lib/actions'
 
 export async function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
-    const profile = await getProfile()
 
     const verifiedToken =
         accessToken &&
@@ -47,6 +46,8 @@ export async function middleware(request: NextRequest) {
         console.error('Token invalid or expired')
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
+
+    const profile = await getProfile()
 
     if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
         return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
