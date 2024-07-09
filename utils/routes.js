@@ -7,5 +7,5 @@ export const INTRODUCCION_ROUTE = `${SUBFOLDER_ROUTE}/introduccion`
 export const MAPA_ROUTE = `${SUBFOLDER_ROUTE}/mapa`
 export const ANFORA_ROUTE = `${SUBFOLDER_ROUTE}/anfora`
 export const PRUEBA_DIAGNOSTICA_ROUTE = `${SUBFOLDER_ROUTE}/prueba-diagnostica`
-export const RESULTADOS_PRUEBA_DIAGNOSTICA_ROUTE = `${SUBFOLDER_ROUTE}/prueba-diagnostica/resultados`
+export const RESULTADOS_ROUTE = `${SUBFOLDER_ROUTE}/resultados`
 export const MUNDOS_ROUTE = `${SUBFOLDER_ROUTE}/empezar-la-aventura`
