@@ -47,14 +47,16 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    const profile = await getProfile()
+    if (tokenData) {
+        const profile = await getProfile()
 
-    if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
-        return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
-    }
+        if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
+            return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
+        }
 
-    if (!profile?.introduccionCompleta && request.nextUrl.pathname != INTRODUCCION_ROUTE && profile?.tiempoPruebaDiagnostica) {
-        return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
+        if (!profile?.introduccionCompleta && request.nextUrl.pathname != INTRODUCCION_ROUTE && profile?.tiempoPruebaDiagnostica) {
+            return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
+        }
     }
 }
 
