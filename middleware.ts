@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { getTokenData } from './utils/getTokenData'
 import { verifyAuth } from './utils/isTokenExpired'
-import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE } from '@/utils/routes'
+import { EMPEZAR_AVENTURA_ROUTE, REGISTER_ROUTE, HOME_ROUTE, LOGIN_ROUTE, SUBFOLDER_ROUTE, INTRODUCCION_ROUTE, PRUEBA_DIAGNOSTICA_ROUTE, MUNDOS_ROUTE } from '@/utils/routes'
+import { getProfile } from './lib/actions'
 
 export async function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('accessToken')?.value
+    const profile = await getProfile()
 
     const verifiedToken =
         accessToken &&
@@ -46,9 +48,16 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    // Redirect to PRUEBA_DIAGNOSTICA_ROUTE if access token exists and user is not already on PRUEBA_DIAGNOSTICA_ROUTE page
-    if (!request.nextUrl.pathname.startsWith(SUBFOLDER_ROUTE)) {
+    if (profile?.introduccionCompleta && request.nextUrl.pathname != MUNDOS_ROUTE) {
+        return NextResponse.redirect(new URL(MUNDOS_ROUTE, request.url))
+    }
+
+    if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
         return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
+    }
+
+    if (!profile?.introduccionCompleta && request.nextUrl.pathname != INTRODUCCION_ROUTE && profile?.tiempoPruebaDiagnostica) {
+        return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
     }
 }
 
