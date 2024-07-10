@@ -3,7 +3,7 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 
 export function CharacterAstronaut({ animation, ...props }) {
     const group = useRef()
-    const { nodes, materials, animations } = useGLTF('/models/CharacterAstronaut.gltf')
+    const { nodes, materials, animations } = useGLTF('/models/CharacterAstronaut.glb')
     const { actions } = useAnimations(animations, group)
 
     useEffect(() => {
@@ -22,7 +22,6 @@ export function CharacterAstronaut({ animation, ...props }) {
                     scale={0.02}>
                     <skinnedMesh
                         name="Body"
-                        // position={[2, -0.4, -3]}
                         geometry={nodes.Body.geometry}
                         material={materials['Material.001']}
                         skeleton={nodes.Body.skeleton}
@@ -36,4 +35,4 @@ export function CharacterAstronaut({ animation, ...props }) {
     )
 }
 
-useGLTF.preload('/models/CharacterAstronaut.gltf')
+useGLTF.preload('/models/CharacterAstronaut.glb')
