@@ -86,11 +86,12 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogAction
-                            className="bg-red-500 mr-10"
+                            className="bg-red-500 lg:mr-12 mt-8 lg:mt-0"
                             onClick={() => handleDeleteUsuario()}>
                             Eliminar
                         </AlertDialogAction>
                         <AlertDialogAction
+                            className="mt-4 lg:mt-0"
                             type="submit"
                             form="editar-usuario">
                             Guardar y cerrar
