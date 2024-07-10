@@ -58,6 +58,8 @@ export const CharacterController = () => {
     const [, get] = useKeyboardControls()
     const isClicking = useRef(false)
 
+    const [lastMovementTime, setLastMovementTime] = useState(Date.now())
+
     useEffect(() => {
         const onMouseDown = (e) => {
             isClicking.current = true
@@ -89,6 +91,26 @@ export const CharacterController = () => {
         }
     }, [activeForm])
 
+    useEffect(() => {
+        // Recuperar la posición del jugador desde el localStorage al montar el componente
+        const savedPosition = localStorage.getItem('player_position')
+        if (savedPosition) {
+            const { x, y, z } = JSON.parse(savedPosition)
+            rb.current.setTranslation({ x, y, z }, true)
+        }
+    }, [])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (Date.now() - lastMovementTime > 1000) {
+                const position = rb.current.translation()
+                localStorage.setItem('player_position', JSON.stringify(position))
+            }
+        }, 1000)
+
+        return () => clearInterval(interval)
+    }, [lastMovementTime])
+
     useFrame(({ camera, mouse }) => {
         if (rb.current) {
             const vel = rb.current.linvel()
@@ -100,9 +122,13 @@ export const CharacterController = () => {
 
             if (get().forward) {
                 movement.z = 1
+
+                setLastMovementTime(Date.now())
             }
             if (get().backward) {
                 movement.z = -1
+
+                setLastMovementTime(Date.now())
             }
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
