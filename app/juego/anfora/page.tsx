@@ -90,7 +90,7 @@ function Anfora() {
                     <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
                 </div>
 
-                <div className="fixed left-10 bottom-6 space-y-2">
+                <div className="fixed left-10 bottom-6 space-y-2 hidden xl:block">
                     <div>
                         <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
                     </div>
@@ -102,7 +102,7 @@ function Anfora() {
                     <small className="block text-center">Caminar</small>
                 </div>
 
-                <div className="fixed left-60 bottom-6 space-y-2">
+                <div className="fixed left-60 bottom-6 space-y-2 hidden xl:block">
                     <div>
                         <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
                     </div>
@@ -110,7 +110,7 @@ function Anfora() {
                     <small className="block text-center">Correr</small>
                 </div>
 
-                <div className="fixed right-10 bottom-6 space-y-2">
+                <div className="fixed lg:right-10 left-0 right-0 mx-auto w-[432px] bottom-6 space-y-2">
                     <div className="flex gap-2">
                         <div
                             className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
