@@ -164,7 +164,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                                         onClick={() => {
                                             setUsuario(resultado), setOpen(true)
                                         }}
-                                        className="block w-full">
+                                        className="block w-full text-xs">
                                         <span className="hidden md:inline-block">Editar</span>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
