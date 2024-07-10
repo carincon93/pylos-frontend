@@ -72,7 +72,7 @@ function Anfora() {
             <KeyboardControls map={keyboardMap}>
                 <Canvas
                     shadows
-                    camera={{ fov: 40 }}
+                    camera={{ fov: 40, position: [20, 20, 20] }}
                     style={{ height: '100vh' }}>
                     <color
                         attach="background"
