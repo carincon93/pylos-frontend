@@ -15,7 +15,7 @@ export default async function AuthLayout({
                 <>
                     <Link
                         href={RESULTADOS_ROUTE + '?admin=1'}
-                        className="fixed bottom-4 right-4 z-30 bg-secondary hover:bg-secondary/90 rounded-full py-4 px-6 shadow-lg flex items-center justify-center">
+                        className="fixed bottom-6 left-0 lg:left-4 w-52 z-30 bg-secondary hover:bg-secondary/90 rounded-full py-3 px-6 shadow-lg flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -33,7 +33,7 @@ export default async function AuthLayout({
                     </Link>
                     <Link
                         href={MUNDOS_ROUTE}
-                        className="fixed bottom-20 right-4 z-30 bg-secondary hover:bg-secondary/90 rounded-full py-4 px-6 shadow-lg flex items-center justify-center">
+                        className="fixed bottom-20 left-0 lg:left-4 w-52 z-30 bg-secondary hover:bg-secondary/90 rounded-full py-3 px-6 shadow-lg flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
