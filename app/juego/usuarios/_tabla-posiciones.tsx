@@ -68,7 +68,15 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Pylonauta: <span className="capitalize font-light">{usuario?.nombre}</span>
+                            <div>
+                                Pylonauta: <span className="capitalize font-light">{usuario?.nombre}</span>
+                            </div>
+                            <div>
+                                Colegio: <span className="capitalize font-light">{usuario?.colegio}</span>
+                            </div>
+                            <div>
+                                Grado: <span className="capitalize font-light">{usuario?.grado}</span>
+                            </div>
                         </AlertDialogTitle>
                         <UsuarioForm
                             className="!mt-10"
@@ -78,14 +86,14 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogAction
+                            className="bg-red-500 mr-10"
+                            onClick={() => handleDeleteUsuario()}>
+                            Eliminar
+                        </AlertDialogAction>
+                        <AlertDialogAction
                             type="submit"
                             form="editar-usuario">
                             Guardar y cerrar
-                        </AlertDialogAction>
-                        <AlertDialogAction
-                            className="bg-red-500"
-                            onClick={() => handleDeleteUsuario()}>
-                            Eliminar
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
@@ -132,9 +140,9 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                             </TableCell>
 
                             {profile?.esAdmin && (
-                                <TableCell>
+                                <TableCell className="space-y-2">
                                     <Button
-                                        className="text-xs mt-1 bg-red-400 hover:bg-red-500 ml-2 md:ml-0"
+                                        className="text-xs mt-1 bg-red-400 hover:bg-red-500 md:ml-0 block w-full"
                                         onClick={() => handleRestartPrueba(resultado.usuarioId)}>
                                         <span className="hidden md:inline-block">Restablecer prueba</span>
                                         <svg
@@ -156,7 +164,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                                         onClick={() => {
                                             setUsuario(resultado), setOpen(true)
                                         }}
-                                        className="ml-2">
+                                        className="block w-full">
                                         Editar
                                     </Button>
                                 </TableCell>
