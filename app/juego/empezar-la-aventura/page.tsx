@@ -23,7 +23,7 @@ export default function EmpezarAventuraPage() {
             <Carousel
                 orientation="vertical"
                 className="mt-32 md:mt-0">
-                <CarouselContent className="h-[286px] md:h-[240px]">
+                <CarouselContent className="h-[320px] md:h-[240px]">
                     <CarouselItem>
                         <Link
                             href={ANFORA_ROUTE}
@@ -41,7 +41,7 @@ export default function EmpezarAventuraPage() {
                     <CarouselItem>
                         <Link
                             href="#"
-                            className="flex items-center hover:opacity-60 grayscale pointer-events-none">
+                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
                             <Image
                                 src="/planeta2.webp"
                                 alt="planetaVerde"
@@ -55,7 +55,7 @@ export default function EmpezarAventuraPage() {
                     <CarouselItem>
                         <Link
                             href="#"
-                            className="flex items-center hover:opacity-60 grayscale pointer-events-none">
+                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
                             <Image
                                 src="/planeta3.webp"
                                 alt="PlanetMorado"
@@ -69,7 +69,7 @@ export default function EmpezarAventuraPage() {
                     <CarouselItem>
                         <Link
                             href="#"
-                            className="flex items-center hover:opacity-60 grayscale pointer-events-none">
+                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
                             <Image
                                 src="/planeta4.webp"
                                 alt="planetaRosa"
@@ -83,7 +83,7 @@ export default function EmpezarAventuraPage() {
                     <CarouselItem>
                         <Link
                             href="#"
-                            className="flex items-center hover:opacity-60 grayscale pointer-events-none">
+                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
                             <Image
                                 src="/planeta5.webp"
                                 alt="planetaAzul"
