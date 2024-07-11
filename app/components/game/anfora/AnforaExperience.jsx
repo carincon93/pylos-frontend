@@ -1,46 +1,43 @@
-import { Map } from './Map'
 import { CharacterController } from '../CharacterController'
 import { useRef } from 'react'
-import { Environment, OrbitControls, OrthographicCamera } from '@react-three/drei'
+import { Environment, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
-import { useFrame } from '@react-three/fiber'
+import { LandscapeAnforaModel } from './LandscapeAnfora'
+import { useGameStore } from '@/lib/store'
 
 const CameraComponent = () => {
-    const controlsRef = useRef()
     const cameraRef = useRef()
-
-    useFrame(() => {
-        if (controlsRef.current) {
-            const { x, y, z } = controlsRef.current.object.position
-            console.log(`Camera position: x: ${x}, y: ${y}, z: ${z}`)
-        }
-    })
 
     return (
         <>
-            <perspectiveCamera
+            <PerspectiveCamera
+                makeDefault
                 ref={cameraRef}
-                position={[0, 0, 5]}
+                fov={40}
+                position={[0.2285654143609755, 231.10896102590522, 0.23774163062832884]}
+                rotation={[-1.56, 0.001, 9.65]}
             />
-            <OrbitControls ref={controlsRef} />
         </>
     )
 }
 
 export const AnforaExperience = () => {
+    const showMap = useGameStore((state) => state.showMap)
+
     return (
         <>
-            {process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'true' && <CameraComponent />}
+            {showMap && <CameraComponent />}
+            {process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'true' && <OrbitControls />}
             <Environment preset="sunset" />
             <directionalLight
                 intensity={0.65}
                 castShadow
                 position={[-5, 10, 25]}
-                shadow-mapSize-width={2048}
-                shadow-mapSize-height={2048}
+                // shadow-mapSize-width={2048}
+                // shadow-mapSize-height={2048}
                 shadow-bias={-0.00005}></directionalLight>
             <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                <Map position={[0, -68.5, 1]} />
+                <LandscapeAnforaModel position={[0, -69, 1]} />
                 <CharacterController />
             </Physics>
         </>
