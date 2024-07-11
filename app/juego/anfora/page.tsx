@@ -5,7 +5,7 @@ import AnforaForm from '@/app/components/game/anfora/Form'
 import { saveObjetoNaveReparado } from '@/lib/actions'
 import { ObjetoNaveReparado } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
-import { KeyboardControls, Loader, SoftShadows } from '@react-three/drei'
+import { KeyboardControls, Loader, SoftShadows, Stats } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
@@ -83,6 +83,7 @@ function Anfora() {
                         <AnforaExperience />
                     </Suspense>
                 </Canvas>
+                <Stats />
             </KeyboardControls>
 
             <div className="select-none">
