@@ -48,13 +48,12 @@ export const Map = ({ ...props }) => {
                 }}
             />
 
-            {/*   <PanelModel
+            <PanelModel
                 scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
-            */}
 
             <BidonModel
                 scale={0.2}

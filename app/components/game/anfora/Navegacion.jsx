@@ -12,8 +12,8 @@ export function NavegacionModel(props) {
                 receiveShadow
                 geometry={nodes.Sistema_de_navegación_1.geometry}
                 material={nodes.Sistema_de_navegación_1.material}
-                rotation={[0, 0, -0.08]}
-                position={[40.187, -13.6, 50.4]}
+                rotation={[0, 0, -0.2]}
+                position={[90, -21.2, 50.4]}
                 scale={[0.24, 0.038, 0.24]}
             />
         </group>

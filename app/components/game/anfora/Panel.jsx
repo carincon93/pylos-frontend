@@ -7,15 +7,23 @@ export function PanelModel(props) {
         <group
             {...props}
             dispose={null}>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Panel_solar.geometry}
-                material={nodes.Panel_solar.material}
-                rotation={[0.718, 0, 0]}
-                position={[30, -2, -18]}
-                scale={[1.515, 0.197, 1]}
-            />
+            <group
+                rotation={[0.3, 0, 0.1]}
+                position={[-20, -22.8, 108]}
+                scale={0.02}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes['10781_Solar-Panels_V1_1'].geometry}
+                    material={materials._10781_Solar_Panels_V101___Default}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes['10781_Solar-Panels_V1_2'].geometry}
+                    material={materials._10781_Solar_Panels_V102___Default}
+                />
+            </group>
         </group>
     )
 }
