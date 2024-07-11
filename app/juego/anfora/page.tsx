@@ -182,7 +182,7 @@ function Anfora() {
                             <img
                                 onClick={() => setShowMap(!showMap)}
                                 src="/satelite.png"
-                                className="w-32"
+                                className={`${showMap ? 'grayscale' : ''} w-32`}
                             />
                         </div>
                     </>
