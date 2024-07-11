@@ -27,6 +27,8 @@ function Anfora() {
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
     const setInGame = useGameStore((state) => state.setInGame)
+    const setShowMap = useGameStore((state) => state.setShowMap)
+    const showMap = useGameStore((state) => state.showMap)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const alaItem = objetosNaveReparados?.find((item) => item.objeto === 'ala')
@@ -92,86 +94,99 @@ function Anfora() {
                 <Stats />
             </KeyboardControls>
 
+            {/* UI */}
             <div className="select-none">
                 <div className="fixed left-10 top-10">
                     <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
                 </div>
 
-                <div className="fixed left-10 bottom-6 space-y-2 hidden xl:block">
-                    <div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
-                    </div>
-                    <div className="flex gap-2">
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
-                    </div>
-                    <small className="block text-center">Caminar</small>
-                </div>
-
-                <div className="fixed left-60 bottom-6 space-y-2 hidden xl:block">
-                    <div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
-                    </div>
-
-                    <small className="block text-center">Correr</small>
-                </div>
-
-                <div className="fixed left-[410px] bottom-6 space-y-2 hidden xl:block">
-                    <div>
-                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">R</div>
-                    </div>
-
-                    <small className="block text-center">Restablecer</small>
-                </div>
-
-                <div className="fixed lg:right-10 left-0 right-0 mx-auto w-[432px] bottom-6 space-y-2">
-                    <div className="flex gap-2">
-                        <div
-                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
-                            }`}>
-                            <img src="/anfora/motor.png" />
+                {!activeForm && (
+                    <>
+                        <div className="fixed left-10 bottom-6 space-y-2 hidden xl:block">
+                            <div>
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">W</div>
+                            </div>
+                            <div className="flex gap-2">
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">A</div>
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">S</div>
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">D</div>
+                            </div>
+                            <small className="block text-center">Caminar</small>
                         </div>
 
-                        <div
-                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
-                            }`}>
+                        <div className="fixed left-60 bottom-6 space-y-2 hidden xl:block">
+                            <div>
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-40">Espacio</div>
+                            </div>
+
+                            <small className="block text-center">Correr</small>
+                        </div>
+
+                        <div className="fixed left-[410px] bottom-6 space-y-2 hidden xl:block">
+                            <div>
+                                <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">R</div>
+                            </div>
+
+                            <small className="block text-center">Restablecer</small>
+                        </div>
+
+                        <div className="fixed lg:right-10 left-0 right-0 mx-auto w-[432px] bottom-6 space-y-2">
+                            <div className="flex gap-2">
+                                <div
+                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                        motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/motor.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                        alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img
+                                        src="/anfora/ala.png"
+                                        className="relative bottom-0 right-[-22px] block w-8"
+                                    />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                        sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/navegacion.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                        panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img
+                                        src="/anfora/panel.png"
+                                        className="relative -bottom-4 -right-2 block"
+                                    />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                        combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img
+                                        src="/anfora/bidon.png"
+                                        className="w-10"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="fixed bottom-4 right-10 hover:opacity-80 transition-opacity select-none">
                             <img
-                                src="/anfora/ala.png"
-                                className="relative bottom-0 right-[-22px] block w-8"
+                                onClick={() => setShowMap(!showMap)}
+                                src="/satelite.png"
+                                className="w-32"
                             />
                         </div>
-
-                        <div
-                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
-                            }`}>
-                            <img src="/anfora/navegacion.png" />
-                        </div>
-
-                        <div
-                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
-                            }`}>
-                            <img
-                                src="/anfora/panel.png"
-                                className="relative -bottom-4 -right-2 block"
-                            />
-                        </div>
-
-                        <div
-                            className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
-                            }`}>
-                            <img
-                                src="/anfora/bidon.png"
-                                className="w-10"
-                            />
-                        </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </div>
 
             <AnforaForm handleSubmit={handleSubmit} />
