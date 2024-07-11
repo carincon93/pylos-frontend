@@ -33,8 +33,8 @@ export const CharacterController = () => {
     const activeForm = useGameStore((state) => state.activeForm)
 
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
-        WALK_SPEED: { value: 0.8, min: 0.1, max: 4, step: 0.1 },
-        RUN_SPEED: { value: 1, min: 0.2, max: 4, step: 0.06 },
+        WALK_SPEED: { value: 1, min: 0.1, max: 4, step: 0.1 },
+        RUN_SPEED: { value: 2, min: 0.2, max: 4, step: 0.06 },
         ROTATION_SPEED: {
             value: degToRad(0.1),
             min: degToRad(0.1),
@@ -57,6 +57,7 @@ export const CharacterController = () => {
     const cameraLookAt = useRef(new Vector3())
     const [, get] = useKeyboardControls()
     const isClicking = useRef(false)
+    const showMap = useGameStore((state) => state.showMap)
 
     const [lastMovementTime, setLastMovementTime] = useState(Date.now())
 
@@ -141,7 +142,7 @@ export const CharacterController = () => {
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
-            if (isClicking.current && activeForm == false && process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false') {
+            if (isClicking.current && activeForm == false && process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false' && !showMap) {
                 // console.log('clicking', mouse.x, mouse.y)
                 if (Math.abs(mouse.x) > 0.1) {
                     movement.x = -mouse.x
@@ -180,7 +181,7 @@ export const CharacterController = () => {
             rb.current.setLinvel(vel, true)
         }
 
-        if (process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false') {
+        if (process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false' && !showMap) {
             // CAMERA
             container.current.rotation.y = MathUtils.lerp(container.current.rotation.y, rotationTarget.current, 0.1)
 
