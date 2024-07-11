@@ -16,6 +16,7 @@ const keyboardMap = [
     { name: 'backward', keys: ['ArrowDown', 'KeyS'] },
     { name: 'left', keys: ['ArrowLeft', 'KeyA'] },
     { name: 'right', keys: ['ArrowRight', 'KeyD'] },
+    { name: 'reset', keys: ['KeyR'] },
     { name: 'run', keys: ['Space'] },
 ]
 
@@ -48,6 +49,11 @@ function Anfora() {
         document.body.classList.add('overflow-hidden')
         document.body.classList.add('touch-none')
         document.body.classList.add('select-none')
+        const element = document.getElementById('app-menu')
+        if (element) {
+            element.remove()
+        }
+
         setInGame(true)
     }, [])
 
@@ -109,6 +115,14 @@ function Anfora() {
                     </div>
 
                     <small className="block text-center">Correr</small>
+                </div>
+
+                <div className="fixed left-[410px] bottom-6 space-y-2 hidden xl:block">
+                    <div>
+                        <div className="text-2xl text-red-100 font-black text-center border-2 rounded-xl p-2 border-red-100 mx-auto w-14">R</div>
+                    </div>
+
+                    <small className="block text-center">Restablecer</small>
                 </div>
 
                 <div className="fixed lg:right-10 left-0 right-0 mx-auto w-[432px] bottom-6 space-y-2">
