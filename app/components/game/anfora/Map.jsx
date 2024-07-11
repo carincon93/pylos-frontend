@@ -41,26 +41,27 @@ export const Map = ({ ...props }) => {
                 }}
             /> */}
 
-            {/* <MotorModel
+            <MotorModel
                 scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
-            <PanelModel
+            {/*   <PanelModel
                 scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
+            */}
 
             <BidonModel
                 scale={0.2}
                 onClick={() => {
                     setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
-            /> */}
+            />
 
             <NavegacionModel
                 scale={0.3}

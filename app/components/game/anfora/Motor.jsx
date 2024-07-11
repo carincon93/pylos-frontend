@@ -12,8 +12,8 @@ export function MotorModel(props) {
                 receiveShadow
                 geometry={nodes.Motor.geometry}
                 material={nodes.Motor.material}
-                rotation={[1.543, 0, 5]}
-                position={[-35, -2, -25]}
+                rotation={[1.543, 0.2, 5]}
+                position={[-95, -19.2, -25]}
                 scale={[1, 1.485, 1.005]}
             />
         </group>

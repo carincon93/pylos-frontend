@@ -12,8 +12,8 @@ export function BidonModel(props) {
                 receiveShadow
                 geometry={nodes.Bidón.geometry}
                 material={nodes.Bidón.material}
-                rotation={[0, 2, 0]}
-                position={[46, -3.4, -60]}
+                rotation={[1.46, -0.1, 0]}
+                position={[46, -18.5, -60]}
                 scale={[1, 1, 0.28]}
             />
         </group>
