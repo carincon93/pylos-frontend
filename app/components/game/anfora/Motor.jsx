@@ -1,21 +1,28 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { StoneModel } from './Stone'
+import { useGameStore } from '@/lib/store'
 
 export function MotorModel(props) {
     const { nodes, materials } = useGLTF('/models/Motor.glb')
+    const showMap = useGameStore((state) => state.showMap)
+
     return (
         <group
             {...props}
             dispose={null}>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={nodes.Motor.geometry}
-                material={nodes.Motor.material}
-                rotation={[1.543, 0.4, 5]}
-                position={[-95, -19.2, -25]}
-                scale={[1, 1.485, 1.005]}
-            />
+            <group
+                position={[-205, -55.4, -5]}
+                scale={[1, 1.485, 1.005]}>
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Motor.geometry}
+                    material={nodes.Motor.material}
+                    rotation={[1.543, 0.4, 5]}
+                />
+                {showMap && <StoneModel scale={50} />}
+            </group>
         </group>
     )
 }
