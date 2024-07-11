@@ -41,7 +41,7 @@ export const Map = ({ ...props }) => {
                 }}
             /> */}
 
-            <MotorModel
+            {/* <MotorModel
                 scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
@@ -60,7 +60,7 @@ export const Map = ({ ...props }) => {
                 onClick={() => {
                     setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
-            />
+            /> */}
 
             <NavegacionModel
                 scale={0.3}
