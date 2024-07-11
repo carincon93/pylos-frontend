@@ -28,11 +28,9 @@ const CameraComponent = () => {
 }
 
 export const AnforaExperience = () => {
-    const shadowCameraRef = useRef()
-
     return (
         <>
-            {/* <CameraComponent /> */}
+            {process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'true' && <CameraComponent />}
             <Environment preset="sunset" />
             <directionalLight
                 intensity={0.65}
@@ -42,7 +40,7 @@ export const AnforaExperience = () => {
                 shadow-mapSize-height={2048}
                 shadow-bias={-0.00005}></directionalLight>
             <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                <Map position={[0, -0.8, 1]} />
+                <Map position={[0, -68.5, 1]} />
                 <CharacterController />
             </Physics>
         </>

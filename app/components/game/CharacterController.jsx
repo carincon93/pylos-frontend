@@ -133,7 +133,7 @@ export const CharacterController = () => {
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
-            if (isClicking.current && activeForm == false) {
+            if (isClicking.current && activeForm == false && process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false') {
                 // console.log('clicking', mouse.x, mouse.y)
                 if (Math.abs(mouse.x) > 0.1) {
                     movement.x = -mouse.x
@@ -172,17 +172,19 @@ export const CharacterController = () => {
             rb.current.setLinvel(vel, true)
         }
 
-        // CAMERA
-        container.current.rotation.y = MathUtils.lerp(container.current.rotation.y, rotationTarget.current, 0.1)
+        if (process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false') {
+            // CAMERA
+            container.current.rotation.y = MathUtils.lerp(container.current.rotation.y, rotationTarget.current, 0.1)
 
-        cameraPosition.current.getWorldPosition(cameraWorldPosition.current)
-        camera.position.lerp(cameraWorldPosition.current, 0.1)
+            cameraPosition.current.getWorldPosition(cameraWorldPosition.current)
+            camera.position.lerp(cameraWorldPosition.current, 0.1)
 
-        if (cameraTarget.current) {
-            cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current)
-            cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.1)
+            if (cameraTarget.current) {
+                cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current)
+                cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.1)
 
-            camera.lookAt(cameraLookAt.current)
+                camera.lookAt(cameraLookAt.current)
+            }
         }
     })
 
