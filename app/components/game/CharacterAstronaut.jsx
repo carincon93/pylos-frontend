@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { StoneModel } from './anfora/Stone'
+import { useGameStore } from '@/lib/store'
 
 export function CharacterAstronaut({ animation, ...props }) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/models/CharacterAstronaut.glb')
     const { actions } = useAnimations(animations, group)
+    const showMap = useGameStore((state) => state.showMap)
 
     useEffect(() => {
         actions[animation].reset().fadeIn(0.2).play()
@@ -30,6 +33,8 @@ export function CharacterAstronaut({ animation, ...props }) {
                     />
                     <primitive object={nodes.mixamorigHips} />
                 </group>
+
+                {showMap && <StoneModel scale={280} />}
             </group>
         </group>
     )
