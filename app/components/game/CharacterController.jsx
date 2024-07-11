@@ -104,7 +104,11 @@ export const CharacterController = () => {
         const interval = setInterval(() => {
             if (Date.now() - lastMovementTime > 1000) {
                 const position = rb.current.translation()
-                localStorage.setItem('player_position', JSON.stringify(position))
+                if (position.y > -4) {
+                    localStorage.setItem('player_position', JSON.stringify(position))
+                } else {
+                    localStorage.setItem('player_position', JSON.stringify({ x: 0.08445417135953903, y: -1.3680016994476318, z: 3.83317494392395 }))
+                }
             }
         }, 1000)
 
@@ -129,6 +133,10 @@ export const CharacterController = () => {
                 movement.z = -1
 
                 setLastMovementTime(Date.now())
+            }
+
+            if (get().reset) {
+                rb.current.setTranslation({ x: 0.08445417135953903, y: -1.3680016994476318, z: 3.83317494392395 }, true)
             }
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
