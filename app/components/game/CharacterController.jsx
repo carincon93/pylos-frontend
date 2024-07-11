@@ -105,7 +105,8 @@ export const CharacterController = () => {
         const interval = setInterval(() => {
             if (Date.now() - lastMovementTime > 1000) {
                 const position = rb.current.translation()
-                if (position.y > -4) {
+                console.log(position)
+                if (position.y > -18) {
                     localStorage.setItem('player_position', JSON.stringify(position))
                 } else {
                     localStorage.setItem('player_position', JSON.stringify({ x: 0.08445417135953903, y: -1.3680016994476318, z: 3.83317494392395 }))
