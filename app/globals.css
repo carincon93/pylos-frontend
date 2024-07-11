@@ -207,7 +207,9 @@ button[role='combobox'] {
 .ipad {
     position: fixed;
     top: var(--ipad-y);
-    left: var(--ipad-x);
+    left: 0;
+    right: 0;
+    margin: auto;
     z-index: 15;
     width: var(--ipad-width);
     height: var(--ipad-height);
