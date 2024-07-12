@@ -56,6 +56,12 @@ function Anfora() {
         document.body.classList.add('overflow-hidden')
         document.body.classList.add('touch-none')
         document.body.classList.add('select-none')
+        const infoPopupStorage = localStorage.getItem('info_popup')
+
+        if (!infoPopupStorage) {
+            setShowInfoPopup(true)
+        }
+
         const element = document.getElementById('app-menu')
         if (element) {
             element.remove()
@@ -152,11 +158,10 @@ function Anfora() {
                             <AlertDialogContent>
                                 <AlertDialogHeader>
                                     <AlertDialogTitle></AlertDialogTitle>
-                                    <h1 className="text-center text-2xl font-semibold !mb-4">Objetivo</h1>
+                                    <h1 className="text-center text-2xl font-semibold !mb-4">¡Ayuda a reparar la nave Nebulón!</h1>
 
-                                    <p className="text-sm">
-                                        <span className="block text-center mb-4">¡Ayuda a reparar la nave Nebulón!</span> Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el
-                                        planeta Ánfora.
+                                    <div className="text-sm">
+                                        Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el planeta Ánfora.
                                         <ol className="list-decimal mt-4 pl-4">
                                             <li>
                                                 <strong>Explora el planeta Ánfora:</strong> Busca las partes perdidas de la nave mientras exploras este increíble planeta.
@@ -189,13 +194,13 @@ function Anfora() {
                                             </li>
                                         </ol>
                                         <strong className="block mt-4 text-center">¡Diviértete explorando y reparando la nave Nebulón!</strong>
-                                    </p>
+                                    </div>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter className="mt-10">
                                     <AlertDialogCancel
                                         className="text-white w-full"
                                         onClick={() => {
-                                            setClickDisabled(false), setShowInfoPopup(false)
+                                            localStorage.setItem('info_popup', 'opened'), setClickDisabled(false), setShowInfoPopup(false)
                                         }}>
                                         Entendido
                                     </AlertDialogCancel>
