@@ -17,6 +17,7 @@ const Form = ({ handleSubmit }) => {
     const [startY, setStartY] = useState(0)
     const [translateY, setTranslateY] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
+    const [showReading, setShowReading] = useState(false)
 
     useEffect(() => {
         if (activeForm) {
@@ -233,7 +234,7 @@ const Form = ({ handleSubmit }) => {
                     style={{ transform: 'rotate(25deg)' }}></div>
             </figure>
 
-            <div className="screen bg-secondary overflow-y-auto">
+            <div className="screen bg-secondary shadow-inner shadow-sky-300 overflow-y-auto">
                 <div className="px-8 py-2 text-xs flex items-center justify-between z-10 relative">
                     <span>04:12</span>
                     <span className="flex items-center justify-center">
@@ -266,21 +267,28 @@ const Form = ({ handleSubmit }) => {
                         </svg>
                     </span>
                 </div>
-                <div className={`p-6 bg-pylos-700 text-white rounded-2xl mx-8 transition-transform ${translateY > -5 ? '' : '-translate-y-60'}`}>
+                <div className={`p-6 bg-pylos-700 text-white rounded-2xl mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-20' : '-translate-y-[300px]'}`}>
                     <div className="flex items-center">
                         <span className="bg-[url('/estados.png')] size-10 inline-block bg-no-repeat bg-[-43px_-42px] bg-[length:86px] mr-2"></span>
-                        <span className="capitalize font-medium">¡Hola {profileUserData?.nombre}!</span>
+                        <span className="capitalize font-medium text-2xl">¡Hola {profileUserData?.nombre}!</span>
                     </div>
 
-                    <p className="text-sm mt-2 text-gray-200 leading-5">
+                    <p
+                        className="text-sm mt-2 text-gray-200 leading-5"
+                        onClick={() => setShowReading(true)}>
                         ¡Genial 😊! Haz encontrado una parte de Nebulón. Lastimosamente está dañada 😒. Para poder repararla debes leer atentamente la siguiente lectura y responder correctamente las{' '}
                         {readingSelected?.questions?.length} preguntas. ¡Tu puedes!.
+                        <br />
+                        <br />
+                        <strong>Clic aquí para mostrar la lectura.</strong>
                     </p>
                 </div>
 
                 <div
                     className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-800 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
-                    onClick={() => setActiveForm(false)}>
+                    onClick={() => {
+                        setActiveForm(false), setShowReading(false)
+                    }}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -297,19 +305,17 @@ const Form = ({ handleSubmit }) => {
                 </div>
 
                 <div
-                    className="ipad-content"
+                    className={`ipad-content transition-transform transform ${showReading ? 'translate-x-[0px]' : 'translate-x-[500px]'} `}
                     onTouchStart={handleTouchStart}
                     onTouchMove={handleTouchMove}
                     onMouseDown={handleDragStart}
                     onMouseMove={handleDrag}
                     onMouseUp={handleDragEnd}
                     ref={contentRef}>
-                    <div
-                        className="mt-10"
-                        style={{ transform: `translateY(${translateY}px)` }}>
+                    <div style={{ transform: `translateY(${translateY - 150}px)` }}>
                         <div className="px-10">
-                            <h1 className="text-center font-[cursive] mb-6 font-semibold text-lg">{readingSelected.title}</h1>
-                            <p className="font-[cursive]">{readingSelected.text}</p>
+                            <h1 className="text-center mb-6 font-semibold text-lg">{readingSelected.title}</h1>
+                            <p className="leading-5">{readingSelected.text}</p>
                             <p className="text-sm text-right mt-4 text-white/70">{readingSelected.author}</p>
                         </div>
 
@@ -318,7 +324,7 @@ const Form = ({ handleSubmit }) => {
                                 <div
                                     key={i}
                                     className="my-20">
-                                    <p className="font-[cursive] mb-6 font-semibold">{question.text}</p>
+                                    <p className="mb-6 font-semibold text-center">{question.text}</p>
                                     <div className="w-full">
                                         {question.answers.map((answer) => (
                                             <button
