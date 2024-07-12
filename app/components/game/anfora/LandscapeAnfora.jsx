@@ -222,6 +222,13 @@ export function LandscapeAnforaModel(props) {
             <MotorModel
                 scale={0.3}
                 onClick={() => {
+                    setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
+                }}
+            />
+
+            <NavegacionModel
+                scale={0.3}
+                onClick={() => {
                     setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
@@ -235,13 +242,6 @@ export function LandscapeAnforaModel(props) {
 
             <BidonModel
                 scale={0.2}
-                onClick={() => {
-                    setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
-                }}
-            />
-
-            <NavegacionModel
-                scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
