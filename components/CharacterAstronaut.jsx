@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { StoneModel } from './anfora/Stone'
+import { StoneModel } from '../app/juego/anfora/components/Stone'
 import { useGameStore } from '@/lib/store'
 
 export function CharacterAstronaut({ animation, ...props }) {

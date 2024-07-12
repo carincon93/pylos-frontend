@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { getProfile } from '@/lib/actions'
-import { useContextData } from '../context/AppContext'
-import LoadingOverlay from '../loading'
+import { useContextData } from '../app/context/AppContext'
+import LoadingOverlay from '../app/loading'
 
 export function NavigationEvents() {
     const pathname = usePathname()

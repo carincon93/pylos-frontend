@@ -1,4 +1,5 @@
 import { useContextData } from '@/app/context/AppContext'
+import { Button } from '@/components/ui/button'
 import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -342,26 +343,26 @@ const Form = ({ handleSubmit }) => {
                                 </div>
                             ))}
 
-                            <button
-                                className="rounded-full border border-white p-2 mx-auto w-32 block hover:bg-white/30"
+                            <Button
+                                className="w-full"
                                 onClick={() => checkAnswers()}>
-                                Enviar
-                            </button>
+                                Enviar respuestas
+                            </Button>
                         </div>
                     </div>
-                    <div
-                        className={`absolute w-52 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow z-10 p-2 transition-transform ${
-                            translateY == 0 ? '' : 'translate-y-60'
-                        }`}>
-                        Desliza hacia abajo
-                    </div>
+                </div>
+                <div
+                    className={`absolute w-52 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow z-10 p-2 transform transition-transform ${
+                        translateY == 0 && showReading ? '-translate-y-20' : 'translate-y-60'
+                    }`}>
+                    Desliza hacia abajo
+                </div>
 
-                    <div
-                        className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow text-sm z-10 p-2 transition-transform ${
-                            errorMessage ? '' : 'translate-y-60'
-                        }`}>
-                        Tiene respuestas erróneas
-                    </div>
+                <div
+                    className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow text-sm z-10 p-2 transition-transform ${
+                        errorMessage ? '' : 'translate-y-60'
+                    }`}>
+                    Tiene respuestas erróneas
                 </div>
             </div>
         </section>

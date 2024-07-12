@@ -1,4 +1,4 @@
-import { CharacterController } from '../CharacterController'
+import { CharacterController } from '../../../../components/CharacterController'
 import { useRef } from 'react'
 import { Environment, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
