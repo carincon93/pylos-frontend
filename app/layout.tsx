@@ -9,7 +9,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { Suspense } from 'react'
 import LoadingOverlay from './loading'
-import { NavigationEvents } from './components/navigation-events'
+import { NavigationEvents } from '../components/navigation-events'
 import type { Viewport } from 'next'
 
 const fontSans = FontSans({

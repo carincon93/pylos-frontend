@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Logo } from './components/Logo'
-import { Isotipo } from './components/Isotipo'
+import { Logo } from '../components/Logo'
+import { Isotipo } from '../components/Isotipo'
 import { HOME_ROUTE, EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
 
 export default function Home() {

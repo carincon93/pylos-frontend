@@ -1,8 +1,8 @@
 'use client'
 
-import { AnforaExperience } from '@/app/components/game/anfora/AnforaExperience'
-import AnforaForm from '@/app/components/game/anfora/Form'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
+import { AnforaExperience } from './components/AnforaExperience'
+import AnforaForm from './components/Form'
+import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { saveObjetoNaveReparado } from '@/lib/actions'
 import { ObjetoNaveReparado } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'

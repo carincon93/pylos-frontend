@@ -1,4 +1,4 @@
-import BackgroundStars from '@/app/components/BackgroundStars'
+import BackgroundStars from '@/components/BackgroundStars'
 import Prueba from './_prueba'
 
 import { Metadata } from 'next'

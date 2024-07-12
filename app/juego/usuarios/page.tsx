@@ -1,11 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-import { Isotipo } from '@/app/components/Isotipo'
-import { Logo } from '@/app/components/Logo'
+import { Isotipo } from '@/components/Isotipo'
+import { Logo } from '@/components/Logo'
 import TablaPosiciones from './_tabla-posiciones'
 import TablaResultados from './_tabla-resultados'
 import { Metadata } from 'next'
-import BackgroundStars from '@/app/components/BackgroundStars'
+import BackgroundStars from '@/components/BackgroundStars'
 
 interface Props {
     searchParams: {
