@@ -1,12 +1,11 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useGameStore } from '@/lib/store'
+import { RigidBody } from '@react-three/rapier'
 import { MotorModel } from './Motor'
+import { NavegacionModel } from './Navegacion'
 import { PanelModel } from './Panel'
 import { BidonModel } from './Bidon'
-import { NavegacionModel } from './Navegacion'
-import { RigidBody } from '@react-three/rapier'
-import { useGameStore } from '@/lib/store'
-import { StoneModel } from './Stone'
 
 export function LandscapeAnforaModel(props) {
     const { nodes, materials } = useGLTF('/models/LandscapeAnfora.glb')
@@ -51,8 +50,8 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.Plane004.geometry}
                     material={materials['Desert.001']}
-                    position={[1.806, 1.904, -2.758]}
-                    rotation={[2.495, 0.792, -2.829]}
+                    position={[0.084, 2.944, -2.102]}
+                    rotation={[2.79, 0.718, -2.933]}
                     scale={[6.297, 2.4, 2.4]}
                 />
                 <group
@@ -94,8 +93,8 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.Plane003.geometry}
                     material={materials.Desert}
-                    position={[3.023, 2.124, -2.059]}
-                    rotation={[1.399, 1.127, -1.561]}
+                    position={[1.382, 2.866, -1.885]}
+                    rotation={[1.996, 1.264, -2.096]}
                     scale={[6.297, 2.4, 2.4]}
                 />
                 <group

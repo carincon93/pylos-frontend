@@ -11,7 +11,7 @@ export function NavegacionModel(props) {
         <group
             {...props}
             dispose={null}>
-            <group position={[250, -91, -50.4]}>
+            <group position={[100, -35.1, -100]}>
                 <mesh
                     castShadow
                     receiveShadow
