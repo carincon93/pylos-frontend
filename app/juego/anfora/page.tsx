@@ -30,6 +30,8 @@ function Anfora() {
     const setInGame = useGameStore((state) => state.setInGame)
     const setShowMap = useGameStore((state) => state.setShowMap)
     const showMap = useGameStore((state) => state.showMap)
+    const clickDisabled = useGameStore((state) => state.clickDisabled)
+    const setClickDisabled = useGameStore((state) => state.setClickDisabled)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const alaItem = objetosNaveReparados?.find((item) => item.objeto === 'ala')
@@ -84,7 +86,8 @@ function Anfora() {
                 <Canvas
                     shadows
                     camera={{ fov: 40, position: [20, 20, 20] }}
-                    style={{ height: '100vh' }}>
+                    style={{ height: '100vh' }}
+                    onMouseOver={() => setClickDisabled(false)}>
                     <color
                         attach="background"
                         args={['#9104a4']}
@@ -98,7 +101,9 @@ function Anfora() {
             </KeyboardControls>
 
             {/* UI */}
-            <div className="select-none">
+            <div
+                className="select-none"
+                onMouseOver={() => setClickDisabled(true)}>
                 <div className="fixed left-10 top-10">
                     <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
                 </div>
@@ -107,7 +112,8 @@ function Anfora() {
                     <>
                         <div
                             className="fixed left-10 bottom-6 space-y-2 hover:opacity-60 transition-opacity"
-                            onClick={() => setShowInfoPopup(true)}>
+                            onClick={() => setShowInfoPopup(true)}
+                            onMouseOver={() => setClickDisabled(true)}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -125,7 +131,8 @@ function Anfora() {
 
                         <div
                             className="fixed left-28 bottom-6 space-y-2 hover:opacity-60 transition-opacity"
-                            onClick={() => setShowControlsPopup(true)}>
+                            onClick={() => setShowControlsPopup(true)}
+                            onMouseOver={() => setClickDisabled(true)}>
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -187,7 +194,9 @@ function Anfora() {
                                 <AlertDialogFooter className="mt-10">
                                     <AlertDialogCancel
                                         className="text-white w-full"
-                                        onClick={() => setShowInfoPopup(false)}>
+                                        onClick={() => {
+                                            setClickDisabled(false), setShowInfoPopup(false)
+                                        }}>
                                         Entendido
                                     </AlertDialogCancel>
                                 </AlertDialogFooter>
@@ -233,7 +242,9 @@ function Anfora() {
                                 <AlertDialogFooter className="mt-10">
                                     <AlertDialogCancel
                                         className="text-white w-full"
-                                        onClick={() => setShowControlsPopup(false)}>
+                                        onClick={() => {
+                                            setClickDisabled(false), setShowControlsPopup(false)
+                                        }}>
                                         Entendido
                                     </AlertDialogCancel>
                                 </AlertDialogFooter>
@@ -288,6 +299,8 @@ function Anfora() {
                         <div className="fixed bottom-4 right-10 hover:opacity-80 transition-opacity select-none">
                             <img
                                 onClick={() => setShowMap(!showMap)}
+                                onMouseOver={() => setClickDisabled(true)}
+                                onMouseLeave={() => setClickDisabled(false)}
                                 src="/satelite.png"
                                 className={`${showMap ? 'grayscale' : ''} w-32`}
                             />

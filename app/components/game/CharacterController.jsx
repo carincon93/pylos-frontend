@@ -58,6 +58,7 @@ export const CharacterController = () => {
     const [, get] = useKeyboardControls()
     const isClicking = useRef(false)
     const showMap = useGameStore((state) => state.showMap)
+    const clickDisabled = useGameStore((state) => state.clickDisabled)
 
     const [lastMovementTime, setLastMovementTime] = useState(Date.now())
 
@@ -105,7 +106,6 @@ export const CharacterController = () => {
         const interval = setInterval(() => {
             if (Date.now() - lastMovementTime > 1000) {
                 const position = rb.current.translation()
-                console.log(position)
                 if (position.y > -18) {
                     localStorage.setItem('player_position', JSON.stringify(position))
                 } else {
@@ -143,7 +143,7 @@ export const CharacterController = () => {
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
 
-            if (isClicking.current && activeForm == false && process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false' && !showMap) {
+            if (isClicking.current && activeForm == false && process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false' && !showMap && !clickDisabled) {
                 // console.log('clicking', mouse.x, mouse.y)
                 if (Math.abs(mouse.x) > 0.1) {
                     movement.x = -mouse.x
