@@ -11,6 +11,7 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
+import LoadingScreen from '@/components/LoadingScreen'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -20,6 +21,8 @@ const keyboardMap = [
     { name: 'reset', keys: ['KeyR'] },
     { name: 'run', keys: ['Space'] },
 ]
+
+const audio = new Audio('/audios/game-music-loop-6.mp3')
 
 function Anfora() {
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
@@ -41,6 +44,7 @@ function Anfora() {
     const [showTablet, setShowTablet] = useState(false)
     const [showInfoPopup, setShowInfoPopup] = useState(false)
     const [showControlsPopup, setShowControlsPopup] = useState(false)
+    const [start, setStart] = useState(false)
 
     useEffect(() => {
         setReadings(readings)
@@ -70,6 +74,13 @@ function Anfora() {
         setInGame(true)
     }, [])
 
+    useEffect(() => {
+        if (start) {
+            // audio.play()
+            // audio.loop = true
+        }
+    }, [start])
+
     const handleSubmit = async (object: string) => {
         const data: Partial<ObjetoNaveReparado> = {
             planeta: 'anfora',
@@ -98,11 +109,15 @@ function Anfora() {
                         attach="background"
                         args={['#9104a4']}
                     />
-                    <Suspense>
+                    <Suspense fallback={null}>
                         <SoftShadows size={42} />
                         <AnforaExperience />
                     </Suspense>
                 </Canvas>
+                <LoadingScreen
+                    started={start}
+                    onStarted={setStart}
+                />
                 <Stats />
             </KeyboardControls>
 
