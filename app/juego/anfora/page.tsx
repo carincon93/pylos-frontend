@@ -22,7 +22,7 @@ const keyboardMap = [
     { name: 'run', keys: ['Space'] },
 ]
 
-const audio = new Audio('/audios/game-music-loop-6.mp3')
+// const audio = new Audio('/audios/game-music-loop-6.mp3')
 
 function Anfora() {
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
@@ -74,12 +74,12 @@ function Anfora() {
         setInGame(true)
     }, [])
 
-    useEffect(() => {
-        if (start) {
-            // audio.play()
-            // audio.loop = true
-        }
-    }, [start])
+    // useEffect(() => {
+    //     if (start) {
+    //         audio.play()
+    //         audio.loop = true
+    //     }
+    // }, [start])
 
     const handleSubmit = async (object: string) => {
         const data: Partial<ObjetoNaveReparado> = {
