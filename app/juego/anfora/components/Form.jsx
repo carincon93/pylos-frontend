@@ -84,6 +84,9 @@ const Form = ({ handleSubmit }) => {
     const checkAnswers = () => {
         if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
             handleSubmit(object)
+            setShowReading(false)
+
+            return
         } else {
             setShowErrorMessage(true)
 
@@ -286,7 +289,7 @@ const Form = ({ handleSubmit }) => {
                 </div>
 
                 <div
-                    className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-800 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
+                    className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-900 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
                     onClick={() => {
                         setActiveForm(false), setShowReading(false)
                     }}>
@@ -334,7 +337,7 @@ const Form = ({ handleSubmit }) => {
                                                     handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
                                                 }}
                                                 className={`btn b-1 ${
-                                                    answers.find((item) => item.questionId == question.id)?.optionsSelected == answer.id ? 'bg-pylos-800 !text-white' : 'bg-purple-100'
+                                                    answers.find((item) => item.questionId == question.id)?.optionsSelected == answer.id ? 'bg-pylos-900 !text-white' : 'bg-purple-100'
                                                 }  leading-4 text-xs block !w-full my-4`}>
                                                 {answer.text}
                                             </button>
@@ -345,21 +348,23 @@ const Form = ({ handleSubmit }) => {
 
                             <Button
                                 className="w-full"
-                                onClick={() => checkAnswers()}>
+                                onClick={() => {
+                                    checkAnswers()
+                                }}>
                                 Enviar respuestas
                             </Button>
                         </div>
                     </div>
                 </div>
                 <div
-                    className={`absolute w-52 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow z-10 p-2 transform transition-transform ${
+                    className={`absolute w-52 h-10 mx-auto text-center text-sm bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow-inner shadow-gray-200 z-10 p-2 transform transition-transform ${
                         translateY == 0 && showReading ? '-translate-y-20' : 'translate-y-60'
                     }`}>
                     Desliza hacia abajo
                 </div>
 
                 <div
-                    className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow text-sm z-10 p-2 transition-transform ${
+                    className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow-inner shadow-red-400 text-sm z-10 p-2 transition-transform ${
                         errorMessage ? '' : 'translate-y-60'
                     }`}>
                     Tiene respuestas erróneas
