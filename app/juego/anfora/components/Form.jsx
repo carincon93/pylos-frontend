@@ -96,6 +96,8 @@ const Form = ({ handleSubmit }) => {
         }
     }
 
+    const ITEMS = ['motor', 'navegacion', 'panel', 'ala', 'bidon']
+
     return (
         <section className={`ipad select-none ${activeForm ? 'visible' : 'invisible'}`}>
             <figure className="ipad-case"></figure>
@@ -239,7 +241,7 @@ const Form = ({ handleSubmit }) => {
             </figure>
 
             <div className="screen bg-secondary shadow-inner shadow-sky-300 overflow-y-auto">
-                <div className="px-8 py-2 text-xs flex items-center justify-between z-10 relative">
+                <div className="px-8 py-2 text-xs flex items-center justify-between z-10 relative bg-[#38bdf8]/30 backdrop-blur">
                     <span>04:12</span>
                     <span className="flex items-center justify-center">
                         <svg
@@ -277,15 +279,24 @@ const Form = ({ handleSubmit }) => {
                         <span className="capitalize font-medium text-2xl">¡Hola {profileUserData?.nombre}!</span>
                     </div>
 
-                    <p
-                        className="text-sm mt-2 text-gray-200 leading-5"
-                        onClick={() => setShowReading(true)}>
-                        ¡Genial 😊! Haz encontrado una parte de Nebulón. Lastimosamente está dañada 😒. Para poder repararla debes leer atentamente la siguiente lectura y responder correctamente las{' '}
+                    <p className="text-sm mt-2 text-gray-200 leading-5">
+                        ¡Genial 😊! Encontraste{' '}
+                        {selectedAnforaForm && (
+                            <img
+                                src={`/anfora/${ITEMS[selectedAnforaForm - 1]}.png`}
+                                className="w-6 inline-block mb-1"
+                            />
+                        )}{' '}
+                        que hace parte de Nebulón. Lastimosamente está dañada 😒. Para poder repararla debes leer atentamente la siguiente lectura y responder correctamente las{' '}
                         {readingSelected?.questions?.length} preguntas. ¡Tu puedes!.
-                        <br />
-                        <br />
-                        <strong>Clic aquí para mostrar la lectura.</strong>
                     </p>
+                </div>
+
+                <div
+                    className={`p-6 bg-gray-200 rounded-2xl text-black mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-32' : '-translate-y-[330px]'}`}
+                    onClick={() => setShowReading(true)}>
+                    <small>¡Tienes 1 nueva notificación!</small>
+                    <p className="text-sm leading-5 mt-2">Recibiste una nueva lectura. Abrir</p>
                 </div>
 
                 <div
@@ -357,17 +368,17 @@ const Form = ({ handleSubmit }) => {
                     </div>
                 </div>
                 <div
-                    className={`absolute w-52 h-10 mx-auto text-center text-sm bottom-[10px] left-0 right-0 rounded-full bg-white text-black shadow-inner shadow-gray-200 z-10 p-2 transform transition-transform ${
-                        translateY == 0 && showReading ? '-translate-y-20' : 'translate-y-60'
+                    className={`absolute w-80 h-10 mx-auto text-center text-sm top-10 left-0 right-0 rounded-full bg-white text-black shadow-inner shadow-gray-200 z-10 p-2 transform transition-transform ${
+                        translateY == 0 && showReading ? '' : '-translate-y-80'
                     }`}>
-                    Desliza hacia abajo
+                    Desliza hacia abajo con el clic del mouse
                 </div>
 
                 <div
                     className={`absolute w-72 h-10 mx-auto text-center bottom-[10px] left-0 right-0 rounded-full bg-red-200 text-red-500 shadow-inner shadow-red-400 text-sm z-10 p-2 transition-transform ${
                         errorMessage ? '' : 'translate-y-60'
                     }`}>
-                    Tiene respuestas erróneas
+                    Tienes respuestas erróneas
                 </div>
             </div>
         </section>
