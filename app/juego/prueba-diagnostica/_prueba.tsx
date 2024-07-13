@@ -96,7 +96,7 @@ export default function Prueba() {
     }
 
     if (progress == 100) {
-        return <LoadingOverlay className="bg-pylos-800" />
+        return <LoadingOverlay className="bg-pylos-900" />
     }
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {

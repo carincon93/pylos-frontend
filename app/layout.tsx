@@ -46,7 +46,7 @@ export default function RootLayout({
                         defaultTheme="system"
                         enableSystem
                         disableTransitionOnChange>
-                        <Suspense fallback={<LoadingOverlay className="bg-pylos-800" />}>
+                        <Suspense fallback={<LoadingOverlay className="bg-pylos-900" />}>
                             {children}
                             <NavigationEvents />
                         </Suspense>
