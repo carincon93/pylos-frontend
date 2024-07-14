@@ -225,7 +225,7 @@ button[role='combobox'] {
 
 .ipad.invisible {
     transition: transform 0.7s cubic-bezier(1, -0.235, 0.525, 0.905);
-    transform: translate3d(0, 110%, 0) rotate(75deg);
+    transform: translate3d(0, 180%, 0) rotate(75deg);
 }
 
 .ipad-case {

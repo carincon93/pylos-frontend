@@ -132,7 +132,7 @@ function Anfora() {
                 {!activeForm && (
                     <>
                         <div
-                            className="fixed left-10 bottom-6 space-y-2 hover:opacity-60 transition-opacity"
+                            className="fixed bottom-32 left-2 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity"
                             onClick={() => setShowInfoPopup(true)}
                             onMouseOver={() => setClickDisabled(true)}>
                             <svg
@@ -141,7 +141,7 @@ function Anfora() {
                                 viewBox="0 0 24 24"
                                 strokeWidth="1.5"
                                 stroke="currentColor"
-                                className="size-12 text-white">
+                                className="size-10 sm:size-12 text-white">
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -151,7 +151,7 @@ function Anfora() {
                         </div>
 
                         <div
-                            className="fixed left-28 bottom-6 space-y-2 hover:opacity-60 transition-opacity"
+                            className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity"
                             onClick={() => setShowControlsPopup(true)}
                             onMouseOver={() => setClickDisabled(true)}>
                             <svg
@@ -159,7 +159,7 @@ function Anfora() {
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 stroke="currentColor"
-                                className="size-12 text-white">
+                                className="size-10 sm:size-12 text-white">
                                 <path
                                     d="M6.00014 11H10.0001M8.00014 9V13M15.0001 12H15.0101M18.0001 10H18.0101M10.4491 5H13.5512C16.1761 5 17.4885 5 18.5187 5.49743C19.4257 5.9354 20.1793 6.63709 20.6808 7.51059C21.2503 8.5027 21.3438 9.81181 21.5309 12.43L21.7769 15.8745C21.8975 17.5634 20.5599 19 18.8667 19C18.0008 19 17.1796 18.6154 16.6253 17.9502L16.2501 17.5C15.907 17.0882 15.7354 16.8823 15.54 16.7159C15.1305 16.3672 14.6346 16.1349 14.1045 16.0436C13.8516 16 13.5836 16 13.0476 16H10.9527C10.4167 16 10.1487 16 9.89577 16.0436C9.36563 16.1349 8.86981 16.3672 8.46024 16.7159C8.26487 16.8823 8.09329 17.0882 7.75013 17.5L7.37497 17.9502C6.82064 18.6154 5.99949 19 5.13359 19C3.44037 19 2.10275 17.5634 2.22339 15.8745L2.46942 12.43C2.65644 9.81181 2.74994 8.5027 3.31951 7.51059C3.82098 6.63709 4.57458 5.9354 5.48159 5.49743C6.51176 5 7.8242 5 10.4491 5Z"
                                     strokeWidth="1.5"
@@ -271,7 +271,7 @@ function Anfora() {
                             </AlertDialogContent>
                         </AlertDialog>
 
-                        <div className="fixed lg:right-10 left-0 right-0 mx-auto w-[432px] bottom-6 space-y-2">
+                        <div className="fixed lg:right-10 left-0 right-0 mx-auto sm:w-[432px] bottom-6 space-y-2">
                             <div className="flex gap-2">
                                 <div
                                     className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
@@ -316,13 +316,13 @@ function Anfora() {
                             </div>
                         </div>
 
-                        <div className="fixed bottom-4 right-10 hover:opacity-80 transition-opacity select-none">
+                        <div className="fixed bottom-32 sm:bottom-4 right-0 hover:opacity-80 transition-opacity select-none">
                             <img
                                 onClick={() => setShowMap(!showMap)}
                                 onMouseOver={() => setClickDisabled(true)}
                                 onMouseLeave={() => setClickDisabled(false)}
                                 src="/satelite.png"
-                                className={`${showMap ? 'grayscale' : ''} w-32`}
+                                className={`${showMap ? 'grayscale' : ''} w-20 sm:w-32`}
                             />
                         </div>
                     </>
