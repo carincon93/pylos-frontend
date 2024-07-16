@@ -206,6 +206,14 @@ function Anfora() {
                                                     />
                                                     Las partes estarán marcadas con este icono.
                                                 </div>
+
+                                                <div className="flex items-center mt-4">
+                                                    <img
+                                                        src="/user-marker.png"
+                                                        className="w-6 mx-5"
+                                                    />
+                                                    Posición del Pylonauta.
+                                                </div>
                                             </li>
                                         </ol>
                                         <strong className="block mt-4 text-center">¡Diviértete explorando y reparando la nave Nebulón!</strong>
