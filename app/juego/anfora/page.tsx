@@ -196,7 +196,7 @@ function Anfora() {
                                                         src="/satelite.png"
                                                         className="w-14 mr-2"
                                                     />
-                                                    Dando clic en el satélite puedes ubicar mejor las partes perdidas.
+                                                    Dando clic en el satélite puedes ubicar las partes perdidas.
                                                 </div>
 
                                                 <div className="flex items-center mt-4">
