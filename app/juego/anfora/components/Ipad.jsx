@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/button'
 import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 
-const Form = ({ handleSubmit }) => {
+const Ipad = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
+
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const readings = useGameStore((state) => state.readings)
@@ -96,7 +97,7 @@ const Form = ({ handleSubmit }) => {
         }
     }
 
-    const ITEMS = ['motor', 'navegacion', 'panel', 'ala', 'bidon']
+    const ITEMS = ['motor', 'navegacion', 'panel', 'reactor', 'bidon']
 
     return (
         <section className={`ipad select-none ${activeForm ? 'visible' : 'invisible'}`}>
@@ -385,4 +386,4 @@ const Form = ({ handleSubmit }) => {
     )
 }
 
-export default Form
+export default Ipad
