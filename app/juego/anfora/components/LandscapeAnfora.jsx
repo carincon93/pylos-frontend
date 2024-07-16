@@ -6,12 +6,14 @@ import { MotorModel } from './Motor'
 import { NavegacionModel } from './Navegacion'
 import { PanelModel } from './Panel'
 import { BidonModel } from './Bidon'
+import { ReactorModel } from './Reactor'
 
 export function LandscapeAnforaModel(props) {
     const { nodes, materials } = useGLTF('/models/LandscapeAnfora.glb')
     const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
+
     return (
         <RigidBody
             colliders="trimesh"
@@ -236,6 +238,13 @@ export function LandscapeAnforaModel(props) {
                 scale={0.3}
                 onClick={() => {
                     setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
+                }}
+            />
+
+            <ReactorModel
+                scale={0.2}
+                onClick={() => {
+                    setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
