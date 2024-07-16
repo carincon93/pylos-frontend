@@ -1,7 +1,7 @@
 'use client'
 
 import { AnforaExperience } from './components/AnforaExperience'
-import AnforaForm from './components/Form'
+import AnforaForm from './components/Ipad'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { saveObjetoNaveReparado } from '@/lib/actions'
 import { ObjetoNaveReparado } from '@/types/MyTypes'
@@ -37,7 +37,7 @@ function Anfora() {
     const setClickDisabled = useGameStore((state) => state.setClickDisabled)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
-    const alaItem = objetosNaveReparados?.find((item) => item.objeto === 'ala')
+    const reactorItem = objetosNaveReparados?.find((item) => item.objeto === 'reactor')
     const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'sistema de navegación')
     const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel solar')
     const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'combustible')
@@ -282,12 +282,9 @@ function Anfora() {
 
                                 <div
                                     className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
-                                        alaItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
+                                        reactorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
-                                    <img
-                                        src="/anfora/ala.png"
-                                        className="relative bottom-0 right-[-22px] block w-8"
-                                    />
+                                    <img src="/anfora/reactor.png" />
                                 </div>
 
                                 <div
