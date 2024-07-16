@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { StoneModel } from '../app/juego/anfora/components/Stone'
+import { UserMarkerModel } from '../app/juego/anfora/components/UserMarker'
 import { useGameStore } from '@/lib/store'
 
 export function CharacterAstronaut({ animation, ...props }) {
@@ -34,7 +34,7 @@ export function CharacterAstronaut({ animation, ...props }) {
                     <primitive object={nodes.mixamorigHips} />
                 </group>
 
-                {showMap && <StoneModel scale={280} />}
+                {showMap && <UserMarkerModel scale={200} />}
             </group>
         </group>
     )

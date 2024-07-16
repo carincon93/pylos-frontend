@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useGameStore } from '@/lib/store'
-import { StoneModel } from './Stone'
+import { MarkerModel } from './Marker'
 
 export function ReactorModel(props) {
     const { nodes, materials } = useGLTF('/models/Reactor.glb')
@@ -21,7 +21,7 @@ export function ReactorModel(props) {
                     rotation={[1.2, -0.024, 0.004]}
                     scale={[1.405, 4.089, 1.405]}
                 />
-                {showMap && <StoneModel scale={80} />}
+                {showMap && <MarkerModel scale={80} />}
             </group>
         </group>
     )

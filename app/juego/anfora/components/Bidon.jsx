@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { StoneModel } from './Stone'
+import { MarkerModel } from './Marker'
 import { useGameStore } from '@/lib/store'
 
 export function BidonModel(props) {
@@ -22,7 +22,7 @@ export function BidonModel(props) {
                     material={nodes.Bidón.material}
                 />
                 {showMap && (
-                    <StoneModel
+                    <MarkerModel
                         scale={100}
                         rotation={[-1.7, -0.1, 0]}
                     />

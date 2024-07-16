@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { StoneModel } from './Stone'
+import { MarkerModel } from './Marker'
 import { useGameStore } from '@/lib/store'
 
 export function NavegacionModel(props) {
@@ -21,7 +21,7 @@ export function NavegacionModel(props) {
                     rotation={[0, 0, -0.2]}
                 />
                 {showMap && (
-                    <StoneModel
+                    <MarkerModel
                         scale={50}
                         color="purple"
                     />

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { StoneModel } from './Stone'
+import { MarkerModel } from './Marker'
 import { useGameStore } from '@/lib/store'
 
 export function PanelModel(props) {
@@ -28,7 +28,7 @@ export function PanelModel(props) {
                     material={materials._10781_Solar_Panels_V102___Default}
                     rotation={[-0.5, 0, 0.1]}
                 />
-                {showMap && <StoneModel scale={3000} />}
+                {showMap && <MarkerModel scale={3000} />}
             </group>
         </group>
     )

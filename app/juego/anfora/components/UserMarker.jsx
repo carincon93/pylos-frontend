@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import { useGLTF } from '@react-three/drei'
 
-export function StoneModel({ color = 'purple', ...props }) {
-    const { nodes, materials } = useGLTF('/models/StonePlatform.glb')
+export function UserMarkerModel({ color = 'yellow', ...props }) {
+    const { nodes, materials } = useGLTF('/models/UserMarker.glb')
     const materialRef = useRef(materials['Material.001'])
 
     useEffect(() => {
@@ -27,4 +27,4 @@ export function StoneModel({ color = 'purple', ...props }) {
     )
 }
 
-useGLTF.preload('/models/StonePlatform.glb')
+useGLTF.preload('/models/UserMarker.glb')

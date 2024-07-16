@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { StoneModel } from './Stone'
+import { MarkerModel } from './Marker'
 import { useGameStore } from '@/lib/store'
 
 export function MotorModel(props) {
@@ -21,7 +21,7 @@ export function MotorModel(props) {
                     material={nodes.Motor.material}
                     rotation={[1.543, 0.4, 5]}
                 />
-                {showMap && <StoneModel scale={50} />}
+                {showMap && <MarkerModel scale={50} />}
             </group>
         </group>
     )
