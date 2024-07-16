@@ -9,7 +9,6 @@ import { Button } from '@/components/ui/button'
 import { deleteUsuario, getProfile, restartRespuestaPruebaDiagnostica } from '@/lib/actions'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Usuario } from '@/types/MyTypes'
-import { useContextData } from '@/app/context/AppContext'
 import { useEffect, useState } from 'react'
 import UsuarioForm from './_form'
 
@@ -36,7 +35,7 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
         return <LoadingOverlay />
     }
 
-    const handleRestartPrueba = async (usuarioId: string) => {
+    const handleRestartPrueba = async (usuarioId: string | undefined) => {
         const data: Partial<Usuario> = {
             id: usuarioId,
         }
@@ -48,6 +47,8 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
         } finally {
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`)
         }
+
+        setOpen(false)
     }
 
     const handleDeleteUsuario = async () => {
@@ -69,13 +70,23 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                     <AlertDialogHeader>
                         <AlertDialogTitle>
                             <div>
-                                Pylonauta: <span className="capitalize font-light">{usuario?.nombre}</span>
+                                Nombre del estudiante: <span className="capitalize font-light">{usuario?.nombre}</span>
                             </div>
                             <div>
                                 Colegio: <span className="capitalize font-light">{usuario?.colegio}</span>
                             </div>
                             <div>
                                 Grado: <span className="capitalize font-light">{usuario?.grado}</span>
+                            </div>
+
+                            <div className="mt-5">
+                                <small>Datos de inicio de sesión</small>
+                            </div>
+                            <div>
+                                Pylonauta: <span className="capitalize font-light">{usuario?.nombreUsuario}</span>
+                            </div>
+                            <div>
+                                Mascota: <span className="capitalize font-light">{usuario?.mascotaNombre}</span>
                             </div>
                         </AlertDialogTitle>
                         <UsuarioForm
@@ -85,17 +96,43 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
                         />
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogAction
-                            className="bg-red-500 lg:mr-12 mt-8 lg:mt-0"
-                            onClick={() => handleDeleteUsuario()}>
-                            Eliminar
-                        </AlertDialogAction>
-                        <AlertDialogAction
-                            className="mt-4 lg:mt-0"
-                            type="submit"
-                            form="editar-usuario">
-                            Guardar y cerrar
-                        </AlertDialogAction>
+                        <div className="flex flex-col w-full !space-y-4">
+                            <AlertDialogAction
+                                className=""
+                                type="submit"
+                                form="editar-usuario">
+                                Guardar y cerrar
+                            </AlertDialogAction>
+
+                            <AlertDialogAction onClick={() => handleRestartPrueba(usuario?.usuarioId)}>
+                                <span className="hidden md:inline-block">Restablecer prueba</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-4 md:hidden mx-auto">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+                                    />
+                                </svg>
+                            </AlertDialogAction>
+
+                            <AlertDialogAction
+                                className="bg-red-500"
+                                onClick={() => handleDeleteUsuario()}>
+                                Eliminar usuario
+                            </AlertDialogAction>
+
+                            <AlertDialogCancel
+                                className="text-white"
+                                onClick={() => setOpen(false)}>
+                                Cerrar
+                            </AlertDialogCancel>
+                        </div>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
@@ -142,25 +179,6 @@ export default function TablaPosiciones({ isAdmin }: { isAdmin: boolean | undefi
 
                             {profile?.esAdmin && (
                                 <TableCell className="space-y-2">
-                                    <Button
-                                        className="text-xs mt-1 bg-red-400 hover:bg-red-500 md:ml-0 block w-full"
-                                        onClick={() => handleRestartPrueba(resultado.usuarioId)}>
-                                        <span className="hidden md:inline-block">Restablecer prueba</span>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth="1.5"
-                                            stroke="currentColor"
-                                            className="size-4 md:hidden mx-auto">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
-                                            />
-                                        </svg>
-                                    </Button>
-
                                     <Button
                                         onClick={() => {
                                             setUsuario(resultado), setOpen(true)
