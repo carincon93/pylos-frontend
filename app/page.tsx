@@ -44,8 +44,8 @@ export default function Home() {
             <div className="lg:max-w-5xl w-full mx-auto text-left mt-20 lg:mt-0">
                 <div className="grid lg:grid-cols-3 items-center">
                     <div className="col-span-2 flex flex-col text-center lg:text-left gap-y-10 lg:gap-y-4">
-                        <h1 className="text-7xl font-bold text-white">Aprender</h1>
-                        <h2 className="text-5xl text-sky-300 font-light">Nunca fue tan divertido</h2>
+                        <h1 className="text-7xl font-bold text-white font-edu">Aprender</h1>
+                        <h2 className="text-5xl text-sky-300 font-light font-edu">Nunca fue tan divertido</h2>
 
                         <p className="lg:mr-36 text-white mb-4 font-medium">
                             Únete a Pylonauta en su increíble aventura espacial por los misteriosos planetas de nuestro universo. Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu
@@ -77,7 +77,7 @@ export default function Home() {
                         height={40}
                         className="object-contain"
                     />
-                    <h2 className="text-white">ÁNFORA</h2>
+                    <h2 className="text-white font-edu">ANFORA</h2>
                 </div>
 
                 <div>

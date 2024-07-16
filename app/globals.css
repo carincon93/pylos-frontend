@@ -332,3 +332,60 @@ button[role='combobox'] {
     overflow: hidden;
     border-radius: calc(30px * var(--ipad-scale));
 }
+
+.word-wrapper {
+    overflow: hidden;
+}
+
+.word-wrapper .word1,
+.word-wrapper .word2,
+.word-wrapper .word3 {
+    display: inline-block;
+    transform: translateY(35px);
+}
+
+.word1.anim1Word1 {
+    animation: anim1Word1 0.5s both;
+}
+
+.word1.anim2Word1 {
+    animation: anim2Word1 0.5s both;
+}
+
+.word2.anim1Word2 {
+    animation: anim1Word1 1.5s both;
+}
+
+.word2.anim2Word2 {
+    animation: anim2Word1 1.5s both;
+}
+
+.word3.anim1Word3 {
+    animation: anim1Word1 2.2s both;
+}
+
+.word3.anim2Word3 {
+    animation: anim2Word1 2.2s both;
+}
+
+@keyframes anim1Word1 {
+    from {
+        transform: translateY(35px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes anim2Word1 {
+    from {
+        transform: translateY(0px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(35px);
+        opacity: 1;
+    }
+}

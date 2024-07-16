@@ -126,7 +126,9 @@ function Anfora() {
                 className="select-none"
                 onMouseOver={() => setClickDisabled(true)}>
                 <div className="fixed left-10 top-10">
-                    <h1 className="text-2xl text-white font-black">PYLOS | ÁNFORA</h1>
+                    <h1 className="text-2xl text-white font-black">
+                        PYLOS | <span className="font-edu">ANFORA</span>
+                    </h1>
                 </div>
 
                 {!activeForm && (

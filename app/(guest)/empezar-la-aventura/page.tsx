@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function EmpezarAventuraPage() {
     return (
         <>
-            <h1 className="text-6xl xl:text-6xl 2xl:text-8xl text-center font-bold text-white">
+            <h1 className="text-6xl xl:text-6xl 2xl:text-8xl text-center font-bold text-white font-edu">
                 Empezar <br /> la aventura
             </h1>
 

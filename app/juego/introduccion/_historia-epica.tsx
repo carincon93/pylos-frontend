@@ -313,6 +313,6 @@ const ActionButton = ({ onClick, direction, text, disabled }: { onClick?: () => 
             direction === 'left' && 'focus-visible:-translate-x-8 lg:group-hover:-translate-x-8',
             disabled ? 'opacity-20' : 'opacity-100',
         )}>
-        <span className={twMerge('button-underline relative block', direction === 'right' && '[--from:-30px] [--to:0px]', direction === 'left' && '[--from:0] [--to:-30px]')}>{text}</span>
+        <span className={twMerge('button-underline relative block font-edu', direction === 'right' && '[--from:-30px] [--to:0px]', direction === 'left' && '[--from:0] [--to:-30px]')}>{text}</span>
     </button>
 )

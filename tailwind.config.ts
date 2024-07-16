@@ -15,7 +15,7 @@ const config = {
         },
         extend: {
             fontFamily: {
-                sans: ['var(--font-sans)', ...fontFamily.sans],
+                edu: ['var(--font-edu)'],
             },
             colors: {
                 border: 'rgb(var(--border) / <alpha-value>)',

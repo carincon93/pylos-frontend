@@ -3,7 +3,7 @@ import { AppProvider } from './context/AppContext'
 
 import './globals.css'
 import 'animate.css'
-import { Inter as FontSans } from 'next/font/google'
+import { Edu_VIC_WA_NT_Beginner } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
@@ -12,9 +12,10 @@ import LoadingOverlay from './loading'
 import { NavigationEvents } from '../components/navigation-events'
 import type { Viewport } from 'next'
 
-const fontSans = FontSans({
+const eduFont = Edu_VIC_WA_NT_Beginner({
+    weight: '500',
     subsets: ['latin'],
-    variable: '--font-sans',
+    variable: '--font-edu',
 })
 
 export const viewport: Viewport = {
@@ -39,7 +40,7 @@ export default function RootLayout({
         <html
             lang="es"
             suppressHydrationWarning>
-            <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+            <body className={cn('min-h-screen bg-background antialiased', eduFont.variable)}>
                 <AppProvider>
                     <ThemeProvider
                         attribute="class"
