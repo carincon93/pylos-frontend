@@ -36,7 +36,7 @@ export const CharacterController = () => {
         WALK_SPEED: { value: 1, min: 0.1, max: 4, step: 0.1 },
         RUN_SPEED: { value: 2, min: 0.2, max: 4, step: 0.06 },
         ROTATION_SPEED: {
-            value: degToRad(0.1),
+            value: degToRad(0.6),
             min: degToRad(0.1),
             max: degToRad(5),
             step: degToRad(0.01),
@@ -82,13 +82,14 @@ export const CharacterController = () => {
         }
     }, [])
 
-    const [cameraPositionValues, setCameraPositionValues] = useState([0, 3, -6])
+    const initialCameraPosition = [0, 1, -2.5]
+    const [cameraPositionValues, setCameraPositionValues] = useState(initialCameraPosition)
     useEffect(() => {
         if (activeForm) {
             setCameraPositionValues([0, 0, 0])
         } else {
             setTimeout(() => {
-                setCameraPositionValues([0, 3, -6])
+                setCameraPositionValues(initialCameraPosition)
             }, 500)
         }
     }, [activeForm])
@@ -155,10 +156,10 @@ export const CharacterController = () => {
             }
 
             if (get().left && activeForm == false) {
-                movement.x = 1
+                movement.x = 0.6
             }
             if (get().right && activeForm == false) {
-                movement.x = -1
+                movement.x = -0.6
             }
 
             if (movement.x !== 0) {
@@ -210,6 +211,7 @@ export const CharacterController = () => {
                 />
                 <group
                     ref={cameraPosition}
+                    // position-z={-3}
                     position={cameraPositionValues}
                 />
                 <group ref={character}>
