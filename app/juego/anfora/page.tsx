@@ -12,6 +12,7 @@ import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
 import useSWR, { mutate } from 'swr'
 import LoadingScreen from '@/components/LoadingScreen'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -45,6 +46,8 @@ function Anfora() {
     const [showInfoPopup, setShowInfoPopup] = useState(false)
     const [showControlsPopup, setShowControlsPopup] = useState(false)
     const [start, setStart] = useState(false)
+
+    const { playAudio, isPlaying } = useAudioPlayer()
 
     useEffect(() => {
         setReadings(readings)
@@ -325,7 +328,9 @@ function Anfora() {
 
                         <div className="fixed bottom-32 sm:bottom-4 right-0 hover:opacity-80 transition-opacity select-none">
                             <img
-                                onClick={() => setShowMap(!showMap)}
+                                onClick={() => {
+                                    setShowMap(!showMap), playAudio(0, 2, '/audios/satelite-sound.mp3')
+                                }}
                                 onMouseOver={() => setClickDisabled(true)}
                                 onMouseLeave={() => setClickDisabled(false)}
                                 src="/satelite.png"
