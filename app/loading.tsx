@@ -22,7 +22,7 @@ export default function LoadingOverlay({ className }: Props) {
     }, [])
 
     return (
-        <div className="bg-pylos-900 fixed inset-0 w-full h-[100vh] z-10">
+        <div className={`${showLoading ? 'bg-pylos-900/10' : 'bg-pylos-900/50'} backdrop-blur-lg fixed inset-0 w-full h-[100vh] z-10`}>
             {showLoading && (
                 <div className={`absolute z-[10000] left-0 right-0 mx-auto text-center transition-opacity delay-75 duration-500 bottom-10 font-bold text-3xl ${toggle ? 'opacity-100' : 'opacity-20'}`}>
                     PYLOS
@@ -46,7 +46,7 @@ export default function LoadingOverlay({ className }: Props) {
             <div className={`transition-transform absolute z-[10000] inset-0 size-[35px] m-auto delay-75 duration-500 ${showLoading ? 'translate-y-40' : 'translate-y-0'} `}>
                 <span className="loader"></span>
             </div>
-            <div className={`bg-pylos-800/60 fixed z-[9999] h-[200%] inset-0 transform transition-transform rotate-[45deg]`}></div>
+            {showLoading && <div className={`bg-pylos-800/60 fixed z-[9999] h-[200%] inset-0 transform transition-transform rotate-[45deg]`}></div>}
         </div>
     )
 }
