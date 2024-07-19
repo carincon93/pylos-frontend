@@ -6,7 +6,7 @@ export function useAudioPlayer() {
 
     // Función para reproducir una parte específica del audio
     const playAudio = useCallback(
-        (inicio: number, fin: number, audioSource: string) => {
+        (inicio: number, fin: number, audioSource: string, volume: number, loop: boolean) => {
             // Pausar y resetear el audio anterior si está en reproducción
             if (audio) {
                 audio.pause()
@@ -17,6 +17,8 @@ export function useAudioPlayer() {
             const newAudio = new Audio(audioSource)
             newAudio.currentTime = inicio
             newAudio.play()
+            newAudio.volume = volume
+            newAudio.loop = loop ?? false
             setIsPlaying(true)
             setAudio(newAudio)
 
