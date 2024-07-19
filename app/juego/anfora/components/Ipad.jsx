@@ -87,11 +87,13 @@ const Ipad = ({ handleSubmit }) => {
     const checkAnswers = () => {
         if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
             handleSubmit(object)
+            playAudio(0, 3, '/audios/phone-hidden-sound.mp3', 0.15, false)
             setShowReading(false)
 
             return
         } else {
             setShowErrorMessage(true)
+            playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false)
 
             setTimeout(() => {
                 setShowErrorMessage(false)
