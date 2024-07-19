@@ -7,12 +7,14 @@ import { NavegacionModel } from './Navegacion'
 import { PanelModel } from './Panel'
 import { BidonModel } from './Bidon'
 import { ReactorModel } from './Reactor'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export function LandscapeAnforaModel(props) {
     const { nodes, materials } = useGLTF('/models/LandscapeAnfora.glb')
     const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
+    const { playAudio } = useAudioPlayer()
 
     return (
         <RigidBody
@@ -223,35 +225,35 @@ export function LandscapeAnforaModel(props) {
             <MotorModel
                 scale={0.3}
                 onClick={() => {
-                    setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
+                    playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false), setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <NavegacionModel
                 scale={0.3}
                 onClick={() => {
-                    setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
+                    playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false), setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <PanelModel
                 scale={0.3}
                 onClick={() => {
-                    setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
+                    playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false), setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <ReactorModel
                 scale={0.2}
                 onClick={() => {
-                    setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
+                    playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false), setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
 
             <BidonModel
                 scale={0.2}
                 onClick={() => {
-                    setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
+                    playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false), setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
                 }}
             />
         </RigidBody>

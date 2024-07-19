@@ -1,5 +1,6 @@
 import { useContextData } from '@/app/context/AppContext'
 import { Button } from '@/components/ui/button'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -20,6 +21,7 @@ const Ipad = ({ handleSubmit }) => {
     const [translateY, setTranslateY] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
     const [showReading, setShowReading] = useState(false)
+    const { playAudio } = useAudioPlayer()
 
     useEffect(() => {
         if (activeForm) {
@@ -295,7 +297,9 @@ const Ipad = ({ handleSubmit }) => {
 
                 <div
                     className={`p-6 bg-gray-200 rounded-2xl text-black mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-32' : '-translate-y-[330px]'}`}
-                    onClick={() => setShowReading(true)}>
+                    onClick={() => {
+                        setShowReading(true), playAudio(0, 3, '/audios/phone-sound.mp3', 0.15, false)
+                    }}>
                     <small>¡Tienes 1 nueva notificación!</small>
                     <p className="text-sm leading-5 mt-2">Recibiste una nueva lectura. Abrir</p>
                 </div>
@@ -303,7 +307,7 @@ const Ipad = ({ handleSubmit }) => {
                 <div
                     className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-900 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
                     onClick={() => {
-                        setActiveForm(false), setShowReading(false)
+                        setActiveForm(false), setShowReading(false), playAudio(0, 3, '/audios/phone-hidden-sound.mp3', 0.15, false)
                     }}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

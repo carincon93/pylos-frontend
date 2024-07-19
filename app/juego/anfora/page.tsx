@@ -47,7 +47,7 @@ function Anfora() {
     const [showControlsPopup, setShowControlsPopup] = useState(false)
     const [start, setStart] = useState(false)
 
-    const { playAudio, isPlaying } = useAudioPlayer()
+    const { playAudio } = useAudioPlayer()
 
     useEffect(() => {
         setReadings(readings)
@@ -329,7 +329,7 @@ function Anfora() {
                         <div className="fixed bottom-32 sm:bottom-4 right-0 hover:opacity-80 transition-opacity select-none">
                             <img
                                 onClick={() => {
-                                    setShowMap(!showMap), playAudio(0, 2, '/audios/satelite-sound.mp3')
+                                    setShowMap(!showMap), playAudio(0, 2, '/audios/satelite-sound.mp3', 1, false)
                                 }}
                                 onMouseOver={() => setClickDisabled(true)}
                                 onMouseLeave={() => setClickDisabled(false)}
