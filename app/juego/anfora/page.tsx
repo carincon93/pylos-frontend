@@ -284,35 +284,35 @@ function Anfora() {
                         <div className="fixed lg:right-10 left-0 right-0 mx-auto sm:w-[432px] bottom-6 space-y-2">
                             <div className="flex gap-2">
                                 <div
-                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
                                         motorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/motor.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
                                         reactorItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/reactor.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
                                         sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/navegacion.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
                                         panelSolarItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/panel.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
                                         combustibleItem ? 'text-pylos-600 border-pylos-600' : 'text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img
