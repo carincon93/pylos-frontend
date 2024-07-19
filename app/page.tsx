@@ -22,12 +22,6 @@ export default function Home() {
                     </Link>
 
                     <Link
-                        className="text-white hidden hover:text-white/90 font-bold sm:inline-block"
-                        href={EMPEZAR_AVENTURA_ROUTE}>
-                        Empezar la aventura
-                    </Link>
-
-                    <Link
                         className="text-white hover:text-white/90 font-bold"
                         href="#">
                         Soporte
@@ -36,7 +30,7 @@ export default function Home() {
                     <Link
                         className="text-white hover:text-white/90 font-bold border-2 py-1 px-8 rounded-full border-primary hover:border-primary/90"
                         href={EMPEZAR_AVENTURA_ROUTE}>
-                        Ingresar
+                        Empezar la aventura
                     </Link>
                 </nav>
             </div>

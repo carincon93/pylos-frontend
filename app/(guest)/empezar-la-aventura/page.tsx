@@ -17,13 +17,13 @@ export default function EmpezarAventuraPage() {
                 <Link
                     href={REGISTER_ROUTE}
                     className="py-4 px-16 font-bold rounded-full bg-primary hover:bg-primary/90 text-white">
-                    Registro
+                    Crear cuenta
                 </Link>
 
                 <Link
                     href={LOGIN_ROUTE}
                     className="py-4 px-16 font-bold rounded-full bg-secondary hover:bg-secondary/90 text-white">
-                    Ingreso
+                    Ingresar
                 </Link>
             </div>
         </>
