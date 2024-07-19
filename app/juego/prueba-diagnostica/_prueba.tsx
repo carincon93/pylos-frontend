@@ -214,7 +214,7 @@ export default function Prueba() {
                                                                 key={opcionPruebaDiagnostica.id}
                                                                 className="p-8 sm:p-10 text-[20px] text-wrap leading-5"
                                                                 onClick={() => {
-                                                                    playAudio(0, 2, buttonPressed),
+                                                                    playAudio(0, 2, buttonPressed, 1, false),
                                                                         handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id, opcionPruebaDiagnostica.esOpcionCorrecta)
                                                                 }}
                                                                 disabled={isSubmitting}>
@@ -232,7 +232,7 @@ export default function Prueba() {
                                                         <Button
                                                             className="text-[18px] h-12 w-52"
                                                             onClick={() => {
-                                                                playAudio(0, 2, buttonPressed), handleSubmit(preguntaPruebaDiagnostica.id, null)
+                                                                playAudio(0, 2, buttonPressed, 1, false), handleSubmit(preguntaPruebaDiagnostica.id, null)
                                                             }}
                                                             disabled={respuesta == ''}>
                                                             Siguiente
