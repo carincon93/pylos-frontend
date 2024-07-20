@@ -291,33 +291,33 @@ button[role='combobox'] {
 
 .thumb-1 svg {
     top: 30%;
-    left: -35.2%;
+    left: -30.2%;
     z-index: 3;
-    width: calc(157px * var(--ipad-scale));
-    height: calc(170px * var(--ipad-scale));
+    width: calc(180px * var(--ipad-scale));
+    height: calc(192px * var(--ipad-scale));
     filter: drop-shadow(10px -10px 5px rgba(0, 0, 0, 0.1));
     transform-origin: bottom center;
 }
 
 .thumb-2 svg {
-    top: 44%;
-    left: -33.2%;
+    top: 38%;
+    left: -37.2%;
     z-index: 0;
-    width: calc(253px * var(--ipad-scale));
-    height: calc(307px * var(--ipad-scale));
+    width: calc(290px * var(--ipad-scale));
+    height: calc(328px * var(--ipad-scale));
     transform-origin: bottom center;
 }
 
 .wrist {
-    color: #e7ac93;
-    background-color: #e7ac93;
+    color: #fff;
+    background-color: #fff;
     position: absolute;
     top: 70%;
     left: -15.2%;
     z-index: 0;
     width: calc(250px * var(--ipad-scale));
     height: calc(600px * var(--ipad-scale));
-    background-color: #e7ac93;
+    background-color: #fff;
     background-image: radial-gradient(45.02% 39.83% at 86.78% 32.14%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
     transform: rotate(25deg);
 }
