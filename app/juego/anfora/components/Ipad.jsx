@@ -109,7 +109,6 @@ const Ipad = ({ handleSubmit }) => {
             <figure className="ipad-hand">
                 <div className="finger-1">
                     <svg
-                        id="Capa_2"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 145.59 209.44">
                         <g>
@@ -197,7 +196,8 @@ const Ipad = ({ handleSubmit }) => {
                 <div className="thumb-1">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 222.25 313.29">
+                        viewBox="0 0 222.25 313.29"
+                        className={`transition-transform delay-150 ${isDragging ? 'rotate-3' : 'rotate-0'}`}>
                         <defs>
                             <linearGradient
                                 id="linear-gradient"
@@ -283,7 +283,8 @@ const Ipad = ({ handleSubmit }) => {
                 <div className="thumb-2">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 352.58 514.14">
+                        viewBox="0 0 352.58 514.14"
+                        className={`transition-transform delay-150 ${isDragging ? 'rotate-1' : 'rotate-0'}`}>
                         <defs>
                             <linearGradient
                                 id="linear-gradient"
