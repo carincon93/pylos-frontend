@@ -54,6 +54,7 @@ export const CharacterController = () => {
 
     const [animation, setAnimation] = useState('Idle')
     const [isRunning, setIsRunning] = useState(false)
+    const [isWalking, setIsWalking] = useState(false)
 
     const characterRotationTarget = useRef(0)
     const rotationTarget = useRef(0)
@@ -195,11 +196,21 @@ export const CharacterController = () => {
                         playSound('running')
                         setIsRunning(true)
                     }
+
+                    if (isWalking) {
+                        stopSound('walking')
+                        setIsWalking(false)
+                    }
                 } else {
                     setAnimation('Walk')
                     if (isRunning) {
                         stopSound('running')
                         setIsRunning(false)
+                    }
+
+                    if (!isWalking) {
+                        playSound('walking')
+                        setIsWalking(true)
                     }
                 }
             } else {
@@ -207,6 +218,11 @@ export const CharacterController = () => {
                 if (isRunning) {
                     stopSound('running')
                     setIsRunning(false)
+                }
+
+                if (isWalking) {
+                    stopSound('walking')
+                    setIsWalking(false)
                 }
             }
             character.current.rotation.y = lerpAngle(character.current.rotation.y, characterRotationTarget.current, 0.1)
