@@ -205,7 +205,7 @@ function Anfora() {
                 )}
 
                 {showMenu && (
-                    <div className="fixed inset-0 bg-white w-[25vw] flex flex-col items-center justify-center px-20">
+                    <div className="fixed inset-0 bg-white xl:w-[45vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-20">
                         <div className="flex">
                             <h1 className="text-2xl mt-2 text-black font-black">PYLOS</h1>
 
@@ -215,7 +215,7 @@ function Anfora() {
                             />
                         </div>
 
-                        <p className="text-gray-400 leading-4 mt-4 mb-20 font-medium font-edu text-lg">
+                        <p className="text-gray-400 leading-4 mt-12 mb-20 font-medium font-edu text-lg">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
