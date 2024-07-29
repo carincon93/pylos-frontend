@@ -33,16 +33,21 @@ const lerpAngle = (start, end, t) => {
 export const CharacterController = () => {
     const activeForm = useGameStore((state) => state.activeForm)
 
-    const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
-        WALK_SPEED: { value: 1, min: 0.1, max: 4, step: 0.1 },
-        RUN_SPEED: { value: 1.5, min: 0.2, max: 4, step: 0.06 },
-        ROTATION_SPEED: {
-            value: degToRad(2.6),
-            min: degToRad(0.1),
-            max: degToRad(5),
-            step: degToRad(0.01),
-        },
-    })
+    // const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
+    //     WALK_SPEED: { value: 1, min: 0.1, max: 4, step: 0.1 },
+    //     RUN_SPEED: { value: 1.5, min: 0.2, max: 4, step: 0.06 },
+    //     ROTATION_SPEED: {
+    //         value: degToRad(2.6),
+    //         min: degToRad(0.1),
+    //         max: degToRad(5),
+    //         step: degToRad(0.01),
+    //     },
+    // })
+
+    const WALK_SPEED = 1
+    const RUN_SPEED = 1.5
+    const ROTATION_SPEED = MathUtils.degToRad(2.6)
+
     const rb = useRef()
     const characterContainer = useRef()
     const character = useRef()
