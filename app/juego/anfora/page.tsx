@@ -152,7 +152,7 @@ function Anfora() {
                         <Button
                             className="w-52 text-[24px] p-8 font-normal"
                             onClick={() => {
-                                setShowMenu(false)
+                                setShowMenu(false), playSound('anforaMusic')
                             }}>
                             {optionStart ? 'Empezar' : 'Continuar'}
                         </Button>
