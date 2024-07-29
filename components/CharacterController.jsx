@@ -7,6 +7,7 @@ import { MathUtils, Vector3 } from 'three'
 import { degToRad } from 'three/src/math/MathUtils.js'
 import { CharacterAstronaut } from './CharacterAstronaut'
 import { useGameStore } from '@/lib/store'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 const normalizeAngle = (angle) => {
     while (angle > Math.PI) angle -= 2 * Math.PI
@@ -34,19 +35,20 @@ export const CharacterController = () => {
 
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = useControls('Character Control', {
         WALK_SPEED: { value: 1, min: 0.1, max: 4, step: 0.1 },
-        RUN_SPEED: { value: 2, min: 0.2, max: 4, step: 0.06 },
+        RUN_SPEED: { value: 1.5, min: 0.2, max: 4, step: 0.06 },
         ROTATION_SPEED: {
-            value: degToRad(0.6),
+            value: degToRad(2.6),
             min: degToRad(0.1),
             max: degToRad(5),
             step: degToRad(0.01),
         },
     })
     const rb = useRef()
-    const container = useRef()
+    const characterContainer = useRef()
     const character = useRef()
 
     const [animation, setAnimation] = useState('Idle')
+    const [isRunning, setIsRunning] = useState(false)
 
     const characterRotationTarget = useRef(0)
     const rotationTarget = useRef(0)
@@ -61,6 +63,8 @@ export const CharacterController = () => {
     const clickDisabled = useGameStore((state) => state.clickDisabled)
 
     const [lastMovementTime, setLastMovementTime] = useState(Date.now())
+
+    const { playSound, stopSound } = useAudioPlayer()
 
     useEffect(() => {
         const onMouseDown = (e) => {
@@ -82,7 +86,7 @@ export const CharacterController = () => {
         }
     }, [])
 
-    const initialCameraPosition = [0, 1, -2.5]
+    const initialCameraPosition = [0.2, 0.6, -1.2]
     const [cameraPositionValues, setCameraPositionValues] = useState(initialCameraPosition)
     useEffect(() => {
         if (activeForm) {
@@ -100,6 +104,8 @@ export const CharacterController = () => {
         if (savedPosition) {
             const { x, y, z } = JSON.parse(savedPosition)
             rb.current.setTranslation({ x, y, z }, true)
+        } else {
+            localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 0, z: 0 }))
         }
     }, [])
 
@@ -107,10 +113,18 @@ export const CharacterController = () => {
         const interval = setInterval(() => {
             if (Date.now() - lastMovementTime > 1000) {
                 const position = rb.current.translation()
-                if (position.y > -18) {
-                    localStorage.setItem('player_position', JSON.stringify(position))
-                } else {
-                    localStorage.setItem('player_position', JSON.stringify({ x: 0.08445417135953903, y: -1.3680016994476318, z: 3.83317494392395 }))
+
+                const savedPosition = localStorage.getItem('player_position')
+                const { x, y, z } = JSON.parse(savedPosition)
+
+                if (savedPosition) {
+                    if (position.y < -0.2) {
+                        rb.current.setTranslation({ x, y: 0, z }, true)
+
+                        localStorage.setItem('player_position', JSON.stringify({ x, y: 0, z }))
+                    } else {
+                        localStorage.setItem('player_position', JSON.stringify(position))
+                    }
                 }
             }
         }, 1000)
@@ -139,7 +153,7 @@ export const CharacterController = () => {
             }
 
             if (get().reset) {
-                rb.current.setTranslation({ x: 0.08445417135953903, y: -1.3680016994476318, z: 3.83317494392395 }, true)
+                rb.current.setTranslation({ x: 0, y: 0, z: 0 }, true)
             }
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
@@ -172,11 +186,23 @@ export const CharacterController = () => {
                 vel.z = Math.cos(rotationTarget.current + characterRotationTarget.current) * speed
                 if (speed === RUN_SPEED) {
                     setAnimation('Run.001')
+                    if (!isRunning) {
+                        playSound('running')
+                        setIsRunning(true)
+                    }
                 } else {
                     setAnimation('Walk')
+                    if (isRunning) {
+                        stopSound('running')
+                        setIsRunning(false)
+                    }
                 }
             } else {
                 setAnimation('Idle')
+                if (isRunning) {
+                    stopSound('running')
+                    setIsRunning(false)
+                }
             }
             character.current.rotation.y = lerpAngle(character.current.rotation.y, characterRotationTarget.current, 0.1)
 
@@ -185,7 +211,7 @@ export const CharacterController = () => {
 
         if (process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'false' && !showMap) {
             // CAMERA
-            container.current.rotation.y = MathUtils.lerp(container.current.rotation.y, rotationTarget.current, 0.1)
+            characterContainer.current.rotation.y = MathUtils.lerp(characterContainer.current.rotation.y, rotationTarget.current, 0.1)
 
             cameraPosition.current.getWorldPosition(cameraWorldPosition.current)
             camera.position.lerp(cameraWorldPosition.current, 0.1)
@@ -193,6 +219,9 @@ export const CharacterController = () => {
             if (cameraTarget.current) {
                 cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current)
                 cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.1)
+                if (cameraLookAt.current.y <= 0.17) {
+                    cameraLookAt.current.y = 0.17
+                }
 
                 camera.lookAt(cameraLookAt.current)
             }
@@ -204,25 +233,24 @@ export const CharacterController = () => {
             colliders={false}
             lockRotations
             ref={rb}>
-            <group ref={container}>
-                <group
-                    ref={cameraTarget}
-                    position-z={1.5}
-                />
+            <group ref={characterContainer}>
+                <group ref={cameraTarget} />
                 <group
                     ref={cameraPosition}
-                    // position-z={-3}
                     position={cameraPositionValues}
                 />
                 <group ref={character}>
                     <CharacterAstronaut
-                        scale={0.1}
-                        position-y={-0.4}
+                        scale={0.065}
+                        position-y={0.1}
                         animation={animation}
                     />
                 </group>
             </group>
-            <CapsuleCollider args={[0.2, 0.2]} />
+            <CapsuleCollider
+                args={[0.1, 0.1]}
+                position={[0, 0.3, 0]}
+            />
         </RigidBody>
     )
 }

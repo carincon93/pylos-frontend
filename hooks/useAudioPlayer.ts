@@ -1,53 +1,66 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useRef, useEffect } from 'react'
+import { Howl } from 'howler'
+
+type SoundName = 'running' | 'satelite' // Lista de nombres de sonidos
+
+type Sounds = {
+    [key in SoundName]?: Howl
+}
 
 export function useAudioPlayer() {
-    const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
-    const [isPlaying, setIsPlaying] = useState(false) // Para rastrear el estado de reproducción
+    const soundsRef = useRef<Sounds>({})
 
-    // Función para reproducir una parte específica del audio
-    const playAudio = useCallback(
-        (inicio: number, fin: number, audioSource: string, volume: number, loop: boolean) => {
-            // Pausar y resetear el audio anterior si está en reproducción
-            if (audio) {
-                audio.pause()
-                audio.currentTime = 0 // Resetear el tiempo si es necesario
-            }
-
-            // Crear y configurar el nuevo audio
-            const newAudio = new Audio(audioSource)
-            newAudio.currentTime = inicio
-            newAudio.play()
-            newAudio.volume = volume
-            newAudio.loop = loop ?? false
-            setIsPlaying(true)
-            setAudio(newAudio)
-
-            // Configurar el evento 'ended'
-            newAudio.onended = () => {
-                setIsPlaying(false)
-            }
-
-            // Detener el audio después de la duración especificada si el audio no ha terminado naturalmente
-            setTimeout(() => {
-                if (newAudio && !newAudio.ended) {
-                    newAudio.pause()
-                    newAudio.currentTime = 0
-                    setIsPlaying(false)
-                }
-            }, (fin - inicio) * 1000)
-        },
-        [audio],
-    )
-
-    // Limpiar el recurso de audio cuando el componente que usa este hook se desmonte
-    useEffect(() => {
-        return () => {
-            if (audio) {
-                audio.pause()
-                audio.src = '' // Esto libera el recurso de audio asignado
-            }
+    // Inicializa tus sonidos
+    const initSounds = () => {
+        soundsRef.current = {
+            running: new Howl({
+                src: ['/audios/running-sound.ogg'],
+                loop: true,
+                volume: 0.04,
+            }),
+            satelite: new Howl({
+                src: ['/audios/satelite-sound.mp3'],
+                loop: false,
+                volume: 0.05,
+            }),
+            // Agrega más sonidos aquí
         }
-    }, [audio])
+    }
 
-    return { playAudio, isPlaying }
+    // Reproduce un sonido específico
+    const playSound = (soundName: SoundName) => {
+        const sound = soundsRef.current[soundName]
+        if (sound) {
+            sound.play()
+        } else {
+            console.error(`Sound "${soundName}" not found`)
+        }
+    }
+
+    // Detiene un sonido específico
+    const stopSound = (soundName: SoundName) => {
+        const sound = soundsRef.current[soundName]
+        if (sound) {
+            sound.stop()
+        } else {
+            console.error(`Sound "${soundName}" not found`)
+        }
+    }
+
+    // Pausa un sonido específico
+    const pauseSound = (soundName: SoundName) => {
+        const sound = soundsRef.current[soundName]
+        if (sound) {
+            sound.pause()
+        } else {
+            console.error(`Sound "${soundName}" not found`)
+        }
+    }
+
+    // Inicializa los sonidos cuando el hook se monta
+    useEffect(() => {
+        initSounds()
+    }, [])
+
+    return { playSound, stopSound, pauseSound }
 }

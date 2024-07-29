@@ -1,44 +1,77 @@
 import { CharacterController } from '../../../../components/CharacterController'
 import { useRef } from 'react'
-import { Environment, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
+import { Environment, Grid, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
 import { LandscapeAnforaModel } from './LandscapeAnfora'
 import { useGameStore } from '@/lib/store'
 
-const CameraComponent = () => {
-    const cameraRef = useRef()
-
+const SateliteCameraComponent = () => {
     return (
         <>
             <PerspectiveCamera
                 makeDefault
-                ref={cameraRef}
                 fov={40}
-                position={[0.2285654143609755, 231.10896102590522, 0.23774163062832884]}
-                rotation={[-1.56, 0.001, 9.65]}
+                position={[0, 231.10896102590522, 0]}
+                rotation={[-1.56, 0, 9.65]}
             />
         </>
     )
 }
 
+const MenuCameraComponent = () => {
+    return (
+        <>
+            <OrthographicCamera
+                makeDefault
+                zoom={70}
+                position={[3, 0.8, 20]}
+                rotation={[-0.02, 0.02, 0]}
+            />
+        </>
+    )
+}
+
+const Ground = () => {
+    const gridConfig = {
+        cellSize: 0.5,
+        cellThickness: 0.5,
+        cellColor: '#6f6f6f',
+        sectionSize: 3,
+        sectionThickness: 1,
+        sectionColor: '#9d4b4b',
+        fadeDistance: 30,
+        fadeStrength: 1,
+        followCamera: false,
+        infiniteGrid: true,
+    }
+    return (
+        <Grid
+            position={[0, -0.01, 0]}
+            args={[10.5, 10.5]}
+            {...gridConfig}
+        />
+    )
+}
+
 export const AnforaExperience = () => {
     const showMap = useGameStore((state) => state.showMap)
+    const showMenu = useGameStore((state) => state.showMenu)
 
     return (
         <>
-            {showMap && <CameraComponent />}
-            {process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'true' && <OrbitControls />}
+            {showMenu && <MenuCameraComponent />}
+            {showMap && <SateliteCameraComponent />}
+            {process.env.NEXT_PUBLIC_DEBUG_ORBIT_CONTROLS == 'true' && (
+                <>
+                    <Ground />
+                    <OrbitControls />
+                </>
+            )}
             <Environment preset="sunset" />
-            <directionalLight
-                intensity={0.65}
-                castShadow
-                position={[-5, 10, 25]}
-                // shadow-mapSize-width={2048}
-                // shadow-mapSize-height={2048}
-                shadow-bias={-0.00005}></directionalLight>
             <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                <LandscapeAnforaModel position={[0, -69, 1]} />
-                <CharacterController />
+                <LandscapeAnforaModel position={[0, -0.205, 0]} />
+
+                {!showMenu && <CharacterController />}
             </Physics>
         </>
     )
