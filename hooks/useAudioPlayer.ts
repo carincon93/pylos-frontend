@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Howl } from 'howler'
 
-type SoundName = 'anforaMusic' | 'running' | 'satelite' | 'buttonPressed' | 'phoneHidden' | 'phoneShowed' // Lista de nombres de sonidos
+type SoundName = 'anforaMusic' | 'running' | 'walking' | 'satelite' | 'buttonPressed' | 'phoneHidden' | 'phoneShowed' // Lista de nombres de sonidos
 
 type Sounds = {
     [key in SoundName]?: Howl
@@ -26,7 +26,7 @@ export function useAudioPlayer() {
             satelite: new Howl({
                 src: ['/audios/satelite-sound.mp3'],
                 loop: false,
-                volume: 0.05,
+                volume: 0.07,
             }),
             buttonPressed: new Howl({
                 src: ['/audios/button-pressed.mp3'],
@@ -43,12 +43,29 @@ export function useAudioPlayer() {
                 loop: false,
                 volume: 0.04,
             }),
+            walking: new Howl({
+                src: ['/audios/walking-sound.ogg'],
+                loop: true,
+                volume: 0.03,
+            }),
             // Agrega más sonidos aquí
+        }
+    }
+
+    const [isAudioContextStarted, setIsAudioContextStarted] = useState(false)
+
+    const startAudioContext = () => {
+        if (!isAudioContextStarted) {
+            Howler.autoUnlock = false
+            Howler.ctx.resume().then(() => {
+                setIsAudioContextStarted(true)
+            })
         }
     }
 
     // Reproduce un sonido específico
     const playSound = (soundName: SoundName) => {
+        startAudioContext()
         const sound = soundsRef.current[soundName]
         if (sound) {
             sound.play()
