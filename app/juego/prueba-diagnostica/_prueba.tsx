@@ -35,8 +35,6 @@ export default function Prueba() {
 
     const router = useRouter()
 
-    const buttonPressed = '/button-pressed.mp3'
-
     useEffect(() => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((20 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 20)
