@@ -1,6 +1,7 @@
 import { getProfile } from '@/lib/actions'
 import Link from 'next/link'
 import { MUNDOS_ROUTE, RESULTADOS_ROUTE } from '@/utils/routes'
+import PageVisibilityHandler from './PageVisibilityHandler'
 
 export default async function AuthLayout({
     children, // will be a page or nested layout
@@ -53,6 +54,7 @@ export default async function AuthLayout({
                     </Link>
                 </div>
             )}
+            <PageVisibilityHandler />
             {children}
         </div>
     )
