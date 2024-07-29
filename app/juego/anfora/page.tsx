@@ -100,8 +100,6 @@ function Anfora() {
         }
     }
 
-    console.log(isPlayingWorldSound)
-
     return (
         <>
             <KeyboardControls map={keyboardMap}>
