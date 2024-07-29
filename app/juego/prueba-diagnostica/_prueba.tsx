@@ -18,7 +18,7 @@ import debounce from 'lodash/debounce'
 import useSWR, { mutate } from 'swr'
 
 export default function Prueba() {
-    const { playAudio } = useAudioPlayer()
+    const { playSound } = useAudioPlayer()
 
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
 
@@ -214,7 +214,7 @@ export default function Prueba() {
                                                                 key={opcionPruebaDiagnostica.id}
                                                                 className="p-8 sm:p-10 text-[20px] text-wrap leading-5"
                                                                 onClick={() => {
-                                                                    playAudio(0, 2, buttonPressed, 1, false),
+                                                                    playSound('buttonPressed'),
                                                                         handleSubmit(preguntaPruebaDiagnostica.id, opcionPruebaDiagnostica.id, opcionPruebaDiagnostica.esOpcionCorrecta)
                                                                 }}
                                                                 disabled={isSubmitting}>
@@ -232,7 +232,7 @@ export default function Prueba() {
                                                         <Button
                                                             className="text-[18px] h-12 w-52"
                                                             onClick={() => {
-                                                                playAudio(0, 2, buttonPressed, 1, false), handleSubmit(preguntaPruebaDiagnostica.id, null)
+                                                                playSound('buttonPressed'), handleSubmit(preguntaPruebaDiagnostica.id, null)
                                                             }}
                                                             disabled={respuesta == ''}>
                                                             Siguiente

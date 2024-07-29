@@ -2,7 +2,6 @@
 
 import './index.css'
 import { Button } from '@/components/ui/button'
-// import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { updateUsuario } from '@/lib/actions'
 import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
@@ -12,8 +11,6 @@ import { useContextData } from '@/app/context/AppContext'
 import React, { useEffect, useRef, useState } from 'react'
 
 export default function HistoriaEpica() {
-    // const { playAudio, isPlaying } = useAudioPlayer()
-
     const [activePhoto, setActivePhoto] = useState<number>(0)
     // const [showOverlay, setShowOverlay] = useState(true)
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
