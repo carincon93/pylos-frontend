@@ -1,5 +1,4 @@
 import { CharacterController } from '../../../../components/CharacterController'
-import { useRef } from 'react'
 import { Environment, Grid, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
 import { Physics } from '@react-three/rapier'
 import { LandscapeAnforaModel } from './LandscapeAnfora'
