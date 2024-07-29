@@ -1,10 +1,7 @@
-import Link from 'next/link'
-import { ANFORA_ROUTE } from '@/utils/routes'
 import { Isotipo } from '@/components/Isotipo'
 import { Logo } from '@/components/Logo'
 import { Metadata } from 'next'
-import Image from 'next/image'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import EmpezarAventuraCarousel from './_carousel'
 
 export const metadata: Metadata = {
     title: 'Empezar la aventura',
@@ -20,84 +17,8 @@ export default function EmpezarAventuraPage() {
                 </div>
                 <h1 className="text-[20px] text-center">Seleccione un planeta:</h1>
             </div>
-            <Carousel
-                orientation="vertical"
-                className="mt-32 md:mt-0">
-                <CarouselContent className="h-[320px] md:h-[240px]">
-                    <CarouselItem>
-                        <Link
-                            href={ANFORA_ROUTE}
-                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-80">
-                            <Image
-                                src="/anfora.webp"
-                                alt="Planeta Ánfora"
-                                width={240}
-                                height={40}
-                                className="object-contain"
-                            />
-                            <h1 className="text-2xl mt-8">ÁNFORA</h1>
-                        </Link>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <Link
-                            href="#"
-                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
-                            <Image
-                                src="/planeta2.webp"
-                                alt="planetaVerde"
-                                width={240}
-                                height={40}
-                                className="object-contain"
-                            />
-                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
-                        </Link>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <Link
-                            href="#"
-                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
-                            <Image
-                                src="/planeta3.webp"
-                                alt="PlanetMorado"
-                                width={240}
-                                height={40}
-                                className="object-contain"
-                            />
-                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
-                        </Link>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <Link
-                            href="#"
-                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
-                            <Image
-                                src="/planeta4.webp"
-                                alt="planetaRosa"
-                                width={240}
-                                height={40}
-                                className="object-contain"
-                            />
-                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
-                        </Link>
-                    </CarouselItem>
-                    <CarouselItem>
-                        <Link
-                            href="#"
-                            className="flex flex-col md:flex-row justify-center items-center w-full hover:opacity-60 grayscale pointer-events-none">
-                            <Image
-                                src="/planeta5.webp"
-                                alt="planetaAzul"
-                                width={240}
-                                height={40}
-                                className="object-contain"
-                            />
-                            <h1 className="text-2xl mt-6">POR DEFINIR</h1>
-                        </Link>
-                    </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-            </Carousel>
+
+            <EmpezarAventuraCarousel />
         </div>
     )
 }
