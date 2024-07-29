@@ -18,8 +18,6 @@ import debounce from 'lodash/debounce'
 import useSWR, { mutate } from 'swr'
 
 export default function Prueba() {
-    const { playSound } = useAudioPlayer()
-
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
 
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -34,6 +32,7 @@ export default function Prueba() {
     const { profileUserData } = useContextData()
 
     const router = useRouter()
+    const { playSound } = useAudioPlayer()
 
     useEffect(() => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
