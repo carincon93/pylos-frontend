@@ -2,20 +2,20 @@
 
 import { AnforaExperience } from './components/AnforaExperience'
 import AnforaForm from './components/Ipad'
+import LoadingScreen from '@/components/LoadingScreen'
+import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
+import Link from 'next/link'
 import { saveObjetoNaveReparado } from '@/lib/actions'
 import { ObjetoNaveReparado } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows, Stats } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import { Suspense, useEffect, useState } from 'react'
 import { fetcher } from '@/utils/fetcher'
-import useSWR, { mutate } from 'swr'
-import LoadingScreen from '@/components/LoadingScreen'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { MUNDOS_ROUTE } from '@/utils/routes'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
+import { Canvas } from '@react-three/fiber'
+import { Suspense, useEffect, useState } from 'react'
+import useSWR, { mutate } from 'swr'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -35,34 +35,27 @@ function Anfora() {
     const setInGame = useGameStore((state) => state.setInGame)
     const setShowMap = useGameStore((state) => state.setShowMap)
     const showMap = useGameStore((state) => state.showMap)
-    const clickDisabled = useGameStore((state) => state.clickDisabled)
     const setClickDisabled = useGameStore((state) => state.setClickDisabled)
     const showMenu = useGameStore((state) => state.showMenu)
     const setShowMenu = useGameStore((state) => state.setShowMenu)
+    const isPageVisible = useGameStore((state) => state.isPageVisible)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const reactorItem = objetosNaveReparados?.find((item) => item.objeto === 'reactor')
     const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'sistema de navegación')
     const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel solar')
     const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'combustible')
-    const [showTablet, setShowTablet] = useState(false)
     const [showInfoPopup, setShowInfoPopup] = useState(false)
     const [showControlsPopup, setShowControlsPopup] = useState(false)
     const [start, setStart] = useState(false)
     const [optionStart, setOptionStart] = useState(true)
     const [isPlayingWorldSound, setIsPlayingWorldSound] = useState(false)
 
-    const { playSound, pauseSound } = useAudioPlayer()
+    const { playSound, pauseSound, stopSound } = useAudioPlayer()
 
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
-
-    useEffect(() => {
-        setTimeout(() => {
-            setShowTablet(activeForm)
-        }, 500)
-    }, [activeForm])
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
@@ -83,6 +76,14 @@ function Anfora() {
 
         setInGame(true)
     }, [])
+
+    useEffect(() => {
+        if (isPageVisible) {
+            playSound('anforaMusic')
+        } else {
+            stopSound('anforaMusic')
+        }
+    }, [isPageVisible])
 
     const handleSubmit = async (object: string) => {
         const data: Partial<ObjetoNaveReparado> = {
@@ -221,6 +222,9 @@ function Anfora() {
 
                         <Button
                             className="w-52 text-[24px] p-8 font-normal"
+                            onMouseEnter={() => {
+                                playSound('phoneShowed')
+                            }}
                             onClick={() => {
                                 setShowMenu(false), setIsPlayingWorldSound(true), playSound('anforaMusic')
                             }}>
@@ -229,6 +233,9 @@ function Anfora() {
 
                         <Link
                             className="w-52 text-[24px] rounded-full bg-purple-800 text-center py-3 mt-6 hover:opacity-80 transition-opacity"
+                            onMouseEnter={() => {
+                                playSound('phoneShowed')
+                            }}
                             href={MUNDOS_ROUTE}>
                             Salir
                         </Link>
