@@ -26,7 +26,6 @@ export default function Prueba() {
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
     const [cronometro, setCronometro] = useState(0)
     const [tiempoEnMinutos, setTiempoEnMinutos] = useState('')
-    const [isPageVisible, setIsPageVisible] = useState(true)
     const [open, setOpen] = useState(false)
 
     const { profileUserData } = useContextData()
@@ -65,14 +64,6 @@ export default function Prueba() {
             }
         }
     }, [open])
-
-    const handleVisibilityChange = () => {
-        if (document.visibilityState === 'visible') {
-            setIsPageVisible(true)
-        } else {
-            setIsPageVisible(false)
-        }
-    }
 
     useEffect(() => {
         setOpen(true)
