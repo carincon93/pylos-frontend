@@ -22,20 +22,14 @@ export default function Home() {
                 <nav
                     id="header-nav"
                     className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
-                    <Link
-                        className="text-white hover:text-white/90 font-bold"
-                        href={HOME_ROUTE}>
-                        Inicio
-                    </Link>
-
                     <Button
-                        className="text-white hover:text-white/90 font-bold"
+                        className="text-white text-xs lg:text-lg hover:text-white/90 font-bold w-40"
                         onClick={() => setShowContactPopup(true)}>
                         Contacto
                     </Button>
 
                     <Link
-                        className="text-white hover:text-white/90 font-bold border-2 py-1 px-8 rounded-full border-primary hover:border-primary/90"
+                        className="text-white hover:text-white/90 font-bold border-2 py-3 lg:py-1 px-8 rounded-full border-primary transition-all hover:bg-pylos-200/20 hover:border-primary/90"
                         href={EMPEZAR_AVENTURA_ROUTE}>
                         Empezar la aventura
                     </Link>
@@ -48,7 +42,7 @@ export default function Home() {
                         <h1 className="text-7xl font-bold text-white font-edu">Aprender</h1>
                         <h2 className="text-5xl text-sky-300 font-light font-edu">Nunca fue tan divertido</h2>
 
-                        <p className="lg:mr-36 text-white mb-4 font-medium">
+                        <p className="lg:mr-36 px-10 lg:px-0 text-white mb-4 font-medium">
                             Únete a Pylonauta en su increíble aventura espacial por los misteriosos planetas de nuestro universo. Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu
                             ayuda para resolver enigmas y superar desafíos emocionantes. ¡Descubre las herramientas secretas, repara la nave NEBULÓN y ayúdalo a regresar a casa! ¡Prepárate para una
                             aventura llena de diversión y aprendizaje!
