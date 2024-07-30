@@ -78,7 +78,7 @@ function Anfora() {
     }, [])
 
     useEffect(() => {
-        if (isPageVisible && !showMenu) {
+        if (isPageVisible && !showMenu && isPlayingWorldSound) {
             playSound('anforaMusic')
         } else {
             stopSound('anforaMusic')
