@@ -24,7 +24,7 @@ export default function LoadingOverlay({ className }: Props) {
     return (
         <div className={`${showLoading ? 'bg-pylos-900/10' : 'bg-pylos-900/50'} backdrop-blur-lg fixed inset-0 w-full h-[100vh] z-10`}>
             {showLoading && (
-                <div className={`absolute z-[10000] left-0 right-0 mx-auto text-center transition-opacity delay-75 duration-500 bottom-10 font-bold text-3xl ${toggle ? 'opacity-100' : 'opacity-20'}`}>
+                <div className={`absolute z-[10000] left-0 right-0 mx-auto text-center transition-opacity delay-75 duration-500 bottom-20 font-bold text-3xl ${toggle ? 'opacity-100' : 'opacity-20'}`}>
                     PYLOS
                 </div>
             )}
