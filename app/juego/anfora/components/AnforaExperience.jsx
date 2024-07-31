@@ -3,6 +3,7 @@ import { Environment, Grid, OrbitControls, OrthographicCamera, PerspectiveCamera
 import { Physics } from '@react-three/rapier'
 import { LandscapeAnforaModel } from './LandscapeAnfora'
 import { useGameStore } from '@/lib/store'
+import { AnforaModel } from './Anfora'
 
 const SateliteCameraComponent = () => {
     return (
@@ -67,11 +68,15 @@ export const AnforaExperience = () => {
                 </>
             )}
             <Environment preset="sunset" />
-            <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                <LandscapeAnforaModel position={[0, -0.205, 0]} />
+            {showMenu ? (
+                <AnforaModel />
+            ) : (
+                <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
+                    <LandscapeAnforaModel position={[0, -0.205, 0]} />
 
-                {!showMenu && <CharacterController />}
-            </Physics>
+                    <CharacterController />
+                </Physics>
+            )}
         </>
     )
 }
