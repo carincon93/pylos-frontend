@@ -102,7 +102,7 @@ function Anfora() {
     }
 
     return (
-        <div className={`fondo-anfora  ${showMenu ? 'md:bg-[315px] 2xl:bg-[335px_-240px]' : ''}`}>
+        <div className={`fondo-anfora  ${showMenu ? 'md:bg-[150px] lg:bg-[315px] 2xl:bg-[335px_-240px]' : ''}`}>
             <KeyboardControls map={keyboardMap}>
                 <Canvas
                     shadows
@@ -201,7 +201,7 @@ function Anfora() {
                 )}
 
                 {showMenu && (
-                    <div className="fixed inset-0 bg-white xl:w-[45vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-20">
+                    <div className="fixed inset-0 bg-white md:w-[45vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-20">
                         <div className="flex">
                             <h1 className="text-2xl mt-2 text-black font-black">PYLOS</h1>
 
