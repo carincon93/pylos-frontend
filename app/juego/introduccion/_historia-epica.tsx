@@ -34,8 +34,6 @@ export default function HistoriaEpica() {
         { id: 'sixth', title: 'Sixth Photo', img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.jpeg', date: '4 de abril de 2250' },
     ]
 
-    // const audioBienvenida = '/bienvenida.mp3'
-
     const nextPhoto = () => {
         handleHoverChange('')
         setActivePhoto((prev) => (prev + 1) % photosData.length)
