@@ -102,7 +102,7 @@ function Anfora() {
     }
 
     return (
-        <div className="fondo-anfora md:bg-[315px] 2xl:bg-[335px_-240px]">
+        <div className={`fondo-anfora  ${showMenu ? 'md:bg-[315px] 2xl:bg-[335px_-240px]' : ''}`}>
             <KeyboardControls map={keyboardMap}>
                 <Canvas
                     shadows
