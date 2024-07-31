@@ -145,6 +145,14 @@ textarea {
     }
 }
 
+.fondo-anfora {
+    background-image: url(/fondo-anfora.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
 .fondo-prueba::before {
     content: '';
     width: 100%;

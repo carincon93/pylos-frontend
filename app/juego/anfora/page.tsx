@@ -16,7 +16,6 @@ import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import useSWR, { mutate } from 'swr'
-import Background from './components/Background'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -103,18 +102,13 @@ function Anfora() {
     }
 
     return (
-        <>
+        <div className="fondo-anfora md:bg-[315px] 2xl:bg-[335px_-240px]">
             <KeyboardControls map={keyboardMap}>
                 <Canvas
                     shadows
                     camera={{ fov: 40, position: [20, 20, 20] }}
                     style={{ height: '100vh' }}
                     onMouseOver={() => setClickDisabled(false)}>
-                    {/* <color
-                        attach="background"
-                        args={['#9104a4']}
-                    /> */}
-
                     <Suspense fallback={null}>
                         <SoftShadows size={42} />
                         <AnforaExperience />
@@ -491,7 +485,7 @@ function Anfora() {
             </div>
 
             <AnforaForm handleSubmit={handleSubmit} />
-        </>
+        </div>
     )
 }
 
