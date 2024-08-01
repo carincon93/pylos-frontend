@@ -1,7 +1,7 @@
 'use client'
 
 import { AnforaExperience } from './components/AnforaExperience'
-import AnforaForm from './components/Ipad'
+import Ipad from './components/Ipad'
 import LoadingScreen from '@/components/LoadingScreen'
 import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
@@ -85,9 +85,10 @@ function Anfora() {
         }
     }, [isPageVisible])
 
-    const handleSubmit = async (object: string) => {
+    const handleSubmit = async (object: string, tiempoRespuesta: number) => {
         const data: Partial<ObjetoNaveReparado> = {
             planeta: 'anfora',
+            tiempoRespuesta: tiempoRespuesta,
             objeto: object,
         }
 
@@ -476,7 +477,7 @@ function Anfora() {
                 )}
             </div>
 
-            <AnforaForm handleSubmit={handleSubmit} />
+            <Ipad handleSubmit={handleSubmit} />
         </div>
     )
 }

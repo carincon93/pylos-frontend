@@ -1,6 +1,7 @@
 import { useContextData } from '@/app/context/AppContext'
 import { Button } from '@/components/ui/button'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
+import useCronometro from '@/hooks/useCronometro'
 import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -11,6 +12,7 @@ const Ipad = ({ handleSubmit }) => {
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const readings = useGameStore((state) => state.readings)
     const { profileUserData } = useContextData()
+
     const [answers, setAnswers] = useState([])
     const [object, setObject] = useState('')
     const [errorMessage, setShowErrorMessage] = useState(false)
@@ -21,6 +23,7 @@ const Ipad = ({ handleSubmit }) => {
     const [translateY, setTranslateY] = useState(0)
     const [isDragging, setIsDragging] = useState(false)
     const [showReading, setShowReading] = useState(false)
+    const { tiempoEnMinutos, cronometro } = useCronometro(showReading)
     const { playSound } = useAudioPlayer()
 
     useEffect(() => {
@@ -84,9 +87,9 @@ const Ipad = ({ handleSubmit }) => {
         })
     }
 
-    const checkAnswers = () => {
+    const checkAnswers = (tiempoRespuesta) => {
         if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
-            handleSubmit(object)
+            handleSubmit(object, tiempoRespuesta)
             playSound('phoneHidden')
             setShowReading(false)
 
@@ -342,6 +345,19 @@ const Ipad = ({ handleSubmit }) => {
             <div className="screen bg-secondary shadow-inner shadow-sky-300 overflow-y-auto">
                 <div className="px-8 py-2 text-xs flex items-center justify-between z-10 relative bg-[#38bdf8]/30 backdrop-blur">
                     <span>04:12</span>
+                    <span className="flex items-center  space-x-3">
+                        <svg
+                            fill="currentColor"
+                            strokeWidth="0"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="size-4 mx-2">
+                            <path
+                                fill="currentColor"
+                                d="m17.618 5.968 1.453-1.453 1.414 1.414-1.453 1.453A9 9 0 1 1 12 4c2.125 0 4.078.736 5.618 1.968ZM12 20a7 7 0 1 0 0-14 7 7 0 0 0 0 14ZM11 8h2v6h-2V8ZM8 1h8v2H8V1Z"></path>
+                        </svg>
+                        {tiempoEnMinutos}
+                    </span>
                     <span className="flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -397,7 +413,9 @@ const Ipad = ({ handleSubmit }) => {
                         setShowReading(true), playSound('phoneShowed')
                     }}>
                     <small>¡Tienes 1 nueva notificación!</small>
-                    <p className="text-sm leading-5 mt-2">Recibiste una nueva lectura. Abrir</p>
+                    <p className="text-sm leading-5 mt-2">
+                        Recibiste una nueva lectura. <strong>Abrir</strong>
+                    </p>
                 </div>
 
                 <div
@@ -461,7 +479,7 @@ const Ipad = ({ handleSubmit }) => {
                             <Button
                                 className="w-full"
                                 onClick={() => {
-                                    checkAnswers()
+                                    checkAnswers(cronometro)
                                 }}>
                                 Enviar respuestas
                             </Button>
