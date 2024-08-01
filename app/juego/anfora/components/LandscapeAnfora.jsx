@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { useGameStore } from '@/lib/store'
 import { RigidBody } from '@react-three/rapier'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export function LandscapeAnforaModel(props) {
     const { nodes, materials } = useGLTF('/models/AnforaLandscape.glb')
@@ -9,6 +10,8 @@ export function LandscapeAnforaModel(props) {
     const setQtyCorrectOptions = useGameStore((state) => state.setQtyCorrectOptions)
     const setSelectedAnforaForm = useGameStore((state) => state.setSelectedAnforaForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
+    const { playSound } = useAudioPlayer()
+
     return (
         <RigidBody
             colliders="trimesh"
@@ -127,7 +130,7 @@ export function LandscapeAnforaModel(props) {
                     rotation={[-0.559, 0, 0]}
                     scale={[0.162, 0.162, 0.045]}
                     onClick={() => {
-                        setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
+                        playSound('phoneShowed'), setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
                     }}
                 />
                 <group
@@ -155,7 +158,7 @@ export function LandscapeAnforaModel(props) {
                     rotation={[1.592, 0.018, -2.434]}
                     scale={[0.452, 0.672, 0.454]}
                     onClick={() => {
-                        setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
+                        playSound('phoneShowed'), setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
                     }}
                 />
                 <group
@@ -192,7 +195,7 @@ export function LandscapeAnforaModel(props) {
                     rotation={[0.017, 0.023, 0.938]}
                     scale={0.005}
                     onClick={() => {
-                        setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
+                        playSound('phoneShowed'), setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
                     }}>
                     <mesh
                         castShadow
@@ -216,7 +219,7 @@ export function LandscapeAnforaModel(props) {
                     rotation={[1.574, -0.024, 0.004]}
                     scale={[0.386, 1.123, 0.386]}
                     onClick={() => {
-                        setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
+                        playSound('phoneShowed'), setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
                     }}
                 />
                 <mesh
@@ -227,7 +230,7 @@ export function LandscapeAnforaModel(props) {
                     position={[-2.673, 2.123, -7.073]}
                     scale={[0.061, 0.01, 0.061]}
                     onClick={() => {
-                        setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
+                        playSound('phoneShowed'), setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
                     }}
                 />
             </group>

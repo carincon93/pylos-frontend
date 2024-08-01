@@ -421,7 +421,7 @@ const Ipad = ({ handleSubmit }) => {
                 <div
                     className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-900 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
                     onClick={() => {
-                        setActiveForm(false), setShowReading(false), playSound('phoneShowed')
+                        setActiveForm(false), setShowReading(false), playSound('phoneHidden')
                     }}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
