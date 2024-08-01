@@ -349,14 +349,6 @@ function Anfora() {
 
                                                 <div className="flex items-center mt-4">
                                                     <img
-                                                        src="/marker.png"
-                                                        className="w-8 mx-4"
-                                                    />
-                                                    Las partes estarán marcadas con este icono.
-                                                </div>
-
-                                                <div className="flex items-center mt-4">
-                                                    <img
                                                         src="/user-marker.png"
                                                         className="w-6 mx-5"
                                                     />
