@@ -118,7 +118,7 @@ function Anfora() {
                     started={start}
                     onStarted={setStart}
                 />
-                <Stats />
+                {process.env.NEXT_PUBLIC_DEBUG == 'true' && <Stats />}
             </KeyboardControls>
 
             {/* UI */}
