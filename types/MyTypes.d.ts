@@ -50,6 +50,7 @@ interface ObjetoNaveReparado {
     objeto: string
     planeta: string
     usuarioId: string
+    tiempoRespuesta: number
 }
 
 interface Login {
