@@ -34,7 +34,7 @@ export function CharacterAstronaut({ animation, ...props }) {
                     <primitive object={nodes.mixamorigHips} />
                 </group>
 
-                {showMap && <UserMarkerModel scale={200} />}
+                {showMap && <UserMarkerModel scale={120} />}
             </group>
         </group>
     )
