@@ -16,7 +16,7 @@ export function useAudioPlayer() {
             anforaMusic: new Howl({
                 src: ['/audios/little-astronaut.ogg'],
                 loop: true,
-                volume: 0.04,
+                volume: 0.1,
             }),
             running: new Howl({
                 src: ['/audios/running-sound.ogg'],
