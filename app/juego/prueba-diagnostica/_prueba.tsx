@@ -97,27 +97,84 @@ export default function Prueba() {
             <AlertDialog
                 open={open}
                 onOpenChange={setOpen}>
-                <AlertDialogContent>
+                <AlertDialogContent className="max-w-screen-xl max-h-[70vh] overflow-y-auto">
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            <span className="block text-center mb-4 text-2xl">
+                            <span className="block text-center mb-10 text-2xl">
                                 ¡Hola <span className="capitalize">{profileUserData?.nombre}</span> 👋🏻!
                             </span>{' '}
                             Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Sigue estos pasos para comenzar:
                         </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
-                            <br />
-                            <br />
-                            2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde con calma y
-                            sin prisa.
-                            <br />
-                            <br />
-                            3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
-                            <br />
-                            <br />
-                            <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
-                        </AlertDialogDescription>
+                        <div className="flex flex-col space-y-20">
+                            <section className="mt-10">
+                                <h1 className="text-2xl text-center mb-10">Prueba diagnóstica</h1>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
+                                        <br />
+                                        <br />
+                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
+                                        con calma y sin prisa.
+                                        <br />
+                                        <br />
+                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
+                                        <br />
+                                        <br />
+                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
+                                    </div>
+
+                                    <div>
+                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h1 className="text-2xl text-center mb-10">Introducción</h1>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
+                                        <br />
+                                        <br />
+                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
+                                        con calma y sin prisa.
+                                        <br />
+                                        <br />
+                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
+                                        <br />
+                                        <br />
+                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
+                                    </div>
+
+                                    <div>
+                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <h1 className="text-2xl text-center mb-10">Ánfora</h1>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
+                                        <br />
+                                        <br />
+                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
+                                        con calma y sin prisa.
+                                        <br />
+                                        <br />
+                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
+                                        <br />
+                                        <br />
+                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
+                                    </div>
+
+                                    <div>
+                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogAction>Continuar</AlertDialogAction>
