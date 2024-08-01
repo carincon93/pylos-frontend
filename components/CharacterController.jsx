@@ -96,7 +96,7 @@ export const CharacterController = () => {
     const [cameraPositionValues, setCameraPositionValues] = useState(initialCameraPosition)
     useEffect(() => {
         if (activeForm) {
-            setCameraPositionValues([0, 0, 0])
+            setCameraPositionValues([1.2, 1, 0])
         } else {
             setTimeout(() => {
                 setCameraPositionValues(initialCameraPosition)
@@ -124,10 +124,9 @@ export const CharacterController = () => {
                 const { x, y, z } = JSON.parse(savedPosition)
 
                 if (savedPosition) {
-                    if (position.y < -0.2) {
-                        rb.current.setTranslation({ x, y: 0, z }, true)
-
-                        localStorage.setItem('player_position', JSON.stringify({ x, y: 0, z }))
+                    if (position.y < -10) {
+                        rb.current.setTranslation({ x, y: 1, z }, true)
+                        localStorage.setItem('player_position', JSON.stringify({ x, y: 1, z }))
                     } else {
                         localStorage.setItem('player_position', JSON.stringify(position))
                     }
