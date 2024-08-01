@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import debounce from 'lodash/debounce'
 import useSWR, { mutate } from 'swr'
+import useCronometro from '@/hooks/useCronometro'
 
 export default function Prueba() {
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
@@ -24,9 +25,8 @@ export default function Prueba() {
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
-    const [cronometro, setCronometro] = useState(0)
-    const [tiempoEnMinutos, setTiempoEnMinutos] = useState('')
     const [open, setOpen] = useState(false)
+    const { tiempoEnMinutos, cronometro } = useCronometro(!open)
 
     const { profileUserData } = useContextData()
 
@@ -43,27 +43,6 @@ export default function Prueba() {
             }
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
-
-    useEffect(() => {
-        if (!open) {
-            const start = Date.now()
-
-            // Actualiza el tiempo del cronómetro cada segundo
-            const intervalo = setInterval(() => {
-                const tiempoTranscurrido = Date.now() - start
-                const segundosTranscurridos = Math.floor(tiempoTranscurrido / 1000)
-                const minutos = Math.floor(segundosTranscurridos / 60)
-                const segundos = segundosTranscurridos % 60
-                const tiempoFormateado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`
-                setTiempoEnMinutos(tiempoFormateado)
-                setCronometro(segundosTranscurridos)
-            }, 1000)
-
-            return () => {
-                clearInterval(intervalo)
-            }
-        }
-    }, [open])
 
     useEffect(() => {
         setOpen(true)
