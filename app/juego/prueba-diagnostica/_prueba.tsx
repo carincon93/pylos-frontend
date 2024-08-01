@@ -99,13 +99,13 @@ export default function Prueba() {
                 onOpenChange={setOpen}>
                 <AlertDialogContent className="max-w-screen-xl max-h-[70vh] overflow-y-auto">
                     <AlertDialogHeader>
-                        <AlertDialogTitle>
+                        <AlertDialogTitle className="px-20">
                             <span className="block text-center mb-10 text-2xl">
                                 ¡Hola <span className="capitalize">{profileUserData?.nombre}</span> 👋🏻!
                             </span>{' '}
                             Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Sigue estos pasos para comenzar:
                         </AlertDialogTitle>
-                        <div className="flex flex-col space-y-20">
+                        <div className="flex flex-col space-y-20 px-20">
                             <section className="mt-10">
                                 <h1 className="text-2xl text-center mb-10">Prueba diagnóstica</h1>
                                 <div className="grid grid-cols-2 gap-4">
@@ -124,7 +124,7 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
                                     </div>
                                 </div>
                             </section>
@@ -147,7 +147,7 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
                                     </div>
                                 </div>
                             </section>
@@ -170,14 +170,14 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
                                     </div>
                                 </div>
                             </section>
                         </div>
                     </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogAction>Continuar</AlertDialogAction>
+                    <AlertDialogFooter className="mt-10">
+                        <AlertDialogAction className="mr-20 inline-block">Continuar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
