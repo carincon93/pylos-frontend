@@ -326,7 +326,7 @@ function Anfora() {
 
                                     <div className="text-sm">
                                         Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el planeta Ánfora.
-                                        <ol className="list-decimal mt-4 pl-4">
+                                        <ol className="list-decimal mt-4 pl-4 text-left space-y-2">
                                             <li>
                                                 <strong>Explora el planeta Ánfora:</strong> Busca las partes perdidas de la nave mientras exploras este increíble planeta.
                                             </li>
