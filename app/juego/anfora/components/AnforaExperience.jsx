@@ -11,7 +11,7 @@ const SateliteCameraComponent = () => {
             <PerspectiveCamera
                 makeDefault
                 fov={40}
-                position={[0, 231.10896102590522, 0]}
+                position={[0, 100, 0]}
                 rotation={[-1.56, 0, 9.65]}
             />
         </>
@@ -72,7 +72,7 @@ export const AnforaExperience = () => {
                 <AnforaModel />
             ) : (
                 <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                    <LandscapeAnforaModel position={[0, -0.205, 0]} />
+                    <LandscapeAnforaModel position={[0, 0, 0]} />
 
                     <CharacterController />
                 </Physics>
