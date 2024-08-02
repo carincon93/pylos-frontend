@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
-import { saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib/actions'
+import { getProfile, saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib/actions'
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
@@ -28,7 +28,20 @@ export default function Prueba() {
     const [open, setOpen] = useState(false)
     const { tiempoEnMinutos, cronometro } = useCronometro(!open)
 
-    const { profileUserData } = useContextData()
+    const [profile, setProfile] = useState<Usuario>()
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile()
+                setProfile(profile)
+            } catch (error: any) {
+                console.error('Error al obtener el perfil del usuario:', error.message)
+            }
+        }
+
+        fetchProfile()
+    }, [])
 
     const router = useRouter()
     const { playSound } = useAudioPlayer()
@@ -50,7 +63,7 @@ export default function Prueba() {
 
     const sendTiempoPruebaDiagnostica = async () => {
         const data: Partial<Usuario> = {
-            tiempoPruebaDiagnostica: cronometro + (profileUserData ? profileUserData?.tiempoPruebaDiagnostica : 0),
+            tiempoPruebaDiagnostica: cronometro + (profile ? profile?.tiempoPruebaDiagnostica : 0),
         }
 
         try {
@@ -101,7 +114,7 @@ export default function Prueba() {
                     <AlertDialogHeader>
                         <AlertDialogTitle className="px-20">
                             <span className="block text-center mb-10 text-2xl">
-                                ¡Hola <span className="capitalize">{profileUserData?.nombre}</span> 👋🏻!
+                                ¡Hola <span className="capitalize">{profile?.nombre}</span> 👋🏻!
                             </span>{' '}
                             Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Sigue estos pasos para comenzar:
                         </AlertDialogTitle>
