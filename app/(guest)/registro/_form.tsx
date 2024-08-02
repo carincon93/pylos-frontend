@@ -17,6 +17,7 @@ import { Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import useSWR from 'swr'
 import { useState } from 'react'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export default function RegisterForm() {
     const { data: mascotas } = useSWR<Mascota[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/mascota`, fetcher)
@@ -25,6 +26,7 @@ export default function RegisterForm() {
     const [loading, setLoading] = useState<boolean>(false)
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
+    const { playSound, pauseSound, stopSound } = useAudioPlayer()
 
     const router = useRouter()
 
@@ -188,7 +190,11 @@ export default function RegisterForm() {
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button disabled={loading}>{loading ? 'Guardando...' : 'Registrarse'}</Button>
+            <Button
+                disabled={loading}
+                onMouseEnter={() => playSound('phoneShowed')}>
+                {loading ? 'Guardando...' : 'Registrarse'}
+            </Button>
         </form>
     )
 }

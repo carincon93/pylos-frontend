@@ -12,6 +12,7 @@ import { Loading } from '@/components/ui/loading'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import useSWR from 'swr'
 import { fetcher } from '@/utils/fetcher'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export default function LoginForm() {
     const { data: usuarios } = useSWR<Usuario[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario`, fetcher)
@@ -21,6 +22,7 @@ export default function LoginForm() {
     const [loading, setLoading] = useState<boolean>(false)
     const fields = ['nombre', 'nombreUsuario', 'edad', 'grado', 'mascotaId', 'mascotaNombre']
     const fieldErrors = getErrorsForFields(fields, errors)
+    const { playSound, pauseSound, stopSound } = useAudioPlayer()
 
     const router = useRouter()
 
@@ -127,7 +129,11 @@ export default function LoginForm() {
                 {fieldErrors['mascotaNombre'] && <small className="text-red-500">{fieldErrors['mascotaNombre']}</small>}
             </div>
 
-            <Button disabled={loading}>{loading ? 'Ingresando...' : 'Ingresar'}</Button>
+            <Button
+                disabled={loading}
+                onMouseEnter={() => playSound('phoneShowed')}>
+                {loading ? 'Ingresando...' : 'Ingresar'}
+            </Button>
         </form>
     )
 }

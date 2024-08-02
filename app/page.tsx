@@ -4,13 +4,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Logo } from '../components/Logo'
 import { Isotipo } from '../components/Isotipo'
-import { HOME_ROUTE, EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
+import { EMPEZAR_AVENTURA_ROUTE } from '@/utils/routes'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 
 export default function Home() {
     const [showContactPopup, setShowContactPopup] = useState(false)
+    const { playSound, pauseSound, stopSound } = useAudioPlayer()
 
     return (
         <main className="flex min-h-screen flex-col justify-between pb-22 px-0 fondo z-[1]">
@@ -24,13 +26,15 @@ export default function Home() {
                     className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Button
                         className="text-white text-xs lg:text-lg hover:text-white/90 font-bold w-40"
-                        onClick={() => setShowContactPopup(true)}>
+                        onClick={() => setShowContactPopup(true)}
+                        onMouseEnter={() => playSound('phoneShowed')}>
                         Contacto
                     </Button>
 
                     <Link
                         className="text-white hover:text-white/90 font-bold border-2 py-3 lg:py-1 px-8 rounded-full border-primary transition-all hover:bg-pylos-200/20 hover:border-primary/90"
-                        href={EMPEZAR_AVENTURA_ROUTE}>
+                        href={EMPEZAR_AVENTURA_ROUTE}
+                        onMouseEnter={() => playSound('phoneShowed')}>
                         Empezar la aventura
                     </Link>
                 </nav>
@@ -57,6 +61,7 @@ export default function Home() {
                 <div className="flex gap-x-4 items-center justify-center lg:justify-start my-10 lg:my-0">
                     <Link
                         href={EMPEZAR_AVENTURA_ROUTE}
+                        onMouseEnter={() => playSound('phoneShowed')}
                         className="py-4 px-8 font-bold text-white rounded-full bg-primary hover:bg-primary/90">
                         Empezar la aventura
                     </Link>
