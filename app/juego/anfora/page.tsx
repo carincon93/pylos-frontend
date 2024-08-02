@@ -334,7 +334,7 @@ function Anfora() {
                                                 <strong>Haz clic en las partes:</strong> Cada vez que encuentres una parte de la nave, haz clic en ella.
                                             </li>
                                             <li>
-                                                <strong>Responde la lectura:</strong> En tu móvil aparecerá una lectura que debes responder correctamente para reparar esa parte de la nave.
+                                                <strong>Responde la lectura:</strong> En tu dispositivo aparecerá una lectura que debes responder correctamente para reparar esa parte de la nave.
                                             </li>
                                             <li>
                                                 <strong>Recupera todas las partes:</strong> Cuando hayas encontrado y reparado las 5 partes, la nave Nebulón estará lista para continuar su viaje.
