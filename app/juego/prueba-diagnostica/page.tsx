@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function PruebaDiagnosticaPage() {
     return (
-        <>
-            <BackgroundStars />
+        <div className="bg-[url('/background-stars.png')] bg-no-repeat bg-cover">
+            {/* <BackgroundStars /> */}
 
             <Prueba />
-        </>
+        </div>
     )
 }
