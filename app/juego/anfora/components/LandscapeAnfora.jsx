@@ -24,38 +24,12 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.satellite.geometry}
                     material={materials.None}
-                    position={[0, 7.821, 0]}
+                    position={[0, 16.028, 0]}
                     rotation={[0, 0, -0.738]}
                     scale={0.901}
                 />
-                <group scale={16.132}>
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Plane001_1.geometry}
-                        material={materials['Grass.001']}
-                    />
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Plane001_2.geometry}
-                        material={materials['Water.001']}
-                    />
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Plane001_3.geometry}
-                        material={materials['Sand.001']}
-                    />
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Plane001_4.geometry}
-                        material={materials.Ice}
-                    />
-                </group>
                 <group
-                    position={[-11.694, 0.675, -0.293]}
+                    position={[-11.605, 0.165, -2.193]}
                     scale={1.742}>
                     <mesh
                         castShadow
@@ -71,7 +45,7 @@ export function LandscapeAnforaModel(props) {
                     />
                 </group>
                 <group
-                    position={[-9.424, 0.764, -7.36]}
+                    position={[-4.974, -0.067, -8.33]}
                     rotation={[0, 1.179, 0]}
                     scale={2.094}>
                     <mesh
@@ -88,7 +62,7 @@ export function LandscapeAnforaModel(props) {
                     />
                 </group>
                 <group
-                    position={[5.334, 0.921, -6.936]}
+                    position={[2.431, 0.117, -6.176]}
                     rotation={[-Math.PI, 1.268, -Math.PI]}
                     scale={2.747}>
                     <mesh
@@ -105,7 +79,7 @@ export function LandscapeAnforaModel(props) {
                     />
                 </group>
                 <group
-                    position={[12.252, 0.921, 1.343]}
+                    position={[9.349, 0.117, 2.103]}
                     rotation={[-Math.PI, 1.268, -Math.PI]}
                     scale={2.747}>
                     <mesh
@@ -126,15 +100,12 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.Bidon.geometry}
                     material={materials['Material_0.007']}
-                    position={[6.347, 0.073, -5.902]}
-                    rotation={[-0.559, 0, 0]}
-                    scale={[0.162, 0.162, 0.045]}
-                    onClick={() => {
-                        playSound('phoneShowed'), setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
-                    }}
+                    position={[-0.747, 0.282, -1.047]}
+                    rotation={[-1.421, 0.831, 1.393]}
+                    scale={[0.252, 0.252, 0.071]}
                 />
                 <group
-                    position={[-0.201, 0.954, 9.853]}
+                    position={[-0.059, 0.137, 6.809]}
                     scale={2.79}>
                     <mesh
                         castShadow
@@ -154,16 +125,13 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.Motor.geometry}
                     material={materials['Material_0.004']}
-                    position={[-7.63, 0.809, 7.349]}
+                    position={[-4.891, 0.562, 7.349]}
                     rotation={[1.592, 0.018, -2.434]}
                     scale={[0.452, 0.672, 0.454]}
-                    onClick={() => {
-                        playSound('phoneShowed'), setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
-                    }}
                 />
                 <group
-                    position={[-5.558, 0.455, 3.658]}
-                    rotation={[-0.409, 0, 0]}
+                    position={[-2.29, 0.42, 0.594]}
+                    rotation={[-0.929, -0.956, -0.863]}
                     scale={3.181}>
                     <mesh
                         castShadow
@@ -191,12 +159,9 @@ export function LandscapeAnforaModel(props) {
                     />
                 </group>
                 <group
-                    position={[11.52, 0.249, -1.116]}
-                    rotation={[0.017, 0.023, 0.938]}
-                    scale={0.005}
-                    onClick={() => {
-                        playSound('phoneShowed'), setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
-                    }}>
+                    position={[10.744, 0.139, -1.116]}
+                    rotation={[0.165, 0.023, 0.938]}
+                    scale={0.005}>
                     <mesh
                         castShadow
                         receiveShadow
@@ -215,23 +180,144 @@ export function LandscapeAnforaModel(props) {
                     receiveShadow
                     geometry={nodes.Reactor.geometry}
                     material={materials['Material_0.005']}
-                    position={[-0.003, -0.137, -1.329]}
-                    rotation={[1.574, -0.024, 0.004]}
+                    position={[4.479, 0.246, -1.863]}
+                    rotation={[1.797, -0.018, 0.585]}
                     scale={[0.386, 1.123, 0.386]}
-                    onClick={() => {
-                        playSound('phoneShowed'), setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
-                    }}
                 />
                 <mesh
                     castShadow
                     receiveShadow
                     geometry={nodes.Sistema_de_navegacion.geometry}
                     material={materials['Material_0.006']}
-                    position={[-2.673, 2.123, -7.073]}
+                    position={[-2.673, 0.063, -7.073]}
                     scale={[0.061, 0.01, 0.061]}
-                    onClick={() => {
-                        playSound('phoneShowed'), setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
-                    }}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Plane.geometry}
+                    material={materials.Grass}
+                    scale={13.403}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube.geometry}
+                    material={nodes.Cube.material}
+                    position={[-0.91, 0.088, 0.46]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube001.geometry}
+                    material={nodes.Cube001.material}
+                    position={[-1.171, 0.011, 0.736]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube002.geometry}
+                    material={nodes.Cube002.material}
+                    position={[-1.332, 0.079, 0.104]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube003.geometry}
+                    material={nodes.Cube003.material}
+                    position={[-1.132, 0.065, 0.46]}
+                    scale={0.029}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube004.geometry}
+                    material={nodes.Cube004.material}
+                    position={[-1.519, -0.003, 0.878]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube005.geometry}
+                    material={nodes.Cube005.material}
+                    position={[4.659, 0.011, -1.396]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube006.geometry}
+                    material={nodes.Cube006.material}
+                    position={[4.427, 0.011, -1.67]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube007.geometry}
+                    material={nodes.Cube007.material}
+                    position={[4.092, 0.011, -1.396]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube008.geometry}
+                    material={nodes.Cube008.material}
+                    position={[10.135, -0.037, -1.396]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube009.geometry}
+                    material={nodes.Cube009.material}
+                    position={[10.001, -0.166, -0.811]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube010.geometry}
+                    material={nodes.Cube010.material}
+                    position={[-4.184, 0.406, 6.976]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube011.geometry}
+                    material={nodes.Cube011.material}
+                    position={[-4.353, 0.406, 6.371]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube012.geometry}
+                    material={nodes.Cube012.material}
+                    position={[-3.049, 0.002, -5.875]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube013.geometry}
+                    material={nodes.Cube013.material}
+                    position={[-2.779, 0.002, -6.275]}
+                    scale={0.021}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.Cube014.geometry}
+                    material={nodes.Cube014.material}
+                    position={[-2.761, 0.002, -6.612]}
+                    scale={0.021}
                 />
             </group>
         </RigidBody>
