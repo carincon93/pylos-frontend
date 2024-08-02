@@ -157,7 +157,7 @@ function Anfora() {
                     <div className="fixed right-10 top-10">
                         {isPlayingWorldSound ? (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3"
+                                className="text-white rounded-full border-4 border-white p-3 invisible md:visible"
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(false), pauseSound('anforaMusic')
@@ -178,7 +178,7 @@ function Anfora() {
                             </button>
                         ) : (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3"
+                                className="text-white rounded-full border-4 border-white p-3 invisible md:visible"
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(true), playSound('anforaMusic')
@@ -223,7 +223,7 @@ function Anfora() {
                 )}
 
                 {showMenu && (
-                    <div className="fixed inset-0 bg-white md:w-[50vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-16 md:px-8 lg:px-16">
+                    <div className="fixed inset-0 bg-white md:w-[50vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-12 md:px-8 lg:px-16">
                         <div className="flex">
                             <h1 className="text-2xl mt-2 text-black font-black">PYLOS</h1>
 
@@ -233,10 +233,96 @@ function Anfora() {
                             />
                         </div>
 
-                        <p className="text-gray-700 leading-6 mt-12 mb-20 font-medium font-edu text-[20px]">
+                        <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium font-edu text-[20px]">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
+
+                        <div className="mb-6">
+                            <div
+                                className="hover:opacity-60 transition-opacity inline-block md:hidden"
+                                onClick={() => {
+                                    setShowInfoPopup(true), setShowMenu(false)
+                                }}
+                                onMouseOver={() => setClickDisabled(true)}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-10 sm:size-12 text-black">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                                    />
+                                </svg>
+                            </div>
+
+                            <div
+                                className="hover:opacity-60 transition-opacity inline-block md:hidden"
+                                onClick={() => {
+                                    setShowControlsPopup(true), setShowMenu(false)
+                                }}
+                                onMouseOver={() => setClickDisabled(true)}>
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    stroke="currentColor"
+                                    className="size-10 sm:size-12 text-black">
+                                    <path
+                                        d="M6.00014 11H10.0001M8.00014 9V13M15.0001 12H15.0101M18.0001 10H18.0101M10.4491 5H13.5512C16.1761 5 17.4885 5 18.5187 5.49743C19.4257 5.9354 20.1793 6.63709 20.6808 7.51059C21.2503 8.5027 21.3438 9.81181 21.5309 12.43L21.7769 15.8745C21.8975 17.5634 20.5599 19 18.8667 19C18.0008 19 17.1796 18.6154 16.6253 17.9502L16.2501 17.5C15.907 17.0882 15.7354 16.8823 15.54 16.7159C15.1305 16.3672 14.6346 16.1349 14.1045 16.0436C13.8516 16 13.5836 16 13.0476 16H10.9527C10.4167 16 10.1487 16 9.89577 16.0436C9.36563 16.1349 8.86981 16.3672 8.46024 16.7159C8.26487 16.8823 8.09329 17.0882 7.75013 17.5L7.37497 17.9502C6.82064 18.6154 5.99949 19 5.13359 19C3.44037 19 2.10275 17.5634 2.22339 15.8745L2.46942 12.43C2.65644 9.81181 2.74994 8.5027 3.31951 7.51059C3.82098 6.63709 4.57458 5.9354 5.48159 5.49743C6.51176 5 7.8242 5 10.4491 5Z"
+                                        strokeWidth="1.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                    />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div className="space-y-2 visible md:invisible mb-10">
+                            <div className="flex gap-2">
+                                <div
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-10 flex items-center justify-center bg-white/80 ${
+                                        motorItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/motor.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-10 flex items-center justify-center bg-white/80 ${
+                                        reactorItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/reactor.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-10 flex items-center justify-center bg-white/80 ${
+                                        sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/navegacion.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-10 flex items-center justify-center bg-white/80 ${
+                                        panelSolarItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img src="/anfora/panel.png" />
+                                </div>
+
+                                <div
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-10 flex items-center justify-center bg-white/80 ${
+                                        combustibleItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
+                                    }`}>
+                                    <img
+                                        src="/anfora/bidon.png"
+                                        className="w-10"
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
                         <Button
                             className="w-52 text-[24px] p-8 font-normal"
@@ -258,7 +344,7 @@ function Anfora() {
                             Salir
                         </Link>
 
-                        <ul className="mt-20 flex space-x-4">
+                        <ul className="mt-20 flex items-center justify-center space-x-6 md:space-x-4">
                             <li>
                                 <a
                                     href="https://instagram.com/wissen.creativo"
@@ -273,7 +359,7 @@ function Anfora() {
                                         <path d="M512 306.9c-113.5 0-205.1 91.6-205.1 205.1S398.5 717.1 512 717.1 717.1 625.5 717.1 512 625.5 306.9 512 306.9zm0 338.4c-73.4 0-133.3-59.9-133.3-133.3S438.6 378.7 512 378.7 645.3 438.6 645.3 512 585.4 645.3 512 645.3zm213.5-394.6c-26.5 0-47.9 21.4-47.9 47.9s21.4 47.9 47.9 47.9 47.9-21.3 47.9-47.9a47.84 47.84 0 0 0-47.9-47.9zM911.8 512c0-55.2.5-109.9-2.6-165-3.1-64-17.7-120.8-64.5-167.6-46.9-46.9-103.6-61.4-167.6-64.5-55.2-3.1-109.9-2.6-165-2.6-55.2 0-109.9-.5-165 2.6-64 3.1-120.8 17.7-167.6 64.5C132.6 226.3 118.1 283 115 347c-3.1 55.2-2.6 109.9-2.6 165s-.5 109.9 2.6 165c3.1 64 17.7 120.8 64.5 167.6 46.9 46.9 103.6 61.4 167.6 64.5 55.2 3.1 109.9 2.6 165 2.6 55.2 0 109.9.5 165-2.6 64-3.1 120.8-17.7 167.6-64.5 46.9-46.9 61.4-103.6 64.5-167.6 3.2-55.1 2.6-109.8 2.6-165zm-88 235.8c-7.3 18.2-16.1 31.8-30.2 45.8-14.1 14.1-27.6 22.9-45.8 30.2C695.2 844.7 570.3 840 512 840c-58.3 0-183.3 4.7-235.9-16.1-18.2-7.3-31.8-16.1-45.8-30.2-14.1-14.1-22.9-27.6-30.2-45.8C179.3 695.2 184 570.3 184 512c0-58.3-4.7-183.3 16.1-235.9 7.3-18.2 16.1-31.8 30.2-45.8s27.6-22.9 45.8-30.2C328.7 179.3 453.7 184 512 184s183.3-4.7 235.9 16.1c18.2 7.3 31.8 16.1 45.8 30.2 14.1 14.1 22.9 27.6 30.2 45.8C844.7 328.7 840 453.7 840 512c0 58.3 4.7 183.2-16.2 235.8z"></path>
                                     </svg>
 
-                                    <span className="ml-2 text-black mt-4 font-semibold text-wissen-gradient">@wissen.creativo</span>
+                                    <span className="md:ml-2 text-black mt-4 font-semibold text-wissen-gradient">@wissen.creativo</span>
                                 </a>
                             </li>
 
@@ -292,7 +378,7 @@ function Anfora() {
                                         <path d="M925.2 338.4c-22.6-53.7-55-101.9-96.3-143.3-41.3-41.3-89.5-73.8-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6.3-119.3 12.3-174.5 35.9-53.3 22.8-101.1 55.2-142 96.5-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9.3 69.4 16.9 138.3 48 199.9v152c0 25.4 20.6 46 46 46h152.1c61.6 31.1 130.5 47.7 199.9 48h2.1c59.9 0 118-11.6 172.7-34.3 53.5-22.3 101.6-54.3 142.8-95.2 41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5.3-60.9-11.5-120-34.8-175.6zm-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-.6 99.6-39.7 192.9-110.1 262.7z"></path>
                                     </svg>
 
-                                    <span className="ml-2 text-black mt-4 font-semibold text-wissen-gradient">+57 315 4707281</span>
+                                    <span className="md:ml-2 text-black mt-4 font-semibold text-wissen-gradient">+57 315 4707281</span>
                                 </a>
                             </li>
                         </ul>
@@ -302,7 +388,7 @@ function Anfora() {
                 {!activeForm && !showMenu && (
                     <>
                         <div
-                            className="fixed bottom-32 left-2 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity"
+                            className="fixed bottom-32 left-2 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity invisible md:visible"
                             onClick={() => setShowInfoPopup(true)}
                             onMouseOver={() => setClickDisabled(true)}>
                             <svg
@@ -321,7 +407,7 @@ function Anfora() {
                         </div>
 
                         <div
-                            className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity"
+                            className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity invisible md:visible"
                             onClick={() => setShowControlsPopup(true)}
                             onMouseOver={() => setClickDisabled(true)}>
                             <svg
@@ -441,38 +527,38 @@ function Anfora() {
                             </AlertDialogContent>
                         </AlertDialog>
 
-                        <div className="fixed lg:right-10 left-0 right-0 mx-auto sm:w-[432px] bottom-6 space-y-2">
+                        <div className="fixed lg:right-10 left-0 right-0 mx-auto sm:w-[432px] bottom-6 space-y-2 invisible md:visible">
                             <div className="flex gap-2">
                                 <div
-                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-20 flex items-center justify-center bg-white/80 ${
                                         motorItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/motor.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-20 flex items-center justify-center bg-white/80 ${
                                         reactorItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/reactor.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-20 flex items-center justify-center bg-white/80 ${
                                         sistemaNavegacionItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/navegacion.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-20 flex items-center justify-center bg-white/80 ${
                                         panelSolarItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img src="/anfora/panel.png" />
                                 </div>
 
                                 <div
-                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto w-20 h-20 flex items-center justify-center bg-white/80 ${
+                                    className={`font-black text-center rounded-xl shadow-inner shadow-gray-600/40 border-2 p-2 mx-auto size-20 flex items-center justify-center bg-white/80 ${
                                         combustibleItem ? 'text-pylos-600 border-pylos-600 opacity-100' : 'opacity-50 text-red-100 border-red-100 grayscale'
                                     }`}>
                                     <img
