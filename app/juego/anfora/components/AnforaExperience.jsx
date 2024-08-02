@@ -11,7 +11,7 @@ const SateliteCameraComponent = () => {
             <PerspectiveCamera
                 makeDefault
                 fov={40}
-                position={[0, 100, 0]}
+                position={[0, 50, 0]}
                 rotation={[-1.56, 0, 9.65]}
             />
         </>
