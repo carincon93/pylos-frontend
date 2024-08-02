@@ -26,7 +26,7 @@ export function useAudioPlayer() {
             satelite: new Howl({
                 src: ['/audios/satelite-sound.mp3'],
                 loop: false,
-                volume: 0.07,
+                volume: 0.1,
             }),
             buttonPressed: new Howl({
                 src: ['/audios/button-pressed.mp3'],
