@@ -39,7 +39,7 @@
         --ipad-scale: 1.29;
         --ipad-text-scale: 1;
         --ipad-width: 484px;
-        --ipad-height: 762px;
+        --ipad-height: 740px;
         --ipad-border: 19.35px;
         --ipad-x: 40%;
         --ipad-y: 89px;
@@ -75,9 +75,7 @@
         --input: 38 38 38;
         --ring: 242 98 255;
     }
-}
 
-@layer base {
     * {
         @apply border-border;
     }
@@ -425,5 +423,12 @@ button[role='combobox'] {
 @keyframes l3 {
     to {
         transform: rotate(1turn);
+    }
+}
+
+@media (max-width: 540px) {
+    :root {
+        --ipad-width: 410px;
+        --ipad-height: 680px;
     }
 }
