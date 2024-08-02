@@ -414,6 +414,14 @@ button[role='combobox'] {
     display: inline-block;
 }
 
+.text-wissen-gradient {
+    background: linear-gradient(to right, #924c8e, #ea1f1f, #f99c1a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
 @keyframes l3 {
     to {
         transform: rotate(1turn);
