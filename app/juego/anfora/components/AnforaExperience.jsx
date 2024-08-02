@@ -72,7 +72,7 @@ export const AnforaExperience = () => {
                 <AnforaModel />
             ) : (
                 <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
-                    <LandscapeAnforaModel position={[0, 0, 0]} />
+                    <LandscapeAnforaModel position={[5, 0, 0]} />
 
                     <CharacterController />
                 </Physics>

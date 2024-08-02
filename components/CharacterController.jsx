@@ -124,9 +124,9 @@ export const CharacterController = () => {
                 const { x, y, z } = JSON.parse(savedPosition)
 
                 if (savedPosition) {
-                    if (position.y < -10) {
+                    if (position.y < -5) {
                         rb.current.setTranslation({ x, y: 1, z }, true)
-                        localStorage.setItem('player_position', JSON.stringify({ x, y: 1, z }))
+                        localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 1, z: 0 }))
                     } else {
                         localStorage.setItem('player_position', JSON.stringify(position))
                     }

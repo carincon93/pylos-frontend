@@ -103,6 +103,9 @@ export function LandscapeAnforaModel(props) {
                     position={[-0.747, 0.282, -1.047]}
                     rotation={[-1.421, 0.831, 1.393]}
                     scale={[0.252, 0.252, 0.071]}
+                    onClick={() => {
+                        playSound('phoneShowed'), setSelectedAnforaForm(5), setActiveForm(true), setQtyCorrectOptions(0)
+                    }}
                 />
                 <group
                     position={[-0.059, 0.137, 6.809]}
@@ -128,6 +131,9 @@ export function LandscapeAnforaModel(props) {
                     position={[-4.891, 0.562, 7.349]}
                     rotation={[1.592, 0.018, -2.434]}
                     scale={[0.452, 0.672, 0.454]}
+                    onClick={() => {
+                        playSound('phoneShowed'), setSelectedAnforaForm(1), setActiveForm(true), setQtyCorrectOptions(0)
+                    }}
                 />
                 <group
                     position={[-2.29, 0.42, 0.594]}
@@ -161,7 +167,10 @@ export function LandscapeAnforaModel(props) {
                 <group
                     position={[10.744, 0.139, -1.116]}
                     rotation={[0.165, 0.023, 0.938]}
-                    scale={0.005}>
+                    scale={0.005}
+                    onClick={() => {
+                        playSound('phoneShowed'), setSelectedAnforaForm(3), setActiveForm(true), setQtyCorrectOptions(0)
+                    }}>
                     <mesh
                         castShadow
                         receiveShadow
@@ -183,6 +192,9 @@ export function LandscapeAnforaModel(props) {
                     position={[4.479, 0.246, -1.863]}
                     rotation={[1.797, -0.018, 0.585]}
                     scale={[0.386, 1.123, 0.386]}
+                    onClick={() => {
+                        playSound('phoneShowed'), setSelectedAnforaForm(4), setActiveForm(true), setQtyCorrectOptions(0)
+                    }}
                 />
                 <mesh
                     castShadow
@@ -191,6 +203,9 @@ export function LandscapeAnforaModel(props) {
                     material={materials['Material_0.006']}
                     position={[-2.673, 0.063, -7.073]}
                     scale={[0.061, 0.01, 0.061]}
+                    onClick={() => {
+                        playSound('phoneShowed'), setSelectedAnforaForm(2), setActiveForm(true), setQtyCorrectOptions(0)
+                    }}
                 />
                 <mesh
                     castShadow
