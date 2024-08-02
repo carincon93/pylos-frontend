@@ -233,7 +233,7 @@ function Anfora() {
                             />
                         </div>
 
-                        <p className="text-gray-700 leading-5 mt-12 mb-20 font-medium font-edu text-lg">
+                        <p className="text-gray-700 leading-6 mt-12 mb-20 font-medium font-edu text-[20px]">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
