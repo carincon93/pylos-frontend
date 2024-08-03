@@ -462,6 +462,11 @@ button[role='combobox'] {
         --ipad-width: 360px;
         --ipad-height: 620px;
     }
+
+    .thumb-1 svg {
+        width: calc(120px * var(--ipad-scale));
+        height: calc(172px * var(--ipad-scale));
+    }
 }
 @media (min-device-width: 414px) and (max-device-width: 515px) and (min-device-height: 414px) and (max-device-height: 1102px) and (orientation: portrait) {
     :root {
