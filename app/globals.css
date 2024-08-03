@@ -459,14 +459,14 @@ button[role='combobox'] {
 @media (min-device-width: 200px) and (max-device-width: 414px) and (min-device-height: 414px) and (max-device-height: 1102px) and (orientation: portrait) {
     :root {
         --ipad-y: 140px;
-        --ipad-width: 330px;
+        --ipad-width: 360px;
         --ipad-height: 620px;
     }
 }
 @media (min-device-width: 414px) and (max-device-width: 515px) and (min-device-height: 414px) and (max-device-height: 1102px) and (orientation: portrait) {
     :root {
         --ipad-y: 140px;
-        --ipad-width: 375px;
+        --ipad-width: 405px;
         --ipad-height: 640px;
     }
 }
