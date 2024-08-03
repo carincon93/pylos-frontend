@@ -574,8 +574,6 @@ function Anfora() {
                                 onClick={() => {
                                     setShowMap(!showMap), playSound('satelite')
                                 }}
-                                onMouseOver={() => setClickDisabled(true)}
-                                onMouseLeave={() => setClickDisabled(false)}
                                 src="/satelite.png"
                                 className={`${showMap ? 'grayscale' : ''} w-20 sm:w-32`}
                             />

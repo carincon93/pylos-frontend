@@ -41,7 +41,7 @@
         --ipad-width: 484px;
         --ipad-height: 740px;
         --ipad-border: 19.35px;
-        --ipad-x: 40%;
+        --ipad-x: 0;
         --ipad-y: 80px;
         --ipad-ratio: 0.635;
     }
@@ -214,7 +214,7 @@ button[role='combobox'] {
     position: fixed;
     top: var(--ipad-y);
     left: 0;
-    right: 0;
+    right: var(--ipad-x);
     margin: auto;
     z-index: 15;
     width: var(--ipad-width);
@@ -456,7 +456,14 @@ button[role='combobox'] {
 } */
 
 /* iPhone XR - Vertical */
-@media (min-device-width: 414px) and (max-device-width: 414px) and (min-device-height: 896px) and (max-device-height: 896px) and (orientation: portrait) {
+@media (min-device-width: 200px) and (max-device-width: 375px) and (min-device-height: 414px) and (max-device-height: 896px) and (orientation: portrait) {
+    :root {
+        --ipad-y: 140px;
+        --ipad-width: 330px;
+        --ipad-height: 620px;
+    }
+}
+@media (min-device-width: 375px) and (max-device-width: 425px) and (min-device-height: 414px) and (max-device-height: 896px) and (orientation: portrait) {
     :root {
         --ipad-y: 140px;
         --ipad-width: 410px;
