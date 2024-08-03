@@ -42,7 +42,7 @@
         --ipad-height: 740px;
         --ipad-border: 19.35px;
         --ipad-x: 40%;
-        --ipad-y: 89px;
+        --ipad-y: 80px;
         --ipad-ratio: 0.635;
     }
 
@@ -426,21 +426,55 @@ button[role='combobox'] {
     }
 }
 
-@media (max-width: 540px) {
+/* @media (max-width: 540px) and (max-width: 1180px) {
     :root {
         --ipad-width: 410px;
         --ipad-height: 680px;
     }
 }
 
-@media (max-height: 1070px) {
+@media (max-height: 544px) and (max-width: 1180px) {
     :root {
-        --ipad-y: 140px;
+        --ipad-y: 35px;
+        --ipad-width: 370px;
+        --ipad-height: 500px;
     }
 }
 
-@media (min-height: 1070px) {
+@media (min-height: 544px) and (max-height: 900px) and (max-width: 1180px) {
+    :root {
+        --ipad-y: 35px;
+        --ipad-width: 420px;
+        --ipad-height: 620px;
+    }
+}
+
+@media (min-height: 900px) and (max-height: 1070px) and (max-width: 1180px) {
+    :root {
+        --ipad-y: 140px;
+    }
+} */
+
+/* iPhone XR - Vertical */
+@media (min-device-width: 414px) and (max-device-width: 414px) and (min-device-height: 896px) and (max-device-height: 896px) and (orientation: portrait) {
+    /* Tus reglas CSS aquí */
+}
+
+/* iPhone XR - Horizontal */
+@media (min-device-width: 896px) and (max-device-width: 896px) and (min-device-height: 414px) and (max-device-height: 414px) and (orientation: landscape) {
+    /* Tus reglas CSS aquí */
+}
+
+/* iPad Air - Vertical */
+@media (min-device-width: 820px) and (max-device-width: 820px) and (min-device-height: 1180px) and (max-device-height: 1180px) and (orientation: portrait) {
     :root {
         --ipad-y: 240px;
+    }
+}
+
+/* iPad Air - Horizontal */
+@media (min-device-width: 1180px) and (max-device-width: 1180px) and (min-device-height: 820px) and (max-device-height: 820px) and (orientation: landscape) {
+    :root {
+        --ipad-y: 50px;
     }
 }
