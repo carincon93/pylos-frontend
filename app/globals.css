@@ -432,3 +432,15 @@ button[role='combobox'] {
         --ipad-height: 680px;
     }
 }
+
+@media (max-height: 1070px) {
+    :root {
+        --ipad-y: 140px;
+    }
+}
+
+@media (min-height: 1070px) {
+    :root {
+        --ipad-y: 240px;
+    }
+}
