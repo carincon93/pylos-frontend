@@ -388,7 +388,7 @@ const Ipad = ({ handleSubmit }) => {
                         </svg>
                     </span>
                 </div>
-                <div className={`p-6 bg-pylos-700 text-white rounded-2xl mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-20' : '-translate-y-[300px]'}`}>
+                <div className={`p-6 bg-pylos-700 text-white rounded-2xl mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-20' : 'show-reading -translate-y-[300px]'}`}>
                     <div className="flex items-center">
                         <span className="bg-[url('/estados.png')] size-10 inline-block bg-no-repeat bg-[-43px_-42px] bg-[length:86px] mr-2"></span>
                         <span className="capitalize font-medium text-2xl">¡Hola {profileUserData?.nombre}!</span>
@@ -408,7 +408,7 @@ const Ipad = ({ handleSubmit }) => {
                 </div>
 
                 <div
-                    className={`p-6 bg-gray-200 rounded-2xl text-black mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-32' : '-translate-y-[330px]'}`}
+                    className={`p-6 bg-gray-200 rounded-2xl text-black mx-8 shadow-inner shadow-white transition-transform ${!showReading ? 'translate-y-32' : 'show-reading -translate-y-[360px]'}`}
                     onClick={() => {
                         setShowReading(true), playSound('phoneShowed')
                     }}>

@@ -457,12 +457,32 @@ button[role='combobox'] {
 
 /* iPhone XR - Vertical */
 @media (min-device-width: 414px) and (max-device-width: 414px) and (min-device-height: 896px) and (max-device-height: 896px) and (orientation: portrait) {
-    /* Tus reglas CSS aquí */
+    :root {
+        --ipad-y: 140px;
+        --ipad-width: 410px;
+        --ipad-height: 680px;
+    }
 }
 
 /* iPhone XR - Horizontal */
 @media (min-device-width: 896px) and (max-device-width: 896px) and (min-device-height: 414px) and (max-device-height: 414px) and (orientation: landscape) {
-    /* Tus reglas CSS aquí */
+    :root {
+        --ipad-y: -10px;
+        --ipad-width: 380px;
+        --ipad-height: 480px;
+    }
+
+    .screen div:nth-child(2) {
+        transform: translateY(1rem);
+    }
+
+    .screen div:nth-child(3) {
+        transform: translateY(2rem);
+    }
+
+    .screen .show-reading {
+        transform: translateY(-360px) !important;
+    }
 }
 
 /* iPad Air - Vertical */
