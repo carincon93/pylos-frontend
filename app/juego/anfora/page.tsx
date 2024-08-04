@@ -40,6 +40,7 @@ function Anfora() {
     const showMenu = useGameStore((state) => state.showMenu)
     const setShowMenu = useGameStore((state) => state.setShowMenu)
     const isPageVisible = useGameStore((state) => state.isPageVisible)
+    const resetCharacterPosition = useGameStore((state) => state.resetCharacterPosition)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const reactorItem = objetosNaveReparados?.find((item) => item.objeto === 'reactor')
@@ -53,7 +54,7 @@ function Anfora() {
     const [isPlayingWorldSound, setIsPlayingWorldSound] = useState(false)
 
     const { playSound, pauseSound, stopSound } = useAudioPlayer()
-    const { fps, warning } = useMonitorFPS(30)
+    const { fps, warning } = useMonitorFPS(25)
 
     useEffect(() => {
         setReadings(readings)
@@ -409,6 +410,8 @@ function Anfora() {
                                 />
                             </svg>
                         </div>
+
+                        {resetCharacterPosition && <div className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 text-white">Restablecer</div>}
 
                         <AlertDialog open={showInfoPopup}>
                             <AlertDialogContent>
