@@ -125,9 +125,7 @@ function Anfora() {
             </KeyboardControls>
 
             {/* UI */}
-            <div
-                className="select-none"
-                onMouseOver={() => setClickDisabled(true)}>
+            <div className="select-none">
                 {warning && (
                     <div className="fixed bg-white/90 left-0 right-0 !bottom-32 p-2 rounded-full z-10 !w-6/12 mx-auto text-center text-black text-xs flex items-center justify-center">
                         Advertencia: Posiblemente su dispositivo no cumpla con los requisitos para ejecutar el juego ({fps.toFixed(2)}) fps
@@ -144,7 +142,7 @@ function Anfora() {
                     <div className="fixed right-10 top-10">
                         {isPlayingWorldSound ? (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3 invisible md:visible"
+                                className="text-white rounded-full border-4 border-white p-3 hidden md:block"
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(false), pauseSound('anforaMusic')
@@ -165,7 +163,7 @@ function Anfora() {
                             </button>
                         ) : (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3 invisible md:visible"
+                                className="text-white rounded-full border-4 border-white p-3 hidden md:block"
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(true), playSound('anforaMusic')
@@ -190,7 +188,7 @@ function Anfora() {
                             className="text-white rounded-full border-4 border-white p-3 ml-2"
                             type="button"
                             onClick={() => {
-                                setShowMenu(true), pauseSound('anforaMusic')
+                                setShowMenu(true), setActiveForm(false), pauseSound('anforaMusic')
                             }}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -220,14 +218,14 @@ function Anfora() {
                             />
                         </div>
 
-                        <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium font-edu text-[20px]">
+                        <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium font-edu text-sm md:text-[20px]">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
 
-                        <div className="mb-6">
+                        <div className="mb-6 flex md:hidden">
                             <div
-                                className="hover:opacity-60 transition-opacity inline-block md:hidden"
+                                className="hover:opacity-60 transition-opacity"
                                 onClick={() => {
                                     setShowInfoPopup(true), setShowMenu(false)
                                 }}
@@ -248,7 +246,7 @@ function Anfora() {
                             </div>
 
                             <div
-                                className="hover:opacity-60 transition-opacity inline-block md:hidden"
+                                className="hover:opacity-60 transition-opacity"
                                 onClick={() => {
                                     setShowControlsPopup(true), setShowMenu(false)
                                 }}
@@ -312,7 +310,7 @@ function Anfora() {
                         </div>
 
                         <Button
-                            className="w-52 text-[24px] p-8 font-normal"
+                            className="w-52  font-normal"
                             onMouseEnter={() => {
                                 playSound('phoneShowed')
                             }}
@@ -323,7 +321,7 @@ function Anfora() {
                         </Button>
 
                         <Link
-                            className="w-52 text-[24px] rounded-full bg-purple-800 text-center py-3 mt-6 hover:opacity-80 transition-opacity"
+                            className="w-52 rounded-full bg-purple-800 text-center py-2 mt-4 hover:opacity-80 transition-opacity"
                             onMouseEnter={() => {
                                 playSound('phoneShowed')
                             }}
