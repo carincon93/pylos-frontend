@@ -1,6 +1,6 @@
 import { CharacterController } from '../../../../components/CharacterController'
 import { Environment, Grid, OrbitControls, OrthographicCamera, PerspectiveCamera } from '@react-three/drei'
-import { Physics } from '@react-three/rapier'
+import { Physics, RigidBody, CuboidCollider } from '@react-three/rapier'
 import { LandscapeAnforaModel } from './LandscapeAnfora'
 import { useGameStore } from '@/lib/store'
 import { AnforaModel } from './Anfora'
@@ -28,6 +28,23 @@ const MenuCameraComponent = () => {
                 rotation={[-0.02, 0.02, 0]}
             />
         </>
+    )
+}
+
+const Barrier = ({ position, size }) => {
+    const setResetCharacterPosition = useGameStore((state) => state.setResetCharacterPosition)
+
+    return (
+        <RigidBody
+            type="fixed"
+            colliders="false"
+            position={position}>
+            <CuboidCollider
+                args={size}
+                onCollisionEnter={() => setResetCharacterPosition(true)}
+            />
+            ,
+        </RigidBody>
     )
 }
 
@@ -73,7 +90,10 @@ export const AnforaExperience = () => {
             ) : (
                 <Physics debug={process.env.NEXT_PUBLIC_DEBUG == 'true'}>
                     <LandscapeAnforaModel position={[5, 0, 0]} />
-
+                    <Barrier
+                        position={[4, -1, 0]}
+                        size={[20, 0.5, 20]}
+                    />
                     <CharacterController />
                 </Physics>
             )}
