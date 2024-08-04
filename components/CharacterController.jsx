@@ -111,25 +111,19 @@ export const CharacterController = () => {
             const { x, y, z } = JSON.parse(savedPosition)
             rb.current.setTranslation({ x, y, z }, true)
         } else {
-            localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 0, z: 0 }))
+            localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 2, z: 0 }))
         }
     }, [])
 
     useEffect(() => {
         const interval = setInterval(() => {
             if (Date.now() - lastMovementTime > 1000) {
-                const position = rb.current.translation()
+                const { x, y, z } = rb.current.translation()
 
-                const savedPosition = localStorage.getItem('player_position')
-                const { x, y, z } = JSON.parse(savedPosition)
-
-                if (savedPosition) {
-                    if (position.y < -5) {
-                        rb.current.setTranslation({ x, y: 1, z }, true)
-                        localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 1, z: 0 }))
-                    } else {
-                        localStorage.setItem('player_position', JSON.stringify(position))
-                    }
+                if (y + 1 > 0.4) {
+                    localStorage.setItem('player_position', JSON.stringify({ x, y: y + 1, z }))
+                } else {
+                    localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 2, z: 0 }))
                 }
             }
         }, 1000)
@@ -158,7 +152,7 @@ export const CharacterController = () => {
             }
 
             if (get().reset) {
-                rb.current.setTranslation({ x: 0, y: 0, z: 0 }, true)
+                rb.current.setTranslation({ x: 0, y: 2, z: 0 }, true)
             }
 
             let speed = get().run ? RUN_SPEED : WALK_SPEED
