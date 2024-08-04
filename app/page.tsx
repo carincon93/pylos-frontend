@@ -22,7 +22,7 @@ export default function Home() {
                     <Logo className="w-52 dark:drop-shadow-[255_255_255.3rem_#ffffff70] text-white" />
                 </div>
                 <nav
-                    id="header-nav"
+                    // id="header-nav"
                     className="flex flex-1 items-center justify-around lg:ml-20 fixed inset-x-0 top-4 lg:top-0 lg:relative text-xs lg:text-lg">
                     <Button
                         className="text-white text-xs lg:text-lg hover:text-white/90 font-bold w-40"
