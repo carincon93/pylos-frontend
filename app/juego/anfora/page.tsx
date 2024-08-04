@@ -223,7 +223,7 @@ function Anfora() {
                 )}
 
                 {showMenu && (
-                    <div className="fixed inset-0 bg-white md:w-[50vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-12 md:px-8 lg:px-16">
+                    <div className="fixed inset-0 bg-white lg:w-[50vw] 2xl:w-[25vw] flex flex-col items-center justify-center px-12 md:px-8 lg:px-16">
                         <div className="flex">
                             <h1 className="text-2xl mt-2 text-black font-black">PYLOS</h1>
 
