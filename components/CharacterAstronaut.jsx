@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import { UserMarkerModel } from '../app/juego/anfora/components/UserMarker'
 import { useGameStore } from '@/lib/store'
@@ -9,12 +9,24 @@ export function CharacterAstronaut({ animation, ...props }) {
     const { actions } = useAnimations(animations, group)
     const showMap = useGameStore((state) => state.showMap)
 
+    const [visible, setVisible] = useState(false)
+
     useEffect(() => {
-        actions[animation].reset().fadeIn(0.2).play()
-        return () => actions[animation]?.fadeOut(0.2)
+        const timer = setTimeout(() => {
+            setVisible(true)
+        }, 2000)
+
+        return () => clearTimeout(timer) // Limpia el temporizador si el componente se desmonta
+    }, [])
+
+    useEffect(() => {
+        if (visible) {
+            actions[animation].reset().fadeIn(0.2).play()
+            return () => actions[animation]?.fadeOut(0.2)
+        }
     }, [animation])
 
-    return (
+    return visible ? (
         <group
             ref={group}
             {...props}>
@@ -37,7 +49,7 @@ export function CharacterAstronaut({ animation, ...props }) {
                 {showMap && <UserMarkerModel scale={80} />}
             </group>
         </group>
-    )
+    ) : null
 }
 
 useGLTF.preload('/models/CharacterAstronaut.glb')
