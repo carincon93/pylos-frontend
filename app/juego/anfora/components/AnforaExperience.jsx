@@ -31,19 +31,16 @@ const MenuCameraComponent = () => {
     )
 }
 
-const Barrier = ({ position, size }) => {
+const Barrier = ({ position, size, rotation }) => {
     const setResetCharacterPosition = useGameStore((state) => state.setResetCharacterPosition)
 
     return (
         <RigidBody
             type="fixed"
             colliders="false"
-            position={position}>
-            <CuboidCollider
-                args={size}
-                onCollisionEnter={() => setResetCharacterPosition(true)}
-            />
-            ,
+            position={position}
+            rotation={rotation}>
+            <CuboidCollider args={size} />,
         </RigidBody>
     )
 }
@@ -93,6 +90,27 @@ export const AnforaExperience = () => {
                     <Barrier
                         position={[4, -1, 0]}
                         size={[20, 0.5, 20]}
+                    />
+                    <Barrier
+                        position={[15.5, 2, 4]}
+                        rotation={[0, 1, 0]}
+                        size={[15, 2, 0.5]}
+                    />
+                    <Barrier
+                        position={[-4, 2, -6]}
+                        rotation={[0, 1, 0]}
+                        size={[15, 2, 0.5]}
+                    />
+
+                    <Barrier
+                        position={[-2, 2, 7]}
+                        rotation={[0, 2.5, 0]}
+                        size={[15, 2, 0.5]}
+                    />
+                    <Barrier
+                        position={[14, 2, -6]}
+                        rotation={[0, 2.5, 0]}
+                        size={[15, 2, 0.5]}
                     />
                     <CharacterController />
                 </Physics>
