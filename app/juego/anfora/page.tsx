@@ -139,10 +139,10 @@ function Anfora() {
                 </div>
 
                 {!showMenu && (
-                    <div className="fixed right-10 top-10">
+                    <div className="fixed right-10 top-10 hidden md:flex">
                         {isPlayingWorldSound ? (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3 hidden md:block"
+                                className="text-white rounded-full border-4 border-white p-3 "
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(false), pauseSound('anforaMusic')
@@ -163,7 +163,7 @@ function Anfora() {
                             </button>
                         ) : (
                             <button
-                                className="text-white rounded-full border-4 border-white p-3 hidden md:block"
+                                className="text-white rounded-full border-4 border-white p-3"
                                 type="button"
                                 onClick={() => {
                                     setIsPlayingWorldSound(true), playSound('anforaMusic')
