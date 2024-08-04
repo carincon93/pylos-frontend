@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 
-const useMonitorFPS = (threshold: number, checkInterval: number = 1000, duration: number = 5000) => {
+const useMonitorFPS = (threshold: number, checkInterval: number = 1000, duration: number = 10000) => {
     const [fps, setFps] = useState<number>(60) // Valor inicial razonable
     const [warning, setWarning] = useState<boolean>(false)
     const timeBelowThreshold = useRef<number>(0) // Tiempo acumulado por debajo del umbral
