@@ -10,7 +10,6 @@ import { getProfile, saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib
 import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher } from '@/utils/fetcher'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
-import { useContextData } from '@/app/context/AppContext'
 import LoadingOverlay from '@/app/loading'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -52,7 +51,13 @@ export default function Prueba() {
             sendTiempoPruebaDiagnostica()
 
             if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
-                router.push(RESULTADOS_ROUTE)
+                setIsSubmitting(true)
+                PruebaDiagnosticaCompleta()
+                playSound('bienvenida')
+
+                setTimeout(() => {
+                    router.push(RESULTADOS_ROUTE)
+                }, 2000)
             }
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
@@ -75,15 +80,22 @@ export default function Prueba() {
         }
     }
 
-    if (progress == 100) {
-        return <LoadingOverlay className="bg-pylos-900" />
+    const PruebaDiagnosticaCompleta = async () => {
+        const data: Partial<Usuario> = {
+            pruebaDiagnosticaCompleta: true,
+        }
+
+        try {
+            await updateUsuario(data)
+        } catch (error) {
+            console.error('Error al guardar la información:', error)
+        }
     }
 
     const handleSubmit = debounce(async (preguntaPruebaDiagnosticaId?: string | null, opcionPruebaDiagnosticaId?: string | null, esOpcionCorrecta?: boolean | null) => {
         if (isSubmitting) return
 
         setOpcionCorrecta(esOpcionCorrecta)
-
         setIsSubmitting(true)
 
         const data: Partial<RespuestaPruebaDiagnostica> = {
@@ -97,13 +109,30 @@ export default function Prueba() {
         } catch (error) {
             console.error('Error al guardar la respuesta:', error)
         } finally {
-            // setTimeout(() => {
-            setOpcionCorrecta(undefined)
-            setIsSubmitting(false)
-            // }, 1000)
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
+            setTimeout(() => {
+                setOpcionCorrecta(undefined)
+                setIsSubmitting(false)
+            }, 1000)
         }
     }, 500)
+
+    if (isSubmitting) {
+        return (
+            <>
+                {opcionCorrecta != undefined && (
+                    <span
+                        className={`bg-[url('/estados.png')] size-32 ${
+                            opcionCorrecta ? 'bg-[-55px_3px]' : 'bg-[-2px_-125px]'
+                        } absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-[10001]`}></span>
+                )}
+                <LoadingOverlay
+                    className="bg-[url('/background-stars.png')]"
+                    onlyLoader={true}
+                />
+            </>
+        )
+    }
 
     return (
         <>
@@ -244,13 +273,6 @@ export default function Prueba() {
                                     </div>
                                 </div>
                             </>
-                        )}
-
-                        {opcionCorrecta != undefined && (
-                            <span
-                                className={`bg-[url('/estados.png')] size-32 ${
-                                    opcionCorrecta ? 'bg-[-55px_3px]' : 'bg-[-2px_-125px]'
-                                } absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-30`}></span>
                         )}
 
                         <Carousel className="w-[90%] mt-20 mx-auto h-full flex items-center justify-center">
