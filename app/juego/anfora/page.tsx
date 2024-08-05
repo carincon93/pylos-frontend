@@ -44,9 +44,9 @@ function Anfora() {
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const reactorItem = objetosNaveReparados?.find((item) => item.objeto === 'reactor')
-    const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'sistema de navegación')
-    const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel solar')
-    const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'combustible')
+    const sistemaNavegacionItem = objetosNaveReparados?.find((item) => item.objeto === 'navegacion')
+    const panelSolarItem = objetosNaveReparados?.find((item) => item.objeto === 'panel')
+    const combustibleItem = objetosNaveReparados?.find((item) => item.objeto === 'bidon')
     const [showInfoPopup, setShowInfoPopup] = useState(false)
     const [showControlsPopup, setShowControlsPopup] = useState(false)
     const [start, setStart] = useState(false)
@@ -128,7 +128,7 @@ function Anfora() {
             {/* UI */}
             <div className="select-none">
                 {warning && (
-                    <div className="fixed bg-yellow-300/90 left-0 right-0 !bottom-32 p-2 rounded-full z-10 md:w-6/12 mx-4 md:mx-auto text-center text-yellow-900 text-xs flex items-center justify-center">
+                    <div className="fixed bg-yellow-300/90 left-0 right-0 !bottom-32 p-2 rounded-full z-20 md:w-6/12 mx-4 md:mx-auto text-center text-yellow-900 text-xs flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -616,6 +616,13 @@ function Anfora() {
                     </>
                 )}
             </div>
+
+            {motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem && (
+                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
+                    <span className="block font-edu text-green-500 font-medium text-[80px] my-4">¡Genial!</span> La nave <span className="font-edu">Nebulón</span> ha sido reparada por completo. ¡Gran
+                    trabajo Pylonauta! 🚀✨
+                </div>
+            )}
 
             <Ipad handleSubmit={handleSubmit} />
         </div>
