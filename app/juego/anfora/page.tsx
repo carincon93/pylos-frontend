@@ -410,7 +410,7 @@ function Anfora() {
                         </div>
 
                         <div
-                            className="fixed bottom-32 left-20 sm:left-32 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity hidden md:block"
+                            className="fixed bottom-32 left-20 sm:left-[7.5rem] sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity hidden md:block"
                             onClick={() => setShowInfoPopup(true)}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
