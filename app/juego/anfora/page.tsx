@@ -657,8 +657,8 @@ function Anfora() {
             </div>
 
             {!showMenu && motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem && (
-                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
-                    <span className="block font-edu text-green-400 font-medium text-[80px] my-4">¡Genial!</span> La nave <span className="font-edu">Nebulón</span> ha sido reparada por completo. ¡Gran
+                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
+                    <span className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</span> La nave <span className="font-semibold">Nebulón</span> ha sido reparada por completo. ¡Gran
                     trabajo Pylonauta! 🚀✨
                 </div>
             )}

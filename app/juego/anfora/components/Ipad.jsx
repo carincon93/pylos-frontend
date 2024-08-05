@@ -515,8 +515,8 @@ const Ipad = ({ handleSubmit }) => {
             </section>
 
             {showObjectRepairMessage && (
-                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
-                    <span className="block font-edu text-pylos-400 font-medium text-[80px] my-4">¡Excelente!</span> Reparaste la siguiente parte de la nave <span className="font-edu">Nebulón</span>:
+                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
+                    <span className="block text-pylos-400 font-medium text-[80px] my-4">¡Excelente!</span> Reparaste la siguiente parte de la nave <span className="font-edu">Nebulón</span>:
                     <img
                         src={`${'/anfora/' + object + '.png'}`}
                         className="mx-auto mt-4 w-16"
