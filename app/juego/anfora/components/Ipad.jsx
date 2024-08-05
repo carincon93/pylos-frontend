@@ -97,7 +97,7 @@ const Ipad = ({ handleSubmit }) => {
 
             setTimeout(() => {
                 setShowObjectRepairMessage(false)
-            }, 8000)
+            }, 6000)
 
             return
         } else {
@@ -515,7 +515,7 @@ const Ipad = ({ handleSubmit }) => {
             </section>
 
             {showObjectRepairMessage && (
-                <div className="fixed top-32 mb-0 left-0 right-0 z-10 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
+                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
                     <span className="block font-edu text-yellow-500 font-medium text-[80px] my-4">¡Excelente!</span> Reparaste la siguiente parte de la nave <span className="font-edu">Nebulón</span>:
                     <img
                         src={`${'/anfora/' + object + '.png'}`}
