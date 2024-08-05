@@ -17,6 +17,7 @@ import { Canvas } from '@react-three/fiber'
 import { Suspense, useEffect, useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import useMonitorFPS from '@/hooks/useMonitorFPS'
+import TablaPosiciones from '../usuarios/_tabla-posiciones'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -52,6 +53,7 @@ function Anfora() {
     const [start, setStart] = useState(false)
     const [optionStart, setOptionStart] = useState(true)
     const [isPlayingWorldSound, setIsPlayingWorldSound] = useState(false)
+    const [showPosiciones, setShowPosiciones] = useState(false)
 
     const { playSound, pauseSound, stopSound } = useAudioPlayer()
     const { fps, warning } = useMonitorFPS(25)
@@ -197,6 +199,43 @@ function Anfora() {
                                 </svg>
                             </button>
                         )}
+
+                        <button
+                            className={`text-white rounded-full border-4 border-white ${showPosiciones ? 'border-pylos-400' : ''} ml-2 p-3`}
+                            type="button"
+                            onClick={() => {
+                                setShowPosiciones(!showPosiciones)
+                            }}>
+                            {showPosiciones ? (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    className={`size-6 ${showPosiciones ? 'text-pylos-400' : ''}`}>
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M6 18 18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            ) : (
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="currentColor"
+                                    className="size-6">
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5"
+                                    />
+                                </svg>
+                            )}
+                        </button>
 
                         <button
                             className="text-white rounded-full border-4 border-white p-3 ml-2"
@@ -617,7 +656,7 @@ function Anfora() {
                 )}
             </div>
 
-            {motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem && (
+            {!showMenu && motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem && (
                 <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl  text-center">
                     <span className="block font-edu text-green-400 font-medium text-[80px] my-4">¡Genial!</span> La nave <span className="font-edu">Nebulón</span> ha sido reparada por completo. ¡Gran
                     trabajo Pylonauta! 🚀✨
@@ -625,6 +664,8 @@ function Anfora() {
             )}
 
             <Ipad handleSubmit={handleSubmit} />
+
+            {showPosiciones && !showMenu && <TablaPosiciones className="w-11/12 md:w-9/12 z-20 fixed inset-0 m-auto h-[70vh] overflow-y-auto bg-white rounded" />}
         </div>
     )
 }
