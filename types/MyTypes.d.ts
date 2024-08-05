@@ -41,6 +41,7 @@ interface Usuario {
     mascotaId: string
     mascotaNombre: string
     introduccionCompleta: boolean
+    pruebaDiagnosticaCompleta: boolean
     esAdmin: boolean
     tiempoPruebaDiagnostica: number
 }
