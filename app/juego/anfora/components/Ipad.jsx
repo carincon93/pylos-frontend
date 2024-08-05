@@ -499,7 +499,7 @@ const Ipad = ({ handleSubmit }) => {
                         </div>
                     </div>
                     <div
-                        className={`absolute w-80 h-10 mx-auto text-center text-sm top-10 left-0 right-0 rounded-full bg-white text-black shadow-inner shadow-gray-200 z-10 p-2 transform transition-transform ${
+                        className={`absolute w-80 h-10 mx-auto text-center text-sm top-14 left-0 right-0 rounded-full bg-white text-black shadow-inner shadow-gray-200 z-10 p-2 transform transition-transform ${
                             translateY == 0 && showReading ? 'translate-y-10' : '-translate-y-80'
                         }`}>
                         Desliza hacia abajo con el clic del mouse
