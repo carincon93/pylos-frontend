@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { Howl } from 'howler'
 
-type SoundName = 'anforaMusic' | 'running' | 'walking' | 'satelite' | 'buttonPressed' | 'phoneHidden' | 'phoneShowed' // Lista de nombres de sonidos
+type SoundName = 'anforaMusic' | 'running' | 'walking' | 'satelite' | 'buttonPressed' | 'phoneHidden' | 'phoneShowed' | 'bienvenida' // Lista de nombres de sonidos
 
 type Sounds = {
     [key in SoundName]?: Howl
@@ -16,7 +16,7 @@ export function useAudioPlayer() {
             anforaMusic: new Howl({
                 src: ['/audios/little-astronaut.ogg'],
                 loop: true,
-                volume: 0.1,
+                volume: 0.3,
             }),
             running: new Howl({
                 src: ['/audios/running-sound.ogg'],
@@ -47,6 +47,11 @@ export function useAudioPlayer() {
                 src: ['/audios/walking-sound.ogg'],
                 loop: true,
                 volume: 0.03,
+            }),
+            bienvenida: new Howl({
+                src: ['/audios/bienvenida.mp3'],
+                loop: false,
+                volume: 1,
             }),
             // Agrega más sonidos aquí
         }
