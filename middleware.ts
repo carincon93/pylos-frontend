@@ -50,11 +50,11 @@ export async function middleware(request: NextRequest) {
     if (tokenData) {
         const profile = await getProfile()
 
-        if (profile?.tiempoPruebaDiagnostica == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
+        if (profile?.pruebaDiagnosticaCompleta == null && request.nextUrl.pathname != PRUEBA_DIAGNOSTICA_ROUTE) {
             return NextResponse.redirect(new URL(PRUEBA_DIAGNOSTICA_ROUTE, request.url))
         }
 
-        if (!profile?.introduccionCompleta && request.nextUrl.pathname != INTRODUCCION_ROUTE && profile?.tiempoPruebaDiagnostica) {
+        if (!profile?.introduccionCompleta && request.nextUrl.pathname != INTRODUCCION_ROUTE && profile?.pruebaDiagnosticaCompleta) {
             return NextResponse.redirect(new URL(INTRODUCCION_ROUTE, request.url))
         }
     }
