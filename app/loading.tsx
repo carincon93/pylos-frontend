@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 
 interface Props {
     className?: string
+    onlyLoader?: boolean
 }
 
-export default function LoadingOverlay({ className }: Props) {
+export default function LoadingOverlay({ className, onlyLoader = false }: Props) {
     const [toggle, setToggle] = useState(true)
     const [showLoading, setShowLoading] = useState(false)
 
@@ -23,13 +24,13 @@ export default function LoadingOverlay({ className }: Props) {
 
     return (
         <div className={`${showLoading ? 'bg-pylos-900/10' : 'bg-pylos-900/50'} backdrop-blur-lg fixed inset-0 w-full h-[100vh] z-10`}>
-            {showLoading && (
+            {showLoading && !onlyLoader && (
                 <div className={`absolute z-[10000] left-0 right-0 mx-auto text-center transition-opacity delay-75 duration-500 bottom-20 font-bold text-3xl ${toggle ? 'opacity-100' : 'opacity-20'}`}>
                     PYLOS
                 </div>
             )}
             <div className={`${className ? className : ''} fixed inset-0 w-full h-[100vh] z-[10000] bg-transparent text-white flex flex-row items-center justify-center font-bold`}>
-                {showLoading && (
+                {showLoading && !onlyLoader && (
                     <>
                         <div className="word-wrapper font-edu top-6 sm:top-0 text-[26px] relative">
                             <span className={`word1 ${toggle ? 'anim1Word1' : 'anim2Word1'} transition-transform delay-75`}>Diversión, </span>
