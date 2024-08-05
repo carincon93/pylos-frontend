@@ -42,7 +42,7 @@ const UsuariosPage = ({ searchParams }: Props) => {
                         </TabsList>
                     )}
                     <TabsContent value="posiciones">
-                        <TablaPosiciones isAdmin={isAdmin} />
+                        <TablaPosiciones />
                     </TabsContent>
                     <TabsContent value="respuestas">
                         <TablaResultados />
