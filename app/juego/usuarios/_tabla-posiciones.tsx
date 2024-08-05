@@ -12,7 +12,7 @@ import { Usuario } from '@/types/MyTypes'
 import { useEffect, useState } from 'react'
 import UsuarioForm from './_form'
 
-export default function TablaPosiciones({ className }: { className: string }) {
+export default function TablaPosiciones({ className }: { className?: string }) {
     const [open, setOpen] = useState(false)
     const [usuario, setUsuario] = useState<Partial<Usuario>>()
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
