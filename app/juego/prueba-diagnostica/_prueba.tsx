@@ -97,10 +97,10 @@ export default function Prueba() {
         } catch (error) {
             console.error('Error al guardar la respuesta:', error)
         } finally {
-            setTimeout(() => {
-                setOpcionCorrecta(undefined)
-                setIsSubmitting(false)
-            }, 1000)
+            // setTimeout(() => {
+            setOpcionCorrecta(undefined)
+            setIsSubmitting(false)
+            // }, 1000)
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`)
         }
     }, 500)
@@ -137,53 +137,70 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">
+                                            <img
+                                                src="/prueba-diagnostica.png"
+                                                className="w-full"
+                                            />
+                                        </figure>
                                     </div>
                                 </div>
                             </section>
 
                             <section>
-                                <h1 className="text-2xl text-center mb-10">Introducción</h1>
+                                <h1 className="text-2xl text-center mb-10">Historia Épica</h1>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
+                                        Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu ayuda para resolver enigmas y superar desafíos emocionantes.
                                         <br />
+                                        Revisa cada una de las fotos y escucha atentamente la historia de Pylonauta.
                                         <br />
-                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
-                                        con calma y sin prisa.
-                                        <br />
-                                        <br />
-                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
-                                        <br />
-                                        <br />
-                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
+                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Pylonauta espera por tu ayuda!</strong>
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">
+                                            <img
+                                                src="/introduccion.gif"
+                                                className="w-full"
+                                            />
+                                        </figure>
                                     </div>
                                 </div>
                             </section>
 
                             <section>
-                                <h1 className="text-2xl text-center mb-10">Ánfora</h1>
+                                <h1 className="text-2xl text-center mb-10">Planeta Ánfora</h1>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
-                                        <br />
-                                        <br />
-                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
-                                        con calma y sin prisa.
-                                        <br />
-                                        <br />
-                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
-                                        <br />
-                                        <br />
-                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
+                                        <h1 className="text-center text-2xl font-semibold !mb-4">¡Ayuda a reparar la nave Nebulón!</h1>
+
+                                        <div className="text-sm">
+                                            Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el planeta Ánfora.
+                                            <ol className="list-decimal mt-4 pl-4 text-left space-y-2">
+                                                <li>
+                                                    <strong>Explora el planeta Ánfora:</strong> Busca las partes perdidas de la nave mientras exploras este increíble planeta.
+                                                </li>
+                                                <li>
+                                                    <strong>Haz clic en las partes:</strong> Cada vez que encuentres una parte de la nave, haz clic en ella.
+                                                </li>
+                                                <li>
+                                                    <strong>Responde la lectura:</strong> En tu dispositivo aparecerá una lectura que debes responder correctamente para reparar esa parte de la nave.
+                                                </li>
+                                                <li>
+                                                    <strong>Recupera todas las partes:</strong> Cuando hayas encontrado y reparado las 5 partes, la nave Nebulón estará lista para continuar su viaje.
+                                                </li>
+                                            </ol>
+                                        </div>
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">GIF</figure>
+                                        <figure className="bg-gray-100 h-full text-2xl">
+                                            <img
+                                                src="/tuto-anfora.gif"
+                                                className="w-full"
+                                            />
+                                        </figure>
                                     </div>
                                 </div>
                             </section>
