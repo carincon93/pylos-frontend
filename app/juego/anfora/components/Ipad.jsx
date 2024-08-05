@@ -431,7 +431,7 @@ const Ipad = ({ handleSubmit }) => {
                     </div>
 
                     <div
-                        className={`fixed size-10 inset-0 mx-auto text-center top-10 rounded-full bg-pylos-900 text-white shadow z-10 p-2 ${translateY < 0 ? '' : 'invisible'}`}
+                        className={`fixed size-10 inset-0 mx-auto text-center top-12 rounded-full bg-pylos-900 text-white shadow z-10 p-2`}
                         onClick={() => {
                             setActiveForm(false), setShowReading(false), playSound('phoneHidden')
                         }}>
