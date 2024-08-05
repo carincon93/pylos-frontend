@@ -40,7 +40,7 @@ function Anfora() {
     const showMenu = useGameStore((state) => state.showMenu)
     const setShowMenu = useGameStore((state) => state.setShowMenu)
     const isPageVisible = useGameStore((state) => state.isPageVisible)
-    const resetCharacterPosition = useGameStore((state) => state.resetCharacterPosition)
+    const setResetCharacterPosition = useGameStore((state) => state.setResetCharacterPosition)
 
     const motorItem = objetosNaveReparados?.find((item) => item.objeto === 'motor')
     const reactorItem = objetosNaveReparados?.find((item) => item.objeto === 'reactor')
@@ -311,7 +311,7 @@ function Anfora() {
                         </div>
 
                         <Button
-                            className="w-52  font-normal"
+                            className="w-52 font-normal"
                             onMouseEnter={() => {
                                 playSound('phoneShowed')
                             }}
@@ -374,9 +374,8 @@ function Anfora() {
                 {!activeForm && !showMenu && (
                     <>
                         <div
-                            className="fixed bottom-32 left-2 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity invisible md:visible"
-                            onClick={() => setShowInfoPopup(true)}
-                            onMouseOver={() => setClickDisabled(true)}>
+                            className="fixed bottom-32 left-2 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity"
+                            onClick={() => setResetCharacterPosition(true)}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -387,15 +386,14 @@ function Anfora() {
                                 <path
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
-                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
                                 />
                             </svg>
                         </div>
 
                         <div
-                            className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity invisible md:visible"
-                            onClick={() => setShowControlsPopup(true)}
-                            onMouseOver={() => setClickDisabled(true)}>
+                            className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity hidden md:block"
+                            onClick={() => setShowControlsPopup(true)}>
                             <svg
                                 viewBox="0 0 24 24"
                                 fill="none"
@@ -411,7 +409,23 @@ function Anfora() {
                             </svg>
                         </div>
 
-                        {resetCharacterPosition && <div className="fixed bottom-32 left-14 sm:left-16 sm:bottom-10 text-white">Restablecer</div>}
+                        <div
+                            className="fixed bottom-32 left-20 sm:left-32 sm:bottom-10 space-y-2 hover:opacity-60 transition-opacity hidden md:block"
+                            onClick={() => setShowInfoPopup(true)}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth="1.5"
+                                stroke="currentColor"
+                                className="size-10 sm:size-12 text-white">
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                                />
+                            </svg>
+                        </div>
 
                         <AlertDialog open={showInfoPopup}>
                             <AlertDialogContent>
