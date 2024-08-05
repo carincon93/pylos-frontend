@@ -67,6 +67,8 @@ export const CharacterController = () => {
     const isClicking = useRef(false)
     const showMap = useGameStore((state) => state.showMap)
     const clickDisabled = useGameStore((state) => state.clickDisabled)
+    const resetCharacterPosition = useGameStore((state) => state.resetCharacterPosition)
+    const setResetCharacterPosition = useGameStore((state) => state.setResetCharacterPosition)
 
     const [lastMovementTime, setLastMovementTime] = useState(Date.now())
 
@@ -114,6 +116,14 @@ export const CharacterController = () => {
             localStorage.setItem('player_position', JSON.stringify({ x: 0, y: 2, z: 0 }))
         }
     }, [])
+
+    useEffect(() => {
+        if (resetCharacterPosition) {
+            rb.current.setTranslation({ x: 0, y: 0, z: 0 }, true)
+        }
+
+        setResetCharacterPosition(false)
+    }, [resetCharacterPosition])
 
     useEffect(() => {
         const interval = setInterval(() => {
