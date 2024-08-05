@@ -128,7 +128,20 @@ function Anfora() {
             {/* UI */}
             <div className="select-none">
                 {warning && (
-                    <div className="fixed bg-white/90 left-0 right-0 !bottom-32 p-2 rounded-full z-10 !w-6/12 mx-auto text-center text-black text-xs flex items-center justify-center">
+                    <div className="fixed bg-yellow-300/90 left-0 right-0 !bottom-32 p-2 rounded-full z-10 md:w-6/12 mx-4 md:mx-auto text-center text-yellow-900 text-xs flex items-center justify-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="size-6 mr-2">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+                            />
+                        </svg>
                         Advertencia: Posiblemente su dispositivo no cumpla con los requisitos para ejecutar el juego ({fps.toFixed(2)}) fps
                     </div>
                 )}
