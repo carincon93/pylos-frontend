@@ -201,7 +201,7 @@ function Anfora() {
                         )}
 
                         <button
-                            className={`text-white rounded-full border-4 border-white ${showPosiciones ? 'border-pylos-400' : ''} ml-2 p-3`}
+                            className={`text-white rounded-full border-4 ${showPosiciones ? 'border-pylos-400' : 'border-white'} ml-2 p-3`}
                             type="button"
                             onClick={() => {
                                 setShowPosiciones(!showPosiciones)
@@ -211,7 +211,7 @@ function Anfora() {
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
-                                    stroke-width="1.5"
+                                    strokeWidth="1.5"
                                     stroke="currentColor"
                                     className={`size-6 ${showPosiciones ? 'text-pylos-400' : ''}`}>
                                     <path
