@@ -112,17 +112,20 @@ export default function Prueba() {
                 onOpenChange={setOpen}>
                 <AlertDialogContent className="max-w-screen-xl max-h-[70vh] overflow-y-auto">
                     <AlertDialogHeader>
-                        <AlertDialogTitle className="px-20">
+                        <AlertDialogTitle className="px-6 md:px-20">
                             <span className="block text-center mb-10 text-2xl">
                                 ¡Hola <span className="capitalize">{profile?.nombre}</span> 👋🏻!
                             </span>{' '}
-                            Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Sigue estos pasos para comenzar:
+                            Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Para llegar a Ánfora debes{' '}
+                            <strong>realizar prueba diagóstica, conocer la historia épica y finalmente ayudar a Pylonauta en el Planeta de Ánfora</strong>. Por favor lee atentamente las siguientes
+                            instrucciones:
                         </AlertDialogTitle>
-                        <div className="flex flex-col space-y-20 px-20">
+
+                        <div className="flex flex-col space-y-20 px-6 md:px-20">
                             <section className="mt-10">
                                 <h1 className="text-2xl text-center mb-10">Prueba diagnóstica</h1>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="text-left">
                                         1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
                                         <br />
                                         <br />
@@ -137,7 +140,7 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">
+                                        <figure className="h-full text-2xl flex items-center justify-center">
                                             <img
                                                 src="/prueba-diagnostica.png"
                                                 className="w-full"
@@ -149,17 +152,18 @@ export default function Prueba() {
 
                             <section>
                                 <h1 className="text-2xl text-center mb-10">Historia Épica</h1>
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="text-left">
                                         Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu ayuda para resolver enigmas y superar desafíos emocionantes.
                                         <br />
                                         Revisa cada una de las fotos y escucha atentamente la historia de Pylonauta.
+                                        <br />
                                         <br />
                                         <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Pylonauta espera por tu ayuda!</strong>
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">
+                                        <figure className="h-full text-2xl flex items-center justify-center">
                                             <img
                                                 src="/introduccion.gif"
                                                 className="w-full"
@@ -171,9 +175,9 @@ export default function Prueba() {
 
                             <section>
                                 <h1 className="text-2xl text-center mb-10">Planeta Ánfora</h1>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid md:grid-cols-2 gap-4">
                                     <div>
-                                        <h1 className="text-center text-2xl font-semibold !mb-4">¡Ayuda a reparar la nave Nebulón!</h1>
+                                        <h1 className="text-center font-semibold !mb-4">¡Ayuda a reparar la nave Nebulón!</h1>
 
                                         <div className="text-sm">
                                             Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el planeta Ánfora.
@@ -195,7 +199,7 @@ export default function Prueba() {
                                     </div>
 
                                     <div>
-                                        <figure className="bg-gray-100 h-full text-2xl">
+                                        <figure className="h-full text-2xl flex items-center justify-center">
                                             <img
                                                 src="/tuto-anfora.gif"
                                                 className="w-full"
@@ -207,7 +211,7 @@ export default function Prueba() {
                         </div>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="mt-10">
-                        <AlertDialogAction className="mr-20 inline-block">Continuar</AlertDialogAction>
+                        <AlertDialogAction className="block md:mr-20 md:inline-block">Continuar</AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
