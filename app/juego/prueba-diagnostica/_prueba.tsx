@@ -1,6 +1,6 @@
 'use client'
 
-import { MUNDOS_ROUTE } from '@/utils/routes'
+import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
@@ -53,11 +53,8 @@ export default function Prueba() {
             if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
                 setIsSubmitting(true)
                 PruebaDiagnosticaCompleta()
-                playSound('bienvenida')
 
-                setTimeout(() => {
-                    router.push(MUNDOS_ROUTE)
-                }, 1000)
+                router.push(INTRODUCCION_ROUTE)
             }
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
