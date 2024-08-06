@@ -6,7 +6,6 @@ import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 import confetti from 'canvas-confetti'
 
-
 const Ipad = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
 
@@ -89,14 +88,14 @@ const Ipad = ({ handleSubmit }) => {
             }
         })
     }
+
     const triggerConfetti = () => {
         confetti({
             particleCount: 100,
             spread: 70,
             origin: { y: 0.6 },
         })
-    } 
-
+    }
 
     const checkAnswers = (tiempoRespuesta) => {
         if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
