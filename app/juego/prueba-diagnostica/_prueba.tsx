@@ -54,10 +54,6 @@ export default function Prueba() {
                 setIsSubmitting(true)
                 PruebaDiagnosticaCompleta()
                 playSound('bienvenida')
-
-                setTimeout(() => {
-                    router.push(RESULTADOS_ROUTE)
-                }, 2000)
             }
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
@@ -117,7 +113,7 @@ export default function Prueba() {
         }
     }, 500)
 
-    if (isSubmitting) {
+    if (isSubmitting || profile == undefined) {
         return (
             <>
                 {opcionCorrecta != undefined && (
