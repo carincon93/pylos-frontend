@@ -1,6 +1,5 @@
 'use client'
 
-import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
@@ -11,11 +10,13 @@ import { PreguntaPruebaDiagnostica, RespuestaPruebaDiagnostica, Usuario } from '
 import { fetcher } from '@/utils/fetcher'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import LoadingOverlay from '@/app/loading'
-import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import debounce from 'lodash/debounce'
 import useSWR, { mutate } from 'swr'
 import useCronometro from '@/hooks/useCronometro'
+import { INTRODUCCION_ROUTE, RESULTADOS_ROUTE } from '@/utils/routes'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function Prueba() {
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
@@ -25,6 +26,7 @@ export default function Prueba() {
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
     const [open, setOpen] = useState(false)
+
     const { tiempoEnMinutos, cronometro } = useCronometro(!open)
 
     const [profile, setProfile] = useState<Usuario>()
@@ -43,24 +45,21 @@ export default function Prueba() {
     }, [])
 
     const router = useRouter()
-    const { playSound } = useAudioPlayer()
 
+    const { playSound } = useAudioPlayer()
     useEffect(() => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((20 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 20)
             sendTiempoPruebaDiagnostica()
+        }
 
-            if (preguntasPruebaDiagnosticaPorUsuario.length === 0) {
-                setIsSubmitting(true)
-                PruebaDiagnosticaCompleta()
-
-                router.push(INTRODUCCION_ROUTE)
-            }
+        if (preguntasPruebaDiagnosticaPorUsuario?.length === 0) {
+            router.push(RESULTADOS_ROUTE)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
 
     useEffect(() => {
-        setOpen(true)
+        setOpen(preguntasPruebaDiagnosticaPorUsuario?.length != 0)
     }, [])
 
     const sendTiempoPruebaDiagnostica = async () => {
@@ -72,18 +71,6 @@ export default function Prueba() {
             if (cronometro > 0) {
                 await updateUsuario(data)
             }
-        } catch (error) {
-            console.error('Error al guardar la información:', error)
-        }
-    }
-
-    const PruebaDiagnosticaCompleta = async () => {
-        const data: Partial<Usuario> = {
-            pruebaDiagnosticaCompleta: true,
-        }
-
-        try {
-            await updateUsuario(data)
         } catch (error) {
             console.error('Error al guardar la información:', error)
         }
@@ -123,6 +110,7 @@ export default function Prueba() {
                             opcionCorrecta ? 'bg-[-55px_3px]' : 'bg-[-2px_-125px]'
                         } absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-[10001]`}></span>
                 )}
+
                 <LoadingOverlay
                     className="bg-[url('/background-stars.png')]"
                     onlyLoader={true}
@@ -272,7 +260,7 @@ export default function Prueba() {
                             </>
                         )}
 
-                        <Carousel className="w-[90%] mt-20 mx-auto h-full flex items-center justify-center">
+                        <Carousel className="w-[90%] pt-20 mx-auto h-full flex items-center justify-center">
                             <CarouselContent>
                                 {isSubmitting ? (
                                     <></>
