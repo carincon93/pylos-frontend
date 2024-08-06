@@ -2,36 +2,50 @@
 
 import './index.css'
 import { Button } from '@/components/ui/button'
-import { updateUsuario } from '@/lib/actions'
+import { getProfile, updateUsuario } from '@/lib/actions'
 import { MUNDOS_ROUTE } from '@/utils/routes'
 import { Usuario } from '@/types/MyTypes'
 import { useRouter } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
-import { useContextData } from '@/app/context/AppContext'
 import React, { useEffect, useRef, useState } from 'react'
+import LoadingOverlay from '@/app/loading'
 
 export default function HistoriaEpica() {
     const [activePhoto, setActivePhoto] = useState<number>(0)
-    // const [showOverlay, setShowOverlay] = useState(true)
     const [hoverClass, setHoverClass] = useState<string>('lg:peer-hover/previous:card--to-left lg:peer-hover/next:card--to-right')
     const [videoStatus, setVideoStatus] = useState(false)
 
     const router = useRouter()
-    const { profileUserData } = useContextData()
+
+    const [profile, setProfile] = useState<Usuario>()
 
     useEffect(() => {
-        if (profileUserData && profileUserData.introduccionCompleta) {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile()
+                setProfile(profile)
+            } catch (error: any) {
+                console.error('Error al obtener el perfil del usuario:', error.message)
+            }
+        }
+
+        fetchProfile()
+    }, [])
+
+    useEffect(() => {
+        if (profile && profile.introduccionCompleta) {
             router.push(MUNDOS_ROUTE)
         }
-    }, [profileUserData])
+    }, [profile])
 
     const photosData = [
-        { id: 'first', title: 'First Photo', img: '/_e351e41b-efe7-4e59-8ce8-91fbbbd0db45.jpeg', date: '4 de abril de 2250' },
-        { id: 'second', title: 'Second Photo', img: '/_08026eb5-f13f-44f9-8a54-96e796383a0e.jpeg', date: '4 de abril de 2250' },
-        { id: 'third', title: 'Third Photo', img: '/_56f5d894-b46b-4294-81d6-17e64e549f11.jpeg', date: '4 de abril de 2250' },
-        { id: 'fourth', title: 'Fourth Photo', img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b48.jpeg', date: '4 de abril de 2250' },
-        { id: 'fifth', title: 'Fifth Photo', img: '/_7ff3ae87-8440-4e2e-9599-8262eb0edf5b.jpeg', date: '4 de abril de 2250' },
-        { id: 'sixth', title: 'Sixth Photo', img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.jpeg', date: '4 de abril de 2250' },
+        { id: '1', title: 'Photo 1', img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b412.webp', date: '4 de abril de 2250' },
+        { id: '2', title: 'Photo 2', img: '/_e351e41b-efe7-4e59-8ce8-91fbbbd0db45.webp', date: '4 de abril de 2250' },
+        { id: '3', title: 'Photo 3', img: '/_08026eb5-f13f-44f9-8a54-96e796383a0e.webp', date: '4 de abril de 2250' },
+        { id: '4', title: 'Photo 4', img: '/_56f5d894-b46b-4294-81d6-17e64e549f11.webp', date: '4 de abril de 2250' },
+        { id: '5', title: 'Photo 5', img: '/_2cb2a853-5270-4b83-a92d-9c804ad40b48.webp', date: '4 de abril de 2250' },
+        { id: '6', title: 'Photo 6', img: '/_7ff3ae87-8440-4e2e-9599-8262eb0edf5b.webp', date: '4 de abril de 2250' },
+        { id: '7', title: 'Photo 7', img: '/_eb17826d-286f-4c61-9250-a88dcdea07a8.webp', date: '4 de abril de 2250' },
     ]
 
     const nextPhoto = () => {
@@ -47,6 +61,7 @@ export default function HistoriaEpica() {
     // }
 
     const videoSegments = [
+        [0, 0],
         [0, 19.6],
         [20, 33],
         [33.5, 49],
@@ -119,6 +134,10 @@ export default function HistoriaEpica() {
         } finally {
             router.push(MUNDOS_ROUTE)
         }
+    }
+
+    if (profile == undefined || profile?.introduccionCompleta) {
+        return <LoadingOverlay />
     }
 
     return (
@@ -231,6 +250,8 @@ const Photo = ({
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
     }
 
+    console.log(currentTime)
+
     return (
         <div
             style={{ zIndex: zIndex }}
@@ -258,7 +279,7 @@ const Photo = ({
                         />
                     </video>
                     <div>
-                        {currentTime < endTime && videoStatus && (
+                        {(currentTime < endTime && videoStatus) || currentTime == 0 ? (
                             <button
                                 onClick={handlePlay}
                                 className="absolute left-[40%] top-[40%] hover:opacity-65">
@@ -281,7 +302,7 @@ const Photo = ({
                                     />
                                 </svg>
                             </button>
-                        )}
+                        ) : null}
                         <button
                             onClick={handlePause}
                             className="custom-play-pause">
