@@ -14,8 +14,7 @@ import { useEffect, useState } from 'react'
 import debounce from 'lodash/debounce'
 import useSWR, { mutate } from 'swr'
 import useCronometro from '@/hooks/useCronometro'
-import { INTRODUCCION_ROUTE, RESULTADOS_ROUTE } from '@/utils/routes'
-import Link from 'next/link'
+import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
 
 export default function Prueba() {
@@ -44,9 +43,9 @@ export default function Prueba() {
         fetchProfile()
     }, [])
 
-    const router = useRouter()
-
     const { playSound } = useAudioPlayer()
+
+    const router = useRouter()
     useEffect(() => {
         if (preguntasPruebaDiagnosticaPorUsuario) {
             setProgress(((20 - preguntasPruebaDiagnosticaPorUsuario?.length) * 100) / 20)
@@ -54,7 +53,7 @@ export default function Prueba() {
         }
 
         if (preguntasPruebaDiagnosticaPorUsuario?.length === 0) {
-            router.push(RESULTADOS_ROUTE)
+            router.push(INTRODUCCION_ROUTE)
         }
     }, [preguntasPruebaDiagnosticaPorUsuario])
 
