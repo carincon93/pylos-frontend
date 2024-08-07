@@ -5,6 +5,7 @@ import useCronometro from '@/hooks/useCronometro'
 import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 import confetti from 'canvas-confetti'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const Ipad = ({ handleSubmit }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
@@ -27,6 +28,8 @@ const Ipad = ({ handleSubmit }) => {
     const [showObjectRepairMessage, setShowObjectRepairMessage] = useState(false)
     const { tiempoEnMinutos, cronometro } = useCronometro(showReading)
     const { playSound } = useAudioPlayer()
+
+    console.log(profileUserData)
 
     useEffect(() => {
         if (activeForm) {
@@ -410,8 +413,11 @@ const Ipad = ({ handleSubmit }) => {
                             !showReading ? 'translate-y-20' : 'show-reading -translate-y-[300px]'
                         }`}>
                         <div className="flex items-center">
-                            <span className="bg-[url('/estados.png')] size-10 inline-block bg-no-repeat bg-[-43px_-42px] bg-[length:86px] mr-2"></span>
-                            <span className="capitalize font-medium text-2xl">¡Hola {profileUserData?.nombre}!</span>
+                            <Avatar className="size-10">
+                                <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${profileUserData?.mascotaId == 'e9a9c98c-d83b-4280-966f-af62dfdebafb' ? 'gato.webp' : 'perro.webp'}`} />
+                                <AvatarFallback>MASCOTA</AvatarFallback>
+                            </Avatar>
+                            <span className="capitalize font-medium text-2xl ml-4">¡Hola {profileUserData?.nombre}!</span>
                         </div>
 
                         <p className="text-sm mt-2 text-gray-200 leading-5">
