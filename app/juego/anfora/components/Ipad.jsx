@@ -29,8 +29,6 @@ const Ipad = ({ handleSubmit }) => {
     const { tiempoEnMinutos, cronometro } = useCronometro(showReading)
     const { playSound } = useAudioPlayer()
 
-    console.log(profileUserData)
-
     useEffect(() => {
         if (activeForm) {
             setTranslateY(0)
@@ -101,7 +99,7 @@ const Ipad = ({ handleSubmit }) => {
     }
 
     const checkAnswers = (tiempoRespuesta) => {
-        if (answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
+        if (answers.length > 0 && answers.filter((answer) => answer.readingId == selectedAnforaForm).every((item) => item.correctAnswer == true)) {
             handleSubmit(object, tiempoRespuesta)
             playSound('phoneHidden')
             setShowReading(false)
