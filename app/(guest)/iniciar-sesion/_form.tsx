@@ -58,7 +58,7 @@ export default function LoginForm() {
                     domain: process.env.NEXT_PUBLIC_DOMAIN,
                     secure: true,
                     httpOnly: true,
-                    maxAge: 24 * 60 * 60,
+                    maxAge: 24 * 60 * 60 * 5,
                 }
 
                 const cookieString = `accessToken=${token}; domain=${cookieOptions.domain}; maxAge=${cookieOptions.maxAge}; secure;`
