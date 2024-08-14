@@ -58,3 +58,16 @@ interface Login {
     nombreUsuario: string
     mascotaNombre: string
 }
+
+interface CalificacionPylos {
+    id: string
+    calificacion: string
+    usuarioId: string
+}
+
+interface ChatEmojis {
+    id: string
+    emoji: string
+    usuario1Id: string
+    usuario2Id: string
+}
