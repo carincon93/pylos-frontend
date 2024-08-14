@@ -1,4 +1,4 @@
-import { ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
+import { CalificacionPylos, ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher, getUserDataFromToken } from '@/utils/fetcher'
 
 export async function getProfile(): Promise<Usuario> {
@@ -57,6 +57,14 @@ export async function saveObjetoNaveReparado(data: Partial<ObjetoNaveReparado>):
         return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado`, 'POST', data)
     } catch (error: any) {
         throw new Error('Error al guardar el objeto: ' + error.message)
+    }
+}
+
+export async function saveCalificacionPylos(data: Partial<CalificacionPylos>): Promise<Response> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/calificacion-pylos`, 'POST', data)
+    } catch (error: any) {
+        throw new Error('Error al guardar la calificación: ' + error.message)
     }
 }
 

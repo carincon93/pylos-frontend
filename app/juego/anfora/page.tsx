@@ -6,8 +6,8 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import Link from 'next/link'
-import { saveObjetoNaveReparado } from '@/lib/actions'
-import { ObjetoNaveReparado } from '@/types/MyTypes'
+import { saveCalificacionPylos, saveObjetoNaveReparado } from '@/lib/actions'
+import { CalificacionPylos, ObjetoNaveReparado } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows, Stats } from '@react-three/drei'
 import { fetcher } from '@/utils/fetcher'
@@ -18,6 +18,9 @@ import { Suspense, useEffect, useState } from 'react'
 import useSWR, { mutate } from 'swr'
 import useMonitorFPS from '@/hooks/useMonitorFPS'
 import TablaPosiciones from '../usuarios/_tabla-posiciones'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -54,13 +57,20 @@ function Anfora() {
     const [optionStart, setOptionStart] = useState(true)
     const [isPlayingWorldSound, setIsPlayingWorldSound] = useState(false)
     const [showPosiciones, setShowPosiciones] = useState(false)
+    const [showFormAppEvaluation, setFormAppEvaluation] = useState(false)
 
     const { playSound, pauseSound, stopSound } = useAudioPlayer()
     const { fps, warning } = useMonitorFPS(25)
 
+    const gameFinished = motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem
+
     useEffect(() => {
         setReadings(readings)
     }, [readings, setReadings])
+
+    useEffect(() => {
+        setFormAppEvaluation(true)
+    }, [gameFinished])
 
     useEffect(() => {
         document.body.classList.add('overflow-hidden')
@@ -104,6 +114,18 @@ function Anfora() {
         } finally {
             mutate(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`)
             setActiveForm(false)
+        }
+    }
+
+    const handleEvaluationSubmit = async (calificacion: string) => {
+        const data: Partial<CalificacionPylos> = {
+            calificacion: calificacion,
+        }
+
+        try {
+            await saveCalificacionPylos(data)
+        } catch (error) {
+            console.error('Error al guardar la calificación:', error)
         }
     }
 
@@ -677,11 +699,80 @@ function Anfora() {
                 )}
             </div>
 
-            {!showMenu && motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem && (
-                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
-                    <span className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</span> La nave <span className="font-semibold">Nebulón</span> ha sido reparada por completo. ¡Gran
-                    trabajo Pylonauta! 🚀✨
-                </div>
+            {!showMenu && gameFinished && (
+                <>
+                    <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
+                        <span className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</span> La nave <span className="font-semibold">Nebulón</span> ha sido reparada por completo. ¡Gran
+                        trabajo Pylonauta! 🚀✨
+                    </div>
+
+                    <AlertDialog open={showFormAppEvaluation}>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                                <AlertDialogTitle></AlertDialogTitle>
+                                <h1 className="text-center text-2xl font-semibold !mb-4">¡Califica Pylos!</h1>
+
+                                <form>
+                                    <div>
+                                        <Label className="my-4 text-center block">¿Cómo calificarías tu experiencia con Pylos? Por favor, selecciona la emoción que mejor te representa:</Label>
+                                        <RadioGroup>
+                                            <div className="flex items-center justify-center gap-4">
+                                                <div className="flex flex-col-reverse items-center gap-2">
+                                                    <RadioGroupItem
+                                                        className="hover:opacity-80"
+                                                        value="Super"
+                                                        onClick={() => handleEvaluationSubmit('Super')}
+                                                        id="Super"
+                                                    />
+                                                    <Label
+                                                        htmlFor="Super"
+                                                        className="hover:cursor-pointer hover:opacity-60">
+                                                        <span className="bg-[url('/estados.png')] size-20 bg-[-34px_4px] bg-no-repeat inline-block bg-[length:155px]" />
+                                                    </Label>
+                                                </div>
+
+                                                <div className="flex flex-col-reverse items-center gap-2">
+                                                    <RadioGroupItem
+                                                        className="hover:opacity-80"
+                                                        value="Feliz"
+                                                        onClick={() => handleEvaluationSubmit('Feliz')}
+                                                        id="Feliz"
+                                                    />
+                                                    <Label
+                                                        htmlFor="Feliz"
+                                                        className="hover:cursor-pointer hover:opacity-60">
+                                                        <span className="bg-[url('/estados.png')] size-20 bg-[-78px_-75px] bg-no-repeat inline-block bg-[length:155px]" />
+                                                    </Label>
+                                                </div>
+
+                                                <div className="flex flex-col-reverse items-center gap-2">
+                                                    <RadioGroupItem
+                                                        className="hover:opacity-80"
+                                                        value="Disgustado"
+                                                        onClick={() => handleEvaluationSubmit('Disgustado')}
+                                                        id="Disgustado"
+                                                    />
+                                                    <Label
+                                                        htmlFor="Disgustado"
+                                                        className="hover:cursor-pointer hover:opacity-60">
+                                                        <span className="bg-[url('/estados.png')] size-20 bg-[0px_-75px] bg-no-repeat inline-block bg-[length:155px]" />
+                                                    </Label>
+                                                </div>
+                                            </div>
+                                        </RadioGroup>
+                                    </div>
+                                </form>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter className="mt-10">
+                                <AlertDialogCancel
+                                    className="text-white w-full"
+                                    onClick={() => setFormAppEvaluation(false)}>
+                                    Enviar
+                                </AlertDialogCancel>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                    </AlertDialog>
+                </>
             )}
 
             <Ipad handleSubmit={handleSubmit} />
