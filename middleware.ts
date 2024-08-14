@@ -41,7 +41,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
     }
 
-    if (accessToken) {
+    if (verifiedToken && accessToken) {
         const tokenData = getTokenData(accessToken)
 
         if (!tokenData) {
