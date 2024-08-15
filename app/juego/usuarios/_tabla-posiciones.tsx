@@ -6,17 +6,18 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import LoadingOverlay from '@/app/loading'
 import { Button } from '@/components/ui/button'
-import { deleteUsuario, getProfile, restartRespuestaPruebaDiagnostica } from '@/lib/actions'
+import { deleteUsuario, getProfile, restartRespuestaPruebaDiagnostica, saveChatEmoji, updateChatEmoji } from '@/lib/actions'
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
-import { Usuario } from '@/types/MyTypes'
+import { ChatEmojis, Usuario } from '@/types/MyTypes'
 import { useEffect, useState } from 'react'
 import UsuarioForm from './_form'
 
 export default function TablaPosiciones({ className }: { className?: string }) {
     const [open, setOpen] = useState(false)
     const [usuario, setUsuario] = useState<Partial<Usuario>>()
-    const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
     const [profile, setProfile] = useState<Usuario>()
+
+    const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -61,6 +62,29 @@ export default function TablaPosiciones({ className }: { className?: string }) {
         }
 
         setOpen(false)
+    }
+
+    const handleChatEmoji = async (emoji: string, usuario2Id: string) => {
+        const data: Partial<ChatEmojis> = {
+            usuario2Id: usuario2Id,
+            emoji: emoji,
+        }
+
+        try {
+            const emoji = await saveChatEmoji(data)
+
+            if (emoji) {
+                setTimeout(async () => {
+                    const newData: Partial<ChatEmojis> = {
+                        id: emoji?.id,
+                        visualizado: true,
+                    }
+                    await updateChatEmoji(newData)
+                }, 5000)
+            }
+        } catch (error) {
+            console.error('Error al guardar el emoji:', error)
+        }
     }
 
     return (
@@ -178,8 +202,8 @@ export default function TablaPosiciones({ className }: { className?: string }) {
                                     {resultado.tiempoPruebaDiagnostica ? `${resultado.tiempoPruebaDiagnostica} segundos` : 'No ha iniciado la prueba'}{' '}
                                 </TableCell>
 
-                                {profile?.esAdmin && (
-                                    <TableCell className="space-y-2">
+                                <TableCell className="space-y-2">
+                                    {profile?.esAdmin ? (
                                         <Button
                                             onClick={() => {
                                                 setUsuario(resultado), setOpen(true)
@@ -200,8 +224,31 @@ export default function TablaPosiciones({ className }: { className?: string }) {
                                                 />
                                             </svg>
                                         </Button>
-                                    </TableCell>
-                                )}
+                                    ) : (
+                                        <div className="flex justify-between">
+                                            <button
+                                                className="hover:bg-pylos-300 size-10 rounded-full"
+                                                onClick={() => handleChatEmoji('Guiño', resultado?.usuarioId)}>
+                                                😉
+                                            </button>
+                                            <button
+                                                className="hover:bg-pylos-300 size-10 rounded-full"
+                                                onClick={() => handleChatEmoji('Risa', resultado?.usuarioId)}>
+                                                😂
+                                            </button>
+                                            <button
+                                                className="hover:bg-pylos-300 size-10 rounded-full"
+                                                onClick={() => handleChatEmoji('Llorar', resultado?.usuarioId)}>
+                                                😭
+                                            </button>
+                                            <button
+                                                className="hover:bg-pylos-300 size-10 rounded-full"
+                                                onClick={() => handleChatEmoji('Corazon', resultado?.usuarioId)}>
+                                                ❤️
+                                            </button>
+                                        </div>
+                                    )}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
