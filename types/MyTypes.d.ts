@@ -68,6 +68,8 @@ interface CalificacionPylos {
 interface ChatEmojis {
     id: string
     emoji: string
+    visualizado: boolean
     usuario1Id: string
     usuario2Id: string
+    usuario1: Usuario
 }
