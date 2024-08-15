@@ -1,21 +1,11 @@
-import { CalificacionPylos, ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
+import { CalificacionPylos, ChatEmojis, ObjetoNaveReparado, RespuestaPruebaDiagnostica, Usuario } from '@/types/MyTypes'
 import { fetcher, getUserDataFromToken } from '@/utils/fetcher'
 
 export async function getProfile(): Promise<Usuario> {
     const userData = await getUserDataFromToken()
 
-    // if (!userData) {
-    //     throw new Error('No se pudo obtener los datos del usuario del token')
-    // }
-
     const user = await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/usuario/${userData?.id}`, 'GET')
     return user
-
-    // try {
-    // } catch (error: any) {
-    //     console.error('Error al obtener el usuario: ' + error.message)
-    //     throw new Error('Error al obtener el perfil del usuario')
-    // }
 }
 
 export async function updateUsuario(data: Partial<Usuario>): Promise<Response> {
@@ -65,6 +55,22 @@ export async function saveCalificacionPylos(data: Partial<CalificacionPylos>): P
         return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/calificacion-pylos`, 'POST', data)
     } catch (error: any) {
         throw new Error('Error al guardar la calificación: ' + error.message)
+    }
+}
+
+export async function saveChatEmoji(data: Partial<ChatEmojis>): Promise<ChatEmojis> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/chat-emojis`, 'POST', data)
+    } catch (error: any) {
+        throw new Error('Error al guardar el emoji: ' + error.message)
+    }
+}
+
+export async function updateChatEmoji(data: Partial<ChatEmojis>): Promise<Response> {
+    try {
+        return await fetcher(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/chat-emojis/${data.id}`, 'PATCH', data)
+    } catch (error: any) {
+        throw new Error('Error al actualizar el emoji: ' + error.message)
     }
 }
 
