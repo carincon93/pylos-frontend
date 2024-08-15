@@ -7,13 +7,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-const Ipad = ({ handleSubmit }) => {
+const Ipad = ({ handleSubmit, profile }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
 
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const readings = useGameStore((state) => state.readings)
-    const { profileUserData } = useContextData()
 
     const [answers, setAnswers] = useState([])
     const [object, setObject] = useState('')
@@ -412,10 +411,10 @@ const Ipad = ({ handleSubmit }) => {
                         }`}>
                         <div className="flex items-center">
                             <Avatar className="size-10">
-                                <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${profileUserData?.mascotaId == 'e9a9c98c-d83b-4280-966f-af62dfdebafb' ? 'gato.webp' : 'perro.webp'}`} />
+                                <AvatarImage src={`${process.env.NEXT_PUBLIC_NESTJS_ASSETS}/${profile?.mascotaId == 'e9a9c98c-d83b-4280-966f-af62dfdebafb' ? 'gato.webp' : 'perro.webp'}`} />
                                 <AvatarFallback>MASCOTA</AvatarFallback>
                             </Avatar>
-                            <span className="capitalize font-medium text-2xl ml-4">¡Hola {profileUserData?.nombre}!</span>
+                            <span className="capitalize font-medium text-2xl ml-4">¡Hola {profile?.nombre}!</span>
                         </div>
 
                         <p className="text-sm mt-2 text-gray-200 leading-5">
