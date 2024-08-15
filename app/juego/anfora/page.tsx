@@ -6,8 +6,8 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import Link from 'next/link'
-import { saveCalificacionPylos, saveObjetoNaveReparado } from '@/lib/actions'
-import { CalificacionPylos, ObjetoNaveReparado } from '@/types/MyTypes'
+import { getProfile, saveCalificacionPylos, saveObjetoNaveReparado } from '@/lib/actions'
+import { CalificacionPylos, ChatEmojis, ObjetoNaveReparado, Usuario } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows, Stats } from '@react-three/drei'
 import { fetcher } from '@/utils/fetcher'
@@ -20,7 +20,6 @@ import useMonitorFPS from '@/hooks/useMonitorFPS'
 import TablaPosiciones from '../usuarios/_tabla-posiciones'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const keyboardMap = [
     { name: 'forward', keys: ['ArrowUp', 'KeyW'] },
@@ -32,8 +31,12 @@ const keyboardMap = [
 ]
 
 function Anfora() {
+    const [profile, setProfile] = useState<Usuario>()
+
     const { data: readings } = useSWR<any>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/lectura/anfora`, fetcher)
     const { data: objetosNaveReparados } = useSWR<ObjetoNaveReparado[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/objeto-nave-reparado/obtener/por-usuario`, fetcher)
+    const { data: chatEmojis } = useSWR<ChatEmojis>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/chat-emojis/${profile?.id}`, fetcher)
+
     const activeForm = useGameStore((state) => state.activeForm)
     const setActiveForm = useGameStore((state) => state.setActiveForm)
     const setReadings = useGameStore((state) => state.setReadings)
@@ -58,11 +61,25 @@ function Anfora() {
     const [isPlayingWorldSound, setIsPlayingWorldSound] = useState(false)
     const [showPosiciones, setShowPosiciones] = useState(false)
     const [showFormAppEvaluation, setFormAppEvaluation] = useState(false)
+    const [showChatEmoji, setShowChatEmoji] = useState(false)
 
     const { playSound, pauseSound, stopSound } = useAudioPlayer()
     const { fps, warning } = useMonitorFPS(25)
 
     const gameFinished = motorItem && reactorItem && sistemaNavegacionItem && panelSolarItem && combustibleItem
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const profile = await getProfile()
+                setProfile(profile)
+            } catch (error: any) {
+                console.error('Error al obtener el perfil del usuario:', error.message)
+            }
+        }
+
+        fetchProfile()
+    }, [])
 
     useEffect(() => {
         setReadings(readings)
@@ -99,6 +116,15 @@ function Anfora() {
             stopSound('anforaMusic')
         }
     }, [isPageVisible])
+
+    useEffect(() => {
+        if (chatEmojis?.visualizado == false) {
+            setShowChatEmoji(true)
+        }
+        setTimeout(() => {
+            setShowChatEmoji(false)
+        }, 5000)
+    }, [chatEmojis])
 
     const handleSubmit = async (object: string, tiempoRespuesta: number) => {
         const data: Partial<ObjetoNaveReparado> = {
@@ -150,6 +176,26 @@ function Anfora() {
             </KeyboardControls>
 
             {/* UI */}
+            {!showMenu && showChatEmoji && (
+                <div className="fixed z-30 left-0 right-0 top-52 w-64 mx-auto">
+                    <h1 className=" text-white text-3xl text-center font-semibold">
+                        ¡<span className="capitalize">{chatEmojis?.usuario1.nombre}</span> te ha enviado un emoji!
+                    </h1>
+
+                    <img
+                        src={`/${
+                            chatEmojis?.emoji == 'Guiño'
+                                ? 'winking-face_1f609'
+                                : chatEmojis?.emoji == 'Risa'
+                                ? 'face-with-tears-of-joy_1f602'
+                                : chatEmojis?.emoji == 'Llorar'
+                                ? 'loudly-crying-face_1f62d'
+                                : 'heart-suit_2665-fe0f'
+                        }.png`}
+                        className="mx-auto"
+                    />
+                </div>
+            )}
             <div className="select-none">
                 {warning && (
                     <div className="fixed bg-yellow-300/90 left-0 right-0 !bottom-32 p-2 rounded-full z-20 md:w-6/12 mx-4 md:mx-auto text-center text-yellow-900 text-xs flex items-center justify-center">
@@ -699,7 +745,7 @@ function Anfora() {
                 )}
             </div>
 
-            {!showMenu && gameFinished && (
+            {!showMenu && gameFinished && !showChatEmoji && (
                 <>
                     <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
                         <span className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</span> La nave <span className="font-semibold">Nebulón</span> ha sido reparada por completo. ¡Gran
@@ -775,7 +821,10 @@ function Anfora() {
                 </>
             )}
 
-            <Ipad handleSubmit={handleSubmit} />
+            <Ipad
+                handleSubmit={handleSubmit}
+                profile={profile}
+            />
 
             {showPosiciones && !showMenu && (
                 <>
