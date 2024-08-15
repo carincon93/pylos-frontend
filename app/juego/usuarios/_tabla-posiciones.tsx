@@ -16,7 +16,7 @@ export default function TablaPosiciones({ className }: { className?: string }) {
     const [open, setOpen] = useState(false)
     const [usuario, setUsuario] = useState<Partial<Usuario>>()
     const [profile, setProfile] = useState<Usuario>()
-
+    const [emojiStatus, setEmojiStatus] = useState(false)
     const { data: resultadosPruebaDiagnostica } = useSWR<[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/respuesta-prueba-diagnostica/obtener/tabla-de-posiciones`, fetcher)
 
     useEffect(() => {
@@ -65,6 +65,7 @@ export default function TablaPosiciones({ className }: { className?: string }) {
     }
 
     const handleChatEmoji = async (emoji: string, usuario2Id: string) => {
+        setEmojiStatus(true)
         const data: Partial<ChatEmojis> = {
             usuario2Id: usuario2Id,
             emoji: emoji,
@@ -80,6 +81,8 @@ export default function TablaPosiciones({ className }: { className?: string }) {
                         visualizado: true,
                     }
                     await updateChatEmoji(newData)
+
+                    setEmojiStatus(false)
                 }, 5000)
             }
         } catch (error) {
@@ -225,34 +228,39 @@ export default function TablaPosiciones({ className }: { className?: string }) {
                                             </svg>
                                         </Button>
                                     ) : (
-                                        <div className="flex justify-between">
-                                            <button
-                                                className="hover:bg-pylos-300 size-10 rounded-full"
-                                                onClick={() => handleChatEmoji('Guiño', resultado?.usuarioId)}>
-                                                😉
-                                            </button>
-                                            <button
-                                                className="hover:bg-pylos-300 size-10 rounded-full"
-                                                onClick={() => handleChatEmoji('Risa', resultado?.usuarioId)}>
-                                                😂
-                                            </button>
-                                            <button
-                                                className="hover:bg-pylos-300 size-10 rounded-full"
-                                                onClick={() => handleChatEmoji('Llorar', resultado?.usuarioId)}>
-                                                😭
-                                            </button>
-                                            <button
-                                                className="hover:bg-pylos-300 size-10 rounded-full"
-                                                onClick={() => handleChatEmoji('Corazon', resultado?.usuarioId)}>
-                                                ❤️
-                                            </button>
-                                        </div>
+                                        <>
+                                            <div className="flex justify-between">
+                                                <button
+                                                    className="hover:bg-pylos-300 size-10 rounded-full"
+                                                    onClick={() => handleChatEmoji('Guiño', resultado?.usuarioId)}>
+                                                    😉
+                                                </button>
+                                                <button
+                                                    className="hover:bg-pylos-300 size-10 rounded-full"
+                                                    onClick={() => handleChatEmoji('Risa', resultado?.usuarioId)}>
+                                                    😂
+                                                </button>
+                                                <button
+                                                    className="hover:bg-pylos-300 size-10 rounded-full"
+                                                    onClick={() => handleChatEmoji('Llorar', resultado?.usuarioId)}>
+                                                    😭
+                                                </button>
+                                                <button
+                                                    className="hover:bg-pylos-300 size-10 rounded-full"
+                                                    onClick={() => handleChatEmoji('Corazon', resultado?.usuarioId)}>
+                                                    ❤️
+                                                </button>
+                                            </div>
+                                        </>
                                     )}
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+                {emojiStatus && (
+                    <h1 className="fixed inset-0 m-auto h-12 bg-pylos-300/60 backdrop-blur-sm text-center py-2 px-2 rounded-full text-2xl w-52 font-semibold z-30 text-pylos-900">¡Emoji enviado!</h1>
+                )}
             </div>
         </>
     )
