@@ -76,7 +76,7 @@ export default function LoginForm() {
 
         setTimeout(() => {
             setLoading(false)
-        }, 3500)
+        }, 20000)
     }
 
     return (
