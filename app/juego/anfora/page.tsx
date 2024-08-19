@@ -787,7 +787,7 @@ function Anfora() {
                                                     <Label
                                                         htmlFor="Feliz"
                                                         className="hover:cursor-pointer hover:opacity-60">
-                                                        <span className="bg-[url('/estados.png')] size-20 bg-[-78px_-75px] bg-no-repeat inline-block bg-[length:155px]" />
+                                                        <span className="bg-[url('/estados.png')] size-20 bg-[-78px_-75px] bg-no-repeat inline-block bg-[length:155px] ml-[12px] mt-[6px]" />
                                                     </Label>
                                                 </div>
 
