@@ -1,4 +1,3 @@
-import { useContextData } from '@/app/context/AppContext'
 import { Button } from '@/components/ui/button'
 import { useAudioPlayer } from '@/hooks/useAudioPlayer'
 import useCronometro from '@/hooks/useCronometro'
@@ -115,7 +114,7 @@ const Ipad = ({ handleSubmit, profile }) => {
             playSound('phoneShowed')
 
             setTimeout(() => {
-                setShowErrorMessage(false)
+                // setShowErrorMessage(false)
             }, 2000)
         }
     }
@@ -444,7 +443,7 @@ const Ipad = ({ handleSubmit, profile }) => {
                     </div>
 
                     <div
-                        className={`fixed size-10 inset-0 mx-auto text-center top-12 rounded-full bg-pylos-900 text-white shadow z-10 p-2`}
+                        className={`fixed size-10 inset-0 mx-auto text-center top-12 rounded-full bg-black text-white shadow z-10 p-2`}
                         onClick={() => {
                             setActiveForm(false), setShowReading(false), playSound('phoneHidden')
                         }}>
@@ -485,17 +484,27 @@ const Ipad = ({ handleSubmit, profile }) => {
                                         className="my-20">
                                         <p className="mb-6 font-semibold text-center">{question.text}</p>
                                         <div className="w-full">
-                                            {question.answers.map((answer) => (
-                                                <button
-                                                    key={answer.id}
-                                                    onClick={() => {
-                                                        handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
-                                                    }}
-                                                    className={`btn b-1 ${
-                                                        answers.find((item) => item.questionId == question.id)?.optionsSelected == answer.id ? 'bg-pylos-900 !text-white' : 'bg-purple-100'
-                                                    }  leading-4 text-xs block !w-full my-4`}>
-                                                    {answer.text}
-                                                </button>
+                                            {question.answers.map((answer, i) => (
+                                                <div>
+                                                    <button
+                                                        key={answer.id}
+                                                        onClick={() => {
+                                                            handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
+                                                        }}
+                                                        className={`btn b-1 relative ${
+                                                            answers.find((item) => item.questionId == question.id)?.optionsSelected == answer.id
+                                                                ? errorMessage && !answer.esOpcionCorrecta
+                                                                    ? 'bg-red-400 !text-red-900 error'
+                                                                    : 'bg-pylos-900 !text-white'
+                                                                : 'bg-purple-100'
+                                                        } leading-4 text-xs block !w-full my-4`}>
+                                                        {answer.text}
+                                                    </button>
+                                                    <div className="clue px-2 py-1 rounded font-semibold border bg-black text-white text-xs">
+                                                        <strong>Pista: </strong>
+                                                        {question.pista}
+                                                    </div>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>

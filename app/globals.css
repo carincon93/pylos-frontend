@@ -195,12 +195,12 @@ button[role='combobox'] {
     box-shadow: 0 0.6em #bd15d3, 0 0.9em rgba(199, 65, 252, 0.4);
 }
 
-.btn:hover {
+.btn:not(.error):hover {
     background: #9104a4;
     color: #ffffff;
 }
 
-.btn.b-1:hover {
+.btn.b-1:not(.error):hover {
     top: 0.2em;
     box-shadow: 0 0.4em #bd15d3, 0 0.7em rgba(199, 65, 252, 0.4);
 }
@@ -208,6 +208,14 @@ button[role='combobox'] {
 .btn.b-1:active {
     top: 0.4em;
     box-shadow: 0 0.2em #bd15d3, 0 0.5em rgba(199, 65, 252, 0.4);
+}
+
+.clue {
+    display: none;
+}
+
+.error + .clue {
+    display: block;
 }
 
 .ipad {
