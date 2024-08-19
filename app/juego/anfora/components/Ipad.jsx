@@ -485,9 +485,8 @@ const Ipad = ({ handleSubmit, profile }) => {
                                         <p className="mb-6 font-semibold text-center">{question.text}</p>
                                         <div className="w-full">
                                             {question.answers.map((answer, i) => (
-                                                <div>
+                                                <div key={answer.id}>
                                                     <button
-                                                        key={answer.id}
                                                         onClick={() => {
                                                             handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
                                                         }}
