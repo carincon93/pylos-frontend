@@ -488,6 +488,7 @@ const Ipad = ({ handleSubmit, profile }) => {
                                                 <div key={answer.id}>
                                                     <button
                                                         onClick={() => {
+                                                            setShowErrorMessage(false)
                                                             handleSelectAnswer(readingSelected.id, question.id, answer.id, answer.esOpcionCorrecta, readingSelected.object)
                                                         }}
                                                         className={`btn b-1 relative ${
