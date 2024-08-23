@@ -192,7 +192,7 @@ function Anfora() {
                                 ? 'loudly-crying-face_1f62d'
                                 : 'heart-suit_2665-fe0f'
                         }.png`}
-                        className="mx-auto"
+                        className="mx-auto animate__animated animate__bounceIn"
                     />
                 </div>
             )}
@@ -339,7 +339,7 @@ function Anfora() {
                             />
                         </div>
 
-                        <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium font-edu text-sm md:text-[20px]">
+                        <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium text-sm md:text-[20px]">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
@@ -747,9 +747,12 @@ function Anfora() {
 
             {!showMenu && gameFinished && !showChatEmoji && !showPosiciones && (
                 <>
-                    <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
-                        <span className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</span> La nave <span className="font-semibold">Nebulón</span> ha sido reparada por completo. ¡Gran
-                        trabajo Pylonauta! 🚀✨
+                    <div className="fixed inset-0 z-20 m-auto bg-black/60 backdrop-blur-md p-2 text-white text-3xl flex flex-col items-center justify-center">
+                        <h1 className="block text-green-400 font-medium text-[80px] my-4 ">¡Genial!</h1>
+
+                        <div className="mt-10">
+                            La nave <strong>Nebulón</strong> ha sido reparada por completo. ¡Gran trabajo Pylonauta! 🚀✨
+                        </div>
                     </div>
 
                     <AlertDialog open={showFormAppEvaluation}>
