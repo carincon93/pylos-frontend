@@ -106,7 +106,7 @@ const Ipad = ({ handleSubmit, profile }) => {
 
             setTimeout(() => {
                 setShowObjectRepairMessage(false)
-            }, 6000)
+            }, 4000)
 
             return
         } else {
@@ -537,13 +537,17 @@ const Ipad = ({ handleSubmit, profile }) => {
             </section>
 
             {showObjectRepairMessage && (
-                <div className="fixed top-32 mb-0 left-0 right-0 z-20 m-auto bg-white/20 backdrop-blur-md p-2 text-white text-3xl font-edu text-center">
-                    <span className="block text-pylos-400 font-medium text-[80px] my-4">¡Excelente!</span> Reparaste la siguiente parte de la nave <span className="font-edu">Nebulón</span>:
-                    <img
-                        src={`${'/anfora/' + object + '.png'}`}
-                        className="mx-auto mt-4 w-16"
-                        alt=""
-                    />
+                <div className="fixed inset-0 z-20 m-auto bg-white/60 backdrop-blur-md p-2 text-white text-3xl flex flex-col items-center justify-center">
+                    <h1 className="block text-pylos-400 font-medium text-[80px] my-4">¡Excelente!</h1>
+
+                    <div className="mt-10 text-black">
+                        Reparaste la siguiente parte de la nave <strong>Nebulón</strong>:
+                        <img
+                            src={`${'/anfora/' + object + '.png'}`}
+                            className="mx-auto mt-4 w-52 animate__animated animate__bounceIn"
+                            alt=""
+                        />
+                    </div>
                 </div>
             )}
         </>
