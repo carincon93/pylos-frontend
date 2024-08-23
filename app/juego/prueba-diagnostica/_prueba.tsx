@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import { Progress } from '@/components/ui/progress'
 import { Input } from '@/components/ui/input'
 import { getProfile, saveRespuestaPruebaDiagnostica, updateUsuario } from '@/lib/actions'
@@ -24,7 +23,7 @@ export default function Prueba() {
     const [respuesta, setRespuesta] = useState('')
     const [progress, setProgress] = useState(0)
     const [opcionCorrecta, setOpcionCorrecta] = useState<any>()
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(true)
 
     const { tiempoEnMinutos, cronometro } = useCronometro(!open)
 
@@ -58,8 +57,10 @@ export default function Prueba() {
     }, [preguntasPruebaDiagnosticaPorUsuario])
 
     useEffect(() => {
-        setOpen(preguntasPruebaDiagnosticaPorUsuario?.length != 0)
-    }, [])
+        setTimeout(() => {
+            setOpen(false)
+        }, 40000)
+    }, [profile])
 
     const sendTiempoPruebaDiagnostica = async () => {
         const data: Partial<Usuario> = {
@@ -110,126 +111,34 @@ export default function Prueba() {
                         } absolute inline-block bg-no-repeat animate__animated animate__bounceIn mx-auto left-0 right-0 top-[40%] z-[10001]`}></span>
                 )}
 
-                <LoadingOverlay
+                {/* <LoadingOverlay
                     className="bg-[url('/background-stars.png')]"
                     onlyLoader={true}
-                />
+                /> */}
             </>
         )
     }
 
     return (
         <>
-            <AlertDialog
-                open={open}
-                onOpenChange={setOpen}>
-                <AlertDialogContent className="max-w-screen-xl max-h-[70vh] overflow-y-auto">
-                    <AlertDialogHeader>
-                        <AlertDialogTitle className="px-6 md:px-20">
-                            <span className="block text-center mb-10 text-2xl">
-                                ¡Hola <span className="capitalize">{profile?.nombre}</span> 👋🏻!
-                            </span>{' '}
-                            Estamos a punto de embarcarnos en una emocionante aventura de aprendizaje. Para llegar a Ánfora debes{' '}
-                            <strong>realizar prueba diagóstica, conocer la historia épica y finalmente ayudar a Pylonauta en el Planeta de Ánfora</strong>. Por favor lee atentamente las siguientes
-                            instrucciones:
-                        </AlertDialogTitle>
+            {profile && open && (
+                <section className="section-starwars">
+                    <div className="container-starwars text-white">
+                        <h1 className="font-bold text-[180px]">
+                            ¡Hola <span className="capitalize">{profile?.nombre}</span>!
+                        </h1>
+                        <br /> <br />
+                        <p>
+                            Soy Pylonauta, y necesito tu ayuda... ¡Bip bip! ¡Bip bip! Estoy intentando establecer contacto... crrrrzzzz ¡Oh no! La señal se está desvaneciendo... <br /> <br />
+                            Para restablecer la comunicación y embarcarnos en nuestra emocionante aventura de aprendizaje, debes completar la siguiente <strong>prueba diagnóstica</strong>.
+                            <br /> <br /> ¡Adelante, responde las 20 preguntas! No te preocupes por el tiempo, ¡tú puedes hacerlo!
+                        </p>
+                    </div>
+                </section>
+            )}
 
-                        <div className="flex flex-col space-y-20 px-6 md:px-20">
-                            <section className="mt-10">
-                                <h1 className="text-2xl text-center mb-10">Prueba diagnóstica</h1>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="text-left">
-                                        1. Prepárate para responder preguntas emocionantes. Recuerda, no te preocupes si tienes respuestas incorrectas, ¡solo queremos ver cuánto sabes!
-                                        <br />
-                                        <br />
-                                        2. ¡Inicia el Desafío! La prueba consta de 20 preguntas. ¡Habrá un cronómetro para registrar cuánto tiempo te tomas en total, no hay límite de tiempo! Responde
-                                        con calma y sin prisa.
-                                        <br />
-                                        <br />
-                                        3. ¡Aprender y Divertirse! ¡Y listo! Ahora es tu momento de brillar. Responde con confianza y disfruta aprendiendo.
-                                        <br />
-                                        <br />
-                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Que empiece la diversión!</strong>
-                                    </div>
-
-                                    <div>
-                                        <figure className="h-full text-2xl flex items-center justify-center">
-                                            <img
-                                                src="/prueba-diagnostica.png"
-                                                className="w-full"
-                                            />
-                                        </figure>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section>
-                                <h1 className="text-2xl text-center mb-10">Historia Épica</h1>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="text-left">
-                                        Tras un aterrizaje forzoso, nuestro valiente astronauta necesita tu ayuda para resolver enigmas y superar desafíos emocionantes.
-                                        <br />
-                                        Revisa cada una de las fotos y escucha atentamente la historia de Pylonauta.
-                                        <br />
-                                        <br />
-                                        <strong>Recuerda, esta aventura es para divertirse y aprender juntos. ¡Pylonauta espera por tu ayuda!</strong>
-                                    </div>
-
-                                    <div>
-                                        <figure className="h-full text-2xl flex items-center justify-center">
-                                            <img
-                                                src="/introduccion.gif"
-                                                className="w-full"
-                                            />
-                                        </figure>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section>
-                                <h1 className="text-2xl text-center mb-10">Planeta Ánfora</h1>
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <h1 className="text-center font-semibold !mb-4">¡Ayuda a reparar la nave Nebulón!</h1>
-
-                                        <div className="text-sm">
-                                            Objetivo del juego: Encuentra las 5 partes perdidas de la nave Nebulón en el planeta Ánfora.
-                                            <ol className="list-decimal mt-4 pl-4 text-left space-y-2">
-                                                <li>
-                                                    <strong>Explora el planeta Ánfora:</strong> Busca las partes perdidas de la nave mientras exploras este increíble planeta.
-                                                </li>
-                                                <li>
-                                                    <strong>Haz clic en las partes:</strong> Cada vez que encuentres una parte de la nave, haz clic en ella.
-                                                </li>
-                                                <li>
-                                                    <strong>Responde la lectura:</strong> En tu dispositivo aparecerá una lectura que debes responder correctamente para reparar esa parte de la nave.
-                                                </li>
-                                                <li>
-                                                    <strong>Recupera todas las partes:</strong> Cuando hayas encontrado y reparado las 5 partes, la nave Nebulón estará lista para continuar su viaje.
-                                                </li>
-                                            </ol>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <figure className="h-full text-2xl flex items-center justify-center">
-                                            <img
-                                                src="/tuto-anfora.gif"
-                                                className="w-full"
-                                            />
-                                        </figure>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter className="mt-10">
-                        <AlertDialogAction className="block md:mr-20 md:inline-block">Continuar</AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
             <div className="relative w-full min-h-[100vh] bg-cover bg-center z-20">
-                {!open && (
+                {!open && profile && (
                     <>
                         {progress < 100 && (
                             <>
