@@ -40,7 +40,7 @@ export default function RootLayout({
         <html
             lang="es"
             suppressHydrationWarning>
-            <body className={cn('min-h-screen bg-background antialiased', eduFont.variable)}>
+            <body className={cn('min-h-screen bg-pylos-900 antialiased overflow-x-hidden', eduFont.variable)}>
                 <AppProvider>
                     <ThemeProvider
                         attribute="class"
