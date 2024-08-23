@@ -90,7 +90,8 @@ html {
 
 body {
     color: rgb(var(--foreground-rgb));
-    background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    background: #4b0d54;
+    /* background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
     background-attachment: fixed;
     min-height: 100%;
     scrollbar-width: none;
@@ -523,5 +524,41 @@ button[role='combobox'] {
 @media (min-device-width: 1180px) and (max-device-width: 1180px) and (min-device-height: 820px) and (max-device-height: 820px) and (orientation: landscape) {
     :root {
         --ipad-y: 50px;
+    }
+}
+
+.section-starwars {
+    position: relative;
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 500%;
+    line-height: 150%;
+    perspective: 400px;
+    text-align: center;
+}
+
+.container-starwars {
+    position: absolute;
+    top: 99999px;
+    transform-origin: 50% 100%;
+    animation: starwars 90s linear;
+    margin-top: 1000px;
+}
+
+.container-starwars p {
+    line-height: 1.5;
+    font-size: 80px;
+}
+
+@keyframes starwars {
+    0% {
+        top: -100px;
+        transform: rotateX(20deg) translateZ(0);
+    }
+    100% {
+        top: -6000px;
+        transform: rotateX(25deg) translateZ(-2500px);
     }
 }
