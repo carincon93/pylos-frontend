@@ -184,6 +184,12 @@ export default function Home() {
                                     </a>
                                 </li>
                             </ul>
+                            <a
+                                href="https://youtu.be/weENvkIw9H0"
+                                className="mt-10 block"
+                                target="_blank">
+                                https://youtu.be/weENvkIw9H0
+                            </a>
                         </div>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="mt-10">
