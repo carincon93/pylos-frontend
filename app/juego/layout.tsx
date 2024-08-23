@@ -2,6 +2,7 @@ import { getProfile } from '@/lib/actions'
 import Link from 'next/link'
 import { MUNDOS_ROUTE, RESULTADOS_ROUTE } from '@/utils/routes'
 import PageVisibilityHandler from './PageVisibilityHandler'
+import 'animate.css'
 
 export default async function AuthLayout({
     children, // will be a page or nested layout
