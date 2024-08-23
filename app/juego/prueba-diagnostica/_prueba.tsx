@@ -15,6 +15,7 @@ import useSWR, { mutate } from 'swr'
 import useCronometro from '@/hooks/useCronometro'
 import { INTRODUCCION_ROUTE } from '@/utils/routes'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 export default function Prueba() {
     const { data: preguntasPruebaDiagnosticaPorUsuario } = useSWR<PreguntaPruebaDiagnostica[]>(`${process.env.NEXT_PUBLIC_NESTJS_API_URL}/pregunta-prueba-diagnostica/preguntas/usuario`, fetcher)
@@ -123,6 +124,20 @@ export default function Prueba() {
         <>
             {profile && open && (
                 <section className="section-starwars">
+                    <Image
+                        src="/anfora.webp"
+                        alt="Planeta Ánfora"
+                        width={240}
+                        height={40}
+                        className="object-contain absolute bottom-10 -left-10 md:bottom-40 md:left-[14%] 2xl:bottom-40 2xl:left-[0%] -z-[1]"
+                    />
+                    <Image
+                        src="/planeta3.webp"
+                        alt="PlanetMorado"
+                        width={240}
+                        height={40}
+                        className="object-contain absolute top-10 -right-10 md:bottom-60 md:right-[14%] 2xl:bottom-60 2xl:right-[0%] -z-[1]"
+                    />
                     <div className="container-starwars text-white">
                         <h1 className="font-bold text-[180px]">
                             ¡Hola <span className="capitalize">{profile?.nombre}</span>!
