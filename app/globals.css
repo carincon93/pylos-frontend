@@ -542,7 +542,7 @@ button[role='combobox'] {
 .container-starwars {
     position: absolute;
     top: 99999px;
-    transform-origin: 50% 100%;
+    transform-origin: 100%;
     animation: starwars 90s linear;
     margin-top: 1000px;
 }
