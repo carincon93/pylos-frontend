@@ -28,6 +28,7 @@ interface RespuestaPruebaDiagnostica {
     usuario: Usuario
     preguntaPruebaDiagnostica: PreguntaPruebaDiagnostica
     opcionPruebaDiagnostica: OpcionPruebaDiagnostica
+    sesion: number
 }
 
 interface Usuario {
