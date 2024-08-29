@@ -87,6 +87,7 @@ export default function Prueba() {
             preguntaPruebaDiagnosticaId: preguntaPruebaDiagnosticaId,
             opcionPruebaDiagnosticaId: opcionPruebaDiagnosticaId,
             respuesta: opcionPruebaDiagnosticaId ? undefined : respuesta,
+            sesion: profile ? profile.sesion : 1,
         }
 
         try {
