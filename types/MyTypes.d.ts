@@ -45,6 +45,7 @@ interface Usuario {
     esAdmin: boolean
     tiempoPruebaDiagnostica: number
     sesion: number
+    sesionPruebaDiagnostica: number
 }
 
 interface ObjetoNaveReparado {
