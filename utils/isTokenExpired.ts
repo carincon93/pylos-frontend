@@ -11,14 +11,13 @@ import { jwtVerify } from 'jose'
 //     }
 // }
 
-
-
 export async function verifyAuth(token: string) {
     try {
         const verified = await jwtVerify(token, new TextEncoder().encode(process.env.NEXT_PUBLIC_NESTJS_JWT_SECRET))
 
         return verified.payload
     } catch (error) {
-        throw new Error('Token expired')
+        // throw new Error('Token expired')
+        console.error('Tokken expired')
     }
 }
