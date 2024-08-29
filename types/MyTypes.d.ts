@@ -44,6 +44,7 @@ interface Usuario {
     pruebaDiagnosticaCompleta: boolean
     esAdmin: boolean
     tiempoPruebaDiagnostica: number
+    sesion: number
 }
 
 interface ObjetoNaveReparado {
@@ -52,6 +53,7 @@ interface ObjetoNaveReparado {
     planeta: string
     usuarioId: string
     tiempoRespuesta: number
+    sesion: number
 }
 
 interface Login {
