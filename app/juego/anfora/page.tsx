@@ -6,7 +6,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { Button } from '@/components/ui/button'
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog'
 import Link from 'next/link'
-import { getProfile, saveCalificacionPylos, saveObjetoNaveReparado } from '@/lib/actions'
+import { getProfile, saveCalificacionPylos, saveObjetoNaveReparado, updateUsuario } from '@/lib/actions'
 import { CalificacionPylos, ChatEmojis, ObjetoNaveReparado, Usuario } from '@/types/MyTypes'
 import { useGameStore } from '@/lib/store'
 import { KeyboardControls, Loader, SoftShadows, Stats } from '@react-three/drei'
@@ -131,6 +131,7 @@ function Anfora() {
             planeta: 'anfora',
             tiempoRespuesta: tiempoRespuesta,
             objeto: object,
+            sesion: profile?.sesion,
         }
 
         try {
@@ -152,6 +153,20 @@ function Anfora() {
             await saveCalificacionPylos(data)
         } catch (error) {
             console.error('Error al guardar la calificación:', error)
+        }
+    }
+
+    const handleRetrySubmit = async () => {
+        const data: Partial<Usuario> = {
+            sesion: profile ? profile?.sesion + 1 : 1,
+        }
+
+        try {
+            await updateUsuario(data)
+        } catch (error) {
+            console.error('Error al actualizar el usuario:', error)
+        } finally {
+            window.location.reload()
         }
     }
 
@@ -338,12 +353,10 @@ function Anfora() {
                                 className="ml-4 w-44"
                             />
                         </div>
-
                         <p className="text-gray-700 leading-6 mt-12 mb-6 md:mb-20 font-medium text-sm md:text-[20px]">
                             PYLOS es un producto de Wissen Creativo, donde la educación se encuentra con la tecnología. En Wissen ofrecemos soluciones interactivas y gamificadas que transforman el
                             aprendizaje en una experiencia divertida y efectiva.
                         </p>
-
                         <div className="mb-6 flex md:hidden">
                             <button
                                 type="button"
@@ -408,7 +421,6 @@ function Anfora() {
                                 </svg>
                             </div>
                         </div>
-
                         <div className="space-y-2 visible md:invisible mb-10">
                             <div className="flex gap-2">
                                 <div
@@ -450,7 +462,6 @@ function Anfora() {
                                 </div>
                             </div>
                         </div>
-
                         <Button
                             className="w-52 font-normal"
                             onMouseEnter={() => {
@@ -470,7 +481,6 @@ function Anfora() {
                             href={MUNDOS_ROUTE}>
                             Salir
                         </Link>
-
                         <ul className="mt-20 flex items-center justify-center space-x-6 md:space-x-4">
                             <li>
                                 <a
@@ -753,6 +763,17 @@ function Anfora() {
                         <div className="mt-10">
                             La nave <strong>Nebulón</strong> ha sido reparada por completo. ¡Gran trabajo Pylonauta! 🚀✨
                         </div>
+
+                        <Button
+                            className="w-52 font-normal mt-10"
+                            onMouseEnter={() => {
+                                playSound('phoneShowed')
+                            }}
+                            onClick={() => {
+                                handleRetrySubmit()
+                            }}>
+                            Reintentar
+                        </Button>
                     </div>
 
                     <AlertDialog open={showFormAppEvaluation}>
