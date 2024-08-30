@@ -124,7 +124,7 @@ export default function Prueba() {
     return (
         <>
             {profile && open && (
-                <section className="section-starwars">
+                <section className="section-starwars z-10">
                     <Image
                         src="/anfora.webp"
                         alt="Planeta Ánfora"

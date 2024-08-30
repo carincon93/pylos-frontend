@@ -11,7 +11,7 @@ export default function PruebaDiagnosticaPage() {
     return (
         // <div className="bg-[url('/background-stars.png')] bg-no-repeat bg-cover">
         <div>
-            {/* <BackgroundStars /> */}
+            <BackgroundStars />
 
             <Prueba />
         </div>
