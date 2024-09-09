@@ -5,6 +5,7 @@ import { useGameStore } from '@/lib/store'
 import React, { useEffect, useRef, useState } from 'react'
 import confetti from 'canvas-confetti'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { saveFeedbackRespuesta } from '@/lib/actions'
 
 const Ipad = ({ handleSubmit, profile }) => {
     const selectedAnforaForm = useGameStore((state) => state.selectedAnforaForm)
@@ -114,6 +115,20 @@ const Ipad = ({ handleSubmit, profile }) => {
             playSound('phoneShowed')
 
             setTimeout(() => {
+                answers
+                    .filter((answer) => answer.readingId == selectedAnforaForm)
+                    .filter((item) => item.correctAnswer == false)
+                    .map((ans) => {
+                        const data = {
+                            lecturaId: ans.readingId,
+                            preguntaId: ans.questionId.toString(),
+                            respuestaId: ans.optionsSelected.toString(),
+                            sesion: profile ? profile.sesion : 1,
+                        }
+
+                        saveFeedbackRespuesta(data)
+                    })
+
                 // setShowErrorMessage(false)
             }, 2000)
         }

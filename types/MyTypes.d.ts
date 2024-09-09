@@ -58,6 +58,15 @@ interface ObjetoNaveReparado {
     sesion: number
 }
 
+interface FeedbackRespuesta {
+    id: string
+    lecturaId: string
+    preguntaId: string
+    respuestaId: string
+    sesion: number
+    usuarioId: string
+}
+
 interface Login {
     nombreUsuario: string
     mascotaNombre: string
