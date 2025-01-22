@@ -1,33 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proyecto [Nombre del Proyecto]
 
-## Getting Started
+Este proyecto es una aplicación desarrollada con [Next.js](https://nextjs.org/) . A continuación, se detallan las instrucciones para clonar, configurar y ejecutar el proyecto en un entorno de desarrollo local.
 
-First, run the development server:
+---
+
+## **Requisitos previos**
+
+Antes de comenzar, asegúrate de tener instalados los siguientes requisitos en tu máquina:
+
+-   [Node.js](https://nodejs.org/) (versión mínima recomendada: `v20.14.0`)
+-   [Git](https://git-scm.com/)
+-   Un editor de texto o IDE como [Visual Studio Code](https://code.visualstudio.com/)
+
+---
+
+## **Instrucciones para ejecutar el proyecto**
+
+### **1. Clonar el repositorio**
+
+Utiliza Git para clonar el repositorio en tu máquina local. En la terminal, ejecuta:
+
+```bash
+git clone https://github.com/carincon93/pylos-frontend.git
+
+cd [nombre-del-directorio]
+
+npm install
+```
+
+Localiza el archivo .env.local.example que se encuentra en la raíz del proyecto.
+
+Crea un archivo .env.local basado en .env.local.example. Importante: Asegúrate de configurar las variables que contiene el archivo correctamente. (Varias de ellas dependen de la configuración del backend)
+
+```bash
+cp .env.local.example .env.local
+```
+
+Ejecuta el servidor en modo de desarrollo con el comando:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre tu navegador y accede a la aplicación en:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Finalmente, no olvides revisar el archivo package.json para conocer todos los paquetes utilizados en el proyecto.
 
 ## Deploy on Vercel
 
