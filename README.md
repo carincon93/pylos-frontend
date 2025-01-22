@@ -1,4 +1,4 @@
-# Proyecto [Nombre del Proyecto]
+# Proyecto Pylos - Frontend
 
 Este proyecto es una aplicación desarrollada con [Next.js](https://nextjs.org/) . A continuación, se detallan las instrucciones para clonar, configurar y ejecutar el proyecto en un entorno de desarrollo local.
 
