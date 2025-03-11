@@ -2,6 +2,8 @@
 
 Este proyecto es una aplicación desarrollada con [Next.js](https://nextjs.org/) . A continuación, se detallan las instrucciones para clonar, configurar y ejecutar el proyecto en un entorno de desarrollo local.
 
+![156shots_so](https://github.com/user-attachments/assets/fccc9c66-edea-406e-bea9-c015f7a02e1d)
+
 ---
 
 ## **Requisitos previos**
